@@ -51,6 +51,16 @@ function RegisterForm() {
           />
         </label>
       </div>
+      
+      {/* =========<LIABILITY WAIVER>================ */}
+      <div>
+        <label>
+          Liability Waiver will go here:
+          <input/>
+        </label>
+      </div>
+      {/* =========<LIABILITY WAIVER>================ */}
+
       <div>
         <input className="btn" type="submit" name="submit" value="Register" />
       </div>
