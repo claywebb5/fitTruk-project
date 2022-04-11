@@ -37,7 +37,7 @@ function LandingPage() {
           {/* <RegisterForm /> */}
           <center>
             <h4>What's Offered?</h4>
-            <button className="btn btn_sizeSm" onClick={onRegister}>
+            <button className="btn btn_sizeSm">
               See Classes
             </button>
           </center>
