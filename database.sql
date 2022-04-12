@@ -32,7 +32,7 @@ CREATE TABLE "classes" (
 
 CREATE TABLE "class_list" (
 	"id" serial PRIMARY KEY NOT NULL,
-	"class_id" int REFERENCES "classes",
+	"class_id" int REFERENCES "classes", ON DELETE CASCADE 
 	"user_id" int REFERENCES "user",
 	"checked_in" BOOLEAN DEFAULT false
 );
