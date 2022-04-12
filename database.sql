@@ -69,6 +69,10 @@ values (3, 5), (2,5);
 Insert into "class_list" ("class_id", "user_id")
 values (2, 4), (3,4), (1,4);
 
+-- Updating your password to log in (password is 1234), put in your id #
+UPDATE "user" 
+SET "password"='$2a$10$4Sgtt603bqy7iYnQDM58bug6XR.Vh5vBEGlez9h9eKTUdWV/pAiXe' 
+WHERE id = ;
 
 
 
