@@ -15,7 +15,7 @@ CREATE TABLE "users" (
 	"emergency_number" varchar(20),
 	"profile_image" varchar(255),
 	"free_classes" integer DEFAULT 3,
-	"access_level" integer
+	"access_level" integer DEFAULT 1
 );
 
 CREATE TABLE "classes" (
@@ -37,10 +37,16 @@ CREATE TABLE "class_list" (
 	"checked_in" BOOLEAN DEFAULT false
 );
 
-insert into users ("username", "password", "name", "email", "phone_number", "address", "dob", "pronouns", "emergency_name", "emergency_number", "profile_image", "access_level")
-values ('colinjay', 12345, 'Colin Jaworski', 'colin@yahoo.com', '763-867-5309', '123 first street, mpls, MN', '12/05/1984', 'he', 'clay', '123-4567', 'profileImage.url', 1); 
+--This would be the login
+insert into users ("username", "password", "name", "email", "phone_number", "address", "dob", "pronouns", "emergency_name", "emergency_number", "profile_image")
+values 
+('colinjay', 12345, 'Colin Jaworski', 'colin@yahoo.com', '763-867-5309', '123 first street, mpls, MN', '12/05/1984', 'he', 'clay', '123-4567', 'profileImage.url'), 
+('joshBoss', 1234, 'Josh Kralewski', 'Joshkmanj@Gmail.com', '651-295-8859', '123 first street, mpls, MN', '01/20/1996', 'he/him', 'clay', '123-4567', 'profileImage.url'), 
+('Koffi', 123, 'Koffi Kittleson', 'koffi.k.collins@gmail.com', '651-354-0552', '123 first street, mpls, MN', '07/09/1999', 'they, them', 'clay', '123-4567', 'profileImage.url'), 
+('Claybaebae', 12, 'Clay Webb', 'clay_webb@outlook.com', '651-964-5585', '123 first street, mpls, MN', '07/09/1999', 'he/him', 'colin', '123-4567', 'profileImage.url'), 
+('Abdi', 12, 'Abdikarim Ibrahim', 'alldayabdi@gmail.com', 'no phone number', '123 first street, mpls, MN', '07/09/1999', 'he/him', 'colin', '123-4567', 'profileImage.url');
 
-
+--This would be adding a new class
 insert into classes ("classname", "description", "trainer_user_id", "date", "start_time", "end_time", "location", "class_size" )
 values ('HIIT', 'high intensity interval training', 1, '4/12/2022', '12:00', '13:00', 'at the park?', 20);
 
