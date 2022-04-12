@@ -57,7 +57,17 @@ values
 select * from classes
 order by date, start_time;
 
+--adding Koffi to HIIT class
+Insert into "class_list" ("class_id", "user_id")
+values (1, 3);
 
+--adding Abdi to yoga class
+Insert into "class_list" ("class_id", "user_id")
+values (2, 5);
+
+--adding Abdi to kickboxing class
+Insert into "class_list" ("class_id", "user_id")
+values (3, 5);
 
 
 
