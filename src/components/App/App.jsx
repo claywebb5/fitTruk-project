@@ -4,6 +4,7 @@ import {
   Redirect,
   Route,
   Switch,
+  Link,
 } from 'react-router-dom';
 
 import { useDispatch, useSelector } from 'react-redux';
@@ -18,7 +19,11 @@ import UserPage from '../UserPage/UserPage';
 import InfoPage from '../InfoPage/InfoPage';
 import LandingPage from '../LandingPage/LandingPage';
 import LoginPage from '../LoginPage/LoginPage';
+
+// ---------------------------< Approved route imports >-------------------------------
 import RegisterPage from '../RegisterPage/RegisterPage';
+
+// ----------------------< // END Approved route imports >-----------------------------
 
 import './App.css';
 
@@ -33,8 +38,22 @@ function App() {
 
   return (
     <Router>
+      <nav>
+      <h1>DEV BAR</h1>
+      <Link to="/home">home</Link>
+      <Link to="/about">About</Link>
+      <Link to="/registration">registration</Link>
+      <Link to="/login">login</Link>
+      <Link to="/all-classes">all-classes</Link>
+      <Link to="/my-classes">my-classes</Link>
+      <Link to="/class-details">class-details</Link>
+      <Link to="/class-attendace">class-attendace</Link>
+      <Link to="/create-class">create-class</Link>
+      <Link to="/personal-info">personal-info</Link>
+      <p>TO BE REMOVED</p>
+      </nav>
       <div>
-        <Nav />
+        {/* <Nav /> */}
         <Switch>
           {/* Visiting localhost:3000 will redirect to localhost:3000/home */}
           <Redirect exact from="/" to="/home" />
@@ -68,33 +87,57 @@ function App() {
             <InfoPage />
           </ProtectedRoute>
 
-          <Route
-            exact
-            path="/login"
-          >
+          
+
+{/* -------------------------< Approved routes >---------------------- */}
+
+          {/* -----< Login (1.2a)>----- */}
+          <Route exact path="/login">
             {user.id ?
               // If the user is already logged in, 
-              // redirect to the /user page
-              <Redirect to="/user" />
+              // redirect to the /classes page
+              <Redirect to="/all-classes" />
               :
               // Otherwise, show the login page
               <LoginPage />
             }
           </Route>
-
-          <Route
-            exact
-            path="/registration"
-          >
+          
+          {/* -----< Registration (1.2b)>----- */}
+          <Route exact path="/registration">
             {user.id ?
               // If the user is already logged in, 
-              // redirect them to the /user page
-              <Redirect to="/user" />
+              // redirect them to the /classes page
+              <Redirect to="/all-classes" />
               :
               // Otherwise, show the registration page
               <RegisterPage />
             }
           </Route>
+
+          {/* -----< All Classes (1.4a)>----- */}
+          <Route
+            // shows classes page at all times (logged in or not)
+            exact
+            path="/all-classes">
+            <AllClassesPage />
+          </Route>
+
+          {/* -----< My Classes (1.4b)>----- */}
+          <ProtectedRoute
+            // logged in shows InfoPage else shows LoginPage
+            exact
+            path="/my-classes"
+          >
+            <MyClassesPage />
+          </ProtectedRoute>
+
+
+
+
+
+          {/* -------------------< // END Approved routes >---------------- */}
+
 
           <Route
             exact
