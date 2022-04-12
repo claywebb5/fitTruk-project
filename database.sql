@@ -74,6 +74,11 @@ UPDATE "user"
 SET "password"='$2a$10$4Sgtt603bqy7iYnQDM58bug6XR.Vh5vBEGlez9h9eKTUdWV/pAiXe' 
 WHERE id = ;
 
+--updating checked in status to true for Clay in HIIT class (signing in users)
+UPDATE class_list
+SET checked_in = FALSE
+WHERE class_id = 1 and user_id = 4;
+
 
 
 
