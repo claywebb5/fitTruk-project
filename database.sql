@@ -40,11 +40,22 @@ CREATE TABLE "class_list" (
 
 --This would be the login
 insert into "user" ("username", "password", "name", "email", "phone_number", "address", "dob", "pronouns", "emergency_name", "emergency_number", "profile_image")
-values ('colinjay', 12345, 'Colin Jaworski', 'colin@yahoo.com', '763-867-5309', '123 first street, mpls, MN', '12/05/1984', 'he', 'clay', '123-4567', 'profileImage.url'), ('joshBoss', 1234, 'Josh Kralewski', 'Joshkmanj@Gmail.com', '651-295-8859', '123 first street, mpls, MN', '01/20/1996', 'he/him', 'clay', '123-4567', 'profileImage.url'), ('Koffi', 123, 'Koffi Kittleson', 'koffi.k.collins@gmail.com', '651-354-0552', '123 first street, mpls, MN', '07/09/1999', 'they, them', 'clay', '123-4567', 'profileImage.url'), ('Claybaebae', 12, 'Clay Webb', 'clay_webb@outlook.com', '651-964-5585', '123 first street, mpls, MN', '07/09/1999', 'he/him', 'colin', '123-4567', 'profileImage.url'), ('Abdi', 12, 'Abdikarim Ibrahim', 'alldayabdi@gmail.com', 'no phone number', '123 first street, mpls, MN', '07/09/1999', 'he/him', 'colin', '123-4567', 'profileImage.url');
+values ('colinjay', 12345, 'Colin Jaworski', 'colin@yahoo.com', '763-867-5309', '123 first street, mpls, MN', '12/05/1984', 'he', 'clay', '123-4567', 'profileImage.url'), 
+('joshBoss', 1234, 'Josh Kralewski', 'Joshkmanj@Gmail.com', '651-295-8859', '123 first street, mpls, MN', '01/20/1996', 'he/him', 'clay', '123-4567', 'profileImage.url'), 
+('Koffi', 123, 'Koffi Kittleson', 'koffi.k.collins@gmail.com', '651-354-0552', '123 first street, mpls, MN', '07/09/1999', 'they, them', 'clay', '123-4567', 'profileImage.url'), 
+('Claybaebae', 12, 'Clay Webb', 'clay_webb@outlook.com', '651-964-5585', '123 first street, mpls, MN', '07/09/1999', 'he/him', 'colin', '123-4567', 'profileImage.url'), 
+('Abdi', 12, 'Abdikarim Ibrahim', 'alldayabdi@gmail.com', 'no phone number', '123 first street, mpls, MN', '07/09/1999', 'he/him', 'colin', '123-4567', 'profileImage.url');
 
 --This would be adding a new class
 insert into classes ("classname", "description", "trainer_user_id", "date", "start_time", "end_time", "location", "class_size" )
-values ('HIIT', 'high intensity interval training', 2, '4/12/2022', '12:00', '13:00', 'at the park?', 20), ('Yoga', 'Its yoga', 1, '4/13/2022', '14:00', '15:00', 'Some place noisy', 10),('Kick boxing', 'This is a class where we are going to kick and box', 1, '4/14/2022', '9:00', '10:00', 'Near the truck', 18);
+values 
+('HIIT', 'high intensity interval training', 2, '4/12/2022', '12:00', '13:00', 'at the park?', 20),
+('Yoga', 'Its yoga', 1, '4/13/2022', '14:00', '15:00', 'Some place noisy', 10),
+('Kick boxing', 'This is a class where we are going to kick and box', 1, '4/13/2022', '9:00', '10:00', 'Near the truck', 18);
+
+--Get all classes ordering them by date and then start_time
+select * from classes
+order by date, start_time;
 
 
 
