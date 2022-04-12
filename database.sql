@@ -100,7 +100,10 @@ UPDATE classes
 SET "location" = 'someplace noisy', "description" = 'yoga is fun and a great way to stay in shape'
 WHERE classes.id = 2; 
 
-
+--Updates pronouns for a specific user
+UPDATE "user"
+SET "pronouns" = 'he/him'
+WHERE "user"."id" = 1;
 
 
 
