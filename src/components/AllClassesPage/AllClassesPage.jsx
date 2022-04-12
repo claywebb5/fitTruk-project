@@ -1,4 +1,5 @@
 import React from 'react';
+import ClassListItem from '../ClassListItem/ClassListItem';
 
 // This is one of our simplest components
 // It doesn't have local state,
@@ -48,11 +49,7 @@ function AllClassesPage() {
       <h2>Nav bar here</h2>
       <ul>
       {classes.map((event, i) =>(
-        <li key={i}>
-        {event.date}
-        {event.start_time}-{event.end_time}
-        {event.classname} with {event.trainer_user_id}
-        </li>
+        <ClassListItem event={event} key={i} />
       ))}
       </ul>
     </div>

@@ -41,50 +41,46 @@ function App() {
   return (
 
     <Router>
-      {/* ---------------------------------<  >------------------------------ */}  
-      <nav>
-        <h1>DEV BAR</h1>
-        <Link to="/home">Home</Link> | 
-        <Link to="/about">About</Link> | 
-        <Link to="/registration">Registration</Link> | 
-        <Link to="/login">Login</Link> | 
-        <Link to="/all-classes">All Classes</Link> | 
-        <Link to="/my-classes">My Classes</Link> | 
-        <Link to="/class-details">Class Details</Link> | 
-        <Link to="/class-attendace">Class Attendace</Link> | 
-        <Link to="/create-class">Create Class</Link> | 
-        <Link to="/personal-info">Personal Info</Link>
-      </nav>
       <div>
-        {/* <Nav />   NEED TO SPECIFY BETWEEN AUTH LEVEL  */}
+        {/* --------------------------< START DEV BAR >-------------------------- */}  
+        {/* <Nav />   (** NEED TO SPECIFY BETWEEN AUTH LEVEL **)  */}
+        <nav>
+          <h1>DEV BAR</h1>
+          <Link to="/home">Home</Link> | 
+          <Link to="/about">About</Link> | 
+          <Link to="/registration">Registration</Link> | 
+          <Link to="/login">Login</Link> | 
+          <Link to="/all-classes">All Classes</Link> | 
+          <Link to="/my-classes">My Classes</Link> | 
+          <Link to="/class-details">Class Details</Link> | 
+          <Link to="/class-attendace">Class Attendace</Link> | 
+          <Link to="/create-class">Create Class</Link> | 
+          <Link to="/personal-info">Personal Info</Link>
+        </nav> {/* --------------------------< END DEV BAR >-------------------------- */}
+        
         <Switch>
-          {/* Visiting localhost:3000 will redirect to localhost:3000/home */}
-          <Redirect exact from="/" to="/home" />
 
-          {/* Visiting localhost:3000/about will show the about page. */}
+          <Redirect exact from="/" to="/home" /> {/* Visiting localhost:3000 will redirect to localhost:3000/home */}
+
+          {/* =============================*< START ALREADY IN REPO >*============================= */}
+          {/* --------------< ABOUT PAGE >---------------- */}
           <Route
-            // shows AboutPage at all times (logged in or not)
             exact
-            path="/about"
-          >
+            path="/about">
             <AboutPage />
           </Route>
-
-          {/* For protected routes, the view could show one of several things on the same route.
-            Visiting localhost:3000/user will show the UserPage if the user is logged in.
-            If the user is not logged in, the ProtectedRoute will show the LoginPage (component).
-            Even though it seems like they are different pages, the user is always on localhost:3000/user */}
+          {/* --------------------------< INFO PAGE >-------------------------- */}
           <ProtectedRoute
-            // logged in shows InfoPage else shows LoginPage
             exact
-            path="/info"
-          >
+            path="/info">
             <InfoPage />
           </ProtectedRoute>
+          {/* =============================*< END ALREADY IN REPO >*============================= */}
+
 
           
 
-{/* -------------------------< Approved routes >---------------------- */}
+          {/* =============================*< START APPROVED ROUTES >*============================= */}
 
           {/* -----< Login (1.2a)>----- */}
           <Route exact path="/login">
@@ -97,7 +93,13 @@ function App() {
               <LoginPage />
             }
           </Route>
+          {/* -----< Login (1.2a)>----- */}
+
           
+
+
+
+
           {/* -----< Registration (1.2b)>----- */}
           <Route exact path="/registration">
             {user.id ?
@@ -109,6 +111,12 @@ function App() {
               <RegisterPage />
             }
           </Route>
+          {/* -----< Registration (1.2b)>----- */}
+
+
+
+
+
 
           {/* -----< All Classes (1.4a)>----- */}
           <Route
@@ -117,6 +125,11 @@ function App() {
             path="/all-classes">
             <AllClassesPage />
           </Route>
+          {/* -----< All Classes (1.4a)>----- */}
+
+
+
+
 
           {/* -----< My Classes (1.4b)>----- */}
           <ProtectedRoute
@@ -126,6 +139,10 @@ function App() {
           >
             <MyClassesPage />
           </ProtectedRoute>
+          {/* -----< My Classes (1.4b)>----- */}
+
+
+
 
           {/* -----< Class Details (1.5)>----- */}
           <Route
@@ -134,6 +151,9 @@ function App() {
             path="/class-details">
             <ClassDetailsPage />
           </Route>
+          {/* -----< Class Details (1.5)>----- */}
+
+
 
           {/* -----< Edit Class Details (1.6)>----- */}
           <AdminRoute
@@ -142,6 +162,9 @@ function App() {
             path="/edit-class">
             <EditClassPage />
           </AdminRoute>
+          {/* -----< Edit Class Details (1.6)>----- */}
+
+
 
           {/* -----< Registered Class (1.7)>----- */}
           <ProtectedRoute
@@ -150,6 +173,9 @@ function App() {
             path="/registered-class">
             <RegisteredClassPage />
           </ProtectedRoute>
+          {/* -----< Registered Class (1.7)>----- */}
+
+
 
           {/* -----< Attendees (1.8)>----- */}
           <TrainerRoute
@@ -158,6 +184,10 @@ function App() {
             path="/attendees">
             <AttendeesPage />
           </TrainerRoute>
+          {/* -----< Attendees (1.8)>----- */}
+
+
+
 
           {/* -----< Personal Info (1.9)>----- */}
           <ProtectedRoute
@@ -167,47 +197,48 @@ function App() {
           >
             <UserPage />
           </ProtectedRoute>
+          {/* -----< Personal Info (1.9)>----- */}
 
 
-          {/* -----< Create Class (1.10)>----- */}
+
+          {/* ===============< Create Class (1.10)>----- */}
           <AdminRoute
             // Only administrators can see the create a class view
             exact
             path="/create-class">
             <CreateClassPage />
           </AdminRoute>
+          {/* ===============< Create Class (1.10)>----- */}
+          {/* =============================*< END APPROVED ROUTES >*============================= */}
 
 
 
-
-
-
-          {/* -------------------< // END Approved routes >---------------- */}
 
 
           <Route
             exact
-            path="/home"
-          >
+            path="/home">
             {user.id ?
               // If the user is already logged in, 
               // redirect them to the /user page
-              <Redirect to="/user" />
+              // --------------------------< LOGGED IN: VIEW MY CLASSES >-------------------------- */}
+              <Redirect to="/my-classes" />
               :
-              // Otherwise, show the Landing page
+              // --------------------------< LOGGED OUT: LANDING PAGE >-------------------------- */}
               <LandingPage />
             }
           </Route>
 
-          {/* If none of the other routes matched, we will show a 404. */}
-          <Route>
-            <h1>404</h1>
-          </Route>
-        </Switch>
-        <Footer />
+          {/* --------------------------<If none of the other routes matched, we will show a 404. >--------------------------*/}
+          <Route> <h1>404</h1> </Route>
+
+        </Switch> {/*====================================< END SWITCH >==================================== */}
+        <Footer /> {/* ---------------------< FOOTER COMPONENT >--------------------- */}
       </div>
-    </Router>
-  );
-}
+    </Router> //====================================< END ROUTER >====================================
+
+  ); //====================================< END RETURN >====================================
+
+} //====================================< END FUNCTION >====================================
 
 export default App;
