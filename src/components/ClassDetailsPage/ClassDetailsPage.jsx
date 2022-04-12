@@ -5,7 +5,7 @@ function ClassDetailsPage(){
 
     return(
         <>
-
+    
         </>
     )
 }

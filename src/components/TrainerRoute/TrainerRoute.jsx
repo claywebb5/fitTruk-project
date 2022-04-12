@@ -13,7 +13,7 @@ import {useSelector} from 'react-redux';
 // by checking req.isAuthenticated for authentication
 // and by checking req.user for authorization
 
-function AdminRoute({ component, children, ...props }) {
+function TrainerRoute({ component, children, ...props }) {
   const user = useSelector((store) => store.user);
 
   // Component may be passed in as a "component" prop,
@@ -27,7 +27,7 @@ function AdminRoute({ component, children, ...props }) {
       // are now passed along to the 'Route' Component
       {...props}
     >
-      {(user.id && user.access_level == 3) ?
+      {(user.id && user.access_level == 2) ?
         // If the user is logged in, show the protected component
         <ProtectedComponent />
         :
@@ -39,4 +39,4 @@ function AdminRoute({ component, children, ...props }) {
   );
 }
 
-export default AdminRoute;
+export default TrainerRoute;
