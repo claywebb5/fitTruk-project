@@ -32,7 +32,7 @@ CREATE TABLE "classes" (
 
 CREATE TABLE "class_list" (
 	"id" serial PRIMARY KEY NOT NULL,
-	"class_id" int REFERENCES "classes", ON DELETE ON UPDATE CASCADE, 
+	"class_id" int REFERENCES "classes", ON DELETE CASCADE ON UPDATE CASCADE, 
 	"user_id" int REFERENCES "user",
 	"checked_in" BOOLEAN DEFAULT false
 );
@@ -95,7 +95,10 @@ ON "user"."id" = "class_list"."user_id"
 JOIN "classes" on "class_list"."user_id" = "user"."id"
 WHERE "classes"."id" = 2;
 
-
+--Updates location and details for a specific class
+UPDATE classes
+SET "location" = 'someplace noisy', "description" = 'yoga is fun and a great way to stay in shape'
+WHERE classes.id = 2; 
 
 
 
