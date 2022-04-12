@@ -74,7 +74,26 @@ UPDATE "user"
 SET "password"='$2a$10$4Sgtt603bqy7iYnQDM58bug6XR.Vh5vBEGlez9h9eKTUdWV/pAiXe' 
 WHERE id = ;
 
+--updating checked in status to true for Clay in HIIT class (signing in users)
+UPDATE class_list
+SET checked_in = FALSE
+WHERE class_id = 1 and user_id = 4;
 
+--Get all classes that Clay has signed up for
+SELECT classes.*
+FROM "classes"
+JOIN "class_list"
+ON "classes"."id" = "class_list"."class_id"
+JOIN "user" on "class_list"."user_id" = "user"."id"
+WHERE "user"."id" = 4;
+
+--Get all users who signed up for yoga
+SELECT distinct "user".*
+FROM "user"
+JOIN "class_list"
+ON "user"."id" = "class_list"."user_id"
+JOIN "classes" on "class_list"."user_id" = "user"."id"
+WHERE "classes"."id" = 2;
 
 
 
