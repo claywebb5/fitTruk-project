@@ -13,6 +13,7 @@ import Nav from '../Nav/Nav';
 import Footer from '../Footer/Footer';
 
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
+import AdminRoute from '../AdminRoute/AdminRoute';
 
 import AboutPage from '../AboutPage/AboutPage';
 import UserPage from '../UserPage/UserPage';
@@ -22,7 +23,9 @@ import LoginPage from '../LoginPage/LoginPage';
 
 // ---------------------------< Approved route imports >-------------------------------
 import RegisterPage from '../RegisterPage/RegisterPage';
-
+import AllClassesPage from '../AllClassesPage/AllClassesPage';
+import MyClassesPage from '../MyClassesPage/MyClassesPage';
+import ClassDetailsPage from '../ClassDetailsPage/ClassDetailsPage';
 // ----------------------< // END Approved route imports >-----------------------------
 // import './App.css';
 
@@ -40,16 +43,16 @@ function App() {
     <Router>
       <nav>
       <h1>DEV BAR</h1>
-      <Link to="/home">home</Link>
-      <Link to="/about">About</Link>
-      <Link to="/registration">registration</Link>
-      <Link to="/login">login</Link>
-      <Link to="/all-classes">all-classes</Link>
-      <Link to="/my-classes">my-classes</Link>
-      <Link to="/class-details">class-details</Link>
-      <Link to="/class-attendace">class-attendace</Link>
-      <Link to="/create-class">create-class</Link>
-      <Link to="/personal-info">personal-info</Link>
+      <Link to="/home">Home</Link> | 
+      <Link to="/about">About</Link> | 
+      <Link to="/registration">Registration</Link> | 
+      <Link to="/login">Login</Link> | 
+      <Link to="/all-classes">All Classes</Link> | 
+      <Link to="/my-classes">My Classes</Link> | 
+      <Link to="/class-details">Class Details</Link> | 
+      <Link to="/class-attendace">Class Attendace</Link> | 
+      <Link to="/create-class">Create Class</Link> | 
+      <Link to="/personal-info">Personal Info</Link>
       <p>TO BE REMOVED</p>
       </nav>
       <div>
@@ -131,6 +134,30 @@ function App() {
           >
             <MyClassesPage />
           </ProtectedRoute>
+
+          {/* -----< Class Details (1.5)>----- */}
+          <Route
+            // shows Class Details page at all times (logged in or not)
+            exact
+            path="/class-details">
+            <ClassDetailsPage />
+          </Route>
+          
+          {/* -----< Class Details (1.5)>----- */}
+          <Route
+            // shows Class Details page at all times (logged in or not)
+            exact
+            path="/class-details">
+            <ClassDetailsPage />
+          </Route>
+
+          {/* -----< Edit Class Details (1.6)>----- */}
+          <AdminRoute
+            // Only administrators can see the edit class view
+            exact
+            path="/edit-class">
+            <EditClassPage />
+          </AdminRoute>
 
 
 
