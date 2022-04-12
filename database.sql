@@ -61,13 +61,13 @@ order by date, start_time;
 Insert into "class_list" ("class_id", "user_id")
 values (1, 3);
 
---adding Abdi to yoga class
+--adding Abdi to kickboxing and yoga 
 Insert into "class_list" ("class_id", "user_id")
-values (2, 5);
+values (3, 5), (2,5);
 
---adding Abdi to kickboxing class
+--adding Clay to yoga, kickboxing, and HIIT
 Insert into "class_list" ("class_id", "user_id")
-values (3, 5);
+values (2, 4), (3,4), (1,4);
 
 
 
