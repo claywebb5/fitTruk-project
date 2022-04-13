@@ -3,7 +3,7 @@ import axios from 'axios';
 
 // ** This saga file will listen for the following actions:
     // *[x] Getting all the customers personal info (Personal Info/Profile)
-    // *[] Update customers personal info (Personal Info/Profile)
+    // *[x] Update customers personal info (Personal Info/Profile)
     // *[x] Getting all the customers registered classes (My Classes)
     // *[] Adding a new class to their reservations (My/All Classes/Class Details)
     // *[] Removing a class from their reservations (My Classes/Class Details)
@@ -49,11 +49,8 @@ function* fetchCustomerClass() {
 // =============***< (POST) ADD CUSTOMER CLASS RESERVATION >***=======================================
 function* addReservation(action){
     try {
-        console.log('The action.payload for adding a new class reservation is:', action.payload)
-        
-        // ** WHERE IN THE ROUTES/SERVER FILES WILL THE ROUTE FOR ADDING A CLASS RESERVATION BE???
-        yield axios.post('/api/..', action.payload);
-        
+        console.log('The action.payload for adding a new class reservation is:', action.payload);
+        yield axios.post('/api/customer', action.payload);
         yield put({ type: 'FETCH_CUSTOMER_CLASS' });
     } catch (error) {
         console.log('Error adding a new class reservation', error);
