@@ -17,6 +17,7 @@ function CreateClassPage() {
 
 
 
+
     const submitHandler = () => {
         console.log('This will submit the form');
     }
@@ -64,6 +65,7 @@ function CreateClassPage() {
         location: '',
         description: '',
     })
+    let selectedTrainer;
     //----------<  I n p u t   H a n d l e r s  >-----------
     const handleChange = (prop) => (event) => {
         setValues({ ...values, [prop]: event.target.value });
@@ -89,16 +91,18 @@ function CreateClassPage() {
                 </h4>
 
                 {/* ---- Select Trainer ---- */}
-                <select name="trainer" id="trainer-selector"
-                    onChange={handleChange('trainer')}
-                    value={values.trainer}>
-                    {trainers.map((trainer,i) => (
-                        <option key={i} value={trainer.trainer_user_id}>{trainer.name}</option>
-                    ))}
-                </select>
-
+                <h4>Trainer:
+                    <select name="trainer" id="trainer-selector"
+                        onChange={handleChange('trainer')}
+                        value={values.trainer}>
+                        {trainers.map((trainer, i) => (
+                            <option key={i} value={trainer.trainer_user_id}>{trainer.name}</option>
+                        ))}
+                    </select>
                 {/* ---- Here's the trainer's image ---- */}
-                {/* <img src={trainer.image_url} alt={trainer.name}/> */}
+                <img src={selectedTrainer.profile_image} alt={selectedTrainer.name}/>
+                </h4>
+
 
                 {/* ---- Set Start Time ---- */}
                 <h4>Start time:
