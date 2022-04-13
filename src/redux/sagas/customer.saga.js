@@ -38,10 +38,13 @@ function* fetchCustomerInfo(){
 }
 
 // =============***< (POST) ADD CLASS RESERVATION >***=======================================
-function* addReservation(){
+function* addReservation(action){
     try {
         console.log('The action.payload for adding a new class reservation is:', action.payload)
+        
+        // ** WHERE IN THE ROUTES/SERVER FILES WILL THE ROUTE FOR ADDING A CLASS RESERVATION BE???
         yield axios.post('/api/..', action.payload);
+        
         yield put({ type: 'FETCH_CUSTOMER_CLASS' });
     } catch (error) {
         console.log('Error adding a new class reservation', error);
@@ -52,7 +55,10 @@ function* addReservation(){
 function* removeReservation(action){
     try {
         console.log('The action.payload in removing a class reservation is:', action.payload)
+        
+        // ** WHERE IN THE ROUTES/SERVER FILES WILL THE ROUTE FOR DELETING A CLASS RESERVATION BE???
         yield axios.delete(`/api/../../${action.payload.id}`, action.payload);
+        
         yield put({ type: 'FETCH_CUSTOMER_CLASS' });
     } catch (error) {
         console.log('Error removing a class reservation', error);
