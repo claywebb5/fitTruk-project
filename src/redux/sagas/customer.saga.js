@@ -23,9 +23,14 @@ function* fetchCustomerInfo(){
 }
 
 // =============***< (PUT) UPDATE CUSTOMER INFO >***=======================================
-function* updateCustomerInfo(){
-    console.log('In , about to axios.');
-
+function* updateCustomerInfo(action){
+    try {
+        console.log('In updateCustomerInfo the action.payload is:', action.payload);
+        yield axios.put(`/api/customer/update/${action.payload.id}`, action.payload);
+        yield put({type: 'SET_USER_INFO'});
+    } catch (error){
+        console.log('Error updating customer info:', error)
+    }
 
 }
 
