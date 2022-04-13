@@ -1,14 +1,24 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 import ClassListItem from '../ClassListItem/ClassListItem';
+import Nav from '../Nav/Nav';
 
-// This is one of our simplest components
-// It doesn't have local state,
-// It doesn't dispatch any redux actions or display any part of redux state
-// or even care what the redux state is'
 
 function AllClassesPage() {
 
-  const classes = [
+  const history = useHistory();
+
+  // ------- Variables ---------
+  const user = useSelector(store => store.user)
+
+  // ------- Buttons -------
+  const handleMyClassClick = () => {
+    history.push("/my-classes");
+  }
+
+
+  const classes = [ /// DELETE this when we have working sagas and reducers, this is temporary test data
     {
       id: 1,
       classname: "HIIT",
@@ -42,11 +52,13 @@ function AllClassesPage() {
       location: "Some place noisy",
       class_size: 10
     }
-  ]
+  ] /// DELETE this when we have working sagas and reducers, this is temporary test data
 
   return (
     <div>
-      <h2>Nav bar here</h2>
+      <Nav/>
+      <h3>If logged in, myclass button appears below, if not then no button</h3>
+      {user.id && <button onClick={handleMyClassClick}>Myclasses (this will be an icon eventually)</button>}
       <ul>
       {classes.map((event, i) =>(
         <ClassListItem event={event} key={i} />

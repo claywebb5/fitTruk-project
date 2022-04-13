@@ -62,6 +62,16 @@ function Nav() {
         <Link className="navLink" to="/about">
           <button>About</button>
         </Link>
+
+
+        {/*------ TEMPORARY DIV, DELETE WHEN NECESSARY --------*/}
+        <div // This is DIV is temporary, just to help differentiate where the nav bar ends and the page begins. Delete when needed ----------------------------
+        style={{marginBottom: 20, backgroundColor: '#8bc34a'}}>
+        ---- -----
+        </div>
+        {/*------ TEMPORARY DIV, DELETE WHEN NECESSARY ---------*/}
+
+
       </div>
     </div>
   );
