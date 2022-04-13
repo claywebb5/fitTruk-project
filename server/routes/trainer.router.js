@@ -7,6 +7,7 @@ const router = express.Router();
 
 router.put('/edit-class/:id', (req, res) => {
 
+
     console.log('req.body', req.body.location, req.body.description) // data would be location and description
     console.log('params', req.params.id) // params is class id
 
