@@ -13,6 +13,7 @@ const classRouter = require('./routes/class.router');
 const trainerRouter = require('./routes/trainer.router');
 const superRouter = require('./routes/super.router');
 const adminRouter = require('./routes/admin.router');
+const customerRouter = require('./routes/customer.router')
 
 // Body parser middleware
 app.use(bodyParser.json());
@@ -31,6 +32,7 @@ app.use('/api/class', classRouter);
 app.use('/api/trainer', trainerRouter);
 app.use('/api/super', superRouter);
 app.use('/api/admin', adminRouter);
+app.use('/api/customer', customerRouter)
 
 // Serve static files
 app.use(express.static('build'));
