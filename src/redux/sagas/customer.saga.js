@@ -3,7 +3,7 @@ import axios from 'axios';
 
 // ** This saga file will listen for the following actions:
     // *[] Getting all the customers registered classes (My Classes)
-    // *[] Getting all the customers personal info (Personal Info/Profile)
+    // *[x] Getting all the customers personal info (Personal Info/Profile)
     // *[] Adding a new class to their reservations (My/All Classes/Class Details)
     // *[] Removing a class from their reservations (My Classes/Class Details)
 
@@ -26,10 +26,7 @@ function* fetchCustomerClass() {
 function* fetchCustomerInfo(){
     try {
         console.log('In fetchCustomerInfo, about to axios.get all the customer personal info');
-        
-        // ** ADD A ROUTE GOING TO customer.router ON server.js FOR AXIOS.GET ROUTE
-        const customerInfoResponse = yield axios.get('/api/..');
-        
+        const customerInfoResponse = yield axios.get('/api/customer');  
         console.log('Getting all customer info:', customerInfoResponse.data);
         yield put({ type: 'SET_USER_INFO', payload: customerInfoResponse.data });
     } catch {
