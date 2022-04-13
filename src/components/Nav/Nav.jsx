@@ -41,8 +41,8 @@ function Nav() {
               <button>Class Details</button>
             </Link>
 
-            <Link className="navLink" to="/class-attendace">
-              <button>Class Attendace</button>
+            <Link className="navLink" to="/attendees">
+              <button>Class Attendees</button>
             </Link> 
             <Link className="navLink" to="/create-class">
               <button>Create Class</button>
