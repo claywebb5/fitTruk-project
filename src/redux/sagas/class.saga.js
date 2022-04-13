@@ -19,13 +19,6 @@ function* fetchDetails (){
 
 }
 
-function* updateDetails (){
-    // PUT
-    // TRAINER/ADMIN ONLY
-    // will send a request to the classes router to update the details of a specific class 
-
-}
-
 function* createClasses (){
     // POST 
     // ADMIN ONLY
@@ -37,7 +30,6 @@ function* classSaga() {
     yield takeLatest('FETCH_CLASSES', fetchClasses);
     yield takeLatest('SEARCH_CLASSES', searchClasses);
     yield takeLatest('FETCH_CLASS_DETAILS', fetchDetails);
-    yield takeLatest('UPDATE_CLASS_DETAILS', updateDetails);
     yield takeLatest('CREATE_CLASS', createClasses);
   }
   
