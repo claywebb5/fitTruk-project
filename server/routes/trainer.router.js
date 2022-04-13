@@ -8,6 +8,24 @@ const router = express.Router();
 // SET "location" = 'someplace noisy', "description" = 'yoga is fun and a great way to stay in shape'
 // WHERE classes.id = 2;
 
+router.put('/classdetails/:id', (req, res) =>{
+    console.log(req.body.location);
+    const queryText = 
+    `UPDATE classes
+    SET "location" = $1, "description" = $2
+    WHERE classes.id = ${req.params.id};`;
+
+    pool.query(queryText, [req.body.location, req.body.description])
+
+        .then((result) => {
+            res.send(result.rows)
+        })
+        .catch((error) => {
+            console.log(error);
+            res.sendStatus(500);
+        })
+})
+
 
 
 // -------------------------- check in customers for classes (PUT)
