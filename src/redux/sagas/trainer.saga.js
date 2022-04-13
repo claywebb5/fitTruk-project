@@ -30,3 +30,5 @@ function* trainerSaga(){
     yield takeLatest('UPDATE_CLASS_DETAILS', updateDetails);
     yield takeLatest('UPDATE_ATTENDANCE', updateAttendance);
 }
+
+export default trainerSaga;
