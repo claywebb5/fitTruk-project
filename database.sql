@@ -105,7 +105,10 @@ UPDATE "user"
 SET "pronouns" = 'he/him'
 WHERE "user"."id" = 1;
 
-
+--Updates access level for a specific user 
+UPDATE "user"
+SET "access_level" = 2
+WHERE "user"."id" = 1;
 
 
 
