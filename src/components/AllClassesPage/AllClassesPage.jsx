@@ -1,8 +1,21 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 import ClassListItem from '../ClassListItem/ClassListItem';
 import Nav from '../Nav/Nav';
 
+
 function AllClassesPage() {
+
+  const history = useHistory();
+
+  // ------- Variables ---------
+  const user = useSelector(store => store.user)
+
+  // ------- Buttons -------
+  const handleMyClassClick = () => {
+    history.push("/my-classes");
+  }
 
 
   const classes = [ /// DELETE this when we have working sagas and reducers, this is temporary test data
@@ -44,6 +57,8 @@ function AllClassesPage() {
   return (
     <div>
       <Nav/>
+      <h3>If logged in, myclass button appears below, if not then no button</h3>
+      {user.id && <button onClick={handleMyClassClick}>Myclasses (this will be an icon eventually)</button>}
       <ul>
       {classes.map((event, i) =>(
         <ClassListItem event={event} key={i} />
