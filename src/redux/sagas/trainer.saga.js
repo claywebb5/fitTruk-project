@@ -5,10 +5,10 @@ function* fetchAttendance(){
     
 }
 
+// PUT
+// TRAINER/ADMIN ONLY
+// will send a request to the classes router to update the details of a specific class 
 function* updateDetails (){
-    // PUT
-    // TRAINER/ADMIN ONLY
-    // will send a request to the classes router to update the details of a specific class 
 
 }
 
