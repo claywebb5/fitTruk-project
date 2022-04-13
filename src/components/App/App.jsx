@@ -53,7 +53,7 @@ function App() {
           <Link to="/all-classes">All Classes</Link> | 
           <Link to="/my-classes">My Classes</Link> | 
           <Link to="/class-details">Class Details</Link> | 
-          <Link to="/class-attendace">Class Attendace</Link> | 
+          <Link to="/attendees">Class Attendance</Link> | 
           <Link to="/create-class">Create Class</Link> | 
           <Link to="/personal-info">Personal Info</Link>
         </nav> {/* --------------------------< END DEV BAR >-------------------------- */}
@@ -77,12 +77,9 @@ function App() {
           </ProtectedRoute>
           {/* =============================*< END ALREADY IN REPO >*============================= */}
 
-
-          
-
           {/* =============================*< START APPROVED ROUTES >*============================= */}
 
-          {/* -----< Login (1.2a)>----- */}
+          {/* -----< LOGIN (1.2a)>--------------------------------- */}
           <Route exact path="/login">
             {user.id ?
               // If the user is already logged in, 
@@ -93,14 +90,9 @@ function App() {
               <LoginPage />
             }
           </Route>
-          {/* -----< Login (1.2a)>----- */}
+          {/* -----< End Login >----- */}
 
-          
-
-
-
-
-          {/* -----< Registration (1.2b)>----- */}
+          {/* -----< REGISTRATION (1.2b)>---------------------------- */}
           <Route exact path="/registration">
             {user.id ?
               // If the user is already logged in, 
@@ -111,27 +103,18 @@ function App() {
               <RegisterPage />
             }
           </Route>
-          {/* -----< Registration (1.2b)>----- */}
+          {/* -----< End Registration >----- */}
 
-
-
-
-
-
-          {/* -----< All Classes (1.4a)>----- */}
+          {/* -----< ALL CLASSES (1.4a)>----------------------------- */}
           <Route
             // shows classes page at all times (logged in or not)
             exact
             path="/all-classes">
             <AllClassesPage />
           </Route>
-          {/* -----< All Classes (1.4a)>----- */}
+          {/* -----< End All Classes >----- */}
 
-
-
-
-
-          {/* -----< My Classes (1.4b)>----- */}
+          {/* -----< MY CLASSES (1.4b)>------------------------------- */}
           <ProtectedRoute
             // logged in shows InfoPage else shows LoginPage
             exact
@@ -139,55 +122,43 @@ function App() {
           >
             <MyClassesPage />
           </ProtectedRoute>
-          {/* -----< My Classes (1.4b)>----- */}
+          {/* -----< End My Classes >----- */}
 
-
-
-
-          {/* -----< Class Details (1.5)>----- */}
+          {/* -----< CLASS DETAILS (1.5)>------------------------------ */}
           <Route
             // shows Class Details page at all times (logged in or not)
             exact
             path="/class-details">
             <ClassDetailsPage />
           </Route>
-          {/* -----< Class Details (1.5)>----- */}
+          {/* -----< End Class Details >----- */}
 
-
-
-          {/* -----< Edit Class Details (1.6)>----- */}
+          {/* -----< EDIT CLASS DETAILS (1.6)>-------------------------- */}
           <AdminRoute
             // Only administrators can see the edit class view
             exact
             path="/edit-class">
             <EditClassPage />
           </AdminRoute>
-          {/* -----< Edit Class Details (1.6)>----- */}
+          {/* -----< End Edit Class Details >----- */}
 
-
-
-          {/* -----< Registered Class (1.7)>----- */}
+          {/* -----< REGISTERED CLASS VIEW (1.7)>-------------------------- */}
           <ProtectedRoute
             // If logged in: Shows the class details for a class the guest/member has registered for.
             exact
             path="/registered-class">
             <RegisteredClassPage />
           </ProtectedRoute>
-          {/* -----< Registered Class (1.7)>----- */}
+          {/* -----< End Registered Class >----- */}
 
-
-
-          {/* -----< Attendees (1.8)>----- */}
+          {/* -----< ATTENDEES (1.8)>---------------------------------- */}
           <TrainerRoute
             // Only trainers and admin can see the class attendees view
             exact
             path="/attendees">
             <AttendeesPage />
           </TrainerRoute>
-          {/* -----< Attendees (1.8)>----- */}
-
-
-
+          {/* -----< End Attendees >----- */}
 
           {/* -----< Personal Info (1.9)>----- */}
           <ProtectedRoute
@@ -198,8 +169,6 @@ function App() {
             <UserPage />
           </ProtectedRoute>
           {/* -----< Personal Info (1.9)>----- */}
-
-
 
           {/* ===============< Create Class (1.10)>----- */}
           <AdminRoute

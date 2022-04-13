@@ -17,6 +17,10 @@ function LandingPage() {
     history.push('/registration');
   };
 
+  const onSeeClasses = (event) => {
+    history.push('/all-classes');
+  };
+
   return (
     <div className="container">
       <h2><u>{heading}</u></h2>
@@ -37,7 +41,7 @@ function LandingPage() {
           {/* <RegisterForm /> */}
           <center>
             <h4>What's Offered?</h4>
-            <button className="btn btn_sizeSm">
+            <button className="btn btn_sizeSm" onClick={onSeeClasses}>
               See Classes
             </button>
           </center>
