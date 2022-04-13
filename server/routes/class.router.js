@@ -29,8 +29,26 @@ router.get('/details/:id', (req, res) => {
 
 // -------------------------- Get classlist for specific class (GET)
 
-router.get('/myclasses', (req, res) => {
+router.get('/myclasses/:id', (req, res) => {
     // GET route code here
+    if (req.isAuthenticated()) {
+        const queryText = ` SELECT classes.* from classes 
+        JOIN class_list ON classes.id = class_list.class_id
+        JOIN "user" ON class_list.user_id = "user".id
+        WHERE "user".id = ${req.params.id}
+        ;`;
+        // endpoint functionality
+        // const queryValues = [req.body.data, req.params.id];
+   
+        pool.query(queryText).then((result) => {
+            res.send(result.rows);
+          }).catch((error) => {
+            console.log(error);
+            res.sendStatus(500);
+          });
+        } else {
+          res.sendStatus(403);
+        }
 
 });
 
