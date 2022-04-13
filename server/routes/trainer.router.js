@@ -13,20 +13,20 @@ router.put('/edit-class/:id', (req, res) => {
 
     if (req.isAuthenticated()) {
 
-    const queryText =
-        `UPDATE "classes"
+        const queryText =
+            `UPDATE "classes"
     SET "location" = $1, "description" = $2
     WHERE classes.id = $3`;
 
-    pool.query(queryText, [req.body.location, req.body.description, req.params.id])
+        pool.query(queryText, [req.body.location, req.body.description, req.params.id])
 
-        .then((result) => {
-            res.send(result.rows)
-        })
-        .catch((error) => {
-            console.log(error);
-            res.sendStatus(500);
-        })
+            .then((result) => {
+                res.send(result.rows)
+            })
+            .catch((error) => {
+                console.log(error);
+                res.sendStatus(500);
+            })
 
     } else {
         res.sendStatus(403);
@@ -62,10 +62,34 @@ router.put('/check-in/:id', (req, res) => {
     } else {
         res.sendStatus(403);
     }
-
 });
 
 
+// -------------------------- gets attendance for a specific class (GET)
+router.get('/attendance/:id', (req, res) => {
+
+    // if (req.isAuthenticated()) {
+console.log('req.params.id', req.params.id)
+    const queryText =
+        `SELECT "username", "profile_image"
+        FROM "classes"
+        JOIN "class_list"
+        ON "classes"."id"="class_list"."class_id" 
+        JOIN "user" ON "class_list"."user_id"="user"."id"
+        WHERE "classes"."id" = $1;`;
+
+    pool.query(queryText, [req.params.id])
+    .then((result) => {
+        res.send(result.rows);
+    }).catch((error) => {
+        console.log(error);
+        res.sendStatus(500);
+    });
+    // } else {
+    //   res.sendStatus(403);
+    // }
+
+});
 
 
 
