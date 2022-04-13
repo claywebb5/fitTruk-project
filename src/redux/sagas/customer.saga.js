@@ -11,9 +11,9 @@ import axios from 'axios';
 function* fetchCustomerClass() {
     try {
         console.log('In fetchCustomerClass, about to axios.get all the customers registered classes');
-        const Response = yield axios.get('/api/..');
-        // console.log('get all:', stepsResponse.data);  **customerClass
-        // yield put({ type: 'SET_ALL_STEPS', payload: stepsResponse.data });
+        const customerClassResponse = yield axios.get('/api/..');
+        console.log('Getting all registered classes:', customerClassResponse.data);
+        yield put({ type: '', payload: customerClassResponse.data });
 
     } catch {
         console.log('Error trying to fetch in sagas');
@@ -23,7 +23,9 @@ function* fetchCustomerClass() {
 // =============***< (GET ALL) CUSTOMER INFO >***=======================================
 function* fetchCustomerInfo(){
     console.log('In , about to axios.');
-    const Response = yield axios.get('/api/..');
+    const customerInfoResponse = yield axios.get('/api/..');
+    console.log('Getting all customer info:', customerInfoResponse.data);
+    yield put({ type: 'SET_USER_INFO', payload: customerInfoResponse.data });
 
 
 }
@@ -31,22 +33,22 @@ function* fetchCustomerInfo(){
 // =============***< (POST) ADD CLASS RESERVATION >***=======================================
 function* addReservation(){
     try {
-        console.log('action.payload is:', action.payload)
-        yield axios.post('/api/tasks', action.payload);
-        yield put({ type: 'FETCH_TASKS' });
+        console.log('The action.payload for adding a new class reservation is:', action.payload)
+        yield axios.post('/api/..', action.payload);
+        yield put({ type: 'FETCH_CUSTOMER_CLASS' });
     } catch (error) {
-        console.log('error posting a new task', error);
+        console.log('Error adding a new class reservation', error);
     }    
 }
 
 // =============***< (DELETE) REMOVE CLASS RESERVATION >***=======================================
-function* removeReservation(){
+function* removeReservation(action){
     try {
-        console.log('action.payload in delete is:', action.payload)
-        yield axios.delete(`/api/tasks/delete/${action.payload.id}`, action.payload);
-        yield put({ type: 'FETCH_TASKS' });
+        console.log('The action.payload in removing a class reservation is:', action.payload)
+        yield axios.delete(`/api/../../${action.payload.id}`, action.payload);
+        yield put({ type: 'FETCH_CUSTOMER_CLASS' });
     } catch (error) {
-        console.log('error deleting a task', error);
+        console.log('Error removing a class reservation', error);
     }   
 }
 
