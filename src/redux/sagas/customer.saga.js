@@ -11,23 +11,30 @@ import axios from 'axios';
 function* fetchCustomerClass() {
     try {
         console.log('In fetchCustomerClass, about to axios.get all the customers registered classes');
+        
+        // ** WHERE IN THE ROUTES/SERVER FILES WILL THE ROUTE FOR MY CLASSES BE???
         const customerClassResponse = yield axios.get('/api/..');
+        
         console.log('Getting all registered classes:', customerClassResponse.data);
-        yield put({ type: '', payload: customerClassResponse.data });
-
+        yield put({ type: 'SET_MY_CLASSES', payload: customerClassResponse.data });
     } catch {
-        console.log('Error trying to fetch in sagas');
+        console.log('Error trying to fetchCustomerClass in sagas!');
     }
 }
 
 // =============***< (GET ALL) CUSTOMER INFO >***=======================================
 function* fetchCustomerInfo(){
-    console.log('In , about to axios.');
-    const customerInfoResponse = yield axios.get('/api/..');
-    console.log('Getting all customer info:', customerInfoResponse.data);
-    yield put({ type: 'SET_USER_INFO', payload: customerInfoResponse.data });
-
-
+    try {
+        console.log('In fetchCustomerInfo, about to axios.get all the customer personal info');
+        
+        // ** ADD A ROUTE GOING TO customer.router ON server.js FOR AXIOS.GET ROUTE
+        const customerInfoResponse = yield axios.get('/api/..');
+        
+        console.log('Getting all customer info:', customerInfoResponse.data);
+        yield put({ type: 'SET_USER_INFO', payload: customerInfoResponse.data });
+    } catch {
+        console.log('Error trying to fetchCustomerInfo in sagas!');
+    }
 }
 
 // =============***< (POST) ADD CLASS RESERVATION >***=======================================
