@@ -46,6 +46,9 @@ values ('colinjay', 12345, 'Colin Jaworski', 'colin@yahoo.com', '763-867-5309', 
 ('Claybaebae', 12, 'Clay Webb', 'clay_webb@outlook.com', '651-964-5585', '123 first street, mpls, MN', '07/09/1999', 'he/him', 'colin', '123-4567', 'profileImage.url'), 
 ('Abdi', 12, 'Abdikarim Ibrahim', 'alldayabdi@gmail.com', 'no phone number', '123 first street, mpls, MN', '07/09/1999', 'he/him', 'colin', '123-4567', 'profileImage.url');
 
+
+
+
 --This would be adding a new class
 insert into classes ("classname", "description", "trainer_user_id", "date", "start_time", "end_time", "location", "class_size" )
 values 
