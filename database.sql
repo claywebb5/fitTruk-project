@@ -32,7 +32,7 @@ CREATE TABLE "classes" (
 
 CREATE TABLE "class_list" (
 	"id" serial PRIMARY KEY NOT NULL,
-	"class_id" int REFERENCES "classes", ON DELETE ON UPDATE CASCADE, 
+	"class_id" int REFERENCES "classes", ON DELETE CASCADE ON UPDATE CASCADE, 
 	"user_id" int REFERENCES "user",
 	"checked_in" BOOLEAN DEFAULT false
 );
@@ -79,11 +79,31 @@ UPDATE class_list
 SET checked_in = FALSE
 WHERE class_id = 1 and user_id = 4;
 
+--Get all classes that Clay has signed up for
+SELECT classes.*
+FROM "classes"
+JOIN "class_list"
+ON "classes"."id" = "class_list"."class_id"
+JOIN "user" on "class_list"."user_id" = "user"."id"
+WHERE "user"."id" = 4;
 
+--Get all users who signed up for yoga
+SELECT distinct "user".*
+FROM "user"
+JOIN "class_list"
+ON "user"."id" = "class_list"."user_id"
+JOIN "classes" on "class_list"."user_id" = "user"."id"
+WHERE "classes"."id" = 2;
 
+--Updates location and details for a specific class
+UPDATE classes
+SET "location" = 'someplace noisy', "description" = 'yoga is fun and a great way to stay in shape'
+WHERE classes.id = 2; 
 
-
-
+--Updates pronouns for a specific user
+UPDATE "user"
+SET "pronouns" = 'he/him'
+WHERE "user"."id" = 1;
 
 
 
