@@ -2,9 +2,10 @@ import { put, takeLatest } from 'redux-saga/effects';
 import axios from 'axios';
 // =============***< (GET) ALL CLASSES >***=======================================
 function* fetchClasses (){
-    
     // GET 
     // will send a request to the classes router to retrieve all available classes
+    console.log('in fetchClasses, this is the disatch I recieved');
+    
 
 }
 // =============***< (GET) ALL CLASSES BASED ON SEARCH >***========================
