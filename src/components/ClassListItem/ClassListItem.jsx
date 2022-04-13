@@ -6,8 +6,6 @@ function ClassListItem({event, i}) {
   const history = useHistory();
 
   const handleEventClick = () => {
-    console.log('Hey i was clicked',)
-    // history.goBack();
     history.push('/class-details')
   }
 
