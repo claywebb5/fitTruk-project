@@ -1,13 +1,22 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import ClassListItem from '../ClassListItem/ClassListItem';
 import Nav from '../Nav/Nav';
 
 
 function AllClassesPage() {
-
   const history = useHistory();
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch({
+      type: 'FETCH_CLASSES'
+    });
+  }, [])
+
+
 
   // ------- Variables ---------
   const user = useSelector(store => store.user)
