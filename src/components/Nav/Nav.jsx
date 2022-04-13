@@ -25,6 +25,10 @@ function Nav() {
         {/* If a user is logged in, show these links */}
         {user.id && (
           <>
+          <Link className="navLink" to="/all-classes">
+              <button>**LOGO**</button>
+            </Link>
+
             <Link className="navLink" to="/all-classes">
               <button>All Classes</button>
             </Link>
@@ -37,8 +41,8 @@ function Nav() {
               <button>Class Details</button>
             </Link>
 
-            <Link className="navLink" to="/class-attendace">
-              <button>Class Attendace</button>
+            <Link className="navLink" to="/attendees">
+              <button>Class Attendees</button>
             </Link> 
             <Link className="navLink" to="/create-class">
               <button>Create Class</button>
@@ -46,10 +50,11 @@ function Nav() {
             <Link className="navLink" to="/personal-info">
               <button>Personal Info</button>
             </Link>
-
-            
             <Link className="navLink" to="/info">
               <button>Info Page</button>
+            </Link>
+            <Link className="navLink" to="/personal-info">
+              <button>**PROFILE PIC**</button>
             </Link>
           </>
         )}
