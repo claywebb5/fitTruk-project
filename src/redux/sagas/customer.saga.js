@@ -5,8 +5,8 @@ import axios from 'axios';
     // *[x] Getting all the customers personal info (Personal Info/Profile)
     // *[x] Update customers personal info (Personal Info/Profile)
     // *[x] Getting all the customers registered classes (My Classes)
-    // *[] Adding a new class to their reservations (My/All Classes/Class Details)
-    // *[] Removing a class from their reservations (My Classes/Class Details)
+    // *[x] Adding a new class to their reservations (My/All Classes/Class Details)
+    // *[x] Removing a class from their reservations (My Classes/Class Details)
 
 
 
@@ -61,23 +61,15 @@ function* addReservation(action){
 function* removeReservation(action){
     try {
         console.log('The action.payload in removing a class reservation is:', action.payload)
-        
-        // ** WHERE IN THE ROUTES/SERVER FILES WILL THE ROUTE FOR DELETING A CLASS RESERVATION BE???
-        yield axios.delete(`/api/../../${action.payload.id}`, action.payload);
-        
+        yield axios.delete(`/api/customer/delete/${action.payload.id}`, action.payload);
         yield put({ type: 'FETCH_CUSTOMER_CLASS' });
     } catch (error) {
         console.log('Error removing a class reservation', error);
     }   
 }
 
-// =============***<  >***=======================================
-// function* (){
-    // console.log('In , about to axios.');
 
-
-// }
-
+// =============*< WATCHER SAGA >*=======================================
 function* customerSaga() {
   yield takeLatest('FETCH_CUSTOMER_CLASS', fetchCustomerClass);
   yield takeLatest('FETCH_CUSTOMER_INFO', fetchCustomerInfo);
@@ -86,4 +78,4 @@ function* customerSaga() {
   yield takeLatest('UPDATE_CUSTOMER_INFO', updateCustomerInfo);
 }
 
-export default customerSaga; // ** NOT EXPORTED INTO ROOT SAGA YET **
+export default customerSaga;
