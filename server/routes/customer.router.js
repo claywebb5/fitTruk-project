@@ -1,8 +1,8 @@
-// put for updating user info
+
 const express = require('express');
 const pool = require('../modules/pool');
 const router = express.Router();
 
-//put
+// put for updating users pronouns
 
 module.exports = router;
