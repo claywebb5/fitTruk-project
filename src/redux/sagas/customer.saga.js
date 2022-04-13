@@ -11,30 +11,40 @@ import axios from 'axios';
 function* fetchCustomerClass() {
     try {
         console.log('In fetchCustomerClass, about to axios.get all the customers registered classes');
+        
+        // ** WHERE IN THE ROUTES/SERVER FILES WILL THE ROUTE FOR MY CLASSES BE???
         const customerClassResponse = yield axios.get('/api/..');
+        
         console.log('Getting all registered classes:', customerClassResponse.data);
-        yield put({ type: '', payload: customerClassResponse.data });
-
+        yield put({ type: 'SET_MY_CLASSES', payload: customerClassResponse.data });
     } catch {
-        console.log('Error trying to fetch in sagas');
+        console.log('Error trying to fetchCustomerClass in sagas!');
     }
 }
 
 // =============***< (GET ALL) CUSTOMER INFO >***=======================================
 function* fetchCustomerInfo(){
-    console.log('In , about to axios.');
-    const customerInfoResponse = yield axios.get('/api/..');
-    console.log('Getting all customer info:', customerInfoResponse.data);
-    yield put({ type: 'SET_USER_INFO', payload: customerInfoResponse.data });
-
-
+    try {
+        console.log('In fetchCustomerInfo, about to axios.get all the customer personal info');
+        
+        // ** ADD A ROUTE GOING TO customer.router ON server.js FOR AXIOS.GET ROUTE
+        const customerInfoResponse = yield axios.get('/api/..');
+        
+        console.log('Getting all customer info:', customerInfoResponse.data);
+        yield put({ type: 'SET_USER_INFO', payload: customerInfoResponse.data });
+    } catch {
+        console.log('Error trying to fetchCustomerInfo in sagas!');
+    }
 }
 
 // =============***< (POST) ADD CLASS RESERVATION >***=======================================
-function* addReservation(){
+function* addReservation(action){
     try {
         console.log('The action.payload for adding a new class reservation is:', action.payload)
+        
+        // ** WHERE IN THE ROUTES/SERVER FILES WILL THE ROUTE FOR ADDING A CLASS RESERVATION BE???
         yield axios.post('/api/..', action.payload);
+        
         yield put({ type: 'FETCH_CUSTOMER_CLASS' });
     } catch (error) {
         console.log('Error adding a new class reservation', error);
@@ -45,7 +55,10 @@ function* addReservation(){
 function* removeReservation(action){
     try {
         console.log('The action.payload in removing a class reservation is:', action.payload)
+        
+        // ** WHERE IN THE ROUTES/SERVER FILES WILL THE ROUTE FOR DELETING A CLASS RESERVATION BE???
         yield axios.delete(`/api/../../${action.payload.id}`, action.payload);
+        
         yield put({ type: 'FETCH_CUSTOMER_CLASS' });
     } catch (error) {
         console.log('Error removing a class reservation', error);
