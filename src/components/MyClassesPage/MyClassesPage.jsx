@@ -1,13 +1,16 @@
 import React from 'react';
+import { useHistory } from 'react-router-dom';
 import ClassListItem from '../ClassListItem/ClassListItem';
 import Nav from '../Nav/Nav';
 
-// This is one of our simplest components
-// It doesn't have local state,
-// It doesn't dispatch any redux actions or display any part of redux state
-// or even care what the redux state is'
 
 function MyClassesPage() {
+
+  const history = useHistory();
+
+  const handleAllClassClick = () => {
+    history.push("/all-classes");
+  }
 
 
 // ----- DELETE this when we have our classes reducer running------
@@ -18,6 +21,7 @@ const classes = [{id: 1,classname: "HIIT",description: "high intensity interval 
   return (
     <div>
       <Nav/>
+      <button onClick={handleAllClassClick}>All Available classes(this will be an icon eventually)</button>
       <ul>
       {classes.map((event, i) =>(
         <ClassListItem event={event} key={i} />
