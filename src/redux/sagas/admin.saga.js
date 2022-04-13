@@ -5,7 +5,7 @@ import axios from 'axios';
 
 // POST 
 // ADMIN ONLY
-// will send a request to the classes router to create a new class and add it to the database
+// will send a request to the admin router to create a new class and add it to the database
 function* createClasses (){
 
 }
