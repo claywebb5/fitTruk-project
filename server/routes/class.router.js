@@ -39,7 +39,6 @@ router.get('/details/:id', (req, res) => {
 
 router.get('/:search', (req, res) => {
 
-    if (req.isAuthenticated()) {
         let queryText = `SELECT * 
     FROM "classes" 
     WHERE "classname" ILIKE $1;`;
@@ -50,9 +49,7 @@ router.get('/:search', (req, res) => {
                 console.log(error)
                 res.sendStatus(500)
             })
-    } else {
-        res.sendStatus(403);
-    }
+
 });
 
 
