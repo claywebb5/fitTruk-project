@@ -91,12 +91,12 @@ JOIN "user" on "class_list"."user_id" = "user"."id"
 WHERE "user"."id" = 4;
 
 --Get all users who signed up for yoga
-SELECT distinct "user".*
-FROM "user"
-JOIN "class_list"
-ON "user"."id" = "class_list"."user_id"
-JOIN "classes" on "class_list"."user_id" = "user"."id"
-WHERE "classes"."id" = 2;
+select username
+from "classes"
+join "class_list"
+on "classes"."id"="class_list"."class_id" 
+join "user" on "class_list"."user_id"="user"."id"
+where "classes"."id" = 2;
 
 --Updates location and details for a specific class
 UPDATE classes
