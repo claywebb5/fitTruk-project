@@ -1,5 +1,5 @@
-// import { useEffect, useState } from 'react';
-// import { useDispatch, useSelector } from 'react-redux';
+import { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
 // ** Trainers can view the list of signed up guests/members for a specific class
 // ** Trainers can check in guests/members upon arrival
@@ -8,10 +8,17 @@
 // ** STRETCH: Trainers can send messages to ALL guests/members
 
 
+
 function AttendeesPage(){
+    const dispatch = useDispatch();
+    const attendees = useSelector(store => store.attendeesReducer);
+    const userId = useSelector(store => store.user.id);
 
     return(
         <>
+        <ul>
+            <li>{attendees.name}</li>
+        </ul>
 
         </>
     )
