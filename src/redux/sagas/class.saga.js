@@ -31,7 +31,7 @@ function* searchClasses (action){
         
     //     yield put({ type: 'SET_ALL_CLASSES', payload: classes.data });
     // } catch (error) {
-    //     console.log('Error fetching All Classes', error);
+    //     console.log('Error searching All Classes', error);
     // } 
     
 }
@@ -41,6 +41,16 @@ function* fetchDetails (action){
     // GET
     // will send a request to the classes router to grab a specific classes details
     console.log('here is the dispatch info:', action.type, action.payload);
+
+    try {
+        
+        const classDetails = yield axios.get(`/api/class/details/${action.payload}`);
+        console.log('these are the class details', classDetails.data);
+        
+        yield put({ type: 'SET_CLASS_DETAILS', payload: classDetails.data });
+    } catch (error) {
+        console.log('Error fetching Class Details', error);
+    } 
 
 }
 

@@ -12,7 +12,7 @@ function ClassDetailsPage(){
     useEffect(() => {
         dispatch({
           type: 'FETCH_CLASS_DETAILS',
-          payload: 1 // PART OF DUMMY DATA, WILL BE UPDATED ONCE :id IS ADDED TO ROUTING
+          payload: 4 // PART OF DUMMY DATA, WILL BE UPDATED ONCE :id IS ADDED TO ROUTING
         });
       }, [])
 
