@@ -5,10 +5,7 @@ const router = express.Router();
 
 // -------------------------- Admin creates new class (POST)
 
-
 router.post('/', (req, res) => {
-
-  // console.log('in admin router', req.body);
 
   if (req.isAuthenticated()) {
     const queryText = `insert into classes ("classname", "description", "trainer_user_id", "date", "start_time", "end_time", "location", "class_size")
