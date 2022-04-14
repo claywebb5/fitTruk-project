@@ -3,7 +3,11 @@ const express = require('express');
 const pool = require('../modules/pool');
 const router = express.Router();
 
+
+// gets customers specific classes
+
 // -------------------------- Gets classes a specific customer signed up for
+
 router.get('/myclasses/:id', (req, res) => {
     // GET route code here
     if (req.isAuthenticated()) {
@@ -12,8 +16,6 @@ router.get('/myclasses/:id', (req, res) => {
         JOIN "user" ON class_list.user_id = "user".id
         WHERE "user".id = ${req.params.id}
         ;`;
-        // endpoint functionality
-        // const queryValues = [req.body.data, req.params.id];
    
         pool.query(queryText).then((result) => {
             res.send(result.rows);
@@ -56,6 +58,21 @@ router.put('/pronouns/:id', (req, res) => {
   // }
 });
 
+
+// cancels a customers reservation 
+router.delete('/reservation/:id', (req,res) =>{
+    console.log('req.body.class_id', req.body.class_id);
+    if (req.isAuthenticated()) {
+        let queryText = `DELETE FROM class_list
+        WHERE class_list.user_id = $1 and class_list.class_id = $2`;
+        pool.query(queryText, [req.body.class_id, req.params.id])
+        .then(result => res.sendStatus(201))
+          .catch(err => res.sendStatus(500));
+      } else {
+        res.sendStatus(403);
+      }
+})
+
 // -------------------------- Reserves a class for a customer (POST)
 
 router.post('/reserve-class/:id', (req, res) => {
@@ -78,6 +95,7 @@ router.post('/reserve-class/:id', (req, res) => {
   //   res.sendStatus(403);
   // }
 });
+
 
 
 
