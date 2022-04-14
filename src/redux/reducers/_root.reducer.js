@@ -5,7 +5,7 @@ import classDetailsReducer from './classDetails.reducer';
 import allClassesReducer from './allClasses.Reducer';
 import attendeesReducer from './attendeesReducer';
 import userClassReducer from './userClassReducer';
-import personalInfo from './personalInfo.reducer';
+import customerInfo from './customerInfo.reducer';
 
 // rootReducer is the primary reducer for our entire project
 // It bundles up all of the other reducers so our project can use them.
@@ -18,7 +18,7 @@ const rootReducer = combineReducers({
   user, // will have an id and username if someone is logged in
   allClassesReducer, // contains all avaliable classes info
   classDetailsReducer, // contains details for a specific class
-  personalInfo, // contains details about user like name, address etc
+  customerInfo, // contains details about user like name, address etc
   attendeesReducer, //contains everyone registered in the class
   userClassReducer, // contains specific classes for both trainers and customers 
   
