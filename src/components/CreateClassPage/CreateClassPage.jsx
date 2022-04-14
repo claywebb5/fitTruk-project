@@ -20,44 +20,24 @@ function CreateClassPage() {
 
 
 
-    // ============= DELETE this when we have a reducer/saga to replace it ===================
-    const trainers = [
-        {
-            trainer_user_id: 1,
-            name: "Kim",
-            profile_image: "https://www.yogaparkside.org/wp-content/uploads/2021/08/Jessica_D_Asana-e1629237846697.jpg",
-        },
-        {
-            trainer_user_id: 2,
-            name: "Mark",
-            profile_image: "https://www.yogabaron.com/wp-content/uploads/2018/12/Yoga-teacher-at-front-of-yoga-class-dec9.jpg",
-        },
-        {
-            trainer_user_id: 3,
-            name: "Sarah",
-            profile_image: "https://www.insideedition.com/sites/default/files/styles/video_1920x1080/public/images/2021-03/031821_yoga_teacher_web_0.jpg?h=d1cb525d",
-        }
-    ]
-    // ^^^^^^^^^^^^ DELETE this when we have a reducer/saga to replace it ^^^^^^^^^^^^^^^^^
-
 
     //---------- Variables -----------
-    // const trainers = useSelector(store => store.trainers)
-    // let displayed_trainer_image;
-    // let displayed_trainer_name;
+    const trainers = useSelector(store => store.availableTrainers)
+    const activeClass = useSelector(store => store.activeClass)
     // With this single useState, we can hold every piece of information needed,
     // and this can be transplanted into a global reducer and this local useState
     // can be deleted later on.
-    const [values, setValues] = useState({
-        trainer_user_id: '',
-        date: '',
-        classname: '',
-        start_time: '',
-        end_time: '',
-        location: '',
-        description: '',
-        class_size: '',
-    })
+
+    // const [values, setValues] = useState({
+    //     trainer_user_id: '',
+    //     date: '',
+    //     classname: '',
+    //     start_time: '',
+    //     end_time: '',
+    //     location: '',
+    //     description: '',
+    //     class_size: '',
+    // })
     //----------<  I n p u t   H a n d l e r s  >-----------
     const handleChange = (prop) => (event) => {
         setValues({ ...values, [prop]: event.target.value }); // This sets the value of the variable based on which variable it pertains to.

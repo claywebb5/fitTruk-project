@@ -5,7 +5,9 @@ import classDetailsReducer from './classDetails.reducer';
 import allClassesReducer from './allClasses.Reducer';
 import PersonalinfoReducer from './Personalinfo.reducer';
 import attendeesReducer from './attendeesReducer';
-import userClassReducer from './userClassReducer';
+import userClassReducer from './userClass.reducer';
+import availableTrainers from './availableTrainers.reducer';
+import activeClass from './activeClass.reducer';
 
 // rootReducer is the primary reducer for our entire project
 // It bundles up all of the other reducers so our project can use them.
@@ -21,7 +23,8 @@ const rootReducer = combineReducers({
   PersonalinfoReducer, // contains details about user like name, address etc
   attendeesReducer, //contains everyone registered in the class
   userClassReducer, // contains specific classes for both trainers and customers 
-  
+  availableTrainers, // contains the list of trainers that an administrator has available to assign to a class.
+  activeClass, // This contains the data of a class that's actively being edited or created.
   
 });
 
