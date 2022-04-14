@@ -20,8 +20,9 @@ router.get('/', (req, res) => {
 
 router.get('/details/:id', (req, res) => {
     // GET route code here
-    let queryText = `SELECT * FROM "classes" WHERE id = ${req.params.id} `;
-    pool.query(queryText).then((result) => {
+    let queryText = `SELECT * FROM "classes" WHERE id = $1 `;
+    pool.query(queryText, [req.params.id])
+    .then((result) => {
         res.send(result.rows)
     }).catch((error) => {
         console.log(error)
@@ -44,11 +45,6 @@ router.get('/:search', (req, res) => {
             res.sendStatus(500)
         })
 });
-
-
-
-
-
 
 
 module.exports = router;
