@@ -15,8 +15,8 @@ function UserPage() {
 
   //  ============<ON PAGE LOAD>=============
   // useEffect(() => {
-  //   dispatch({ type: 'FETCH_CUSTOMER_INFO' }); // Trigger customer.saga
-  // }, []);
+  //   dispatch({ type: 'FETCH_USER' }); // Trigger customer.saga
+  // }, [dispatch]);
 
     //  ============<>=============
     let userObj = {
@@ -38,6 +38,8 @@ function UserPage() {
 
     //  ============< Pronoun Change >=============
     const handlePronounChange = (event) => {
+      console.log('New Pronoun:', event.target.value);
+      
       setEditUser({...editUser, pronouns: event.target.value})
       console.log('In handlePronounChange');
       
@@ -83,10 +85,10 @@ function UserPage() {
 
         <div> {/* CAN EDIT  */}
           <p><b>Pronouns:</b> {user.pronouns}</p>
-          <select onChange={handlePronounChange}>
-            <option value={editUser.pronouns}> He/Him</option>
-            <option value={editUser.pronouns}> She/Her</option>
-            <option value={editUser.pronouns}> They/Them</option>
+          <select onChange={handlePronounChange} value={editUser.pronouns}>
+            <option value="He/Him"> He/Him</option>
+            <option value="She/Her"> She/Her</option>
+            <option value="They/Them"> They/Them</option>
           </select>
         </div>
         <p><b>Email:</b> {user.email}</p>
