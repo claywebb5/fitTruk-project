@@ -24,18 +24,21 @@ function UserPage() {
   return (
     <>
       <h1><u>Personal Info Page</u></h1>
+
       <div className="container">
-        {/* <p>Your ID is: {user.id}</p> */}
+        <h2>*Profile Image Here*</h2> {/* CAN EDIT  */}
         <h2>Welcome, {user.name}!</h2>
-        <p><b>Pronouns:</b> {user.pronouns}</p>
+        <p><b>Pronouns:</b> {user.pronouns}</p> {/* CAN EDIT  */}
         <p><b>Email:</b> {user.email}</p>
         <p><b>Number:</b> {user.phone_number}</p>
         <p><b>Address:</b> {user.address}</p>
         <p>------- In case of emergencies ---------</p>
         <p><b>Emergency Contact:</b> {user.emergency_name}</p>
         <p><b>Number:</b> {user.emergency_number}</p>
-
       </div>
+
+      <button>Back</button>
+      <button>Save</button>
     </>
   );
 }
