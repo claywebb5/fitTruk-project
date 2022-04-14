@@ -11,6 +11,7 @@ router.get('/', (req, res) => {
     pool.query(queryText).then((result) =>{
         res.send(result.rows)
     }).catch((error)=>{
+        console.log(error)
         res.sendStatus(500)
     }) 
 });
@@ -23,9 +24,27 @@ router.get('/details/:id', (req, res) => {
     pool.query(queryText).then((result) =>{
         res.send(result.rows)
     }).catch((error)=>{
+        console.log(error)
         res.sendStatus(500)
     }) 
 });
+
+// -------------------------- Get classes, search by name that includes not case sensitive text
+
+router.get('/:search', (req, res) => {
+    console.log('req.params.search', req.params.search)
+    let queryText = `SELECT * 
+    FROM "classes" 
+    WHERE "classname" ILIKE '%$1%';`;
+    pool.query(queryText,[req.params.search])
+    .then((result) =>{
+        res.send(result.rows)
+    }).catch((error)=>{
+        console.log(error)
+        res.sendStatus(500)
+    }) 
+});
+
 
 
 
