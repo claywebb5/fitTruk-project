@@ -29,7 +29,7 @@ router.get('/myclasses/:id', (req, res) => {
 });
 
 
-// -------------------------- Updates personal info of customer (PUT)
+// -------------------------- Updates personal info and address of customer (PUT)
 
 router.put('/pronouns/:id', (req, res) => {
 
@@ -40,10 +40,10 @@ router.put('/pronouns/:id', (req, res) => {
 
   const queryText =
     `UPDATE "user"
-          SET "pronouns" = $1
-          WHERE "user"."id" = $2;`;
+          SET "pronouns" = $1, "address" = $2
+          WHERE "user"."id" = $3;`;
 
-  pool.query(queryText, [req.body.pronouns, req.params.id])
+  pool.query(queryText, [req.body.pronouns, req.body.address, req.params.id])
 
     .then((result) => {
       res.send(result.rows)
