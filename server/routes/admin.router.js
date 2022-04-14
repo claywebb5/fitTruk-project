@@ -24,6 +24,24 @@ router.post('/', (req, res) => {
   }
 });
 
+// -------------------------- Admin GET trainer list (trainers have access level of 2)
+router.get('/', (req, res) => {
+
+  if (req.isAuthenticated()) {
+    let queryText = `select "name", "id", "profile_image"
+      from "user"
+      where "access_level" = 2;`;
+    pool.query(queryText).then((result) => {
+      res.send(result.rows)
+    }).catch((error) => {
+      console.log(error)
+      res.sendStatus(500)
+    })
+  } else {
+    res.sendStatus(403);
+  }
+});
+
 
 
 
