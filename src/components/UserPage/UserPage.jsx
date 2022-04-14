@@ -56,6 +56,7 @@ function UserPage() {
       type: 'UPDATE_CUSTOMER_INFO',
       payload: updatedUser
     });
+    window.location.reload();
     console.log('Clicked Submit');
     // dispatch({
     //   type: 'FETCH_CUSTOMER_INFO'
@@ -105,11 +106,12 @@ function UserPage() {
           <p>------- In case of emergencies ---------</p>
           <p><b>Emergency Contact:</b> {user.emergency_name}</p>
           <p><b>Number:</b> {user.emergency_number}</p>
+          <button onClick={handleReturnClick}>Cancel</button>
+          <button type="submit">Submit</button>
         </form>
       </div>
 
-      <button onClick={handleReturnClick}>Cancel</button>
-      <button onClick={handleSubmit}>Submit</button>
+      
     </>
   );
 }

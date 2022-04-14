@@ -1,4 +1,4 @@
-const customerInfo = (state = {}, action) => {
+const customerInfoReducer = (state = {}, action) => {
     switch (action.type) {
       case 'SET_USER_INFO':
         return action.payload;
@@ -9,4 +9,4 @@ const customerInfo = (state = {}, action) => {
     }
   };
 
-  export default customerInfo;
+  export default customerInfoReducer;
