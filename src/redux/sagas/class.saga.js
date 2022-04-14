@@ -7,7 +7,7 @@ function* fetchClasses (){
     console.log('in fetchClasses, this is the disatch I recieved');
     
     try {
-        // ** WHERE IN THE ROUTES/SERVER FILES WILL THE ROUTE FOR FETCHING ALL CLASSES BE???
+        
         const classes = yield axios.get(`/api/class/`);
         console.log('these are classes', classes);
         
@@ -23,6 +23,16 @@ function* searchClasses (action){
     // GET 
     // will send a request to the classes router to search tne classes by name
     console.log('here is the dispatch info:', action.type, action.payload);
+    // ----------------***< WAITING FOR BACK END ROUTE TO TEST >***-----------------------
+    // try {
+    //     // ** WHERE IN THE ROUTES/SERVER FILES WILL THE ROUTE FOR FETCHING ALL CLASSES BE???
+    //     const classes = yield axios.get(`/api/class/${action.payload}`);
+    //     console.log('these are classes', classes);
+        
+    //     yield put({ type: 'SET_ALL_CLASSES', payload: classes.data });
+    // } catch (error) {
+    //     console.log('Error fetching All Classes', error);
+    // } 
     
 }
 
