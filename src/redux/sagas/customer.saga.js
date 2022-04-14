@@ -26,8 +26,8 @@ function* fetchCustomerInfo(){
 function* updateCustomerInfo(action){
     try {
         console.log('In updateCustomerInfo the action.payload is:', action.payload);
-        yield axios.put(`/api/customer/update/${action.payload.id}`, action.payload);
-        yield put({type: 'SET_USER_INFO'});
+        yield axios.put(`/api/customer/pronouns/${action.payload.id}`, action.payload);
+        yield put({type: 'SET_USER'});
     } catch (error){
         console.log('Error updating customer info:', error)
     }
