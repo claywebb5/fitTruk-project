@@ -21,5 +21,6 @@ export default function* rootSaga() {
     registrationSaga(),
     userSaga(),
     classSaga(),
+    customerSaga(),
   ]);
 }
