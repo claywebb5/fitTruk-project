@@ -18,9 +18,6 @@ function CreateClassPage() {
 
 
 
-    const submitHandler = () => {
-        console.log('This will submit the form');
-    }
 
 
     // ============= DELETE this when we have a reducer/saga to replace it ===================
@@ -28,49 +25,78 @@ function CreateClassPage() {
         {
             trainer_user_id: 1,
             name: "Kim",
-            image_url: "https://www.yogaparkside.org/wp-content/uploads/2021/08/Jessica_D_Asana-e1629237846697.jpg",
+            profile_image: "https://www.yogaparkside.org/wp-content/uploads/2021/08/Jessica_D_Asana-e1629237846697.jpg",
         },
         {
             trainer_user_id: 2,
             name: "Mark",
-            image_url: "https://www.yogabaron.com/wp-content/uploads/2018/12/Yoga-teacher-at-front-of-yoga-class-dec9.jpg",
+            profile_image: "https://www.yogabaron.com/wp-content/uploads/2018/12/Yoga-teacher-at-front-of-yoga-class-dec9.jpg",
         },
         {
             trainer_user_id: 3,
             name: "Sarah",
-            image_url: "https://www.insideedition.com/sites/default/files/styles/video_1920x1080/public/images/2021-03/031821_yoga_teacher_web_0.jpg?h=d1cb525d",
+            profile_image: "https://www.insideedition.com/sites/default/files/styles/video_1920x1080/public/images/2021-03/031821_yoga_teacher_web_0.jpg?h=d1cb525d",
         }
     ]
-    // const [trainer, setTrainer] = useState('');
-    // const [date, setDate] = useState('');
-    // const [className, setClassName] = useState('');
-    // const [startTime, setStartTime] = useState('');
-    // const [endTime, setEndTime] = useState('');
-    // const [location, setLocation] = useState('');
-    // const [description, setDescription] = useState('');
-
     // ^^^^^^^^^^^^ DELETE this when we have a reducer/saga to replace it ^^^^^^^^^^^^^^^^^
 
 
     //---------- Variables -----------
+    // const trainers = useSelector(store => store.trainers)
+    // let displayed_trainer_image;
+    // let displayed_trainer_name;
     // With this single useState, we can hold every piece of information needed,
     // and this can be transplanted into a global reducer and this local useState
     // can be deleted later on.
     const [values, setValues] = useState({
-        trainer: '',
+        trainer_user_id: '',
         date: '',
-        className: '',
-        startTime: '',
-        endTime: '',
+        classname: '',
+        start_time: '',
+        end_time: '',
         location: '',
         description: '',
+        class_size: '',
     })
-    let selectedTrainer;
     //----------<  I n p u t   H a n d l e r s  >-----------
     const handleChange = (prop) => (event) => {
-        setValues({ ...values, [prop]: event.target.value });
+        setValues({ ...values, [prop]: event.target.value }); // This sets the value of the variable based on which variable it pertains to.
         console.log(`${prop} updated to: ${event.target.value}`); // Test log
-    };
+    }; // END handleChange
+
+
+    const handleTrainerSelection = (trainerId) => {
+        console.log('HandleTrainerSelection: I\'m handling trainer selection!');
+
+        for (let trainer of trainers) {
+            if (trainer.trainer_user_id == trainerId) {
+                let displayed_trainer_image = trainer.profile_image;
+                let displayed_trainer_name = trainer.name;
+                
+                // export default ImageRenderer = (){
+                //     let displayed_trainer_image = trainer.profile_image;
+                //     let displayed_trainer_name = trainer.name;
+                    
+                // }
+
+                console.log('trainer:', trainer.name); // Test log to ensure the objects are being retrieved properly.
+                console.log('trainer:', trainer.profile_image); // Test log to ensure the objects are being retrieved properly.
+                
+                setValues({
+                    ...values,
+                    trainer_user_id: trainerId,
+                })
+            }// End conditional statement
+        }// End loop through trainer array
+        console.log('trainer:', displayed_trainer_image); // Test log to ensure the objects are being retrieved properly.
+        console.log('trainer:', displayed_trainer_name); // Test log to ensure the objects are being retrieved properly.
+    }; // END handleTrainerSelection
+
+    const submitHandler = (event) => {
+        event.preventDefault();
+        console.log('This will submit the form');
+        console.log(values);
+    }
     //----------<  //  E N D   I n p u t   H a n d l e r s  >-----------
 
 
@@ -87,31 +113,34 @@ function CreateClassPage() {
 
                 {/* ---- Set Class Name ---- */}
                 <h4>Class name:
-                    <input type="text" name="class-name" value={values.className} onChange={handleChange('className')} />
+                    <input type="text" name="class-name" value={values.classname} onChange={handleChange('classname')} />
                 </h4>
 
                 {/* ---- Select Trainer ---- */}
-                <h4>Trainer:
+                <h4>Led by:
                     <select name="trainer" id="trainer-selector"
-                        onChange={handleChange('trainer')}
-                        value={values.trainer}>
+                        placeholder='Trainer'
+                        onChange={(event) => { handleTrainerSelection(event.target.value) }}
+                    // value={trainer}
+                    >
                         {trainers.map((trainer, i) => (
                             <option key={i} value={trainer.trainer_user_id}>{trainer.name}</option>
                         ))}
                     </select>
-                {/* ---- Here's the trainer's image ---- */}
-                <img src={selectedTrainer.profile_image} alt={selectedTrainer.name}/>
+                    {/* ---- Here's the trainer's image ---- */}
+                    <img src={displayed_trainer_image} alt="Profile image of the selected trainer" />
+                    <ImageRenderer />
                 </h4>
 
 
                 {/* ---- Set Start Time ---- */}
                 <h4>Start time:
-                    <input type="time" name="start-time" value={values.startTime} onChange={handleChange('startTime')} />
+                    <input type="time" name="start-time" value={values.start_time} onChange={handleChange('start_time')} />
 
 
                     {/* ---- Set End Time ---- */}
                     End Time:
-                    <input type="time" name="end-time" value={values.endTime} onChange={handleChange('endTime')} />
+                    <input type="time" name="end-time" value={values.end_time} onChange={handleChange('end_time')} />
                 </h4>
 
                 {/* ---- Set Location ---- */}
@@ -122,6 +151,11 @@ function CreateClassPage() {
                 {/* ---- Set Description ---- */}
                 <h4>Description:
                     <input type="text" name="" value={values.description} onChange={handleChange('description')} />
+                </h4>
+
+                {/* ---- Set Class Size ---- */}
+                <h4>Class Size:
+                    <input type="number" name="class-size" value={values.class_size} onChange={handleChange('class_size')} />
                 </h4>
 
                 {/* ---- Submit form!! ---- */}
