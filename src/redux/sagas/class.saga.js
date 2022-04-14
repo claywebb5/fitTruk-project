@@ -43,7 +43,6 @@ function* fetchDetails (action){
     console.log('here is the dispatch info:', action.type, action.payload);
 
     try {
-        
         const classDetails = yield axios.get(`/api/class/details/${action.payload}`);
         console.log('these are the class details', classDetails.data);
         

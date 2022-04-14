@@ -21,7 +21,7 @@ router.get('/details/:id', (req, res) => {
     // GET route code here
     let queryText = `SELECT * FROM "classes" WHERE id = ${req.params.id} `;
     pool.query(queryText).then((result) =>{
-        res.send(result.rows)
+        res.send(result.rows[0])
     }).catch((error)=>{
         res.sendStatus(500)
     }) 
