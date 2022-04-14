@@ -56,6 +56,28 @@ router.put('/pronouns/:id', (req, res) => {
   // }
 });
 
+// -------------------------- Reserves a class for a customer (POST)
+
+router.post('/reserve-class/:id', (req, res) => {
+
+  console.log('reserve class router', req.body.user_id);
+
+  // if (req.isAuthenticated()) {
+    const queryText = `INSERT into "class_list" ("class_id", "user_id")
+    values ($1, $2);`
+    pool.query(queryText, [req.params.id, req.body.user_id])
+
+      .then((result) => {
+        res.send(result.rows)
+      })
+      .catch((error) => {
+        console.log(error);
+        res.sendStatus(500);
+      })
+  // } else {
+  //   res.sendStatus(403);
+  // }
+});
 
 
 
