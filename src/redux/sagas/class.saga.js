@@ -11,7 +11,7 @@ function* fetchClasses (){
         const classes = yield axios.get(`/api/class/`);
         console.log('these are classes', classes);
         
-        // yield put({ type: 'SET_ALL_CLASSES', payload: classes.data });
+        yield put({ type: 'SET_ALL_CLASSES', payload: classes.data });
     } catch (error) {
         console.log('Error fetching All Classes', error);
     } 
