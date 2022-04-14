@@ -19,10 +19,11 @@ function* fetchClasses (){
 
 }
 // =============***< (GET) ALL CLASSES BASED ON SEARCH >***========================
-function* searchClasses (){
+function* searchClasses (action){
     // GET 
     // will send a request to the classes router to search tne classes by name
-
+    console.log('here is the dispatch info:', action.type, action.payload);
+    
 }
 
 // =============***< (GET) CLASS DETAILS >***======================================

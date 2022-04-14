@@ -28,6 +28,10 @@ function AllClassesPage() {
   }
   const runSearch = () => {
     console.log('this is the search term', search);
+    dispatch({
+      type: 'SEARCH_CLASSES',
+      payload: search
+    })
     setSearch('')
   }
   // ------- Search Bar -------
