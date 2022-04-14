@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
@@ -26,6 +26,12 @@ function AllClassesPage() {
   const handleMyClassClick = () => {
     history.push("/my-classes");
   }
+  const runSearch = () => {
+    console.log('this is the search term', search);
+    setSearch('')
+  }
+  // ------- Search Bar -------
+  const [search, setSearch] = useState('')
 
 
   // const classes = [ /// DELETE this when we have working sagas and reducers, this is temporary test data
@@ -68,6 +74,11 @@ function AllClassesPage() {
   return (
     <div>
       <Nav/>
+      <input 
+      type="text"
+      value={search}
+      onChange={(e) => setSearch(e.target.value)} />
+      <button onClick={runSearch}>search classes</button>
       <h3>If logged in, myclass button appears below, if not then no button</h3>
       {user.id && <button onClick={handleMyClassClick}>Myclasses (this will be an icon eventually)</button>}
       <ul>
