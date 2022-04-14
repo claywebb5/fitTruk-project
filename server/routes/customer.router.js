@@ -10,26 +10,27 @@ const router = express.Router();
 
 router.get('/myclasses/:id', (req, res) => {
   // GET route code here
-  if (req.isAuthenticated()) {
-    const queryText = ` SELECT classes.* from classes 
+  // if (req.isAuthenticated()) {
+  const queryText = ` SELECT classes.* from classes 
         JOIN class_list ON classes.id = class_list.class_id
         JOIN "user" ON class_list.user_id = "user".id
-        WHERE "user".id = ${req.params.id}
+        WHERE "user".id = $1
         ;`;
 
-    pool.query(queryText).then((result) => {
+  pool.query(queryText, [req.params.id])
+    .then((result) => {
       res.send(result.rows);
     }).catch((error) => {
       console.log(error);
       res.sendStatus(500);
     });
-  } else {
-    res.sendStatus(403);
-  }
+  // } else {
+  //   res.sendStatus(403);
+  // }
 });
 
 
-// -------------------------- Updates personal info of customer (PUT)
+// -------------------------- Updates personal info and address of customer (PUT)
 
 router.put('/pronouns/:id', (req, res) => {
 
@@ -40,10 +41,10 @@ router.put('/pronouns/:id', (req, res) => {
 
   const queryText =
     `UPDATE "user"
-          SET "pronouns" = $1
-          WHERE "user"."id" = $2;`;
+          SET "pronouns" = $1, "address" = $2
+          WHERE "user"."id" = $3;`;
 
-  pool.query(queryText, [req.body.pronouns, req.params.id])
+  pool.query(queryText, [req.body.pronouns, req.body.address, req.params.id])
 
     .then((result) => {
       res.send(result.rows)
@@ -109,7 +110,7 @@ router.get('/search/:id', (req, res) => {
   ON "classes"."id" = "class_list"."class_id"
   JOIN "user" on "class_list"."user_id" = "user"."id"
   WHERE "user"."id" = $1 AND "classes"."classname" ILIKE $2;`;
-  pool.query(queryText, [req.params.id,'%' + req.body.classname + '%'])
+  pool.query(queryText, [req.params.id, '%' + req.body.classname + '%'])
     .then((result) => {
       res.send(result.rows)
     }).catch((error) => {
