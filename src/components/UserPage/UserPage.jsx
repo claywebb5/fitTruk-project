@@ -1,5 +1,5 @@
 // ==================================< PERSONAL INFO PAGE >====================================================
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 
@@ -38,12 +38,15 @@ function UserPage() {
 
     //  ============< Pronoun Change >=============
     const handlePronounChange = (event) => {
-      // setEditUser({...editUser, pronouns: event.target.value})
+      setEditUser({...editUser, pronouns: event.target.value})
+      console.log('In handlePronounChange');
+      
   };
 
   //  ============< Address Change >=============
   const handleAddressChange = (event) => {
-    // setEditUser({...editUser, address: event.target.value})
+    setEditUser({...editUser, address: event.target.value})
+    console.log('In handleAddressChange');
 };
 
   //  ============< Submit >=============
@@ -56,9 +59,14 @@ function UserPage() {
       type: 'UPDATE_CUSTOMER_INFO',
       payload: updatedUser
     });
-    history.push('/personal-info')
+    console.log('Clicked Submit');
+    history.push('/all-classes')
   }
 
+  const handleReturnClick = () => {
+    // history.goBack();
+    console.log('Clicked Cancel');
+  }
 
 
   return (
@@ -75,10 +83,10 @@ function UserPage() {
 
         <div> {/* CAN EDIT  */}
           <p><b>Pronouns:</b> {user.pronouns}</p>
-          <select onChange={(event) => setPronouns(event.target.value)}>
-            <option> He/Him</option>
-            <option> She/Her</option>
-            <option> They/Them</option>
+          <select onChange={handlePronounChange}>
+            <option value={editUser.pronouns}> He/Him</option>
+            <option value={editUser.pronouns}> She/Her</option>
+            <option value={editUser.pronouns}> They/Them</option>
           </select>
         </div>
         <p><b>Email:</b> {user.email}</p>
@@ -88,8 +96,9 @@ function UserPage() {
           <p><b>Address:</b> {user.address}</p>
           <input 
             type="text"
-            // placeholder={user.}
-            // value={user.}
+            placeholder={user.address}
+            value={editUser.address}
+            onChange={handleAddressChange}
           />
         </div>
 
@@ -98,8 +107,8 @@ function UserPage() {
         <p><b>Number:</b> {user.emergency_number}</p>
       </div>
 
-      <button>Back</button>
-      <button>Save</button>
+      <button onClick={handleReturnClick}>Cancel</button>
+      <button onClick={handleSubmit}>Submit</button>
     </>
   );
 }
