@@ -1,4 +1,4 @@
-// import { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import Nav from '../Nav/Nav';
@@ -7,6 +7,14 @@ function ClassDetailsPage(){
     //------------<  Setup  >-------------
     const history = useHistory();
     const dispatch = useDispatch();
+
+
+    useEffect(() => {
+        dispatch({
+          type: 'FETCH_CLASS_DETAILS',
+          payload: 1 // PART OF DUMMY DATA, WILL BE UPDATED ONCE :id IS ADDED TO ROUTING
+        });
+      }, [])
 
     //------------<  Variables  >----------
     // const user = useSelector(store => store.user)

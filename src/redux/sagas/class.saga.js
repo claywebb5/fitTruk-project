@@ -37,9 +37,10 @@ function* searchClasses (action){
 }
 
 // =============***< (GET) CLASS DETAILS >***======================================
-function* fetchDetails (){
+function* fetchDetails (action){
     // GET
     // will send a request to the classes router to grab a specific classes details
+    console.log('here is the dispatch info:', action.type, action.payload);
 
 }
 
