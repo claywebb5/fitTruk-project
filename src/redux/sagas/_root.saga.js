@@ -20,6 +20,7 @@ export default function* rootSaga() {
     loginSaga(), // login saga is now registered
     registrationSaga(),
     userSaga(),
+    classSaga(),
     customerSaga(),
   ]);
 }
