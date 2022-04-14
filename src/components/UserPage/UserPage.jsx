@@ -8,65 +8,62 @@ function UserPage() {
 
   const dispatch = useDispatch();
   const history = useHistory();
-  
+
   // Default user info from original repo
   const user = useSelector((store) => store.user);
 
 
-  //  ============<ON PAGE LOAD>=============
-  // useEffect(() => {
-  //   dispatch({ type: 'FETCH_USER' }); // Trigger customer.saga
-  // }, [dispatch]);
+  //  ============<>=============
+  let userObj = {
+    id: user.id,
+    username: user.username,
+    password: user.password,
+    name: user.name,
+    email: user.email,
+    address: user.address,
+    dob: user.dob,
+    phoneNumber: user.phoneNumber,
+    pronouns: user.pronouns,
+    emergencyName: user.emergencyName,
+    emergencyNumber: user.emergencyNumber,
+    access_level: user.access_level
+  }
 
-    //  ============<>=============
-    let userObj = {
-      id: user.id,
-      username: user.username,
-      password: user.password,
-      name: user.name,
-      email: user.email,
-      address: user.address,
-      dob: user.dob,
-      phoneNumber: user.phoneNumber,
-      pronouns: user.pronouns,
-      emergencyName: user.emergencyName,
-      emergencyNumber: user.emergencyNumber,
-      access_level: user.access_level
-    }
+  const [editUser, setEditUser] = useState(userObj);
 
-    const [editUser, setEditUser] = useState(userObj);
+  //  ============< Pronoun Change >=============
+  const handlePronounChange = (event) => {
+    console.log('New Pronoun:', event.target.value);
 
-    //  ============< Pronoun Change >=============
-    const handlePronounChange = (event) => {
-      console.log('New Pronoun:', event.target.value);
-      
-      setEditUser({...editUser, pronouns: event.target.value})
-      console.log('In handlePronounChange');
-      
+    setEditUser({ ...editUser, pronouns: event.target.value })
+    console.log('In handlePronounChange');
+
   };
 
   //  ============< Address Change >=============
   const handleAddressChange = (event) => {
-    setEditUser({...editUser, address: event.target.value})
+    setEditUser({ ...editUser, address: event.target.value })
     console.log('In handleAddressChange');
-};
+  };
 
   //  ============< Submit >=============
   const handleSubmit = () => {
     event.preventDefault();
     let updatedUser = editUser;
-    updatedUser = {...updatedUser};
+    updatedUser = { ...updatedUser };
     console.log('Updated user info is:', updatedUser);
     dispatch({
       type: 'UPDATE_CUSTOMER_INFO',
       payload: updatedUser
     });
     console.log('Clicked Submit');
-    history.push('/all-classes')
+    // dispatch({
+    //   type: 'FETCH_CUSTOMER_INFO'
+    // });
   }
 
   const handleReturnClick = () => {
-    // history.goBack();
+    history.goBack();
     console.log('Clicked Cancel');
   }
 
@@ -76,37 +73,39 @@ function UserPage() {
       <h1><u>Personal Info Page</u></h1>
 
       <div className="container">
+        <form onSubmit={handleSubmit}>
 
-        <div> {/* CAN EDIT  */}
-          <h2>*Profile Image Here*</h2>
-        </div>
+          <div> {/* CAN EDIT  */}
+            <h2>*Profile Image Here*</h2>
+          </div>
 
-        <h2>Welcome, {user.name}!</h2>
+          <h2>Welcome, {user.name}!</h2>
 
-        <div> {/* CAN EDIT  */}
-          <p><b>Pronouns:</b> {user.pronouns}</p>
-          <select onChange={handlePronounChange} value={editUser.pronouns}>
-            <option value="He/Him"> He/Him</option>
-            <option value="She/Her"> She/Her</option>
-            <option value="They/Them"> They/Them</option>
-          </select>
-        </div>
-        <p><b>Email:</b> {user.email}</p>
-        <p><b>Number:</b> {user.phone_number}</p>
+          <div> {/* CAN EDIT  */}
+            <p><b>Pronouns:</b> {user.pronouns}</p>
+            <select onChange={handlePronounChange} value={editUser.pronouns}>
+              <option value="He/Him"> He/Him</option>
+              <option value="She/Her"> She/Her</option>
+              <option value="They/Them"> They/Them</option>
+            </select>
+          </div>
+          <p><b>Email:</b> {user.email}</p>
+          <p><b>Number:</b> {user.phone_number}</p>
 
-        <div> {/* CAN EDIT  */}
-          <p><b>Address:</b> {user.address}</p>
-          <input 
-            type="text"
-            placeholder={user.address}
-            value={editUser.address}
-            onChange={handleAddressChange}
-          />
-        </div>
+          <div> {/* CAN EDIT  */}
+            <p><b>Address:</b> {user.address}</p>
+            <input
+              type="text"
+              placeholder={user.address}
+              value={editUser.address}
+              onChange={handleAddressChange}
+            />
+          </div>
 
-        <p>------- In case of emergencies ---------</p>
-        <p><b>Emergency Contact:</b> {user.emergency_name}</p>
-        <p><b>Number:</b> {user.emergency_number}</p>
+          <p>------- In case of emergencies ---------</p>
+          <p><b>Emergency Contact:</b> {user.emergency_name}</p>
+          <p><b>Number:</b> {user.emergency_number}</p>
+        </form>
       </div>
 
       <button onClick={handleReturnClick}>Cancel</button>

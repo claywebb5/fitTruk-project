@@ -14,7 +14,7 @@ import axios from 'axios';
 function* fetchCustomerInfo(){
     try {
         console.log('In fetchCustomerInfo, about to axios.get all the customer personal info');
-        const customerInfoResponse = yield axios.get('/api/customer');  
+        const customerInfoResponse = yield axios.get('/api/user');  
         console.log('Getting all customer info:', customerInfoResponse.data);
         yield put({ type: 'SET_USER_INFO', payload: customerInfoResponse.data });
     } catch {
@@ -27,7 +27,7 @@ function* updateCustomerInfo(action){
     try {
         console.log('In updateCustomerInfo the action.payload is:', action.payload);
         yield axios.put(`/api/customer/pronouns/${action.payload.id}`, action.payload);
-        yield put({type: 'SET_USER'});
+        yield put({type: 'SET_USER_INFO'});
     } catch (error){
         console.log('Error updating customer info:', error)
     }
