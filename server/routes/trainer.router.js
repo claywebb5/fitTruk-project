@@ -7,10 +7,6 @@ const router = express.Router();
 
 router.put('/edit-class/:id', (req, res) => {
 
-
-    console.log('req.body', req.body.location, req.body.description) // data would be location and description
-    console.log('params', req.params.id) // params is class id
-
     if (req.isAuthenticated()) {
 
         const queryText =
@@ -39,9 +35,6 @@ router.put('/edit-class/:id', (req, res) => {
 
 router.put('/check-in/:id', (req, res) => {
 
-    console.log('req.body.data', req.body.data) // data would be the user_id
-    console.log('params', req.params.id) // params is class id
-
     if (req.isAuthenticated()) {
 
         const queryText =
@@ -68,26 +61,26 @@ router.put('/check-in/:id', (req, res) => {
 // -------------------------- gets attendance for a specific class (GET)
 router.get('/attendance/:id', (req, res) => {
 
-    // if (req.isAuthenticated()) {
-console.log('req.params.id', req.params.id)
-    const queryText =
-        `SELECT "username", "profile_image"
+    if (req.isAuthenticated()) {
+        console.log('req.params.id', req.params.id)
+        const queryText =
+            `SELECT "username", "profile_image"
         FROM "classes"
         JOIN "class_list"
         ON "classes"."id"="class_list"."class_id" 
         JOIN "user" ON "class_list"."user_id"="user"."id"
         WHERE "classes"."id" = $1;`;
 
-    pool.query(queryText, [req.params.id])
-    .then((result) => {
-        res.send(result.rows);
-    }).catch((error) => {
-        console.log(error);
-        res.sendStatus(500);
-    });
-    // } else {
-    //   res.sendStatus(403);
-    // }
+        pool.query(queryText, [req.params.id])
+            .then((result) => {
+                res.send(result.rows);
+            }).catch((error) => {
+                console.log(error);
+                res.sendStatus(500);
+            });
+    } else {
+        res.sendStatus(403);
+    }
 
 });
 
