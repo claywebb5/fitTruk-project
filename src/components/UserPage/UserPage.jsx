@@ -47,7 +47,7 @@ function UserPage() {
   };
 
   //  ============< Submit >=============
-  const handleSubmit = () => {
+  const handleSubmit = (event) => {
     event.preventDefault();
     let updatedUser = editUser;
     updatedUser = { ...updatedUser };
@@ -56,7 +56,7 @@ function UserPage() {
       type: 'UPDATE_CUSTOMER_INFO',
       payload: updatedUser
     });
-    window.location.reload();
+    // window.location.reload(); // SYNTAX-UPDATE : this probably shouldn't be here, test this
     console.log('Clicked Submit');
     // dispatch({
     //   type: 'FETCH_CUSTOMER_INFO'
