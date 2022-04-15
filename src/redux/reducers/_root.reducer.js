@@ -3,7 +3,6 @@ import errors from './errors.reducer';
 import user from './user.reducer';
 import classDetails from './classDetails.reducer';
 import allClasses from './allClasses.reducer';
-import PersonalinfoReducer from './Personalinfo.reducer';
 import attendees from './attendees.reducer';
 import userClass from './userClass.reducer';
 import availableTrainers from './availableTrainers.reducer';
@@ -22,7 +21,6 @@ const rootReducer = combineReducers({
   user, // will have an id and username if someone is logged in
   allClasses, // contains all avaliable classes info
   classDetails, // contains details for a specific class
-  PersonalinfoReducer, // contains details about user like name, address etc
   attendees, //contains everyone registered in the class
   userClass, // contains specific classes for both trainers and customers 
   availableTrainers, // contains the list of trainers that an administrator has available to assign to a class.
