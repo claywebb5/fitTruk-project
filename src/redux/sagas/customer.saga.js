@@ -14,9 +14,9 @@ import axios from 'axios';
 function* fetchCustomerInfo(){
     try {
         console.log('In fetchCustomerInfo, about to axios.get all the customer personal info');
-        const customerInfoResponse = yield axios.get('/api/user');  
+        const customerInfoResponse = yield axios.get('/api/user'); // Goes to "user.router"
         console.log('Getting all customer info:', customerInfoResponse.data);
-        yield put({ type: 'SET_USER_INFO', payload: customerInfoResponse.data });
+        yield put({ type: 'SET_USER_INFO', payload: customerInfoResponse.data }); // * Goes to "customerInfo.reducer.js"
     } catch {
         console.log('Error trying to fetchCustomerInfo in sagas!');
     }
@@ -26,8 +26,13 @@ function* fetchCustomerInfo(){
 function* updateCustomerInfo(action){
     try {
         console.log('In updateCustomerInfo the action.payload is:', action.payload);
-        yield axios.put(`/api/customer/pronouns/${action.payload.id}`, action.payload); // Best practice for REST API's, the ID of the thing you're changing should be on the url
-        yield put({type: 'FETCH_CUSTOMER_INFO'}); // SYNTAX-UPDATE : TEST this, make sure it works 
+
+        // Best practice for REST API's, the ID of the thing you're changing should be on the url
+        yield axios.put(`/api/customer/pronouns/${action.payload.id}`, action.payload); // * Goes to "customer.router" *
+
+        // SYNTAX-UPDATE : TEST this, make sure it works 
+        yield put({type: 'FETCH_CUSTOMER_INFO'}); // * Goes to "customer.saga.js" (fetchCustomerInfo) *
+
     } catch (error){
         console.log('Error updating customer info:', error)
     }
