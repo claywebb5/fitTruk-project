@@ -26,16 +26,16 @@ function AllClassesPage() {
   const handleMyClassClick = () => {
     history.push("/my-classes");
   }
-  const runSearch = () => {
-    console.log('this is the search term', search);
-    dispatch({
-      type: 'SEARCH_CLASSES',
-      payload: search
-    })
-    setSearch('')
-  }
+  // const runSearch = () => {
+  //   console.log('this is the search term', search);
+  //   dispatch({
+  //     type: 'SEARCH_CLASSES',
+  //     payload: search
+  //   })
+  //   setSearch('')
+  // }
   // ------- Search Bar -------
-  const [search, setSearch] = useState('')
+  const [searchTerm, setSearchTerm] = useState('')
 
 
   // const classes = [ /// DELETE this when we have working sagas and reducers, this is temporary test data
@@ -80,16 +80,24 @@ function AllClassesPage() {
       <Nav/>
       <input 
       type="text"
-      value={search}
-      onChange={(e) => setSearch(e.target.value)} />
-      <button onClick={runSearch}>search classes</button>
+      value ={searchTerm}
+      placeholder='Search'
+      onChange={(e) => setSearchTerm(e.target.value)} />
+      {/* <button onClick={runSearch}>search classes</button> */}
       <h3>If logged in, myclass button appears below, if not then no button</h3>
       {user.id && <button onClick={handleMyClassClick}>Myclasses (this will be an icon eventually)</button>}
       <ul>
-      {classes.map((classEvent, i) =>(
+      {classes.filter((val)=>{
+        if (searchTerm == ""){
+          return val
+        } else if (val.classname.toLowerCase().includes(searchTerm.toLowerCase())){
+            return val
+        }
+      }).map((classEvent, i) =>(
         <ClassListItem classEvent={classEvent} key={i} />
       ))}
       </ul>
+      
     </div>
   );
 }

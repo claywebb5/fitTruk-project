@@ -2,21 +2,23 @@ import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import Nav from '../Nav/Nav';
-
+import { useParams } from 'react-router-dom/cjs/react-router-dom.min';
 function ClassDetailsPage(){
     //------------<  Setup  >-------------
     const history = useHistory();
     const dispatch = useDispatch();
 
+    const { id } = useParams()
 
     useEffect(() => {
         dispatch({
           type: 'FETCH_CLASS_DETAILS',
-          payload: 2 // PART OF DUMMY DATA, WILL BE UPDATED ONCE :id IS ADDED TO ROUTING
+          payload: id // PART OF DUMMY DATA, WILL BE UPDATED ONCE :id IS ADDED TO ROUTING
         });
       }, [])
 
       const classDetails = useSelector(store => store.selectedClass.classDetails)
+
 
     //------------<  Variables  >----------
     // const user = useSelector(store => store.user)
@@ -49,6 +51,7 @@ function ClassDetailsPage(){
 // Link the gps to an actual google search query.
 //---------------< // END Temporary things to be deleted  >----------------------------
 console.log('these are the details pulled in from the reducer:', classDetails);
+console.log('this is the id pull from the url with params', id);
     return(
         <>
             <Nav/>

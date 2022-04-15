@@ -14,9 +14,9 @@ import axios from 'axios';
 function* fetchCustomerInfo(){
     try {
         console.log('In fetchCustomerInfo, about to axios.get all the customer personal info');
-        const customerInfoResponse = yield axios.get('/api/user'); // Goes to "user.router"
+        const customerInfoResponse = yield axios.get('/api/user'); // Goes to SERVER "user.router"
         console.log('Getting all customer info:', customerInfoResponse.data);
-        yield put({ type: 'SET_USER_INFO', payload: customerInfoResponse.data }); // * Goes to "customerInfo.reducer.js"
+        yield put({ type: 'SET_USER_INFO', payload: customerInfoResponse.data }); // * Goes to REDUCER "customerInfo.reducer.js"
     } catch {
         console.log('Error trying to fetchCustomerInfo in sagas!');
     }
@@ -28,10 +28,10 @@ function* updateCustomerInfo(action){
         console.log('In updateCustomerInfo the action.payload is:', action.payload);
 
         // Best practice for REST API's, the ID of the thing you're changing should be on the url
-        yield axios.put(`/api/customer/pronouns/${action.payload.id}`, action.payload); // * Goes to "customer.router" *
+        yield axios.put(`/api/customer/pronouns/${action.payload.id}`, action.payload); // * Goes to SERVER "customer.router" *
 
         // SYNTAX-UPDATE : TEST this, make sure it works 
-        yield put({type: 'FETCH_CUSTOMER_INFO'}); // * Goes to "customer.saga.js" (fetchCustomerInfo) *
+        yield put({type: 'FETCH_CUSTOMER_INFO'}); // * Goes to THIS SAGA "customer.saga.js" (fetchCustomerInfo) *
 
     } catch (error){
         console.log('Error updating customer info:', error)
@@ -43,9 +43,9 @@ function* updateCustomerInfo(action){
 function* fetchCustomerClass() {
     try {
         console.log('In fetchCustomerClass, about to axios.get all the customers registered classes');
-        const customerClassResponse = yield axios.get('/api/customer');
+        const customerClassResponse = yield axios.get('/api/customer'); // * Goes to SERVER "customer.router"
         console.log('Getting all registered classes:', customerClassResponse.data);
-        yield put({ type: 'SET_MY_CLASSES', payload: customerClassResponse.data });
+        yield put({ type: 'SET_MY_CLASSES', payload: customerClassResponse.data }); // * Goes to REDUCER "userClass.reducer.js"
     } catch {
         console.log('Error trying to fetchCustomerClass in sagas!');
     }
@@ -55,8 +55,8 @@ function* fetchCustomerClass() {
 function* addReservation(action){
     try {
         console.log('The action.payload for adding a new class reservation is:', action.payload);
-        yield axios.post('/api/customer', action.payload);
-        yield put({ type: 'FETCH_CUSTOMER_CLASS' });
+        yield axios.post('/api/customer', action.payload); // * Goes to SERVER "customer.router"
+        yield put({ type: 'FETCH_CUSTOMER_CLASS' }); // * Goes to 
     } catch (error) {
         console.log('Error adding a new class reservation', error);
     }    
@@ -66,8 +66,8 @@ function* addReservation(action){
 function* removeReservation(action){
     try {
         console.log('The action.payload in removing a class reservation is:', action.payload)
-        yield axios.delete(`/api/customer/delete/${action.payload.id}`, action.payload);
-        yield put({ type: 'FETCH_CUSTOMER_CLASS' });
+        yield axios.delete(`/api/customer/delete/${action.payload.id}`, action.payload); // * Goes to SERVER "customer.router"
+        yield put({ type: 'FETCH_CUSTOMER_CLASS' }); // * Goes to THIS SAGA "customer.saga.js" (fetchCustomerSaga)
     } catch (error) {
         console.log('Error removing a class reservation', error);
     }   
