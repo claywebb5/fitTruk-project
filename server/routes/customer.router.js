@@ -9,10 +9,12 @@ const router = express.Router();
 router.get('/myclasses/:id', (req, res) => {
 
   if (req.isAuthenticated()) {
-    const queryText = ` SELECT classes.* from classes 
+    const queryText = ` SELECT classes.id, date, start_time, end_time, classname, trainer_user_id
+    from classes 
         JOIN class_list ON classes.id = class_list.class_id
         JOIN "user" ON class_list.user_id = "user".id
         WHERE "user".id = $1
+        ORDER BY date, start_time
         ;`;
     pool.query(queryText, [req.params.id])
       .then((result) => {
