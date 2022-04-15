@@ -6,9 +6,9 @@ function ClassListItem({classEvent, i}) {
   const history = useHistory();
 
   
-  const handleEventClick = (event) => {
-    console.log(event);
-    history.push(`/class-details/${event.id}`)
+  const handleEventClick = () => {
+    console.log(classEvent);
+    history.push(`/class-details/${classEvent.id}`)
   }
 
   return (
