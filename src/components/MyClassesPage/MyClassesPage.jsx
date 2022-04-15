@@ -1,5 +1,6 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 import ClassListItem from '../ClassListItem/ClassListItem';
 import Nav from '../Nav/Nav';
 
