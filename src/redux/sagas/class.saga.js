@@ -5,11 +5,11 @@ import axios from 'axios';
 // =============***< (GET) ALL CLASSES >***=======================================
 function* fetchClasses (){
     // Will send a request to the classes router to retrieve all available classes
-    console.log('in fetchClasses, this is the disatch I recieved');
+    console.log('in fetchClasses, this is the dispatch I received');
     try {
-        const classes = yield axios.get(`/api/class/`);
+        const classes = yield axios.get(`/api/class/`); // * Goes to SERVER "class.router"
         console.log('these are classes', classes);
-        yield put({ type: 'SET_ALL_CLASSES', payload: classes.data });
+        yield put({ type: 'SET_ALL_CLASSES', payload: classes.data }); // * Goes to REDUCER "allClasses.reducer.js"
     } catch (error) {
         console.log('Error fetching All Classes', error);
     } 
@@ -23,10 +23,9 @@ function* searchClasses (action){
     // ----------------***< WAITING FOR BACK END ROUTE TO TEST >***-----------------------
     // try {
     //     // ** WHERE IN THE ROUTES/SERVER FILES WILL THE ROUTE FOR FETCHING ALL CLASSES BE???
-    //     const classes = yield axios.get(`/api/class/${action.payload}`);
+    //     const classes = yield axios.get(`/api/class/${action.payload}`); // * Goes to SERVER "class.router"
     //     console.log('these are classes', classes);
-        
-    //     yield put({ type: 'SET_ALL_CLASSES', payload: classes.data });
+    //     yield put({ type: 'SET_ALL_CLASSES', payload: classes.data }); // * Goes to REDUCER "allClasses.reducer.js"
     // } catch (error) {
     //     console.log('Error searching All Classes', error);
     // } 
@@ -37,9 +36,9 @@ function* fetchDetails (action){
     // Will send a request to the classes router to grab a specific classes details
     console.log('here is the dispatch info:', action.type, action.payload);
     try {
-        const classDetails = yield axios.get(`/api/class/details/${action.payload}`);
+        const classDetails = yield axios.get(`/api/class/details/${action.payload}`); // * Goes to SERVER "class.router"
         console.log('these are the class details', classDetails.data);
-        yield put({ type: 'SET_CLASS_DETAILS', payload: classDetails.data });
+        yield put({ type: 'SET_CLASS_DETAILS', payload: classDetails.data }); // * Goes to REDUCER "classDetails.reducer.js"
     } catch (error) {
         console.log('Error fetching Class Details', error);
     } 
@@ -48,7 +47,7 @@ function* fetchDetails (action){
 
 function* classSaga() {
     yield takeLatest('FETCH_CLASSES', fetchClasses);
-    yield takeLatest('SEARCH_CLASSES', searchClasses);
+    yield takeLatest('SEARCH_CLASSES', searchClasses); // Currently commented out
     yield takeLatest('FETCH_CLASS_DETAILS', fetchDetails);
 }
   
