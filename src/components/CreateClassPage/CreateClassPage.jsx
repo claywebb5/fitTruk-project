@@ -38,47 +38,37 @@ function CreateClassPage() {
     //---------- Variables -----------
     const trainers = useSelector(store => store.availableTrainers)
     const activeClass = useSelector(store => store.activeClass)
-    
-    // const { trainer_user_id, date, classname, start_time, end_time, location, description, class_size } = activeClass
-
-
-    // const [values, setValues] = useState({
-    //     trainer_user_id: '',
-    //     date: '',
-    //     classname: '',
-    //     start_time: '',
-    //     end_time: '',
-    //     location: '',
-    //     description: '',
-    //     class_size: '',
-    // })
+    const selectedTrainer = useSelector(store => store.selectedTrainer)
 
     //----------<  I n p u t   H a n d l e r s  >-----------
 
-
-    // let displayed_trainer_image;
-    // let displayed_trainer_name;
 
     const handleTrainerSelection = (trainerId) => {
         console.log('HandleTrainerSelection: I\'m handling trainer selection!');
 
         for (let trainer of trainers) {
             if (trainer.trainer_user_id == trainerId) {
-                displayed_trainer_image = trainer.profile_image;
-                displayed_trainer_name = trainer.name;
 
+                console.log('trainer:'); // Test log to ensure the objects are being retrieved properly.
+                console.log('trainer:'); // Test log to ensure the objects are being retrieved properly.
+                // dispatch({
+                //     type: 'SET_ACTIVE_CLASS_TRAINER',
+                //     payload: {
+                //         trainer_user_id: trainer.trainer_user_id,
+                //         profile_image: trainer.profile_image,
+                //         name: trainer.name
+                //     }
+                // })
 
-                console.log('trainer:', trainer.name); // Test log to ensure the objects are being retrieved properly.
-                console.log('trainer:', trainer.profile_image); // Test log to ensure the objects are being retrieved properly.
-                
-                setValues({
-                    ...values,
-                    trainer_user_id: trainerId,
-                })
+                dispatch({
+                    type: 'SET_ACTIVE_CLASS_DETAILS',
+                    payload: {
+                        propertyName: 'trainer_user_id',
+                        data: trainerId
+                    }
+                });
             }// End conditional statement
         }// End loop through trainer array
-        console.log('trainer:', displayed_trainer_image); // Test log to ensure the objects are being retrieved properly.
-        console.log('trainer:', displayed_trainer_name); // Test log to ensure the objects are being retrieved properly.
     }; // END handleTrainerSelection
 
     const submitHandler = (event) => {
@@ -88,11 +78,13 @@ function CreateClassPage() {
     }
 
     const handleChange = (prop) => (event) => {
-                dispatch({ type:'SET_ACTIVE_CLASS_DETAILS', 
-                payload: {
-                    propertyName: prop,
-                    data: event.target.value
-                }});
+        dispatch({
+            type: 'SET_ACTIVE_CLASS_DETAILS',
+            payload: {
+                propertyName: prop,
+                data: event.target.value
+            }
+        });
     }; // END handleChange
 
 
@@ -125,7 +117,7 @@ function CreateClassPage() {
                         ))}
                     </select>
                     {/* ---- Here's the trainer's image ---- */}
-                    {/* <img src={displayed_trainer_image} alt="Profile image of the selected trainer" /> */}
+                    <img src={selectedTrainer.profile_image} alt="Profile image of the selected trainer" />
                     {/* <ImageRenderer /> */}
                 </h4>
 

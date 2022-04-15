@@ -3,9 +3,8 @@ import axios from 'axios';
 
 // =============***< (GET) ALL ATTENDEES FOR A CLASS >***==============================
 function* fetchAttendance(){
-    // GET
     // TRAINER/ADMIN ONLY
-    // will send a request to the trainer router to get all users signed up for a class
+    // Will send a request to the trainer router to get all users signed up for a class
     try {
         const attendance = yield axios.get(`/api/trainer/attendance/${action.payload}`)
         yield put({ type: 'SET_ATTENDEES', payload: attendance.data });
@@ -16,28 +15,24 @@ function* fetchAttendance(){
 
 // =============***< (PUT) UPDATE CLASS DETAILS >***===================================
 function* updateDetails (){
-    // PUT
     // TRAINER/ADMIN ONLY
-    // will send a request to the trainer router to update the details of a specific class
+    // Will send a request to the trainer router to update the details of a specific class
     try{
-        
         yield axios.put(`/api/trainer/edit-class/${action.payload.id}`, action.payload);
         yield put({type: 'SET_CLASS_DETAILS'}) //
-    }catch (error){
+    } catch (error){
         console.log('Error editing class details', error);
     }
 }
 
 // =============***< (PUT) UPDATE CLASS ATTENDANCE >***=======================================
 function* updateAttendance(){
-    // PUT
     // TRAINER/ADMIN ONLY
-    // will send a request to the trainer router to update attendance with those who arrived for the class
+    // Will send a request to the trainer router to update attendance with those who arrived for the class
     try{
-        
         yield axios.put(`/api/check-in/${action.payload.id}`, action.payload);
         yield put({type: 'FETCH_ATTENDANCE'}) //
-    }catch (error){
+    } catch (error){
         console.log('Error updating checked in status', error);
     }
 }
