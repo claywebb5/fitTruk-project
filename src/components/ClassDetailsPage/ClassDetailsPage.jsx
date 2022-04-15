@@ -16,7 +16,7 @@ function ClassDetailsPage(){
         });
       }, [])
 
-      const classDetails = useSelector(store => store.classDetails)
+      const classDetails = useSelector(store => store.selectedClass.classDetails)
 
     //------------<  Variables  >----------
     // const user = useSelector(store => store.user)
