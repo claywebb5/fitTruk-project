@@ -128,7 +128,7 @@ function App() {
           <Route
             // shows Class Details page at all times (logged in or not)
             exact
-            path="/class-details">
+            path="/class-details/:id">
             <ClassDetailsPage />
           </Route>
           {/* -----< End Class Details >----- */}
@@ -155,7 +155,7 @@ function App() {
           <TrainerRoute
             // Only trainers and admin can see the class attendees view
             exact
-            path="/attendees">
+            path="/class-details/:id/attendees">
             <AttendeesPage />
           </TrainerRoute>
           {/* -----< End Attendees >----- */}
@@ -164,7 +164,7 @@ function App() {
           <ProtectedRoute
             // logged in shows UserPage else shows LoginPage
             exact
-            path="/personal-info"
+            path="/personal-info/:id"
           >
             <UserPage />
           </ProtectedRoute>

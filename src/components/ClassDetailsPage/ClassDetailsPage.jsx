@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import Nav from '../Nav/Nav';
-
+import { useParams } from 'react-router-dom/cjs/react-router-dom.min';
 function ClassDetailsPage(){
     //------------<  Setup  >-------------
     const history = useHistory();
@@ -17,7 +17,7 @@ function ClassDetailsPage(){
       }, [])
 
       const event = useSelector(store => store.classDetailsReducer)
-
+      const { id } = useParams()// this grabs the :id from the url
     //------------<  Variables  >----------
     // const user = useSelector(store => store.user)
     

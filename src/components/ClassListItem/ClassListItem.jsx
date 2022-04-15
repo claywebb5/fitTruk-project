@@ -5,8 +5,10 @@ import { useHistory } from 'react-router-dom';
 function ClassListItem({event, i}) {
   const history = useHistory();
 
-  const handleEventClick = () => {
-    history.push('/class-details')
+  
+  const handleEventClick = (event) => {
+    console.log(event);
+    history.push(`/class-details/${event.id}`)
   }
 
   return (
