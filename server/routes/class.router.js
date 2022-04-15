@@ -6,8 +6,9 @@ const router = express.Router();
 
 router.get('/', (req, res) => {
 
-        let queryText = `select * from classes
-    order by date, start_time;`
+        let queryText = `SELECT classes.id, date, start_time, end_time, classname, trainer_user_id  
+        FROM classes
+    ORDER BY date, start_time;`
         pool.query(queryText).then((result) => {
             res.send(result.rows)
         }).catch((error) => {
