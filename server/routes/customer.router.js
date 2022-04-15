@@ -32,15 +32,15 @@ router.get('/myclasses/:id', (req, res) => {
 // -------------------------- Updates personal info and address of customer (PUT)
 // --- SYNTAX-UPDATE : update this name
 router.put('/pronouns/:id', (req, res) => {
-  let userId = req.user.id;
-  console.log('req userId is:', userId)
-
+  // let userId = req.user.id;
+  // console.log('req userId is:', userId)
+console.log('req.params.id is', req.params.id )
   if (req.isAuthenticated()) {
     const queryText =
       `UPDATE "user"
-          SET "pronouns" = $1, "address" = $2
-          WHERE "user"."id" = $3;`;
-    pool.query(queryText, [req.body.pronouns, req.body.address, req.params.id]) // SYNTAX-UPDATE : change req.params.id to req.user.id , as it's verified by Passport
+          SET "pronouns" = $1, "street_address" = $2, "city" = $3, "state" = $4, "zip" = $5
+          WHERE "user"."id" = $6;`;
+    pool.query(queryText, [req.body.pronouns, req.body.street_address, req.body.city, req.body.state, req.body.zip, req.params.id]) // SYNTAX-UPDATE : change req.params.id to req.user.id , as it's verified by Passport
       .then((result) => {
         res.send(result.rows)
       })
