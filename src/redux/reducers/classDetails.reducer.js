@@ -44,12 +44,12 @@ const classDetailsReducer = (state = {}, action) => {
       }, action) => {
 
         if(action.type === 'SET_ACTIVE_CLASS_TRAINER'){
-          const {trainer_user_id, profile_image, name} = action.payload;
-          return {
-            trainer_user_id: trainer_user_id,
-            profile_image: profile_image,
-            name: name
-          }
+          // const {trainer_user_id, profile_image, name} = action.payload;
+          return {...state,
+            trainer_user_id: action.payload.trainer_user_id,
+            profile_image: action.payload.profile_image,
+            name: action.payload.name
+          };
         }
 
         return state;

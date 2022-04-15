@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import Nav from "../Nav/Nav";
+import TrainerProfileImage from './TrainerProfileImage';
 
 // ** ONLY ADMIN CAN SEE **
 // ** Admin can create a new class by: naming the class/selecting a date/..
@@ -31,6 +32,7 @@ function CreateClassPage() {
     //         })
     //     }
     // }, [classId]);
+    // }, [selectedTrainer]);
 
 
 
@@ -49,16 +51,16 @@ function CreateClassPage() {
         for (let trainer of trainers) {
             if (trainer.trainer_user_id == trainerId) {
 
-                console.log('trainer:'); // Test log to ensure the objects are being retrieved properly.
-                console.log('trainer:'); // Test log to ensure the objects are being retrieved properly.
-                // dispatch({
-                //     type: 'SET_ACTIVE_CLASS_TRAINER',
-                //     payload: {
-                //         trainer_user_id: trainer.trainer_user_id,
-                //         profile_image: trainer.profile_image,
-                //         name: trainer.name
-                //     }
-                // })
+                console.log('trainer:', trainer.name); // Test log to ensure the objects are being retrieved properly.
+                // console.log('trainer:'); // Test log to ensure the objects are being retrieved properly.
+                dispatch({
+                    type: 'SET_ACTIVE_CLASS_TRAINER',
+                    payload: {
+                        trainer_user_id: trainer.trainer_user_id,
+                        profile_image: trainer.profile_image,
+                        name: trainer.name
+                    }
+                });
 
                 dispatch({
                     type: 'SET_ACTIVE_CLASS_DETAILS',
@@ -74,7 +76,6 @@ function CreateClassPage() {
     const submitHandler = (event) => {
         event.preventDefault();
         console.log('This will submit the form');
-        console.log('user data:'); // test log
         console.log(activeClass);
     }
 
@@ -88,7 +89,8 @@ function CreateClassPage() {
         });
     }; // END handleChange
 
-
+    console.log('selectedTrainer is:', selectedTrainer.name);
+    console.log('selectedTrainer is:', selectedTrainer.profile_image);
     //----------<  //  E N D   I n p u t   H a n d l e r s  >-----------
 
 
@@ -118,8 +120,10 @@ function CreateClassPage() {
                         ))}
                     </select>
                     {/* ---- Here's the trainer's image ---- */}
-                    <img src={selectedTrainer.profile_image} alt="Profile image of the selected trainer" />
-                    {/* <ImageRenderer /> */}
+                    <TrainerProfileImage />
+
+                    
+                    {/* <img className='trainer-image' src={"https://www.insideedition.com/sites/default/files/styles/video_1920x1080/public/images/2021-03/031821_yoga_teacher_web_0.jpg?h=d1cb525d"} alt="Profile image of the selected trainer" /> */}
                 </h4>
 
 

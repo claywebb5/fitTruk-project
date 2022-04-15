@@ -9,8 +9,8 @@ import customerInfo from './customerInfo.reducer';
 
 // -------- Class detail/editing information -----------
 import classDetails from './classDetails.reducer';
-import activeClass from './classDetails.reducer';
-import selectedTrainer from './classDetails.reducer';
+// import activeClass from './classDetails.reducer'; // These are going to be deleted adter testing confirms they are unnecessary
+// import selectedTrainer from './classDetails.reducer';
 
 
 const rootReducer = combineReducers({
