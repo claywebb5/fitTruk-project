@@ -4,10 +4,8 @@ const router = express.Router();
 
 // -------------------------- Get all classes (GET) (Everyone can see this)
 
-
 router.get('/', (req, res) => {
 
-    // if (req.isAuthenticated()) {
         let queryText = `select * from classes
     order by date, start_time;`
         pool.query(queryText).then((result) => {
@@ -16,9 +14,6 @@ router.get('/', (req, res) => {
             console.log(error)
             res.sendStatus(500)
         })
-    // } else {
-    //     res.sendStatus(403);
-    // }
 });
 
 // -------------------------- Get class details (GET)(Everyone can see this)
