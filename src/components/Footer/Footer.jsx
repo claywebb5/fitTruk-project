@@ -8,7 +8,7 @@ import LogOutButton from '../LogOutButton/LogOutButton';
 function Footer() {
   return (
     <>
-      <footer>&copy; Prime Digital Academy</footer>
+      <footer>&copy; FitTruk</footer>
       <LogOutButton />
     </>
   )
