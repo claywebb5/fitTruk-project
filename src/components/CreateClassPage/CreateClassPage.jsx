@@ -74,6 +74,7 @@ function CreateClassPage() {
     const submitHandler = (event) => {
         event.preventDefault();
         console.log('This will submit the form');
+        console.log('user data:'); // test log
         console.log(activeClass);
     }
 
