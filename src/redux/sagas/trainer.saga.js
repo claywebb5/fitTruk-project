@@ -6,8 +6,8 @@ function* fetchAttendance(){
     // TRAINER/ADMIN ONLY
     // Will send a request to the trainer router to get all users signed up for a class
     try {
-        const attendance = yield axios.get(`/api/trainer/attendance/${action.payload}`)
-        yield put({ type: 'SET_ATTENDEES', payload: attendance.data });
+        const attendance = yield axios.get(`/api/trainer/attendance/${action.payload}`) // * Goes to SERVER "trainer.router"
+        yield put({ type: 'SET_ATTENDEES', payload: attendance.data }); // * Goes to REDUCERS "attendees.reducer"
     } catch {
         console.log('Get all attendees error');
     }
@@ -18,8 +18,8 @@ function* updateDetails (){
     // TRAINER/ADMIN ONLY
     // Will send a request to the trainer router to update the details of a specific class
     try{
-        yield axios.put(`/api/trainer/edit-class/${action.payload.id}`, action.payload);
-        yield put({type: 'SET_CLASS_DETAILS'}) //
+        yield axios.put(`/api/trainer/edit-class/${action.payload.id}`, action.payload); // * Goes to SERVER "trainer.router"
+        yield put({type: 'SET_CLASS_DETAILS'}) // * Goes to REDUCERS "classDetails.reducer"
     } catch (error){
         console.log('Error editing class details', error);
     }
@@ -30,8 +30,8 @@ function* updateAttendance(){
     // TRAINER/ADMIN ONLY
     // Will send a request to the trainer router to update attendance with those who arrived for the class
     try{
-        yield axios.put(`/api/check-in/${action.payload.id}`, action.payload);
-        yield put({type: 'FETCH_ATTENDANCE'}) //
+        yield axios.put(`/api/trainer/check-in/${action.payload.id}`, action.payload); // * Goes to SERVER "trainer.router"
+        yield put({type: 'FETCH_ATTENDANCE'}) // * Goes to THIS SAGA "trainer.saga" (fetchAttendance)
     } catch (error){
         console.log('Error updating checked in status', error);
     }
