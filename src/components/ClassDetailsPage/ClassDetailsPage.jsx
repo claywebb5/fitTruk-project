@@ -16,7 +16,7 @@ function ClassDetailsPage(){
         });
       }, [])
 
-      const event = useSelector(store => store.classDetailsReducer)
+    //   const event = useSelector(store => store.classDetailsReducer)
 
     //------------<  Variables  >----------
     // const user = useSelector(store => store.user)
@@ -41,7 +41,7 @@ function ClassDetailsPage(){
     
 //---------------<  Temporary things to be deleted  >----------------------------
 // ----- DELETE this when we have a reducer/saga to replace it ------
-// const event = {id: 1,classname: "HIIT",description: "high intensity interval training",trainer_user_id: 2,date: "2022-04-12",start_time: "12:00:00",end_time: "13:00:00",location: "at the park?",class_size: 20};
+const event = {id: 1,classname: "HIIT",description: "high intensity interval training",trainer_user_id: 2,date: "2022-04-12",start_time: "12:00:00",end_time: "13:00:00",location: "at the park?",class_size: 20};
 // ^^^^^^^^^^^^ DELETE this when we have a reducer/saga to replace it ^^^^^^^^^^^^^^^^^
 
 // To be completed on this page:

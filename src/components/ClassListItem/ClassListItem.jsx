@@ -2,7 +2,7 @@
 // import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 
-function ClassListItem({event, i}) {
+function ClassListItem({classEvent, i}) {
   const history = useHistory();
 
   const handleEventClick = () => {
@@ -12,9 +12,9 @@ function ClassListItem({event, i}) {
   return (
     <>
       <li key={i} onClick={handleEventClick}>
-        {event.date}
-        {event.start_time}-{event.end_time}
-        {event.classname} with {event.trainer_user_id}
+        {classEvent.date}
+        {classEvent.start_time}-{classEvent.end_time}
+        {classEvent.classname} with {classEvent.trainer_user_id}
       </li>
     </>
   )
