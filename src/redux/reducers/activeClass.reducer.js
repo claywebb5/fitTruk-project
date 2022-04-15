@@ -12,7 +12,7 @@ const activeClassReducer = (
 
       
       if(action.type === 'SET_ACTIVE_CLASS_DETAILS'){
-        console.log('activeClassReducer: Action.payload is:', action.payload.data);
+        console.log('activeClass: Action.payload is:', action.payload.data);
 
         let propertyName = action.payload.propertyName
         return {...state,

@@ -11,7 +11,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 function AttendeesPage(){
     const dispatch = useDispatch();
-    const attendees = useSelector(store => store.attendeesReducer);
+    const attendees = useSelector(store => store.attendees);
     const userId = useSelector(store => store.user.id);
 
     return(

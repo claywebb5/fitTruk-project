@@ -26,8 +26,8 @@ function* fetchCustomerInfo(){
 function* updateCustomerInfo(action){
     try {
         console.log('In updateCustomerInfo the action.payload is:', action.payload);
-        yield axios.put(`/api/customer/pronouns/${action.payload.id}`, action.payload);
-        yield put({type: 'SET_USER_INFO'});
+        yield axios.put(`/api/customer/pronouns/${action.payload.id}`, action.payload); // Best practice for REST API's, the ID of the thing you're changing should be on the url
+        yield put({type: 'FETCH_CUSTOMER_INFO'}); // SYNTAX-UPDATE : TEST this, make sure it works 
     } catch (error){
         console.log('Error updating customer info:', error)
     }

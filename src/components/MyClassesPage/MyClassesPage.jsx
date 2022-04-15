@@ -23,8 +23,8 @@ const classes = [{id: 1,classname: "HIIT",description: "high intensity interval 
       <Nav/>
       <button onClick={handleAllClassClick}>All Available classes(this will be an icon eventually)</button>
       <ul>
-      {classes.map((event, i) =>(
-        <ClassListItem event={event} key={i} />
+      {classes.map((classEvent, i) =>( // "classEvent" was formerly called "event", look out for any residual errors from this.
+        <ClassListItem classEvent={classEvent} key={i} />
       ))}
       </ul>
     </div>

@@ -20,7 +20,7 @@ function AllClassesPage() {
 
   // ------- Variables ---------
   const user = useSelector(store => store.user)
-  const classes = useSelector(store => store.allClassesReducer)
+  const classes = useSelector(store => store.allClasses) // SYNTAX-UPDATE : test this later
 
   // ------- Buttons -------
   const handleMyClassClick = () => {
@@ -86,8 +86,8 @@ function AllClassesPage() {
       <h3>If logged in, myclass button appears below, if not then no button</h3>
       {user.id && <button onClick={handleMyClassClick}>Myclasses (this will be an icon eventually)</button>}
       <ul>
-      {classes.map((event, i) =>(
-        <ClassListItem event={event} key={i} />
+      {classes.map((classEvent, i) =>(
+        <ClassListItem classEvent={classEvent} key={i} />
       ))}
       </ul>
     </div>

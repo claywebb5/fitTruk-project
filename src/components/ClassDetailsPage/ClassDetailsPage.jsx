@@ -12,11 +12,11 @@ function ClassDetailsPage(){
     useEffect(() => {
         dispatch({
           type: 'FETCH_CLASS_DETAILS',
-          payload: 4 // PART OF DUMMY DATA, WILL BE UPDATED ONCE :id IS ADDED TO ROUTING
+          payload: 2 // PART OF DUMMY DATA, WILL BE UPDATED ONCE :id IS ADDED TO ROUTING
         });
       }, [])
 
-      const event = useSelector(store => store.classDetailsReducer)
+      const classDetails = useSelector(store => store.classDetails)
 
     //------------<  Variables  >----------
     // const user = useSelector(store => store.user)
@@ -48,16 +48,16 @@ function ClassDetailsPage(){
 // Eventually we'll get a trainer name, that will replace the trainer_user_id below
 // Link the gps to an actual google search query.
 //---------------< // END Temporary things to be deleted  >----------------------------
-console.log('these are the details pulled in from the reducer:', event);
+console.log('these are the details pulled in from the reducer:', classDetails);
     return(
         <>
             <Nav/>
-            <h1>{event.date}</h1>
-            <h3>{event.classname}</h3>
-            <h3>led by: {event.trainer_user_id}</h3>
-            <h3>{event.location} <button onClick={handleGpsClick}>gps</button></h3>
-            <h3>{event.start_time}-{event.end_time}</h3>
-            <h3>{event.description}</h3>
+            <h1>{classDetails.date}</h1>
+            <h3>{classDetails.classname}</h3>
+            <h3>led by: {classDetails.trainer_user_id}</h3>
+            <h3>{classDetails.location} <button onClick={handleGpsClick}>gps</button></h3>
+            <h3>{classDetails.start_time}-{classDetails.end_time}</h3>
+            <h3>{classDetails.description}</h3>
             <button onClick={handleReturnClick}>Return</button>
             <button onClick={handleReserveClick}>Reserve</button>
         </>
