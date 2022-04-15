@@ -164,7 +164,7 @@ function App() {
           <ProtectedRoute
             // logged in shows UserPage else shows LoginPage
             exact
-            path="/personal-info/:id"
+            path="/personal-info/"
           >
             <UserPage />
           </ProtectedRoute>

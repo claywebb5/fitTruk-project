@@ -8,6 +8,7 @@ function ClassDetailsPage(){
     const history = useHistory();
     const dispatch = useDispatch();
 
+    const { id } = useParams()
 
     useEffect(() => {
         dispatch({
@@ -49,6 +50,7 @@ function ClassDetailsPage(){
 // Link the gps to an actual google search query.
 //---------------< // END Temporary things to be deleted  >----------------------------
 console.log('these are the details pulled in from the reducer:', classDetails);
+console.log('this is the id pull from the url with params', id);
     return(
         <>
             <Nav/>
