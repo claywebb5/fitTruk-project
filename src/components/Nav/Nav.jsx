@@ -47,13 +47,13 @@ function Nav() {
             <Link className="navLink" to="/create-class">
               <button>Create Class</button>
             </Link>
-            <Link className="navLink" to="/personal-info">
+            <Link className="navLink" to="/personal-info/">
               <button>Personal Info</button>
             </Link>
             <Link className="navLink" to="/info">
               <button>Info Page</button>
             </Link>
-            <Link className="navLink" to="/personal-info">
+            <Link className="navLink" to="/personal-info/">
               <button>**PROFILE PIC**</button>
             </Link>
           </>
