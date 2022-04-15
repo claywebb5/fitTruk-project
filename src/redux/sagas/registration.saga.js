@@ -5,20 +5,20 @@ import axios from 'axios';
 function* registerUser(action) {
   try {
     // clear any existing error on the registration page
-    yield put({ type: 'CLEAR_REGISTRATION_ERROR' });
+    yield put({ type: 'CLEAR_REGISTRATION_ERROR' }); // * Goes to REDUCER "errors.reducer"
 
     // passes the username and password from the payload to the server
-    yield axios.post('/api/user/register', action.payload);
+    yield axios.post('/api/user/register', action.payload); // * Goes to SERVER "user.router"
 
     // automatically log a user in after registration
-    yield put({ type: 'LOGIN', payload: action.payload });
+    yield put({ type: 'LOGIN', payload: action.payload }); // * Goes to SAGAS "login.saga"
 
     // set to 'login' mode so they see the login screen
     // after registration or after they log out
-    yield put({ type: 'SET_TO_LOGIN_MODE' });
+    yield put({ type: 'SET_TO_LOGIN_MODE' }); // * NO CLUE WHERE THIS GOES???
   } catch (error) {
     console.log('Error with user registration:', error);
-    yield put({ type: 'REGISTRATION_FAILED' });
+    yield put({ type: 'REGISTRATION_FAILED' }); // * Goes to REDUCER "errors.reducer"
   }
 }
 
