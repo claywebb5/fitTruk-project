@@ -13,11 +13,11 @@ function ClassDetailsPage(){
     useEffect(() => {
         dispatch({
           type: 'FETCH_CLASS_DETAILS',
-          payload: 2 // PART OF DUMMY DATA, WILL BE UPDATED ONCE :id IS ADDED TO ROUTING
+          payload: id // PART OF DUMMY DATA, WILL BE UPDATED ONCE :id IS ADDED TO ROUTING
         });
       }, [])
 
-      const classDetails = useSelector(store => store.classDetails)
+      const classDetails = useSelector(store => store.classDetails.classDetailsReducer)
 
     //------------<  Variables  >----------
     // const user = useSelector(store => store.user)
