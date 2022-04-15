@@ -18,7 +18,7 @@ CREATE TABLE "user" (
 	"emergency_number" VARCHAR(20),
 	"profile_image" VARCHAR(255),
 	"free_classes" VARCHAR DEFAULT 3,
-	"access_level" VARCHAR DEFAULT 1
+	"access_level" INTEGER DEFAULT 1
 );
 
 CREATE TABLE "classes" (
