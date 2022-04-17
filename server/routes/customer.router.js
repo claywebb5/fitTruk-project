@@ -36,7 +36,7 @@ router.put('/pronouns/:id', (req, res) => {
   if (req.isAuthenticated() && req.user.id === Number(req.params.id)) {
     const queryText =
       `UPDATE "user"
-          SET "pronouns" = $1, "street_address" = $2, "city" = $3, "state" = $4, "zip" = $5
+          SET "pronouns" = $1, "street" = $2, "city" = $3, "state" = $4, "zip" = $5
           WHERE "user"."id" = $6;`;
     pool.query(queryText, [req.body.pronouns, req.body.street_address, req.body.city, req.body.state, req.body.zip, req.params.id]) // SYNTAX-UPDATE : change req.params.id to req.user.id , as it's verified by Passport
       .then((result) => {
