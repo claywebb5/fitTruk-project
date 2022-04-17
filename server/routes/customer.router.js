@@ -32,10 +32,8 @@ router.get('/myclasses/:id', (req, res) => {
 // -------------------------- Updates personal info and address of customer (PUT)
 // --- SYNTAX-UPDATE : update this name
 router.put('/pronouns/:id', (req, res) => {
-  // let userId = req.user.id;
-  // console.log('req userId is:', userId)
-console.log('req.params.id is', req.params.id )
-  if (req.isAuthenticated()) {
+
+  if (req.isAuthenticated() && req.user.id === Number(req.params.id)) {
     const queryText =
       `UPDATE "user"
           SET "pronouns" = $1, "street_address" = $2, "city" = $3, "state" = $4, "zip" = $5
