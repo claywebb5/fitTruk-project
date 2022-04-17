@@ -72,11 +72,14 @@ router.delete('/reservation/:id', (req, res) => {
 // -------------------------- Reserves a class for a customer (POST)
 // SYNTAX-UPDATE : change userID verification
 router.post('/reserve-class/:id', (req, res) => {
+  console.log('req.body.user_id:', req.user.id);
+  console.log('req.params.id:', req.params.id);
+  
 
   if (req.isAuthenticated()) {
     const queryText = `INSERT into "class_list" ("class_id", "user_id")
     values ($1, $2);`
-    pool.query(queryText, [req.params.id, req.body.user_id]) // SYNTAX-UPDATE : change req.params.id to req.user.id , as it's verified by Passport
+    pool.query(queryText, [req.params.id, req.user.id]) // SYNTAX-UPDATE : change req.params.id to req.user.id , as it's verified by Passport
 
       .then((result) => {
         res.send(result.rows)
