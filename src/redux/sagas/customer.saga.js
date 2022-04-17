@@ -45,11 +45,11 @@ function* fetchCustomerClass() {
 
     try {
         console.log('In fetchCustomerClass, about to axios.get all the customers registered classes');
-        const customerClassResponse = yield axios.get('/api/customer/myclasses'); // * Goes to SERVER "customer.router"
+        const customerClassResponse = yield axios.get(`/api/customer`); // * Goes to SERVER "customer.router"
         console.log('Getting all registered classes:', customerClassResponse.data);
         yield put({ type: 'SET_MY_CLASSES', payload: customerClassResponse.data }); // * Goes to REDUCER "userClass.reducer.js"
-    } catch {
-        console.log('Error trying to fetchCustomerClass in sagas!');
+    } catch (error) {
+        console.log('Error trying to fetchCustomerClass in sagas!', error);
     }
 }
 

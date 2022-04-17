@@ -8,6 +8,7 @@ function ClassListItem({classEvent, i}) {
   
   const handleEventClick = () => {
     console.log(classEvent);
+    // history.push(`/class-details/${classEvent.id}`)
     history.push(`/class-details/${classEvent.id}`)
   }
 

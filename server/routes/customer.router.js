@@ -6,17 +6,20 @@ const router = express.Router();
 
 // -------------------------- Gets classes a specific customer signed up for
 
-router.get('/myclasses/:id', (req, res) => {
+router.get('/', (req, res) => {
+  console.log('req.user.id:', req.user.id);
+  
 
   if (req.isAuthenticated()) {
-    const queryText = ` SELECT classes.id, date, start_time, end_time, classname, trainer_user_id
-    from classes 
-        JOIN class_list ON classes.id = class_list.class_id
-        JOIN "user" ON class_list.user_id = "user".id
-        WHERE "user".id = $1
+    const queryText = ` SELECT classes.*
+        FROM "classes" 
+        JOIN "class_list" 
+        ON "classes"."id" = "class_list"."class_id"
+        JOIN "user" ON "class_list"."user_id" = "user".id
+        WHERE "user"."id" = ${req.user.id}
         ORDER BY date, start_time
         ;`;
-    pool.query(queryText, [req.params.id])
+    pool.query(queryText)
       .then((result) => {
         res.send(result.rows);
       }).catch((error) => {
