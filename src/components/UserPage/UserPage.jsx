@@ -38,46 +38,35 @@ function UserPage() {
     console.log('The user is:', user);
     console.log('The userObj is:', userObj);
     console.log('The state of editUser is:', editUser);
-
   }
 
   //  ============< Pronoun Change >=============
   const handlePronounChange = (event) => {
     console.log('New Pronoun:', event.target.value);
 
-    setEditUser({ ...editUser, pronouns: event.target.value })
+    setEditUser({ ...editUser, pronouns: event.target.value });
     console.log('In handlePronounChange');
 
   };
 
-  //  ============<  Change >=============
+  //  ============< Address Change >=============
   const handleChangeStreet = (event) => {
-    // console.log('New Street:', event.target.value);
-
-    setEditUser({ ...editUser, street: event.target.value})
-    // console.log('In handleChange');
+    setEditUser({ ...editUser, street: event.target.value});
   };
 
   const handleChangeCity = (event) => {
-    // console.log('New City:', event.target.value);
-
-    setEditUser({ ...editUser, city: event.target.value})
-    // console.log('In handleChange');
+    setEditUser({ ...editUser, city: event.target.value});
   };
+
   const handleChangeState = (event) => {
-    // console.log('New State:', event.target.value);
-
-    setEditUser({ ...editUser, state: event.target.value})
-    // console.log('In handleChange');
+    setEditUser({ ...editUser, state: event.target.value});
   };
+
   const handleChangeZip = (event) => {
-    // console.log('New Zip:', event.target.value);
-
-    setEditUser({ ...editUser, zip: event.target.value })
-    // console.log('In handleChange');
+    setEditUser({ ...editUser, zip: event.target.value });
   };
 
-  //  ============< Submit >=============
+  //  ============< Submit >==============================================
   const handleSubmit = (event) => {
     event.preventDefault();
     let updatedUser = editUser;

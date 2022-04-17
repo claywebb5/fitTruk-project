@@ -38,7 +38,7 @@ router.put('/pronouns/:id', (req, res) => {
       `UPDATE "user"
           SET "pronouns" = $1, "street" = $2, "city" = $3, "state" = $4, "zip" = $5
           WHERE "user"."id" = $6;`;
-    pool.query(queryText, [req.body.pronouns, req.body.street_address, req.body.city, req.body.state, req.body.zip, req.params.id]) // SYNTAX-UPDATE : change req.params.id to req.user.id , as it's verified by Passport
+    pool.query(queryText, [req.body.pronouns, req.body.street, req.body.city, req.body.state, req.body.zip, req.params.id]) // SYNTAX-UPDATE : change req.params.id to req.user.id , as it's verified by Passport
       .then((result) => {
         res.send(result.rows)
       })
