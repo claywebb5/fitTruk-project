@@ -58,7 +58,7 @@ function* addReservation(action){
     try {
         console.log('The action.payload for adding a new class reservation is:', action.payload);
         yield axios.post(`/api/customer/reserve-class/${action.payload.id}`, action.payload); // * Goes to SERVER "customer.router"
-        yield put({ type: 'FETCH_CUSTOMER_CLASS' }); // * Goes to 
+        yield put({ type: 'FETCH_CUSTOMER_CLASS' }); // * Goes to THIS SAGA "customer.saga.js" (fetchCustomerSaga)
     } catch (error) {
         console.log('Error adding a new class reservation', error);
     }    
