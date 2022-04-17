@@ -7,7 +7,7 @@ function RegisterForm() {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [phoneNumber, setPhoneNumber] = useState('');
-  const [streetAddress, setStreetAddress] = useState('');
+  const [street, setStreet] = useState('');
   const [city, setCity] = useState('');
   const [state, setState] = useState('');
   const [zip, setZip] = useState('');
@@ -34,7 +34,7 @@ function RegisterForm() {
         password: password,
         name: name,
         email: email,
-        streetAddress: streetAddress,
+        street: street,
         city: city,
         state: state,
         zip: zip,
@@ -119,13 +119,13 @@ function RegisterForm() {
       </div>
       <div>
         <label htmlFor="street">
-          Street:
+          street:
           <input
             type="text"
-            name="Street"
-            value={streetAddress}
+            name="street"
+            value={street}
             required
-            onChange={(event) => setStreetAddress(event.target.value)}
+            onChange={(event) => setStreet(event.target.value)}
           />
         </label>
       </div>
