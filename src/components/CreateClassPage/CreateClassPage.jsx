@@ -2,6 +2,9 @@ import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import Nav from "../Nav/Nav";
+import './CreateClassPage.css';
+
+// import TrainerProfileImage from './TrainerProfileImage';
 
 // ** ONLY ADMIN CAN SEE **
 // ** Admin can create a new class by: naming the class/selecting a date/..
@@ -35,59 +38,55 @@ function CreateClassPage() {
 
 
 
+
     //---------- Variables -----------
-    const trainers = useSelector(store => store.availableTrainers)
-    const activeClass = useSelector(store => store.activeClass)
-    const selectedTrainer = useSelector(store => store.selectedTrainer)
+    const availableTrainers = useSelector(store => store.availableTrainers)
+    const classDetails = useSelector(store => store.selectedClass.classDetails)
+    const selectedTrainer = useSelector(store => store.selectedClass.selectedTrainer)
 
     //----------<  I n p u t   H a n d l e r s  >-----------
+    const handleTrainerSelection = (selectedTrainerId) => {
+        for (let trainer of availableTrainers) {
+            if (trainer.trainer_user_id == selectedTrainerId) {
 
-
-    const handleTrainerSelection = (trainerId) => {
-        console.log('HandleTrainerSelection: I\'m handling trainer selection!');
-
-        for (let trainer of trainers) {
-            if (trainer.trainer_user_id == trainerId) {
-
-                console.log('trainer:'); // Test log to ensure the objects are being retrieved properly.
-                console.log('trainer:'); // Test log to ensure the objects are being retrieved properly.
-                // dispatch({
-                //     type: 'SET_ACTIVE_CLASS_TRAINER',
-                //     payload: {
-                //         trainer_user_id: trainer.trainer_user_id,
-                //         profile_image: trainer.profile_image,
-                //         name: trainer.name
-                //     }
-                // })
+                // console.log(trainer.name); // Test log to ensure the objects are being retrieved properly.
+                
+                dispatch({
+                    type: 'SET_ACTIVE_CLASS_TRAINER',
+                    payload: {
+                        trainer_user_id: trainer.trainer_user_id,
+                        profile_image: trainer.profile_image,
+                        name: trainer.name
+                    }
+                });
 
                 dispatch({
-                    type: 'SET_ACTIVE_CLASS_DETAILS',
+                    type: 'EDIT_CLASS_DETAILS',
                     payload: {
                         propertyName: 'trainer_user_id',
-                        data: trainerId
+                        key: trainer.trainer_user_id
                     }
                 });
             }// End conditional statement
         }// End loop through trainer array
     }; // END handleTrainerSelection
 
-    const submitHandler = (event) => {
-        event.preventDefault();
-        console.log('This will submit the form');
-        console.log(activeClass);
-    }
-
+    
     const handleChange = (prop) => (event) => {
         dispatch({
-            type: 'SET_ACTIVE_CLASS_DETAILS',
+            type: 'EDIT_CLASS_DETAILS',
             payload: {
                 propertyName: prop,
-                data: event.target.value
+                key: event.target.value
             }
         });
     }; // END handleChange
-
-
+    
+    const submitHandler = (event) => {
+        event.preventDefault();
+        console.log('This will submit the form');
+        console.log(classDetails);
+    }
     //----------<  //  E N D   I n p u t   H a n d l e r s  >-----------
 
 
@@ -99,12 +98,12 @@ function CreateClassPage() {
 
                 {/* ---- Set Date ---- */}
                 <h4>Date:
-                    <input type="date" name="date" value={activeClass.date} onChange={handleChange('date')} />
+                    <input type="date" name="date" value={classDetails.date} onChange={handleChange('date')} />
                 </h4>
 
                 {/* ---- Set Class Name ---- */}
                 <h4>Class name:
-                    <input type="text" name="class-name" value={activeClass.classname} onChange={handleChange('classname')} />
+                    <input type="text" name="class-name" value={classDetails.classname} onChange={handleChange('classname')} />
                 </h4>
 
                 {/* ---- Select Trainer ---- */}
@@ -112,39 +111,45 @@ function CreateClassPage() {
                     <select name="trainer" id="trainer-selector"
                         placeholder='Trainer'
                         onChange={(event) => { handleTrainerSelection(event.target.value) }}>
-                        {trainers.map((trainer, i) => (
+                        {availableTrainers.map((trainer, i) => (
                             <option key={i} value={trainer.trainer_user_id}>{trainer.name}</option>
                         ))}
                     </select>
                     {/* ---- Here's the trainer's image ---- */}
-                    <img src={selectedTrainer.profile_image} alt="Profile image of the selected trainer" />
-                    {/* <ImageRenderer /> */}
+                    {/* <TrainerProfileImage /> */}
+                    {selectedTrainer.profile_image ? 
+                    <img className='trainer-image' src={selectedTrainer.profile_image} alt="Profile image of the selected trainer" />
+                    :
+                    <div className='trainer-image' >This is a div</div>
+                    }
+
+                    
                 </h4>
 
 
                 {/* ---- Set Start Time ---- */}
                 <h4>Start time:
-                    <input type="time" name="start-time" value={activeClass.start_time} onChange={handleChange('start_time')} />
+                    <input type="time" name="start-time" value={classDetails.start_time} onChange={handleChange('start_time')} />
 
 
                     {/* ---- Set End Time ---- */}
                     End Time:
-                    <input type="time" name="end-time" value={activeClass.end_time} onChange={handleChange('end_time')} />
+                    <input type="time" name="end-time" value={classDetails.end_time} onChange={handleChange('end_time')} />
                 </h4>
 
                 {/* ---- Set Location ---- */}
                 <h4>Location:
-                    <input type="text" name="location" value={activeClass.location} onChange={handleChange('location')} />
+                    <input type="text" name="location" value={classDetails.location} onChange={handleChange('location')} />
                 </h4>
 
                 {/* ---- Set Description ---- */}
                 <h4>Description:
-                    <input type="text" name="" value={activeClass.description} onChange={handleChange('description')} />
+                    <input type="text" name="" value={classDetails.description} onChange={handleChange('description')} />
                 </h4>
 
                 {/* ---- Set Class Size ---- */}
                 <h4>Class Size:
-                    <input type="number" name="class-size" value={activeClass.class_size} onChange={handleChange('class_size')} />
+                    <input type="number" name="class-size" value={classDetails.class_size} onChange={handleChange('class_size')} />
                 </h4>
 
                 {/* ---- Submit form!! ---- */}
