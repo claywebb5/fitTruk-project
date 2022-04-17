@@ -31,7 +31,8 @@ function* updateCustomerInfo(action){
         yield axios.put(`/api/customer/pronouns/${action.payload.id}`, action.payload); // * Goes to SERVER "customer.router" *
 
         // SYNTAX-UPDATE : TEST this, make sure it works 
-        yield put({type: 'FETCH_CUSTOMER_INFO'}); // * Goes to THIS SAGA "customer.saga.js" (fetchCustomerInfo) *
+        // yield put({type: 'FETCH_CUSTOMER_INFO'}); // * Goes to THIS SAGA "customer.saga.js" (fetchCustomerInfo) *
+        yield put({type: 'FETCH_USER'}); // * Goes to THIS SAGA "customer.saga.js" (fetchCustomerInfo) *
 
     } catch (error){
         console.log('Error updating customer info:', error)
