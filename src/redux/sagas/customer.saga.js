@@ -41,9 +41,10 @@ function* updateCustomerInfo(action){
 
 // =============***< (GET ALL) REGISTERED CLASSES >***=======================================
 function* fetchCustomerClass() {
+
     try {
         console.log('In fetchCustomerClass, about to axios.get all the customers registered classes');
-        const customerClassResponse = yield axios.get('/api/customer'); // * Goes to SERVER "customer.router"
+        const customerClassResponse = yield axios.get('/api/customer/myclasses'); // * Goes to SERVER "customer.router"
         console.log('Getting all registered classes:', customerClassResponse.data);
         yield put({ type: 'SET_MY_CLASSES', payload: customerClassResponse.data }); // * Goes to REDUCER "userClass.reducer.js"
     } catch {
@@ -55,7 +56,7 @@ function* fetchCustomerClass() {
 function* addReservation(action){
     try {
         console.log('The action.payload for adding a new class reservation is:', action.payload);
-        yield axios.post('/api/customer', action.payload); // * Goes to SERVER "customer.router"
+        yield axios.post(`/api/customer/reserve-class/${action.payload.id}`, action.payload); // * Goes to SERVER "customer.router"
         yield put({ type: 'FETCH_CUSTOMER_CLASS' }); // * Goes to 
     } catch (error) {
         console.log('Error adding a new class reservation', error);
