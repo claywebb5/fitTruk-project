@@ -8,16 +8,17 @@ function ClassListItem({classEvent, i}) {
   
   const handleEventClick = () => {
     console.log(classEvent);
+    // history.push(`/class-details/${classEvent.id}`)
     history.push(`/class-details/${classEvent.id}`)
   }
 
   return (
     <>
       <li key={i} onClick={handleEventClick}>
-        {classEvent.date}
-        {classEvent.start_time}-{classEvent.end_time}
-        {classEvent.classname} with {classEvent.trainer_user_id}
-      </li>
+      <b>Date:</b> {classEvent.date} <br />
+      <b>Time:</b> {classEvent.start_time}-{classEvent.end_time} <br />
+      <b>Class:</b> {classEvent.classname} with <b>Trainer:</b> {classEvent.trainer_user_id}
+      </li> <br />
     </>
   )
 }

@@ -6,17 +6,20 @@ const router = express.Router();
 
 // -------------------------- Gets classes a specific customer signed up for
 
-router.get('/myclasses/:id', (req, res) => {
+router.get('/', (req, res) => {
+  console.log('req.user.id:', req.user.id);
+  
 
   if (req.isAuthenticated()) {
-    const queryText = ` SELECT classes.id, date, start_time, end_time, classname, trainer_user_id
-    from classes 
-        JOIN class_list ON classes.id = class_list.class_id
-        JOIN "user" ON class_list.user_id = "user".id
-        WHERE "user".id = $1
+    const queryText = ` SELECT classes.*
+        FROM "classes" 
+        JOIN "class_list" 
+        ON "classes"."id" = "class_list"."class_id"
+        JOIN "user" ON "class_list"."user_id" = "user".id
+        WHERE "user"."id" = ${req.user.id}
         ORDER BY date, start_time
         ;`;
-    pool.query(queryText, [req.params.id])
+    pool.query(queryText)
       .then((result) => {
         res.send(result.rows);
       }).catch((error) => {
@@ -36,9 +39,9 @@ router.put('/pronouns/:id', (req, res) => {
   if (req.isAuthenticated() && req.user.id === Number(req.params.id)) {
     const queryText =
       `UPDATE "user"
-          SET "pronouns" = $1, "street_address" = $2, "city" = $3, "state" = $4, "zip" = $5
+          SET "pronouns" = $1, "street" = $2, "city" = $3, "state" = $4, "zip" = $5
           WHERE "user"."id" = $6;`;
-    pool.query(queryText, [req.body.pronouns, req.body.street_address, req.body.city, req.body.state, req.body.zip, req.params.id]) // SYNTAX-UPDATE : change req.params.id to req.user.id , as it's verified by Passport
+    pool.query(queryText, [req.body.pronouns, req.body.street, req.body.city, req.body.state, req.body.zip, req.params.id]) // SYNTAX-UPDATE : change req.params.id to req.user.id , as it's verified by Passport
       .then((result) => {
         res.send(result.rows)
       })
@@ -69,11 +72,14 @@ router.delete('/reservation/:id', (req, res) => {
 // -------------------------- Reserves a class for a customer (POST)
 // SYNTAX-UPDATE : change userID verification
 router.post('/reserve-class/:id', (req, res) => {
+  console.log('req.body.user_id:', req.user.id);
+  console.log('req.params.id:', req.params.id);
+  
 
   if (req.isAuthenticated()) {
     const queryText = `INSERT into "class_list" ("class_id", "user_id")
     values ($1, $2);`
-    pool.query(queryText, [req.params.id, req.body.user_id]) // SYNTAX-UPDATE : change req.params.id to req.user.id , as it's verified by Passport
+    pool.query(queryText, [req.params.id, req.user.id]) // SYNTAX-UPDATE : change req.params.id to req.user.id , as it's verified by Passport
 
       .then((result) => {
         res.send(result.rows)

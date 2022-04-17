@@ -20,47 +20,63 @@ function UserPage() {
     password: user.password,
     name: user.name,
     email: user.email,
-    address: user.address,
+    street: user.street,
+    city: user.city,
+    state: user.state,
+    zip: user.zip,
     dob: user.dob,
-    phoneNumber: user.phoneNumber,
+    phone_number: user.phone_number,
     pronouns: user.pronouns,
-    emergencyName: user.emergencyName,
-    emergencyNumber: user.emergencyNumber,
+    emergency_name: user.emergency_name,
+    emergency_number: user.emergency_number,
     access_level: user.access_level
   }
 
   const [editUser, setEditUser] = useState(userObj);
 
+  const handleTest = () => {
+    console.log('The user is:', user);
+    console.log('The userObj is:', userObj);
+    console.log('The state of editUser is:', editUser);
+  }
+
   //  ============< Pronoun Change >=============
   const handlePronounChange = (event) => {
     console.log('New Pronoun:', event.target.value);
 
-    setEditUser({ ...editUser, pronouns: event.target.value })
+    setEditUser({ ...editUser, pronouns: event.target.value });
     console.log('In handlePronounChange');
 
   };
 
   //  ============< Address Change >=============
-  const handleAddressChange = (event) => {
-    setEditUser({ ...editUser, address: event.target.value })
-    console.log('In handleAddressChange');
+  const handleChangeStreet = (event) => {
+    setEditUser({ ...editUser, street: event.target.value});
   };
 
-  //  ============< Submit >=============
+  const handleChangeCity = (event) => {
+    setEditUser({ ...editUser, city: event.target.value});
+  };
+
+  const handleChangeState = (event) => {
+    setEditUser({ ...editUser, state: event.target.value});
+  };
+
+  const handleChangeZip = (event) => {
+    setEditUser({ ...editUser, zip: event.target.value });
+  };
+
+  //  ============< Submit >==============================================
   const handleSubmit = (event) => {
     event.preventDefault();
     let updatedUser = editUser;
     updatedUser = { ...updatedUser };
+    console.log('Clicked Submit');
     console.log('Updated user info is:', updatedUser);
     dispatch({
       type: 'UPDATE_CUSTOMER_INFO',
       payload: updatedUser
     });
-    // window.location.reload(); // SYNTAX-UPDATE : this probably shouldn't be here, test this
-    console.log('Clicked Submit');
-    // dispatch({
-    //   type: 'FETCH_CUSTOMER_INFO'
-    // });
   }
 
   const handleReturnClick = () => {
@@ -72,6 +88,9 @@ function UserPage() {
   return (
     <>
       <h1><u>Personal Info Page</u></h1>
+
+      <button onClick={handleTest}>Test userObj</button>
+
 
       <div className="container">
         <form onSubmit={handleSubmit}>
@@ -94,12 +113,39 @@ function UserPage() {
           <p><b>Number:</b> {user.phone_number}</p>
 
           <div> {/* CAN EDIT  */}
-            <p><b>Address:</b> {user.address}</p>
+            <p><b>Street:</b> {user.street}</p>
             <input
               type="text"
-              placeholder={user.address}
-              value={editUser.address}
-              onChange={handleAddressChange}
+              placeholder={user.street}
+              value={editUser.street}
+              onChange={handleChangeStreet}
+            />
+          </div>
+          <div>
+            <p><b>City:</b> {user.city}</p>
+            <input
+              type="text"
+              placeholder={user.city}
+              value={editUser.city}
+              onChange={handleChangeCity}
+            />
+          </div>
+          <div>
+            <p><b>State:</b> {user.state}</p>
+            <input
+              type="text"
+              placeholder={user.state}
+              value={editUser.state}
+              onChange={handleChangeState}
+            />
+          </div>
+          <div>
+            <p><b>Zip:</b> {user.zip}</p>
+            <input
+              type="text"
+              placeholder={user.zip}
+              value={editUser.zip}
+              onChange={handleChangeZip}
             />
           </div>
 
@@ -111,7 +157,7 @@ function UserPage() {
         </form>
       </div>
 
-      
+
     </>
   );
 }

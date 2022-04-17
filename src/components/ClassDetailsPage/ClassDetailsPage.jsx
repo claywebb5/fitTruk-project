@@ -30,9 +30,14 @@ function ClassDetailsPage(){
         history.goBack();
     }
     const handleReserveClick = () => {
-        console.log('User ID is:');
-        console.log('Ideally this should trigger a saga');
-        // dispatch({type:'', payload: userId})
+        console.log('Selected class is:', classDetails.id);
+
+        dispatch({
+            type:'ADD_RESERVATION', 
+            payload: classDetails 
+        });
+        alert("About to Add!")
+        history.push('/my-classes')
     }
     const handleGpsClick = () => {
         console.log('This would ideally open google maps');
@@ -61,7 +66,7 @@ console.log('this is the id pull from the url with params', id);
             <h3>{classDetails.location} <button onClick={handleGpsClick}>gps</button></h3>
             <h3>{classDetails.start_time}-{classDetails.end_time}</h3>
             <h3>{classDetails.description}</h3>
-            <button onClick={handleReturnClick}>Return</button>
+            <button onClick={() => handleReturnClick(classDetails)}>Return</button>
             <button onClick={handleReserveClick}>Reserve</button>
         </>
     )
