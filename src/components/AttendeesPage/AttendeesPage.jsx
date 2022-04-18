@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useParams } from 'react-router-dom/cjs/react-router-dom.min';
 
 // ** Trainers can view the list of signed up guests/members for a specific class
 // ** Trainers can check in guests/members upon arrival
@@ -13,6 +14,7 @@ function AttendeesPage(){
     const dispatch = useDispatch();
     const attendees = useSelector(store => store.attendees);
     const userId = useSelector(store => store.user.id);
+    const { id } = useParams()
 
     return(
         <>
