@@ -36,7 +36,7 @@ function* fetchDetails (action){
     // Will send a request to the classes router to grab a specific classes details
     console.log('here is the dispatch info:', action.type, action.payload);
     try {
-        const classDetails = yield axios.get(`/api/class/details/${action.payload}`); // * Goes to SERVER "class.router"
+        const classDetails = yield axios.get(`/api/class/details/${action.payload.id}/${action.payload.userId}`); // * Goes to SERVER "class.router"
         console.log('these are the class details', classDetails.data);
         yield put({ type: 'SET_CLASS_DETAILS', payload: classDetails.data }); // * Goes to REDUCER "classDetails.reducer.js"
     } catch (error) {

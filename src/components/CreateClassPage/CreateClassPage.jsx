@@ -1,11 +1,8 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, useParams } from 'react-router-dom';
-
-
 import Nav from "../Nav/Nav";
 import './CreateClassPage.css';
-
 // import TrainerProfileImage from './TrainerProfileImage';
 
 // ** ONLY ADMIN CAN SEE **
@@ -20,13 +17,7 @@ function CreateClassPage() {
     const dispatch = useDispatch();
     const history = useHistory();
     const params = useParams();
-
-    const classId = params.id
-
-
-    // useEffect(() => {
-    // dispatch({type: 'RESET_CLASS_DETAILS'});
-    // }, []);
+    const classId = params.id;
 
 
     useEffect(() => {
@@ -44,17 +35,11 @@ function CreateClassPage() {
     }, []);
 
 
-
-
-
-
     //---------- Variables -----------
     const availableTrainers = useSelector(store => store.availableTrainers)
     const user = useSelector(store => store.user)
     const classDetails = useSelector(store => store.selectedClass.classDetails)
     const selectedTrainer = useSelector(store => store.selectedClass.selectedTrainer)
-
-
 
     console.log('access level', user.access_level);
 
@@ -101,6 +86,11 @@ function CreateClassPage() {
         event.preventDefault();
         console.log('This will submit the form');
         console.log(classDetails);
+        dispatch({
+            type: 'CREATE_CLASS',
+            payload: classDetails
+        });
+        history.push('/all-classes');
     }
     //----------<  //  E N D   I n p u t   H a n d l e r s  >-----------
 
