@@ -14,15 +14,15 @@ function ClassDetailsPage() {
         dispatch({
             type: 'FETCH_CLASS_DETAILS',
             // payload: id // PART OF DUMMY DATA, WILL BE UPDATED ONCE :id IS ADDED TO ROUTING
-            payload: {id: id, userId: user.id}
+            payload: { id: id, userId: user.id }
         });
     }, [])
 
-      const classDetails = useSelector(store => store.selectedClass.classDetails)
-      
-// ---------USED FOR TESTS, REMOVE LATER---------- USED FOR TESTS, REMOVE LATER ----------------USED FOR TESTS, REMOVE LATER--------
-const user = useSelector(store => store.user)
-// ---------USED FOR TESTS, REMOVE LATER---------- USED FOR TESTS, REMOVE LATER ----------------USED FOR TESTS, REMOVE LATER--------
+    const classDetails = useSelector(store => store.selectedClass.classDetails)
+
+    // ---------USED FOR TESTS, REMOVE LATER---------- USED FOR TESTS, REMOVE LATER ----------------USED FOR TESTS, REMOVE LATER--------
+    const user = useSelector(store => store.user)
+    // ---------USED FOR TESTS, REMOVE LATER---------- USED FOR TESTS, REMOVE LATER ----------------USED FOR TESTS, REMOVE LATER--------
 
 
     //------------<  Variables  >----------
@@ -48,6 +48,16 @@ const user = useSelector(store => store.user)
         // console.log('This will show google maps');
         // setShowMap(!showMap)
     }
+    const handleCancelClick = () => {
+        console.log('you canceled the class', classDetails)
+
+        dispatch({
+            type: 'REMOVE_RESERVATION',
+            payload: classDetails
+        });
+        alert("About to Remove")
+        history.push('/my-classes')
+    }
     //---------------<  E N D  C l i c k   H a n d l e r s  >----------------------------
 
 
@@ -66,7 +76,7 @@ const user = useSelector(store => store.user)
     console.log('this is the value of show map', showMap);
     return (
         <>
-            <Nav/>
+            <Nav />
             <h1>{classDetails.clean_format_date}</h1>
             <h1>{classDetails.week_day_name}</h1>
             <h3>{classDetails.classname}</h3>
@@ -75,18 +85,24 @@ const user = useSelector(store => store.user)
             {showMap ? <iframe
                 width="100%"
                 height="250"
-                frameBorder="0" style={{border:0}}
+                frameBorder="0" style={{ border: 0 }}
                 // referrerpolicy="no-referrer-when-downgrade"
                 src="https://www.google.com/maps/embed/v1/place?key=ADD_KEY_HERE&q=44.952975,-93.21846" //the 'q' or "Query" can be text aswell as coordinates, these coords are DUMMY DATA
-                >
+            >
             </iframe> : <p>Im not a map</p>}
             <h3>{classDetails.start_time}-{classDetails.end_time}</h3>
             <h3>{classDetails.description}</h3>
             <button onClick={() => handleReturnClick(classDetails)}>Return</button>
-            <button onClick={handleReserveClick} disabled={classDetails.is_my_class}>Reserve</button>
+            {(function () {
+                if (classDetails.is_my_class) {
+                    return <button onClick={handleCancelClick}>Cancel Reservation</button>;
+                } else {
+                    return <button onClick={handleReserveClick}>Reserve</button>;
+                }
+            })()}
 
             {/* ---------USED FOR TESTS, REMOVE LATER---------- USED FOR TESTS, REMOVE LATER ----------------USED FOR TESTS, REMOVE LATER-------- */}
-            {user.access_level >= 2 && <button onClick={()=>{history.push(`/edit-class/${classDetails.id}`)}}>edit class</button> }
+            {user.access_level >= 2 && <button onClick={() => { history.push(`/edit-class/${classDetails.id}`) }}>edit class</button>}
             {/* ---------USED FOR TESTS, REMOVE LATER---------- USED FOR TESTS, REMOVE LATER ----------------USED FOR TESTS, REMOVE LATER-------- */}
         </>
     )
