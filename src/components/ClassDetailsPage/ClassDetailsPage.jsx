@@ -93,13 +93,15 @@ function ClassDetailsPage() {
             <h3>{classDetails.start_time}-{classDetails.end_time}</h3>
             <h3>{classDetails.description}</h3>
             <button onClick={() => handleReturnClick(classDetails)}>Return</button>
-            {user.access_level >= 2 ? <p>somethingelse</p> : (function () {
-                if (classDetails.is_my_class) {
-                    return <button onClick={handleCancelClick}>Cancel Reservation</button>;
-                } else {
-                    return <button onClick={handleReserveClick}>Reserve</button>;
-                }
-            })()}
+            {user.access_level >= 2 ?
+                <button onClick={() => console.log('cluck click clikc')}>Attendance</button> :
+                (function () {
+                    if (classDetails.is_my_class) {
+                        return <button onClick={handleCancelClick}>Cancel Reservation</button>;
+                    } else {
+                        return <button onClick={handleReserveClick}>Reserve</button>;
+                    }
+                })()}
 
             {/* ---------USED FOR TESTS, REMOVE LATER---------- USED FOR TESTS, REMOVE LATER ----------------USED FOR TESTS, REMOVE LATER-------- */}
             {user.access_level >= 2 && <button onClick={() => { history.push(`/edit-class/${classDetails.id}`) }}>edit class</button>}
