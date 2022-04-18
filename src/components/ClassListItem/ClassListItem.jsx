@@ -1,10 +1,11 @@
 // import { useEffect, useState } from 'react';
-// import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 
 function ClassListItem({classEvent, i}) {
   const history = useHistory();
-
+  
+// console.log(trainers.name);
   
   const handleEventClick = () => {
     console.log(classEvent);
