@@ -5,12 +5,15 @@ function RegisterForm() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [name, setName] = useState('');
-  const [email, setEmail] = useState('')
-  const [phoneNumber, setPhoneNumber] = useState('')
-  const [address, setAddress] = useState('')
-  const [dob, setDob] = useState('')
-  const [pronouns, setPronouns] = useState()
-  const [emergencyName, setEmergencyName] = useState('')
+  const [email, setEmail] = useState('');
+  const [phoneNumber, setPhoneNumber] = useState('');
+  const [street, setStreet] = useState('');
+  const [city, setCity] = useState('');
+  const [state, setState] = useState('');
+  const [zip, setZip] = useState('');
+  const [dob, setDob] = useState('');
+  const [pronouns, setPronouns] = useState();
+  const [emergencyName, setEmergencyName] = useState('');
   const [emergencyNumber, setEmergencyNumber] = useState('')
 
   const errors = useSelector((store) => store.errors);
@@ -31,14 +34,15 @@ function RegisterForm() {
         password: password,
         name: name,
         email: email,
-        address: address,
+        street: street,
+        city: city,
+        state: state,
+        zip: zip,
         dob: dob,
         phoneNumber: phoneNumber,
         pronouns: pronouns,
         emergencyName: emergencyName,
         emergencyNumber: emergencyNumber
-        
-
 
       },
     });
@@ -114,26 +118,62 @@ function RegisterForm() {
         </label>
       </div>
       <div>
-        <label htmlFor="address">
-          Address:
+        <label htmlFor="street">
+          street:
           <input
             type="text"
-            name="address"
-            value={address}
+            name="street"
+            value={street}
             required
-            onChange={(event) => setAddress(event.target.value)}
+            onChange={(event) => setStreet(event.target.value)}
           />
         </label>
       </div>
       <div>
-        <select onChange={(event) => setPronouns(event.target.value)}>
+        <label htmlFor="City">
+          City:
+          <input
+            type="text"
+            name="City"
+            value={city}
+            required
+            onChange={(event) => setCity(event.target.value)}
+          />
+        </label>
+      </div>
+      <div>
+        <label htmlFor="state">
+          State:
+          <input
+            type="text"
+            name="State"
+            value={state}
+            required
+            onChange={(event) => setState(event.target.value)}
+          />
+        </label>
+      </div>
+      <div>
+        <label htmlFor="zip">
+          Zip:
+          <input
+            type="text"
+            name="Zip"
+            value={zip}
+            required
+            onChange={(event) => setZip(event.target.value)}
+          />
+        </label>
+      </div>
+      <div>
+        <select onChange={(event) => setPronouns(event.target.value)}> 
+        <option> Select Pronouns</option>
           <option> He/Him</option>
           <option> She/Her</option>
           <option> They/Them</option>
           
           </select>
       </div>
-
       <div>
         <label htmlFor="dob">
           Date of Birth:

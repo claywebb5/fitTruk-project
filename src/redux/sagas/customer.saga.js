@@ -31,7 +31,8 @@ function* updateCustomerInfo(action){
         yield axios.put(`/api/customer/pronouns/${action.payload.id}`, action.payload); // * Goes to SERVER "customer.router" *
 
         // SYNTAX-UPDATE : TEST this, make sure it works 
-        yield put({type: 'FETCH_CUSTOMER_INFO'}); // * Goes to THIS SAGA "customer.saga.js" (fetchCustomerInfo) *
+        // yield put({type: 'FETCH_CUSTOMER_INFO'}); // * Goes to THIS SAGA "customer.saga.js" (fetchCustomerInfo) *
+        yield put({type: 'FETCH_USER'}); // * Goes to THIS SAGA "customer.saga.js" (fetchCustomerInfo) *
 
     } catch (error){
         console.log('Error updating customer info:', error)
@@ -41,13 +42,14 @@ function* updateCustomerInfo(action){
 
 // =============***< (GET ALL) REGISTERED CLASSES >***=======================================
 function* fetchCustomerClass() {
+
     try {
         console.log('In fetchCustomerClass, about to axios.get all the customers registered classes');
-        const customerClassResponse = yield axios.get('/api/customer'); // * Goes to SERVER "customer.router"
+        const customerClassResponse = yield axios.get(`/api/customer`); // * Goes to SERVER "customer.router"
         console.log('Getting all registered classes:', customerClassResponse.data);
         yield put({ type: 'SET_MY_CLASSES', payload: customerClassResponse.data }); // * Goes to REDUCER "userClass.reducer.js"
-    } catch {
-        console.log('Error trying to fetchCustomerClass in sagas!');
+    } catch (error) {
+        console.log('Error trying to fetchCustomerClass in sagas!', error);
     }
 }
 
@@ -55,8 +57,8 @@ function* fetchCustomerClass() {
 function* addReservation(action){
     try {
         console.log('The action.payload for adding a new class reservation is:', action.payload);
-        yield axios.post('/api/customer', action.payload); // * Goes to SERVER "customer.router"
-        yield put({ type: 'FETCH_CUSTOMER_CLASS' }); // * Goes to 
+        yield axios.post(`/api/customer/reserve-class/${action.payload.id}`, action.payload); // * Goes to SERVER "customer.router"
+        yield put({ type: 'FETCH_CUSTOMER_CLASS' }); // * Goes to THIS SAGA "customer.saga.js" (fetchCustomerSaga)
     } catch (error) {
         console.log('Error adding a new class reservation', error);
     }    
@@ -65,8 +67,8 @@ function* addReservation(action){
 // =============***< (DELETE) REMOVE CUSTOMER CLASS RESERVATION >***=======================================
 function* removeReservation(action){
     try {
-        console.log('The action.payload in removing a class reservation is:', action.payload)
-        yield axios.delete(`/api/customer/delete/${action.payload.id}`, action.payload); // * Goes to SERVER "customer.router"
+        // console.log('The action.payload in removing a class reservation is:', action.payload)
+        yield axios.delete(`/api/customer/delete/${action.payload.id}`, ); // * Goes to SERVER "customer.router"
         yield put({ type: 'FETCH_CUSTOMER_CLASS' }); // * Goes to THIS SAGA "customer.saga.js" (fetchCustomerSaga)
     } catch (error) {
         console.log('Error removing a class reservation', error);

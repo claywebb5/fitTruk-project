@@ -8,7 +8,7 @@ CREATE TABLE "user" (
 	"name" VARCHAR(255),
 	"email" VARCHAR(255),
 	"phone_number" VARCHAR (20),
-	"street_address" VARCHAR(255),
+	"street" VARCHAR(255),
 	"city" VARCHAR (50),
 	"state" VARCHAR (50),
 	"zip" VARCHAR (20),
@@ -29,7 +29,7 @@ CREATE TABLE "classes" (
 	"date" DATE,
 	"start_time" TIME,
 	"end_time" TIME,
-	"street_address" VARCHAR (255),
+	"street" VARCHAR (255),
 	"city" VARCHAR (50),
 	"state" VARCHAR (50),
 	"zip" VARCHAR (20),
@@ -44,7 +44,7 @@ CREATE TABLE "class_list" (
 );
 
 --This would be sign up
-insert into "user" ("username", "password", "name", "email", "phone_number", "street_address", "city", "state", "zip", "dob", "pronouns", "emergency_name", "emergency_number", "profile_image")
+insert into "user" ("username", "password", "name", "email", "phone_number", "street", "city", "state", "zip", "dob", "pronouns", "emergency_name", "emergency_number", "profile_image")
 values 
 ('colinjay', 12345, 'Colin Jaworski', 'colin@yahoo.com', '763-867-5309', '123 first street','Minneapolis', 'MN', '55443', '12/05/1984', 'he', 'clay', '123-4567', 'profileImage.url'),
  
@@ -57,7 +57,7 @@ values
 ('Abdi', 12, 'Abdikarim Ibrahim', 'alldayabdi@gmail.com', 'no phone number', '90210 hollywood avenue', 'Saint Paul', 'MN', 'st paul zip here', '07/09/1999', 'he/him', 'colin', '123-4567', 'profileImage.url');
 
 --This would be adding a new class
-insert into classes ("classname", "description", "trainer_user_id", "date", "start_time", "end_time", "street_address", "city", "state", "zip", "class_size" )
+insert into classes ("classname", "description", "trainer_user_id", "date", "start_time", "end_time", "street", "city", "state", "zip", "class_size" )
 values 
 ('HIIT', 'high intensity interval training at Joshes place for some reason', 2, '4/12/2022', '12:00', '13:00', '420 milky way', 'Minneapolis', 'MN', '55444', 20), 
 ('Yoga', 'Its yoga', 1, '4/13/2022', '14:00', '15:00', '345 coolplace drive', 'Saint Cloud', 'MN', '56301' , 10),
@@ -108,11 +108,6 @@ join "class_list"
 on "classes"."id"="class_list"."class_id" 
 join "user" on "class_list"."user_id"="user"."id"
 where "classes"."id" = 2;
-
---Updates location and details for a specific class
-UPDATE classes
-SET "location" = 'someplace noisy', "description" = 'yoga is fun and a great way to stay in shape'
-WHERE classes.id = 2; 
 
 --Updates pronouns for a specific user
 UPDATE "user"
