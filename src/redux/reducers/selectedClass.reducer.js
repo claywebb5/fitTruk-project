@@ -7,7 +7,10 @@ const classDetails = (
     classname: '',
     start_time: '',
     end_time: '',
-    location: '',
+    street: '',
+    city: '',
+    state: '',
+    zip: '',
     description: '',
     class_size: 0,
   }, action) => {

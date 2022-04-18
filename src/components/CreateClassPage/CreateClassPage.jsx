@@ -96,17 +96,17 @@ function CreateClassPage() {
             <h1>Create Class</h1>
             <form onSubmit={submitHandler}>
 
-                {/* ---- Set Date ---- */}
+                {/* --------------- Set Date -------------------------------------------------- */}
                 <h4>Date:
                     <input type="date" name="date" value={classDetails.date} onChange={handleChange('date')} />
                 </h4>
 
-                {/* ---- Set Class Name ---- */}
+                {/* ------------ Set Class Name --------------------------------------------- */}
                 <h4>Class name:
                     <input type="text" name="class-name" value={classDetails.classname} onChange={handleChange('classname')} />
                 </h4>
 
-                {/* ---- Select Trainer ---- */}
+                {/* ------------ Select Trainer ----------------------------------------------- */}
                 <h4>Led by:
                     <select name="trainer" id="trainer-selector"
                         placeholder='Trainer'
@@ -122,27 +122,36 @@ function CreateClassPage() {
                     :
                     <div className='trainer-image' >This is a div</div>
                     }
-
-                    
                 </h4>
 
 
-                {/* ---- Set Start Time ---- */}
+                {/* ------------- Set Start Time ------------------------------ */}
                 <h4>Start time:
                     <input type="time" name="start-time" value={classDetails.start_time} onChange={handleChange('start_time')} />
 
-
-                    {/* ---- Set End Time ---- */}
+                    {/* --------- Set End Time -------------------------------------- */}
                     End Time:
                     <input type="time" name="end-time" value={classDetails.end_time} onChange={handleChange('end_time')} />
                 </h4>
 
-                {/* ---- Set Location ---- */}
-                <h4>Location:
-                    <input type="text" name="location" value={classDetails.location} onChange={handleChange('location')} />
+                {/* ------------- Set Location ------------------------------------------- */}
+                <h4>Street:
+                    <input type="text" name="street" value={classDetails.street} onChange={handleChange('street')} />
                 </h4>
 
-                {/* ---- Set Description ---- */}
+                <h4>City:
+                    <input type="text" name="city" value={classDetails.city} onChange={handleChange('city')} />
+                </h4>
+
+                <h4>State:
+                    <input type="text" name="state" value={classDetails.state} onChange={handleChange('state')} />
+                </h4>
+
+                <h4>Zip:
+                    <input type="text" name="zip" value={classDetails.zip} onChange={handleChange('zip')} />
+                </h4>
+
+                {/* ---------- Set Description ------------------------------------------ */}
                 <h4>Description:
                     <input type="text" name="" value={classDetails.description} onChange={handleChange('description')} />
                 </h4>
