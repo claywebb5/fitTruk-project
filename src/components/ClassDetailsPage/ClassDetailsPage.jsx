@@ -13,7 +13,8 @@ function ClassDetailsPage() {
     useEffect(() => {
         dispatch({
             type: 'FETCH_CLASS_DETAILS',
-            payload: id // PART OF DUMMY DATA, WILL BE UPDATED ONCE :id IS ADDED TO ROUTING
+            // payload: id // PART OF DUMMY DATA, WILL BE UPDATED ONCE :id IS ADDED TO ROUTING
+            payload: {id: id, userId: user.id}
         });
     }, [])
 
@@ -44,8 +45,8 @@ const user = useSelector(store => store.user)
         history.push('/my-classes')
     }
     const handleGpsClick = (showMap) => {
-        console.log('This will show google maps');
-        setShowMap(!showMap)
+        // console.log('This will show google maps');
+        // setShowMap(!showMap)
     }
     //---------------<  E N D  C l i c k   H a n d l e r s  >----------------------------
 
@@ -82,7 +83,7 @@ const user = useSelector(store => store.user)
             <h3>{classDetails.start_time}-{classDetails.end_time}</h3>
             <h3>{classDetails.description}</h3>
             <button onClick={() => handleReturnClick(classDetails)}>Return</button>
-            <button onClick={handleReserveClick}>Reserve</button>
+            <button onClick={handleReserveClick} disabled={classDetails.is_my_class}>Reserve</button>
 
             {/* ---------USED FOR TESTS, REMOVE LATER---------- USED FOR TESTS, REMOVE LATER ----------------USED FOR TESTS, REMOVE LATER-------- */}
             {user.access_level >= 2 && <button onClick={()=>{history.push(`/edit-class/${classDetails.id}`)}}>edit class</button> }

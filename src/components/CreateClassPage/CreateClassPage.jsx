@@ -86,6 +86,11 @@ function CreateClassPage() {
         event.preventDefault();
         console.log('This will submit the form');
         console.log(classDetails);
+        dispatch({
+            type: 'CREATE_CLASS',
+            payload: classDetails
+        });
+        history.push('/all-classes');
     }
     //----------<  //  E N D   I n p u t   H a n d l e r s  >-----------
 
