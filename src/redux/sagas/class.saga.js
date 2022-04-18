@@ -8,7 +8,7 @@ function* fetchClasses (){
     console.log('in fetchClasses, this is the dispatch I received');
     try {
         const classes = yield axios.get(`/api/class/`); // * Goes to SERVER "class.router"
-        console.log('these are classes', classes);
+        console.log('these are classes', classes.data);
         yield put({ type: 'SET_ALL_CLASSES', payload: classes.data }); // * Goes to REDUCER "allClasses.reducer.js"
     } catch (error) {
         console.log('Error fetching All Classes', error);
