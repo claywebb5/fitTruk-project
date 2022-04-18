@@ -8,7 +8,7 @@ import axios from 'axios';
 function* createClass (action){
     try {
         console.log('In createClass saga creating a new class, action.payload is:', action.payload);
-        axios.post('/api/admin', action.payload); // * Goes to SERVER "admin.router"
+        axios.post('/api/admin/new-class', action.payload); // * Goes to SERVER "admin.router"
         yield put({type: 'FETCH_CLASSES'}); // * Goes to SAGAS "class.saga"
     } catch {
         console.log('Error trying to create a new class in admin saga!');
