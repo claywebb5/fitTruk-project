@@ -56,12 +56,12 @@ router.put('/pronouns/:id', (req, res) => {
 
 
 //  -------------------------- cancels a customers reservation 
-router.delete('/reservation/:id', (req, res) => {
-
+router.delete('/delete/:id', (req, res) => {
+// console.log('req.params.id', req.params.id);
   if (req.isAuthenticated()) {
     let queryText = `DELETE FROM class_list
         WHERE class_list.user_id = $1 and class_list.class_id = $2`;
-    pool.query(queryText, [req.body.class_id, req.params.id])
+    pool.query(queryText, [req.user.id, req.params.id])
       .then(result => res.sendStatus(201))
       .catch(err => res.sendStatus(500));
   } else {

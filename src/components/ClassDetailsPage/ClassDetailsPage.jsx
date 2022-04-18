@@ -48,6 +48,16 @@ function ClassDetailsPage() {
         // console.log('This will show google maps');
         // setShowMap(!showMap)
     }
+    const handleCancelClick = () => {
+        console.log('you canceled the class', classDetails)
+
+        dispatch({
+            type: 'REMOVE_RESERVATION',
+            payload: classDetails
+        });
+        alert("About to Remove")
+        history.push('/my-classes')
+    }
     //---------------<  E N D  C l i c k   H a n d l e r s  >----------------------------
 
 
@@ -85,7 +95,7 @@ function ClassDetailsPage() {
             <button onClick={() => handleReturnClick(classDetails)}>Return</button>
             {(function () {
                 if (classDetails.is_my_class) {
-                    return <button>Cancel Reservation</button>;
+                    return <button onClick={handleCancelClick}>Cancel Reservation</button>;
                 } else {
                     return <button onClick={handleReserveClick}>Reserve</button>;
                 }
