@@ -16,5 +16,7 @@ export default function* rootSaga() {
     userSaga(),
     classSaga(),
     customerSaga(),
+    adminSaga(),
+    trainerSaga(),
   ]);
 }
