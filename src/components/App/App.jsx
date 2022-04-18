@@ -53,7 +53,7 @@ function App() {
           <Link to="/all-classes">All Classes</Link> | 
           <Link to="/my-classes">My Classes</Link> | 
           <Link to="/class-details">Class Details</Link> | 
-          <Link to="/attendees">Class Attendance</Link> | 
+          <Link to="/class-details/:id/attendees">Class Attendance</Link> | 
           <Link to="/create-class">Create Class</Link> | 
           <Link to="/personal-info">Personal Info</Link>
         </nav> {/* --------------------------< END DEV BAR >-------------------------- */}
@@ -134,12 +134,12 @@ function App() {
           {/* -----< End Class Details >----- */}
 
           {/* -----< EDIT CLASS DETAILS (1.6)>-------------------------- */}
-          <AdminRoute
+          <TrainerRoute
             // Only administrators can see the edit class view
             exact
-            path="/edit-class">
-            <EditClassPage />
-          </AdminRoute>
+            path="/edit-class/:id">
+            <CreateClassPage />
+          </TrainerRoute>
           {/* -----< End Edit Class Details >----- */}
 
           {/* -----< REGISTERED CLASS VIEW (1.7)>-------------------------- */}

@@ -11,7 +11,7 @@ router.get('/', (req, res) => {
   
 
   if (req.isAuthenticated()) {
-    const queryText = ` SELECT classes.*
+    const queryText = ` SELECT classes.id, to_char("date", 'YYYY-MM-DD') AS "date", start_time, end_time, classname, trainer_user_id 
         FROM "classes" 
         JOIN "class_list" 
         ON "classes"."id" = "class_list"."class_id"

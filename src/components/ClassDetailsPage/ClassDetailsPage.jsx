@@ -18,6 +18,10 @@ function ClassDetailsPage(){
       }, [])
 
       const classDetails = useSelector(store => store.selectedClass.classDetails)
+      
+// ---------USED FOR TESTS, REMOVE LATER---------- USED FOR TESTS, REMOVE LATER ----------------USED FOR TESTS, REMOVE LATER--------
+const user = useSelector(store => store.user)
+// ---------USED FOR TESTS, REMOVE LATER---------- USED FOR TESTS, REMOVE LATER ----------------USED FOR TESTS, REMOVE LATER--------
 
 
     //------------<  Variables  >----------
@@ -68,6 +72,10 @@ console.log('this is the id pull from the url with params', id);
             <h3>{classDetails.description}</h3>
             <button onClick={() => handleReturnClick(classDetails)}>Return</button>
             <button onClick={handleReserveClick}>Reserve</button>
+
+            {/* ---------USED FOR TESTS, REMOVE LATER---------- USED FOR TESTS, REMOVE LATER ----------------USED FOR TESTS, REMOVE LATER-------- */}
+            {user.access_level >= 2 && <button onClick={()=>{history.push(`/edit-class/${classDetails.id}`)}}>edit class</button> }
+            {/* ---------USED FOR TESTS, REMOVE LATER---------- USED FOR TESTS, REMOVE LATER ----------------USED FOR TESTS, REMOVE LATER-------- */}
         </>
     )
 }

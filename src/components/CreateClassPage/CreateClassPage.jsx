@@ -32,16 +32,16 @@ function CreateClassPage() {
     useEffect(() => {
         // Edit class view
         if (classId) {
-            // dispatch({ 
-            //     type: 'FETCH_CLASS_DETAILS',
-            //     payload: classId
-            // });
+            dispatch({ 
+                type: 'FETCH_CLASS_DETAILS',
+                payload: classId
+            });
         }
         // Create class view
         else {
             dispatch({ type: 'RESET_CLASS_DETAILS' });
         }
-    }, [classId]);
+    }, []);
 
 
 
