@@ -19,7 +19,7 @@ function EditClassPage(){
 
     return(
         <>
-
+            
             <button onClick={handleReturnClick}>Return</button>
             <button onClick={handleSubmit}>Submit</button>
         </>
