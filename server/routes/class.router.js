@@ -6,7 +6,7 @@ const router = express.Router();
 
 router.get('/', (req, res) => {
 
-        let queryText = `SELECT classes.id, date, start_time, end_time, classname, trainer_user_id  
+        let queryText = `SELECT classes.id, to_char("date", 'FMDay') AS "week_day_name", to_char("date", 'FMMM/FMDD') AS "abbreviated_date", to_char("date", 'YYYY-MM-DD') AS "date", start_time, end_time, classname, trainer_user_id  
         FROM classes
         ORDER BY date, start_time;`
         pool.query(queryText).then((result) => {
@@ -21,7 +21,9 @@ router.get('/', (req, res) => {
 
 router.get('/details/:id', (req, res) => {
 
-    let queryText = `SELECT * FROM "classes" WHERE id = $1 `;
+    let queryText = `SELECT "id", to_char("date", 'FMDay') AS "week_day_name", to_char("date", 'FMMM/FMDD/YYYY') AS "clean_format_date", "classname", "description", "trainer_user_id",
+    to_char("date", 'YYYY-MM-DD') AS "date", "start_time", "end_time", "street",
+    "city", "state", "zip", "class_size" FROM "classes" WHERE id = $1;`;
     pool.query(queryText, [req.params.id])
         .then((result) => {
             res.send(result.rows[0])

@@ -27,7 +27,7 @@ function TrainerRoute({ component, children, ...props }) {
       // are now passed along to the 'Route' Component
       {...props}
     >
-      {(user.id && user.access_level == 2) ?
+      {(user.id && user.access_level >= 2) ?
         // If the user is logged in, show the protected component
         <ProtectedComponent />
         :

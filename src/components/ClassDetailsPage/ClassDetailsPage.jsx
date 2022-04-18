@@ -17,7 +17,11 @@ function ClassDetailsPage() {
         });
     }, [])
 
-    const classDetails = useSelector(store => store.selectedClass.classDetails)
+      const classDetails = useSelector(store => store.selectedClass.classDetails)
+      
+// ---------USED FOR TESTS, REMOVE LATER---------- USED FOR TESTS, REMOVE LATER ----------------USED FOR TESTS, REMOVE LATER--------
+const user = useSelector(store => store.user)
+// ---------USED FOR TESTS, REMOVE LATER---------- USED FOR TESTS, REMOVE LATER ----------------USED FOR TESTS, REMOVE LATER--------
 
 
     //------------<  Variables  >----------
@@ -61,8 +65,9 @@ function ClassDetailsPage() {
     console.log('this is the value of show map', showMap);
     return (
         <>
-            <Nav />
-            <h1>{classDetails.date}</h1>
+            <Nav/>
+            <h1>{classDetails.clean_format_date}</h1>
+            <h1>{classDetails.week_day_name}</h1>
             <h3>{classDetails.classname}</h3>
             <h3>led by: {classDetails.trainer_user_id}</h3>
             <h3>{classDetails.location} <button onClick={() => handleGpsClick(showMap)}>gps</button></h3>
@@ -78,6 +83,10 @@ function ClassDetailsPage() {
             <h3>{classDetails.description}</h3>
             <button onClick={() => handleReturnClick(classDetails)}>Return</button>
             <button onClick={handleReserveClick}>Reserve</button>
+
+            {/* ---------USED FOR TESTS, REMOVE LATER---------- USED FOR TESTS, REMOVE LATER ----------------USED FOR TESTS, REMOVE LATER-------- */}
+            {user.access_level >= 2 && <button onClick={()=>{history.push(`/edit-class/${classDetails.id}`)}}>edit class</button> }
+            {/* ---------USED FOR TESTS, REMOVE LATER---------- USED FOR TESTS, REMOVE LATER ----------------USED FOR TESTS, REMOVE LATER-------- */}
         </>
     )
 }
