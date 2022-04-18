@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useHistory, useParams } from 'react-router-dom';
+
 
 import Nav from "../Nav/Nav";
 import './CreateClassPage.css';
@@ -16,24 +18,31 @@ import './CreateClassPage.css';
 function CreateClassPage() {
     //---------- Tools -----------
     const dispatch = useDispatch();
+    const history = useHistory();
+    const params = useParams();
+
+    const classId = params.id
 
 
+    // useEffect(() => {
+    // dispatch({type: 'RESET_CLASS_DETAILS'});
+    // }, []);
 
-    // useEffect(() =>{
-    //     // Edit class view
-    //     if (classId) {
-    //         dispatch({ 
-    //             type: 'FETCH_ACTIVE_CLASS',
-    //             payload: classId
-    //         });
-    //     }
-    //     // Create class view
-    //     else {
-    //         dispatch({
-    //             type: 'RESET_ACTIVE_CLASS'
-    //         })
-    //     }
-    // }, [classId]);
+
+    useEffect(() => {
+        // Edit class view
+        if (classId) {
+            // dispatch({ 
+            //     type: 'FETCH_CLASS_DETAILS',
+            //     payload: classId
+            // });
+        }
+        // Create class view
+        else {
+            dispatch({ type: 'RESET_CLASS_DETAILS' });
+        }
+    }, [classId]);
+
 
 
 
@@ -41,8 +50,14 @@ function CreateClassPage() {
 
     //---------- Variables -----------
     const availableTrainers = useSelector(store => store.availableTrainers)
+    const user = useSelector(store => store.user)
     const classDetails = useSelector(store => store.selectedClass.classDetails)
     const selectedTrainer = useSelector(store => store.selectedClass.selectedTrainer)
+
+
+
+    console.log('access level', user.access_level);
+
 
     //----------<  I n p u t   H a n d l e r s  >-----------
     const handleTrainerSelection = (selectedTrainerId) => {
@@ -50,7 +65,7 @@ function CreateClassPage() {
             if (trainer.trainer_user_id == selectedTrainerId) {
 
                 // console.log(trainer.name); // Test log to ensure the objects are being retrieved properly.
-                
+
                 dispatch({
                     type: 'SET_ACTIVE_CLASS_TRAINER',
                     payload: {
@@ -71,7 +86,7 @@ function CreateClassPage() {
         }// End loop through trainer array
     }; // END handleTrainerSelection
 
-    
+
     const handleChange = (prop) => (event) => {
         dispatch({
             type: 'EDIT_CLASS_DETAILS',
@@ -81,13 +96,27 @@ function CreateClassPage() {
             }
         });
     }; // END handleChange
-    
+
     const submitHandler = (event) => {
         event.preventDefault();
         console.log('This will submit the form');
         console.log(classDetails);
     }
     //----------<  //  E N D   I n p u t   H a n d l e r s  >-----------
+
+    //----------< CLICK LISTENERS >------------------------------
+    const handleReturn = () => {
+        console.log('Clicked Return');
+        history.goBack();
+    }
+
+    let disabledState;
+
+    if (user.access_level == 3) {
+        disabledState = false;
+    } else {
+        disabledState = true;
+    }
 
 
     return (
@@ -98,7 +127,9 @@ function CreateClassPage() {
 
                 {/* --------------- Set Date -------------------------------------------------- */}
                 <h4>Date:
-                    <input type="date" name="date" value={classDetails.date} onChange={handleChange('date')} />
+                    <input
+                        disabled={disabledState}
+                        type="date" name="date" value={classDetails.date} onChange={handleChange('date')} />
                 </h4>
 
                 {/* ------------ Set Class Name --------------------------------------------- */}
@@ -117,10 +148,10 @@ function CreateClassPage() {
                     </select>
                     {/* ---- Here's the trainer's image ---- */}
                     {/* <TrainerProfileImage /> */}
-                    {selectedTrainer.profile_image ? 
-                    <img className='trainer-image' src={selectedTrainer.profile_image} alt="Profile image of the selected trainer" />
-                    :
-                    <div className='trainer-image' >This is a div</div>
+                    {selectedTrainer.profile_image ?
+                        <img className='trainer-image' src={selectedTrainer.profile_image} alt="Profile image of the selected trainer" />
+                        :
+                        <div className='trainer-image' >This is a div</div>
                     }
                 </h4>
 
@@ -162,8 +193,10 @@ function CreateClassPage() {
                 </h4>
 
                 {/* ---- Submit form!! ---- */}
-                <button type="submit">submit</button>
+                <button type="submit">Submit</button>
             </form>
+
+            <button onClick={handleReturn}>Return</button>
 
         </>
     )

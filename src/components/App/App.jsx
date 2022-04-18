@@ -22,7 +22,7 @@ import CreateClassPage from '../CreateClassPage/CreateClassPage'; // (1.10)
   //------------------^< APPROVED ROUTES >^------------------------------------
 import Footer from '../Footer/Footer'; // ** ALREADY IN REPO
 import AboutPage from '../AboutPage/AboutPage'; // ** ALREADY IN REPO
-import InfoPage from '../InfoPage/InfoPage'; // ** ALREADY IN REPO
+// import InfoPage from '../InfoPage/InfoPage'; // ** ALREADY IN REPO
 // ^^=====================^< COMPONENTS/VIEWS >^==========================
 //=======================================**< END IMPORTS >**===============================================================
 
@@ -70,11 +70,11 @@ function App() {
             <AboutPage />
           </Route>
           {/* --------------------------< INFO PAGE >-------------------------- */}
-          <ProtectedRoute
+          {/* <ProtectedRoute
             exact
             path="/info">
             <InfoPage />
-          </ProtectedRoute>
+          </ProtectedRoute> */}
           {/* =============================*< END ALREADY IN REPO >*============================= */}
 
           {/* =============================*< START APPROVED ROUTES >*============================= */}
