@@ -8,7 +8,7 @@ function* fetchClasses (){
     console.log('in fetchClasses, this is the dispatch I received');
     try {
         const classes = yield axios.get(`/api/class/`); // * Goes to SERVER "class.router"
-        console.log('these are classes', classes);
+        console.log('these are classes', classes.data);
         yield put({ type: 'SET_ALL_CLASSES', payload: classes.data }); // * Goes to REDUCER "allClasses.reducer.js"
     } catch (error) {
         console.log('Error fetching All Classes', error);
@@ -36,7 +36,7 @@ function* fetchDetails (action){
     // Will send a request to the classes router to grab a specific classes details
     console.log('here is the dispatch info:', action.type, action.payload);
     try {
-        const classDetails = yield axios.get(`/api/class/details/${action.payload}`); // * Goes to SERVER "class.router"
+        const classDetails = yield axios.get(`/api/class/details/${action.payload.id}/${action.payload.userId}`); // * Goes to SERVER "class.router"
         console.log('these are the class details', classDetails.data);
         yield put({ type: 'SET_CLASS_DETAILS', payload: classDetails.data }); // * Goes to REDUCER "classDetails.reducer.js"
     } catch (error) {

@@ -67,8 +67,8 @@ function* addReservation(action){
 // =============***< (DELETE) REMOVE CUSTOMER CLASS RESERVATION >***=======================================
 function* removeReservation(action){
     try {
-        console.log('The action.payload in removing a class reservation is:', action.payload)
-        yield axios.delete(`/api/customer/delete/${action.payload.id}`, action.payload); // * Goes to SERVER "customer.router"
+        // console.log('The action.payload in removing a class reservation is:', action.payload)
+        yield axios.delete(`/api/customer/delete/${action.payload.id}`, ); // * Goes to SERVER "customer.router"
         yield put({ type: 'FETCH_CUSTOMER_CLASS' }); // * Goes to THIS SAGA "customer.saga.js" (fetchCustomerSaga)
     } catch (error) {
         console.log('Error removing a class reservation', error);

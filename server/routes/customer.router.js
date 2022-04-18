@@ -11,7 +11,7 @@ router.get('/', (req, res) => {
   
 
   if (req.isAuthenticated()) {
-    const queryText = ` SELECT classes.*
+    const queryText = ` SELECT classes.id, to_char("date", 'FMMM/FMDD') AS "abbreviated_date", to_char("date", 'FMDay') AS "week_day_name", to_char("date", 'YYYY-MM-DD') AS "date", start_time, end_time, classname, trainer_user_id 
         FROM "classes" 
         JOIN "class_list" 
         ON "classes"."id" = "class_list"."class_id"
@@ -56,12 +56,12 @@ router.put('/pronouns/:id', (req, res) => {
 
 
 //  -------------------------- cancels a customers reservation 
-router.delete('/reservation/:id', (req, res) => {
-
+router.delete('/delete/:id', (req, res) => {
+// console.log('req.params.id', req.params.id);
   if (req.isAuthenticated()) {
     let queryText = `DELETE FROM class_list
         WHERE class_list.user_id = $1 and class_list.class_id = $2`;
-    pool.query(queryText, [req.body.class_id, req.params.id])
+    pool.query(queryText, [req.user.id, req.params.id])
       .then(result => res.sendStatus(201))
       .catch(err => res.sendStatus(500));
   } else {
