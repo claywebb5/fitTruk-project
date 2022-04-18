@@ -3,7 +3,7 @@ import axios from 'axios';
 
 
 // =============***< (GET) ALL CLASSES >***=======================================
-function* fetchClasses (){
+function* fetchClasses() {
     // Will send a request to the classes router to retrieve all available classes
     console.log('in fetchClasses, this is the dispatch I received');
     try {
@@ -12,12 +12,12 @@ function* fetchClasses (){
         yield put({ type: 'SET_ALL_CLASSES', payload: classes.data }); // * Goes to REDUCER "allClasses.reducer.js"
     } catch (error) {
         console.log('Error fetching All Classes', error);
-    } 
+    }
 }
 
 
 // =============***< (GET) ALL CLASSES BASED ON SEARCH >***========================
-function* searchClasses (action){
+function* searchClasses(action) {
     // Will send a request to the classes router to search the classes by name
     console.log('here is the dispatch info:', action.type, action.payload);
     // ----------------***< WAITING FOR BACK END ROUTE TO TEST >***-----------------------
@@ -32,16 +32,16 @@ function* searchClasses (action){
 }
 
 // =============***< (GET) CLASS DETAILS >***======================================
-function* fetchDetails (action){
+function* fetchDetails(action) {
     // Will send a request to the classes router to grab a specific classes details
     console.log('here is the dispatch info:', action.type, action.payload);
     try {
-        const classDetails = yield axios.get(`/api/class/details/${action.payload}`); // * Goes to SERVER "class.router"
+        const classDetails = yield axios.get(`/api/class/details/${action.payload.id}/${action.payload.userId}`); // * Goes to SERVER "class.router"
         console.log('these are the class details', classDetails.data);
         yield put({ type: 'SET_CLASS_DETAILS', payload: classDetails.data }); // * Goes to REDUCER "classDetails.reducer.js"
     } catch (error) {
         console.log('Error fetching Class Details', error);
-    } 
+    }
 }
 
 
@@ -50,5 +50,5 @@ function* classSaga() {
     yield takeLatest('SEARCH_CLASSES', searchClasses); // Currently commented out
     yield takeLatest('FETCH_CLASS_DETAILS', fetchDetails);
 }
-  
+
 export default classSaga;

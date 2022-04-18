@@ -5,25 +5,25 @@ import Nav from '../Nav/Nav';
 import { useParams } from 'react-router-dom/cjs/react-router-dom.min';
 function ClassDetailsPage() {
     //------------<  Setup  >-------------
-    let [match, setMatch] = useState('');
+
     const history = useHistory();
     const dispatch = useDispatch();
 
     const { id } = useParams()
 
     useEffect(() => {
+
         dispatch({
-            type: 'FETCH_CUSTOMER_CLASS',
             type: 'FETCH_CLASS_DETAILS',
-            payload: id // PART OF DUMMY DATA, WILL BE UPDATED ONCE :id IS ADDED TO ROUTING
+            payload: {id: id, userId: user.id}
         });
+
     }, [])
 
-    const classDetails = useSelector(store => store.selectedClass.classDetails)
-    const classes = useSelector(store => store.userClass)
 
     //------------<  Variables  >----------
     const user = useSelector(store => store.user)
+    const classDetails = useSelector(store => store.selectedClass.classDetails)
 
 
 
@@ -42,18 +42,8 @@ function ClassDetailsPage() {
         history.push('/my-classes')
     }
 
-    function checkMatch() { // checks to see if class in details page matches a class the user is already signed up for
-        //-------------------- function isn't called on page load but with gps button click.
-        for (const myClass of classes) {
-            if (classDetails.id === myClass.id) {
-                setMatch(true);
-            }
-        }
-    }
     const handleGpsClick = () => {
         // console.log('This would ideally open google maps');
-        checkMatch();
-
     }
 
     //---------------<  E N D  C l i c k   H a n d l e r s  >----------------------------
@@ -81,7 +71,7 @@ function ClassDetailsPage() {
             <h3>{classDetails.start_time}-{classDetails.end_time}</h3>
             <h3>{classDetails.description}</h3>
             <button onClick={() => handleReturnClick(classDetails)}>Return</button>
-            <button onClick={handleReserveClick} disabled={match}>Reserve</button>
+            <button onClick={handleReserveClick} disabled={classDetails.is_my_class}>Reserve</button>
         </>
     )
 }

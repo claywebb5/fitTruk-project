@@ -72,8 +72,8 @@ router.delete('/reservation/:id', (req, res) => {
 // -------------------------- Reserves a class for a customer (POST)
 // SYNTAX-UPDATE : change userID verification
 router.post('/reserve-class/:id', (req, res) => {
-  console.log('req.body.user_id:', req.user.id);
-  console.log('req.params.id:', req.params.id);
+  // console.log('req.body.user_id:', req.user.id);
+  // console.log('req.params.id:', req.params.id);
   
 
   if (req.isAuthenticated()) {
