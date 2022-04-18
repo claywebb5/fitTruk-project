@@ -66,6 +66,7 @@ console.log('this is the value of show map', showMap);
             <h3>{classDetails.classname}</h3>
             <h3>led by: {classDetails.trainer_user_id}</h3>
             <h3>{classDetails.location} <button onClick={()=>handleGpsClick(showMap)}>gps</button></h3>
+            {showMap ? <p> I am a map</p> : <p>Im not a map</p>}
             <h3>{classDetails.start_time}-{classDetails.end_time}</h3>
             <h3>{classDetails.description}</h3>
             <button onClick={() => handleReturnClick(classDetails)}>Return</button>
