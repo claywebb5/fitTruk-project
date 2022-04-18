@@ -69,10 +69,10 @@ function ClassDetailsPage() {
             {showMap ? <iframe
                 width="100%"
                 height="250"
-                // frameborder="0" style="border:0"
+                frameBorder="0" style={{border:0}}
                 // referrerpolicy="no-referrer-when-downgrade"
-                src="https://www.google.com/maps/embed/v1/place?key=API_KEY&q=Bracket+Park,+MN"
-                allowfullscreen>
+                src="https://www.google.com/maps/embed/v1/place?key=ADD_KEY_HERE&q=44.952975,-93.21846" //the 'q' or "Query" can be text aswell as coordinates, these coords are DUMMY DATA
+                >
             </iframe> : <p>Im not a map</p>}
             <h3>{classDetails.start_time}-{classDetails.end_time}</h3>
             <h3>{classDetails.description}</h3>
