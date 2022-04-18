@@ -22,7 +22,7 @@ function ClassDetailsPage(){
 
     //------------<  Variables  >----------
     // const user = useSelector(store => store.user)
-    
+    const [showMap, setShowMap] = useState(false)
 
 
     //---------------<  C l i c k   H a n d l e r s  >----------------------------
@@ -39,8 +39,9 @@ function ClassDetailsPage(){
         alert("About to Add!")
         history.push('/my-classes')
     }
-    const handleGpsClick = () => {
-        console.log('This would ideally open google maps');
+    const handleGpsClick = (showMap) => {
+        console.log('This will show google maps');
+        setShowMap(!showMap)
     }
     //---------------<  E N D  C l i c k   H a n d l e r s  >----------------------------
     
@@ -57,13 +58,14 @@ function ClassDetailsPage(){
 //---------------< // END Temporary things to be deleted  >----------------------------
 console.log('these are the details pulled in from the reducer:', classDetails);
 console.log('this is the id pull from the url with params', id);
+console.log('this is the value of show map', showMap);
     return(
         <>
             <Nav/>
             <h1>{classDetails.date}</h1>
             <h3>{classDetails.classname}</h3>
             <h3>led by: {classDetails.trainer_user_id}</h3>
-            <h3>{classDetails.location} <button onClick={handleGpsClick}>gps</button></h3>
+            <h3>{classDetails.location} <button onClick={()=>handleGpsClick(showMap)}>gps</button></h3>
             <h3>{classDetails.start_time}-{classDetails.end_time}</h3>
             <h3>{classDetails.description}</h3>
             <button onClick={() => handleReturnClick(classDetails)}>Return</button>
