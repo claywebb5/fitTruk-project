@@ -9,6 +9,12 @@ import TabContext from '@material-ui/lab/TabContext';
 import TabList from '@material-ui/lab/TabList';
 import TabPanel from '@material-ui/lab/TabPanel';
 
+//================***< INSTALLS >***=======================
+// npm install @mui/lab
+// npm install @material-ui/lab
+// npm install @mui/icons-material
+//================***< INSTALLS >***=======================
+
 
 function AboutPage() {
 
