@@ -36,21 +36,18 @@ function UserPage() {
   const name = user.name
   const words = name.split(' ');
   const initials = [];
- 
+
+  for (const i of words) {
+    initials.push(i[0])
+  }
+
+  console.log('initials together are', initials.join('') )
 
   const handleTest = () => {
     console.log('The user is:', user);
     console.log('The userObj is:', userObj);
     console.log('The state of editUser is:', editUser);
 
-    // console.log('name', name)
-    // console.log('words', words)
-    for (const i of words) {
-      initials.push(i[0])
-    }
-
-    console.log('initials are:', initials)
-    console.log('initials together are', initials.join('') )
   }
 
   //  ============< Pronoun Change >=============
