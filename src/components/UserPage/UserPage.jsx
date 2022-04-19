@@ -35,7 +35,7 @@ function UserPage() {
   }
 
   const [editUser, setEditUser] = useState(userObj);
-  const name = user.name
+  const name = user.name.toUpperCase()
   const words = name.split(' ');
   const initials = [];
 
@@ -43,7 +43,6 @@ function UserPage() {
     initials.push(i[0])
   }
 
-  console.log('initials together are', initials.join('') )
 
   const handleTest = () => {
     console.log('The user is:', user);
@@ -101,14 +100,15 @@ function UserPage() {
     <>
       <h1><u>Personal Info Page</u></h1>
 
-      <button onClick={handleTest}>Test userObj</button>
+      {/* <button onClick={handleTest}>Test userObj</button> */}
 
 
       <div className="container">
         <form onSubmit={handleSubmit}>
 
           <div> {/* CAN EDIT  */}
-            <h2>*Profile Image Here*</h2>
+            {/* <h2>*Profile Image Here*</h2> */}
+
           <Avatar sx={{ bgcolor: deepPurple[500] }}>{initials.join('')}</Avatar>
 
           </div>
