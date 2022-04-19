@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom/cjs/react-router-dom.min';
+//-------------- COMPONENTS ------------
+import AttendanceItem from '../AttendanceItem/AttendanceItem';
 
 // ** Trainers can view the list of signed up guests/members for a specific class
 // ** Trainers can check in guests/members upon arrival
@@ -33,7 +35,7 @@ function AttendeesPage(){
         <ul>
             {/* <li>{attendees.name}</li> */}
             {attendees.map((customer, i)=>(
-                <li key={i}>{customer.username}</li>
+                <AttendanceItem key={i} customer={customer}/>
             ))}
         </ul>
 
