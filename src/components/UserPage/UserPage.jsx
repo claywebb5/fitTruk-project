@@ -33,11 +33,14 @@ function UserPage() {
   }
 
   const [editUser, setEditUser] = useState(userObj);
-
+  const name = user.name
+  const words = name.split(' ');
   const handleTest = () => {
     console.log('The user is:', user);
     console.log('The userObj is:', userObj);
     console.log('The state of editUser is:', editUser);
+    console.log('name', name)
+    console.log('words', words)
   }
 
   //  ============< Pronoun Change >=============
@@ -51,15 +54,15 @@ function UserPage() {
 
   //  ============< Address Change >=============
   const handleChangeStreet = (event) => {
-    setEditUser({ ...editUser, street: event.target.value});
+    setEditUser({ ...editUser, street: event.target.value });
   };
 
   const handleChangeCity = (event) => {
-    setEditUser({ ...editUser, city: event.target.value});
+    setEditUser({ ...editUser, city: event.target.value });
   };
 
   const handleChangeState = (event) => {
-    setEditUser({ ...editUser, state: event.target.value});
+    setEditUser({ ...editUser, state: event.target.value });
   };
 
   const handleChangeZip = (event) => {
