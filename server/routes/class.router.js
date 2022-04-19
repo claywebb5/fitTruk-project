@@ -6,15 +6,15 @@ const router = express.Router();
 
 router.get('/', (req, res) => {
 
-        let queryText = `SELECT classes.id, to_char("date", 'FMDay') AS "week_day_name", to_char("date", 'FMMM/FMDD') AS "abbreviated_date", to_char("date", 'YYYY-MM-DD') AS "date", start_time, end_time, classname, trainer_user_id  
+    let queryText = `SELECT classes.id, to_char("date", 'FMDay') AS "week_day_name", to_char("date", 'FMMM/FMDD') AS "abbreviated_date", to_char("date", 'YYYY-MM-DD') AS "date", start_time, end_time, classname, trainer_user_id  
         FROM classes
         ORDER BY date, start_time;`
-        pool.query(queryText).then((result) => {
-            res.send(result.rows)
-        }).catch((error) => {
-            console.log(error)
-            res.sendStatus(500)
-        })
+    pool.query(queryText).then((result) => {
+        res.send(result.rows)
+    }).catch((error) => {
+        console.log(error)
+        res.sendStatus(500)
+    })
 });
 
 // -------------------------- Get class details (GET)(Everyone can see this)
@@ -32,8 +32,7 @@ router.get('/details/:id/:userId', (req, res) => {
     END AS "is_my_class"
     FROM "classes" WHERE id = $1;
     `;
-    // FROM "classes" 
-    // WHERE id = $1;`;
+
     pool.query(queryText, [req.params.id, req.params.userId])
         .then((result) => {
             res.send(result.rows[0])
@@ -47,18 +46,41 @@ router.get('/details/:id/:userId', (req, res) => {
 
 router.get('/:search', (req, res) => {
 
-        let queryText = `SELECT * 
+    let queryText = `SELECT * 
     FROM "classes" 
     WHERE "classname" ILIKE $1;`;
-        pool.query(queryText, ['%' + req.params.search + '%'])
-            .then((result) => {
-                res.send(result.rows)
-            }).catch((error) => {
-                console.log(error)
-                res.sendStatus(500)
-            })
+    pool.query(queryText, ['%' + req.params.search + '%'])
+        .then((result) => {
+            res.send(result.rows)
+        }).catch((error) => {
+            console.log(error)
+            res.sendStatus(500)
+        })
 
 });
+
+router.get('/class-size/:id', (req, res) => {
+    console.log('in router get class_id is:', req.params.id)
+
+    let queryText = `select 
+    CASE
+    WHEN count(user_id) >= ( SELECT class_size FROM classes WHERE id = $1) 
+    THEN true
+    ELSE
+    false
+    END AS "full_class"
+    from class_list 
+    where class_id = $1;`;
+    pool.query(queryText, [req.params.id])
+        .then((result) => {
+            res.send(result.rows[0])
+        }).catch((error) => {
+            console.log(error)
+            res.sendStatus(500)
+        })
+
+});
+
 
 
 module.exports = router;
