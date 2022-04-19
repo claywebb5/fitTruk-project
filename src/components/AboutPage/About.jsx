@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 // ---------< MUI IMPORTS >----------------
 import Container from '@mui/material/Container';
 import ImageList from '@mui/material/ImageList';
@@ -16,8 +16,6 @@ import List from '@mui/material/List';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 
-// import CardActions from '@mui/material/CardActions';
-// import Button from '@mui/material/Button';
 
 
 function AboutTab() {
@@ -64,7 +62,7 @@ function AboutTab() {
                 {/*========< START HEADING CARD >================*/}
                 <Card>
                     <CardContent>
-                        <Typography variant="h3" align="center">
+                        <Typography variant="h2" align="center">
                             ABOUT THE TRUK
                         </Typography>
                     </CardContent>
