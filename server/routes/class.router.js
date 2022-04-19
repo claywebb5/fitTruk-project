@@ -6,9 +6,11 @@ const router = express.Router();
 
 router.get('/', (req, res) => {
 
-    let queryText = `SELECT classes.id, to_char("date", 'FMDay') AS "week_day_name", to_char("date", 'FMMM/FMDD') AS "abbreviated_date", to_char("date", 'YYYY-MM-DD') AS "date", start_time, end_time, classname, trainer_user_id  
-        FROM classes
-        ORDER BY date, start_time;`
+    let queryText = `SELECT "c"."id", to_char("c"."date", 'FMDay') AS "week_day_name", to_char("c"."date", 'FMMM/FMDD') AS "abbreviated_date", to_char("c"."date", 'YYYY-MM-DD') AS "date", "c"."start_time", "c"."end_time", "c"."classname", "c"."trainer_user_id",
+    "user"."name", "user"."pronouns"  
+    FROM "classes" AS "c"
+    JOIN "user" ON "user"."id" = "c"."trainer_user_id"
+    ORDER BY date, start_time;`;
     pool.query(queryText).then((result) => {
         res.send(result.rows)
     }).catch((error) => {
@@ -19,27 +21,54 @@ router.get('/', (req, res) => {
 
 // -------------------------- Get class details (GET)(Everyone can see this)
 
-router.get('/details/:id/:userId', (req, res) => {
+router.get('/details/:classId/', (req, res) => {
+    let classId = req.params.classId
+    // If the user is signed in, this will return the class details AS WELL AS 
+    // a boolean of whether or not the user is registered for this class.
+    if (req.user.id) {
+        let registeredUserQuery = `SELECT "c"."id", to_char("c"."date", 'FMDay') AS "week_day_name",
+		to_char("c"."date", 'FMMM/FMDD/YYYY') AS "clean_format_date", "c"."classname",
+		"c"."description", "c"."trainer_user_id", to_char("c"."date", 'YYYY-MM-DD') AS "date",
+		"c"."start_time", "c"."end_time", "c"."street", "c"."city", "c"."state", "c"."zip", "c"."class_size",
+		"user"."name", "user"."pronouns",
+        CASE
+        WHEN (SELECT "cl"."id" FROM "class_list" AS "cl" WHERE "cl"."class_id" = $1 AND "cl"."user_id" = $2 limit 1) > 0
+        THEN true
+        ELSE false
+        END AS "is_my_class"
+        FROM "classes" AS "c"
+        JOIN "user" ON "user"."id" = "c"."trainer_user_id"
+        WHERE "c"."id" = $1;`;
 
-    let queryText = `SELECT "id", to_char("date", 'FMDay') AS "week_day_name", to_char("date", 'FMMM/FMDD/YYYY') AS "clean_format_date", "classname", "description", "trainer_user_id",
-    to_char("date", 'YYYY-MM-DD') AS "date", "start_time", "end_time", "street",
-    "city", "state", "zip", "class_size", 
-    CASE
-    WHEN (SELECT id FROM class_list WHERE class_id = $1 AND user_id = $2 limit 1) > 0
-    THEN true
-    ELSE
-    false
-    END AS "is_my_class"
-    FROM "classes" WHERE id = $1;
-    `;
+        pool.query(registeredUserQuery, [classId, req.user.id])
 
-    pool.query(queryText, [req.params.id, req.params.userId])
-        .then((result) => {
-            res.send(result.rows[0])
-        }).catch((error) => {
-            console.log(error)
-            res.sendStatus(500)
-        })
+            .then((result) => {
+                res.send(result.rows[0])
+            }).catch((error) => {
+                console.log(error)
+                res.sendStatus(500)
+            })
+    } else {
+        // Else if a user is not signed in, this will only return the class details
+        // without checking any sort of reservation status.
+        let unregisteredUserQuery = `SELECT "c"."id", to_char("c"."date", 'FMDay') AS "week_day_name",
+		to_char("c"."date", 'FMMM/FMDD/YYYY') AS "clean_format_date", "c"."classname",
+		"c"."description", "c"."trainer_user_id", to_char("c"."date", 'YYYY-MM-DD') AS "date",
+		"c"."start_time", "c"."end_time", "c"."street", "c"."city", "c"."state", "c"."zip", "c"."class_size",
+		"user"."name", "user"."pronouns"
+        FROM "classes" AS "c"
+        JOIN "user" ON "user"."id" = "c"."trainer_user_id"
+        WHERE "c"."id" = $1;`;
+
+        pool.query(unregisteredUserQuery, [classId])
+
+            .then((result) => {
+                res.send(result.rows[0])
+            }).catch((error) => {
+                console.log(error)
+                res.sendStatus(500)
+            })
+    }
 });
 
 // -------------------------- Get classes, search by name that includes not case sensitive text
