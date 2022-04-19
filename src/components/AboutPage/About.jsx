@@ -213,19 +213,23 @@ function AboutTab() {
                         <AccordionDetails>
                             <List>
                                 <ListItem disablePadding>
-                                    <ListItemText primary="" />
+                                    <ListItemText primary="Pioneer DMG-WT8600NEX Head Unit with 10.1” Floating Display" />
+                                </ListItem>
+                                <ListItem disablePadding>
+                                    <ListItemText primary="Kicker Marine Amplifiers" />
+                                </ListItem>
+                                <ListItem disablePadding>
+                                    <ListItemText primary="8 Kicker 6.5” Marine Lighted Marine Speakers" />
+                                </ListItem>
+                                <ListItem disablePadding>
+                                    <ListItemText primary="2 Bazooka Marine Subwoofers" />
+                                </ListItem>
+                                <ListItem disablePadding>
+                                    <ListItemText primary="2 Flat Screen LED Displays" />
                                 </ListItem>
                             </List>
                         </AccordionDetails>
                     </Accordion>
-                    <div>
-                        {/* ------< DETAILS >-------- */}
-                        <li>Pioneer DMG-WT8600NEX Head Unit with 10.1” Floating Display</li>
-                        <li>Kicker Marine Amplifiers</li>
-                        <li>8 Kicker 6.5” Marine Lighted Marine Speakers</li>
-                        <li>2 Bazooka Marine Subwoofers</li>
-                        <li>2 Flat Screen LED Displays</li>
-                    </div>
                     {/* ===========< LIGHTING ACCORDION >=============== */}
                     <Accordion>
                         {/* ------< SUMMARY >-------- */}
@@ -239,18 +243,20 @@ function AboutTab() {
                         <AccordionDetails>
                             <List>
                                 <ListItem disablePadding>
-                                    <ListItemText primary="" />
+                                    <ListItemText primary="Million Color App Controlled LED Under-glow Lighting" />
+                                </ListItem>
+                                <ListItem disablePadding>
+                                    <ListItemText primary="6 LED Scene Lights" />
+                                </ListItem>
+                                <ListItem disablePadding>
+                                    <ListItemText primary="2 LED Light Bars" />
+                                </ListItem>
+                                <ListItem disablePadding>
+                                    <ListItemText primary="LED Lighting Throughout Interior Space" />
                                 </ListItem>
                             </List>
                         </AccordionDetails>
                     </Accordion>
-                    <div>
-                        {/* ------< DETAILS >-------- */}
-                        <li>Million Color App Controlled LED Under-glow Lighting</li>
-                        <li>6 LED Scene Lights</li>
-                        <li>2 LED Light Bars</li>
-                        <li>LED Lighting Throughout Interior Space</li>
-                    </div>
                     {/* ===========< SECURITY ACCORDION >=============== */}
                     <Accordion>
                         {/* ------< SUMMARY >-------- */}
@@ -264,18 +270,20 @@ function AboutTab() {
                         <AccordionDetails>
                             <List>
                                 <ListItem disablePadding>
-                                    <ListItemText primary="" />
+                                    <ListItemText primary="Viper Audible Alarm System with Text Alerts" />
+                                </ListItem>
+                                <ListItem disablePadding>
+                                    <ListItemText primary="App Controlled Lock/Unlock, GPS Location/Speed Tracking" />
+                                </ListItem>
+                                <ListItem disablePadding>
+                                    <ListItemText primary="Remote Start" />
+                                </ListItem>
+                                <ListItem disablePadding>
+                                    <ListItemText primary="Low Battery Alerts" />
                                 </ListItem>
                             </List>
                         </AccordionDetails>
                     </Accordion>
-                    <div>
-                        {/* ------< DETAILS >-------- */}
-                        <li>Viper Audible Alarm System with Text Alerts</li>
-                        <li>App Controlled Lock/Unlock, GPS Location/Speed Tracking</li>
-                        <li>Remote Start</li>
-                        <li>Low Battery Alerts</li>
-                    </div>
                     {/* ===========< INTERIOR AMENITIES ACCORDION >=============== */}
                     <Accordion>
                         {/* ------< SUMMARY >-------- */}
@@ -289,22 +297,32 @@ function AboutTab() {
                         <AccordionDetails>
                             <List>
                                 <ListItem disablePadding>
-                                    <ListItemText primary="" />
+                                    <ListItemText primary="Desk and Workspace" />
+                                </ListItem>
+                                <ListItem disablePadding>
+                                    <ListItemText primary="Heated and Cooled Rear Workspace" />
+                                </ListItem>
+                                <ListItem disablePadding>
+                                    <ListItemText primary="Interior Audio Controls" />
+                                </ListItem>
+                                <ListItem disablePadding>
+                                    <ListItemText primary="Mini Fridge" />
+                                </ListItem>
+                                <ListItem disablePadding>
+                                    <ListItemText primary="Water Bottle Filler" />
+                                </ListItem>
+                                <ListItem disablePadding>
+                                    <ListItemText primary="360 Camera System For Driver- Always on with Video Storage" />
+                                </ListItem>
+                                <ListItem disablePadding>
+                                    <ListItemText primary="Front Touchscreen Head Unit" />
+                                </ListItem>
+                                <ListItem disablePadding>
+                                    <ListItemText primary="Custom Fit Truk Seats" />
                                 </ListItem>
                             </List>
                         </AccordionDetails>
                     </Accordion>
-                    <div>
-                        {/* ------< DETAILS >-------- */}
-                        <li>Desk and Workspace</li>
-                        <li>Heated and Cooled Rear Workspace</li>
-                        <li>Interior Audio Controls</li>
-                        <li>Mini Fridge</li>
-                        <li>Water Bottle Filler</li>
-                        <li>360 Camera System For Driver- Always on with Video Storage</li>
-                        <li>Front Touchscreen Head Unit</li>
-                        <li>Custom Fit Truk Seats</li>
-                    </div>
                     {/* ===========< POWER ACCORDION >=============== */}
                     <Accordion>
                         {/* ------< SUMMARY >-------- */}
@@ -318,17 +336,17 @@ function AboutTab() {
                         <AccordionDetails>
                             <List>
                                 <ListItem disablePadding>
-                                    <ListItemText primary="" />
+                                    <ListItemText primary="7 Onboard Batteries" />
+                                </ListItem>
+                                <ListItem disablePadding>
+                                    <ListItemText primary="400 Watt Solar Panel System" />
+                                </ListItem>
+                                <ListItem disablePadding>
+                                    <ListItemText primary="110 Power Inverter" />
                                 </ListItem>
                             </List>
                         </AccordionDetails>
                     </Accordion>
-                    <div>
-                        {/* ------< DETAILS >-------- */}
-                        <li>7 Onboard Batteries</li>
-                        <li>400 Watt Solar Panel System</li>
-                        <li>110 Power Inverter</li>
-                    </div>
                     {/* ===========< PICTURES ACCORDION >=============== */}
                     <Accordion>
                         {/* ------< SUMMARY >-------- */}
