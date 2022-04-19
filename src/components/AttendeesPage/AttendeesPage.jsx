@@ -27,10 +27,14 @@ function AttendeesPage(){
         });
     }, [])
 
+    //------------< Functions >----------------
+    const handleMassMessage = () => {
+        console.log('this will open the option to send a mass message to all members signed up for a class');
+    }
     console.log('this is the attendees info', attendees);
     return(
         <>
-            {/* <li>{attendees.name}</li> */}
+            <button onClick={handleMassMessage}>Message all</button>
             {attendees.map((customer, i)=>(
                 // console.log(customer, i)
                 <AttendanceItem key={i} customer={customer}/>
