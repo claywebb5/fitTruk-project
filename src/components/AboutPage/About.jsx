@@ -13,6 +13,8 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
 import List from '@mui/material/List';
+import Grid from '@mui/material/Grid';
+import Box from '@mui/material/Box';
 
 // import CardActions from '@mui/material/CardActions';
 // import Button from '@mui/material/Button';
@@ -115,7 +117,7 @@ function AboutTab() {
                             </List>
                         </AccordionDetails>
                     </Accordion>
-                    
+
                     {/* ========< EQUIPMENT ACCORDION >============= */}
                     <Accordion>
                         {/* ------< SUMMARY >-------- */}
@@ -123,51 +125,89 @@ function AboutTab() {
                             expandIcon={<ExpandMoreIcon />}
                             aria-controls="panel1a-content"
                             id="panel1a-header">
-                            <Typography></Typography>
+                            <Typography>EQUIPMENT</Typography>
                         </AccordionSummary>
                         {/* ------< DETAILS >-------- */}
                         <AccordionDetails>
-                            <List>
-                                <ListItem disablePadding>
-                                    <ListItemText primary="" />
-                                </ListItem>
-                            </List>
+                            <Box
+                                sx={{
+                                    display: 'grid',
+                                    gridAutoFlow: 'row',
+                                    gap: 1,
+                                }}
+                            >
+                                <Grid sx={{ gridColumn: '1' }}>
+                                    <ListItem disablePadding>
+                                        <ListItemText primary="Squat Rack" />
+                                    </ListItem>
+                                    <ListItem disablePadding>
+                                        <ListItemText primary="Commercial Cable Station" />
+                                    </ListItem>
+                                    <ListItem disablePadding>
+                                        <ListItemText primary="Pull-Up Bars" />
+                                    </ListItem>
+                                    <ListItem disablePadding>
+                                        <ListItemText primary="Adjustable Plyo Boxes" />
+                                    </ListItem>
+                                    <ListItem disablePadding>
+                                        <ListItemText primary="Dip Bars" />
+                                    </ListItem>
+                                    <ListItem disablePadding>
+                                        <ListItemText primary="Battle Rope" />
+                                    </ListItem>
+                                </Grid>
+                                <Grid sx={{ gridColumn: '2 / 3' }}>
+                                    <ListItem disablePadding>
+                                        <ListItemText primary="2 Rogue Landmines" />
+                                    </ListItem>
+                                    <ListItem disablePadding>
+                                        <ListItemText primary="Trx Trainer" />
+                                    </ListItem>
+                                    <ListItem disablePadding>
+                                        <ListItemText primary="Torque Tank M1 Sled" />
+                                    </ListItem>
+                                    <ListItem disablePadding>
+                                        <ListItemText primary="2 Rogue Benches" />
+                                    </ListItem>
+                                    <ListItem disablePadding>
+                                        <ListItemText primary="3 Solid Fitness Barbells" />
+                                    </ListItem>
+                                    <ListItem disablePadding>
+                                        <ListItemText primary="2 Solid Fitness Training Bars" />
+                                    </ListItem>
+                                </Grid>
+                                <Grid sx={{ gridColumn: '3 / 3' }}>
+                                    <ListItem disablePadding>
+                                        <ListItemText primary="Trap Bar" />
+                                    </ListItem>
+                                    <ListItem disablePadding>
+                                        <ListItemText primary="Bumper Plates" />
+                                    </ListItem>
+                                    <ListItem disablePadding>
+                                        <ListItemText primary="Full Kettle Bell and Dumbbell Set" />
+                                    </ListItem>
+                                    <ListItem disablePadding>
+                                        <ListItemText primary="Resistance Bands" />
+                                    </ListItem>
+                                    <ListItem disablePadding>
+                                        <ListItemText primary="Medicine Balls" />
+                                    </ListItem>
+                                    <ListItem disablePadding>
+                                        <ListItemText primary="Jump Ropes" />
+                                    </ListItem>
+                                </Grid>
+                            </Box>
                         </AccordionDetails>
                     </Accordion>
-                    <div>
-                        {/* ------< SUMMARY >-------- */}
-                        <h3>EQUIPMENT</h3>
-                        {/* ------< DETAILS >-------- */}
-                        <li>Squat Rack</li>
-                        <li>Commercial Cable Station</li>
-                        <li>Pull-Up Bars</li>
-                        <li>Adjustable Plyo Boxes</li>
-                        <li>Dip Bars</li>
-                        <li>Battle Rope</li>
-                        {/* BREAK */}
-                        <li>2 Rogue Landmines</li>
-                        <li>Trx Trainer</li>
-                        <li>Torque Tank M1 Sled</li>
-                        <li>2 Rogue Benches</li>
-                        <li>3 Solid Fitness Barbells</li>
-                        <li>2 Solid Fitness Training Bars</li>
-                        {/* BREAK */}
-                        <li>Trap Bar</li>
-                        <li>Bumper Plates</li>
-                        <li>Full Kettle Bell and Dumbbell Set</li>
-                        <li>Resistance Bands</li>
-                        <li>Medicine Balls</li>
-                        <li>Jump Ropes</li>
-                        {/* BREAK */}
-                    </div>
-                    {/* ===========< ACCORDION >=============== */}
+
+                    {/* ===========< AUDIO/VIDEO ACCORDION >=============== */}
                     <Accordion>
                         {/* ------< SUMMARY >-------- */}
                         <AccordionSummary
                             expandIcon={<ExpandMoreIcon />}
                             aria-controls="panel1a-content"
                             id="panel1a-header">
-                            <Typography></Typography>
+                            <Typography>AUDIO/VIDEO</Typography>
                         </AccordionSummary>
                         {/* ------< DETAILS >-------- */}
                         <AccordionDetails>
@@ -179,8 +219,6 @@ function AboutTab() {
                         </AccordionDetails>
                     </Accordion>
                     <div>
-                        {/* ------< SUMMARY >-------- */}
-                        <h3>AUDIO/VIDEO</h3>
                         {/* ------< DETAILS >-------- */}
                         <li>Pioneer DMG-WT8600NEX Head Unit with 10.1” Floating Display</li>
                         <li>Kicker Marine Amplifiers</li>
@@ -188,14 +226,14 @@ function AboutTab() {
                         <li>2 Bazooka Marine Subwoofers</li>
                         <li>2 Flat Screen LED Displays</li>
                     </div>
-                    {/* ===========< ACCORDION >=============== */}
+                    {/* ===========< LIGHTING ACCORDION >=============== */}
                     <Accordion>
                         {/* ------< SUMMARY >-------- */}
                         <AccordionSummary
                             expandIcon={<ExpandMoreIcon />}
                             aria-controls="panel1a-content"
                             id="panel1a-header">
-                            <Typography></Typography>
+                            <Typography>LIGHTING</Typography>
                         </AccordionSummary>
                         {/* ------< DETAILS >-------- */}
                         <AccordionDetails>
@@ -207,22 +245,20 @@ function AboutTab() {
                         </AccordionDetails>
                     </Accordion>
                     <div>
-                        {/* ------< SUMMARY >-------- */}
-                        <h3>LIGHTING</h3>
                         {/* ------< DETAILS >-------- */}
                         <li>Million Color App Controlled LED Under-glow Lighting</li>
                         <li>6 LED Scene Lights</li>
                         <li>2 LED Light Bars</li>
                         <li>LED Lighting Throughout Interior Space</li>
                     </div>
-                    {/* ===========< ACCORDION >=============== */}
+                    {/* ===========< SECURITY ACCORDION >=============== */}
                     <Accordion>
                         {/* ------< SUMMARY >-------- */}
                         <AccordionSummary
                             expandIcon={<ExpandMoreIcon />}
                             aria-controls="panel1a-content"
                             id="panel1a-header">
-                            <Typography></Typography>
+                            <Typography>SECURITY</Typography>
                         </AccordionSummary>
                         {/* ------< DETAILS >-------- */}
                         <AccordionDetails>
@@ -234,22 +270,20 @@ function AboutTab() {
                         </AccordionDetails>
                     </Accordion>
                     <div>
-                        {/* ------< SUMMARY >-------- */}
-                        <h3>SECURITY</h3>
                         {/* ------< DETAILS >-------- */}
                         <li>Viper Audible Alarm System with Text Alerts</li>
                         <li>App Controlled Lock/Unlock, GPS Location/Speed Tracking</li>
                         <li>Remote Start</li>
                         <li>Low Battery Alerts</li>
                     </div>
-                    {/* ===========< ACCORDION >=============== */}
+                    {/* ===========< INTERIOR AMENITIES ACCORDION >=============== */}
                     <Accordion>
                         {/* ------< SUMMARY >-------- */}
                         <AccordionSummary
                             expandIcon={<ExpandMoreIcon />}
                             aria-controls="panel1a-content"
                             id="panel1a-header">
-                            <Typography></Typography>
+                            <Typography>INTERIOR AMENITIES</Typography>
                         </AccordionSummary>
                         {/* ------< DETAILS >-------- */}
                         <AccordionDetails>
@@ -261,8 +295,6 @@ function AboutTab() {
                         </AccordionDetails>
                     </Accordion>
                     <div>
-                        {/* ------< SUMMARY >-------- */}
-                        <h3>INTERIOR AMENITIES</h3>
                         {/* ------< DETAILS >-------- */}
                         <li>Desk and Workspace</li>
                         <li>Heated and Cooled Rear Workspace</li>
@@ -273,14 +305,14 @@ function AboutTab() {
                         <li>Front Touchscreen Head Unit</li>
                         <li>Custom Fit Truk Seats</li>
                     </div>
-                    {/* ===========< ACCORDION >=============== */}
+                    {/* ===========< POWER ACCORDION >=============== */}
                     <Accordion>
                         {/* ------< SUMMARY >-------- */}
                         <AccordionSummary
                             expandIcon={<ExpandMoreIcon />}
                             aria-controls="panel1a-content"
                             id="panel1a-header">
-                            <Typography></Typography>
+                            <Typography>POWER</Typography>
                         </AccordionSummary>
                         {/* ------< DETAILS >-------- */}
                         <AccordionDetails>
@@ -292,51 +324,38 @@ function AboutTab() {
                         </AccordionDetails>
                     </Accordion>
                     <div>
-                        {/* ------< SUMMARY >-------- */}
-                        <h3>POWER</h3>
                         {/* ------< DETAILS >-------- */}
                         <li>7 Onboard Batteries</li>
                         <li>400 Watt Solar Panel System</li>
                         <li>110 Power Inverter</li>
                     </div>
-                    {/* ===========< ACCORDION >=============== */}
+                    {/* ===========< PICTURES ACCORDION >=============== */}
                     <Accordion>
                         {/* ------< SUMMARY >-------- */}
                         <AccordionSummary
                             expandIcon={<ExpandMoreIcon />}
                             aria-controls="panel1a-content"
                             id="panel1a-header">
-                            <Typography></Typography>
+                            <Typography>PICTURES</Typography>
                         </AccordionSummary>
                         {/* ------< DETAILS >-------- */}
                         <AccordionDetails>
-                            <List>
-                                <ListItem disablePadding>
-                                    <ListItemText primary="" />
-                                </ListItem>
-                            </List>
+                            <ImageList>
+                                {itemData.map((item) => (
+                                    <ImageListItem key={item.img}>
+                                        <img
+                                            src={`${item.img}?w=164&h=164&fit=crop&auto=format`}
+                                            srcSet={`${item.img}?w=164&h=164&fit=crop&auto=format&dpr=2 2x`}
+                                            alt={item.title}
+                                            loading="lazy" />
+                                    </ImageListItem>
+                                ))}
+                            </ImageList>
                         </AccordionDetails>
                     </Accordion>
+
                 </Card>
                 {/*======< END HERES WHAT'S ON THE TRUK CARD >======================== */}
-                <Card>
-                    {/* ------< SUMMARY >-------- */}
-                    <h3>PICTURES</h3>
-                    {/* ------< DETAILS >-------- */}
-                    <ImageList sx={{ width: 500, height: 450 }} cols={3} rowHeight={164}>
-                        {itemData.map((item) => (
-                            <ImageListItem key={item.img}>
-                                <img
-                                    src={`${item.img}?w=164&h=164&fit=crop&auto=format`}
-                                    srcSet={`${item.img}?w=164&h=164&fit=crop&auto=format&dpr=2 2x`}
-                                    alt={item.title}
-                                    loading="lazy"
-                                />
-                            </ImageListItem>
-                        ))}
-                    </ImageList>
-                </Card>
-                {/*======< END PICTURES CARD >======================== */}
             </Container>
         </>
     );
