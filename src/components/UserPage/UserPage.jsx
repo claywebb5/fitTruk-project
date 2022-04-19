@@ -2,7 +2,9 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-
+import Avatar from '@mui/material/Avatar';
+import Stack from '@mui/material/Stack';
+import { deepOrange, deepPurple } from '@mui/material/colors';
 
 function UserPage() {
 
@@ -33,11 +35,20 @@ function UserPage() {
   }
 
   const [editUser, setEditUser] = useState(userObj);
+  const name = user.name.toUpperCase()
+  const words = name.split(' ');
+  const initials = [];
+
+  for (const i of words) {
+    initials.push(i[0])
+  }
+
 
   const handleTest = () => {
     console.log('The user is:', user);
     console.log('The userObj is:', userObj);
     console.log('The state of editUser is:', editUser);
+
   }
 
   //  ============< Pronoun Change >=============
@@ -51,15 +62,15 @@ function UserPage() {
 
   //  ============< Address Change >=============
   const handleChangeStreet = (event) => {
-    setEditUser({ ...editUser, street: event.target.value});
+    setEditUser({ ...editUser, street: event.target.value });
   };
 
   const handleChangeCity = (event) => {
-    setEditUser({ ...editUser, city: event.target.value});
+    setEditUser({ ...editUser, city: event.target.value });
   };
 
   const handleChangeState = (event) => {
-    setEditUser({ ...editUser, state: event.target.value});
+    setEditUser({ ...editUser, state: event.target.value });
   };
 
   const handleChangeZip = (event) => {
@@ -89,18 +100,20 @@ function UserPage() {
     <>
       <h1><u>Personal Info Page</u></h1>
 
-      <button onClick={handleTest}>Test userObj</button>
+      {/* <button onClick={handleTest}>Test userObj</button> */}
 
 
       <div className="container">
         <form onSubmit={handleSubmit}>
 
           <div> {/* CAN EDIT  */}
-            <h2>*Profile Image Here*</h2>
+            {/* <h2>*Profile Image Here*</h2> */}
+
+          <Avatar sx={{ bgcolor: deepPurple[500] }}>{initials.join('')}</Avatar>
+
           </div>
 
           <h2>Welcome, {user.name}!</h2>
-
           <div> {/* CAN EDIT  */}
             <p><b>Pronouns:</b> {user.pronouns}</p>
             <select onChange={handlePronounChange} value={editUser.pronouns}>

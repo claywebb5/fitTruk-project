@@ -7,10 +7,16 @@ function ClassDetailsPage() {
     //------------<  Setup  >-------------
     const history = useHistory();
     const dispatch = useDispatch();
-
     const { id } = useParams()
 
+
+
+
     useEffect(() => {
+        dispatch({
+            type: 'FETCH_CLASS_SIZE',
+            payload: id
+        })
         dispatch({
             type: 'FETCH_CLASS_DETAILS',
             // payload: id // PART OF DUMMY DATA, WILL BE UPDATED ONCE :id IS ADDED TO ROUTING
@@ -19,7 +25,7 @@ function ClassDetailsPage() {
     }, [])
 
     const classDetails = useSelector(store => store.selectedClass.classDetails)
-
+    const classSize = useSelector(store => store.selectedClass.classSize.full_class);
     // ---------USED FOR TESTS, REMOVE LATER---------- USED FOR TESTS, REMOVE LATER ----------------USED FOR TESTS, REMOVE LATER--------
     const user = useSelector(store => store.user)
     // ---------USED FOR TESTS, REMOVE LATER---------- USED FOR TESTS, REMOVE LATER ----------------USED FOR TESTS, REMOVE LATER--------
@@ -47,6 +53,8 @@ function ClassDetailsPage() {
     const handleGpsClick = (showMap) => {
         // console.log('This will show google maps');
         // setShowMap(!showMap)
+        console.log('classSize',classSize) 
+
     }
     const handleCancelClick = () => {
         console.log('you canceled the class', classDetails)
@@ -97,7 +105,7 @@ function ClassDetailsPage() {
                 if (classDetails.is_my_class) {
                     return <button onClick={handleCancelClick}>Cancel Reservation</button>;
                 } else {
-                    return <button onClick={handleReserveClick}>Reserve</button>;
+                    return <button onClick={handleReserveClick} disabled={classSize}>Reserve</button>;
                 }
             })()}
 
