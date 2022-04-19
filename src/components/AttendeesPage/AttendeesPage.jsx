@@ -28,8 +28,13 @@ function AttendeesPage(){
     console.log('this is the attendees info', attendees);
     return(
         <>
+
+        
         <ul>
-            <li>{attendees.name}</li>
+            {/* <li>{attendees.name}</li> */}
+            {attendees.map((customer, i)=>(
+                <li key={i}>{customer.username}</li>
+            ))}
         </ul>
 
         </>
