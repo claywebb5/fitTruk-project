@@ -13,7 +13,10 @@ function AttendanceItem (customer) {
     console.log(customer);
     return (
         <>
-        <li>{customer.customer.username}</li>
+         <input type="checkbox" id="customer" value="user?"></input>
+         <label htmlFor="customer">{customer.customer.username}</label><br></br>
+    
+
         </>
     )
 }

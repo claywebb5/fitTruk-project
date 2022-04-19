@@ -30,14 +30,11 @@ function AttendeesPage(){
     console.log('this is the attendees info', attendees);
     return(
         <>
-
-        
-        <ul>
             {/* <li>{attendees.name}</li> */}
             {attendees.map((customer, i)=>(
                 <AttendanceItem key={i} customer={customer}/>
             ))}
-        </ul>
+       
 
         </>
     )
