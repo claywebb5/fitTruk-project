@@ -18,6 +18,7 @@ function CreateClassPage() {
     const history = useHistory();
     const params = useParams();
     const classId = params.id;
+    //---------- Tools -----------
 
 
     useEffect(() => {
@@ -124,12 +125,15 @@ function CreateClassPage() {
 
                 {/* ------------ Set Class Name --------------------------------------------- */}
                 <h4>Class name:
-                    <input type="text" name="class-name" value={classDetails.classname} onChange={handleChange('classname')} />
+                    <input 
+                    disabled={disabledState}
+                    type="text" name="class-name" value={classDetails.classname} onChange={handleChange('classname')} />
                 </h4>
 
                 {/* ------------ Select Trainer ----------------------------------------------- */}
                 <h4>Led by:
                     <select name="trainer" id="trainer-selector"
+                    disabled={disabledState}
                         placeholder='Trainer'
                         onChange={(event) => { handleTrainerSelection(event.target.value) }}>
                         {availableTrainers.map((trainer, i) => (
@@ -141,45 +145,61 @@ function CreateClassPage() {
                     {selectedTrainer.profile_image ?
                         <img className='trainer-image' src={selectedTrainer.profile_image} alt="Profile image of the selected trainer" />
                         :
-                        <div className='trainer-image' >This is a div</div>
+                        <div className='trainer-image' style={{display: 'block'}}>This is a div</div>
                     }
                 </h4>
 
 
                 {/* ------------- Set Start Time ------------------------------ */}
                 <h4>Start time:
-                    <input type="time" name="start-time" value={classDetails.start_time} onChange={handleChange('start_time')} />
+                    <input 
+                    disabled={disabledState}
+                    type="time" name="start-time" value={classDetails.start_time} onChange={handleChange('start_time')} />
 
                     {/* --------- Set End Time -------------------------------------- */}
                     End Time:
-                    <input type="time" name="end-time" value={classDetails.end_time} onChange={handleChange('end_time')} />
+                    <input
+                    disabled={disabledState}
+                    type="time" name="end-time" value={classDetails.end_time} onChange={handleChange('end_time')} />
                 </h4>
 
                 {/* ------------- Set Location ------------------------------------------- */}
                 <h4>Street:
-                    <input type="text" name="street" value={classDetails.street} onChange={handleChange('street')} />
+                    <input
+                    disabled={false}
+                    type="text" name="street" value={classDetails.street} onChange={handleChange('street')} />
                 </h4>
 
                 <h4>City:
-                    <input type="text" name="city" value={classDetails.city} onChange={handleChange('city')} />
+                    <input
+                    disabled={false}
+                    type="text" name="city" value={classDetails.city} onChange={handleChange('city')} />
                 </h4>
 
                 <h4>State:
-                    <input type="text" name="state" value={classDetails.state} onChange={handleChange('state')} />
+                    <input
+                    disabled={false}
+                    type="text" name="state" value={classDetails.state} onChange={handleChange('state')} />
                 </h4>
 
                 <h4>Zip:
-                    <input type="text" name="zip" value={classDetails.zip} onChange={handleChange('zip')} />
+                    <input
+                    disabled={false}
+                    type="text" name="zip" value={classDetails.zip} onChange={handleChange('zip')} />
                 </h4>
 
                 {/* ---------- Set Description ------------------------------------------ */}
                 <h4>Description:
-                    <input type="text" name="" value={classDetails.description} onChange={handleChange('description')} />
+                    <input
+                    disabled={false}
+                    type="text" name="" value={classDetails.description} onChange={handleChange('description')} />
                 </h4>
 
                 {/* ---- Set Class Size ---- */}
                 <h4>Class Size:
-                    <input type="number" name="class-size" value={classDetails.class_size} onChange={handleChange('class_size')} />
+                    <input
+                    disabled={disabledState}
+                    type="number" name="class-size" value={classDetails.class_size} onChange={handleChange('class_size')} />
                 </h4>
 
                 {/* ---- Submit form!! ---- */}
