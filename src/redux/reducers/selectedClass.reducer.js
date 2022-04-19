@@ -21,6 +21,8 @@ const classDetails = (
     case 'SET_CLASS_DETAILS': // When opening up a class to edit, a saga will retrieve
     return action.payload;    // the class information and it'll be stored here.
     
+    case 'REMOVE_CLASS_TRAINER': // This resets the assigned trainer from the class.
+    return {...state, trainer_user_id: ''};
     
     case 'EDIT_CLASS_DETAILS': // This handles any individual edits to a class' individual details.
     let propertyName = action.payload.propertyName; // The property name is dynamically inserted into the object
@@ -30,7 +32,7 @@ const classDetails = (
       [propertyName]: key
     };
     
-    case 'RESET_CLASS_DETAILS': // When opening up a class to edit, a saga will retrieve
+    case 'RESET_CLASS_DETAILS': // This resets a class's details to an empty state.
     return {
       trainer_user_id: '',
       date: '',
@@ -61,7 +63,7 @@ const selectedTrainer = (
     name: ''
   }, action) => {
 
-  if (action.type === 'SET_ACTIVE_CLASS_TRAINER') {
+  if (action.type === 'SET_SELECTED_TRAINER') {
     const { trainer_user_id, profile_image, name } = action.payload;
     return {
       ...state,
@@ -69,6 +71,12 @@ const selectedTrainer = (
       profile_image: profile_image,
       name: name
     };
+  } else if (action.type === 'RESET_SELECTED_TRAINER'){
+    return {
+      trainer_user_id: '',
+      profile_image: '',
+      name: ''
+    }
   }
 
   return state;

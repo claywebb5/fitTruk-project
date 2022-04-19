@@ -59,6 +59,7 @@ function* addReservation(action){
         console.log('The action.payload for adding a new class reservation is:', action.payload);
         yield axios.post(`/api/customer/reserve-class/${action.payload.id}`, action.payload); // * Goes to SERVER "customer.router"
         yield put({ type: 'FETCH_CUSTOMER_CLASS' }); // * Goes to THIS SAGA "customer.saga.js" (fetchCustomerSaga)
+        yield put({ type: 'FETCH_CLASS_DETAILS', payload: action.payload.id }); // * Goes to THIS SAGA "class.saga.js" (fetchDetails)
     } catch (error) {
         console.log('Error adding a new class reservation', error);
     }    
@@ -69,6 +70,7 @@ function* removeReservation(action){
     try {
         // console.log('The action.payload in removing a class reservation is:', action.payload)
         yield axios.delete(`/api/customer/delete/${action.payload.id}`, ); // * Goes to SERVER "customer.router"
+        yield put({ type: 'FETCH_CLASS_DETAILS', payload: action.payload.id }); // * Goes to THIS SAGA "class.saga.js" (fetchDetails)
         yield put({ type: 'FETCH_CUSTOMER_CLASS' }); // * Goes to THIS SAGA "customer.saga.js" (fetchCustomerSaga)
     } catch (error) {
         console.log('Error removing a class reservation', error);
