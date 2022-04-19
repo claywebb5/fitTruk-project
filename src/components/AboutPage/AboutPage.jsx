@@ -1,10 +1,55 @@
 import React from 'react';
+// ---------< MUI IMPORTS >----------------
+import Container from '@mui/material/Container';
+import ImageList from '@mui/material/ImageList';
+import ImageListItem from '@mui/material/ImageListItem';
 
 
 function AboutPage() {
+
+  const itemData = [
+    {
+      img: "https://fittrukkc.com/wp-content/uploads/2021/08/IMG_4729.jpg",
+      title: 'First',
+    },
+    {
+      img: "https://fittrukkc.com/wp-content/uploads/2021/08/IMG_4752.jpg",
+      title: 'Second',
+    },
+    {
+      img: "https://fittrukkc.com/wp-content/uploads/2021/08/IMG_4755.jpg",
+      title: 'Third',
+    },
+    {
+      img: "https://fittrukkc.com/wp-content/uploads/2021/08/IMG_4765.jpg",
+      title: 'Fourth',
+    },
+    {
+      img: "https://fittrukkc.com/wp-content/uploads/2021/08/IMG_4767.jpg",
+      title: 'Fifth',
+    },
+    {
+      img: "https://fittrukkc.com/wp-content/uploads/2021/08/IMG_4791.jpg",
+      title: 'Sixth',
+    },
+    {
+      img: "https://fittrukkc.com/wp-content/uploads/2021/08/IMG_4776-scaled.jpg",
+      title: 'Seventh',
+    },
+    {
+      img: "https://fittrukkc.com/wp-content/uploads/2021/08/IMG_4793.jpg",
+      title: 'Eighth',
+    },
+  ]
+
+
+
+
+
+
   return (
     <>
-      <div className="container">
+      <Container>
         <div>
           <h1>ABOUT THE TRUK</h1>
         </div>
@@ -17,7 +62,7 @@ function AboutPage() {
           <h2>HERE'S WHAT IS ON THE TRUK:</h2>
         </div>
         {/* ========< ACCORDION >============= */}
-        <div> 
+        <div>
           {/* ------< SUMMARY >-------- */}
           <h3>HIGHLIGHTS</h3>
           {/* ------< DETAILS >-------- */}
@@ -115,65 +160,20 @@ function AboutPage() {
           {/* ------< SUMMARY >-------- */}
           <h3>PICTURES</h3>
           {/* ------< DETAILS >-------- */}
-          <li>
-            <img 
-              className="photo" 
-              width={100} height={100}
-              src="https://fittrukkc.com/wp-content/uploads/2021/08/IMG_4729.jpg">
-            </img>
-          </li>
-          <li>
-            <img 
-              className="photo" 
-              width={100} height={100}
-              src="https://fittrukkc.com/wp-content/uploads/2021/08/IMG_4752.jpg">
-            </img>
-          </li>
-          <li>
-          <img 
-              className="photo" 
-              width={100} height={100}
-              src="https://fittrukkc.com/wp-content/uploads/2021/08/IMG_4755.jpg">
-            </img>
-          </li>
-          <li>
-          <img 
-              className="photo" 
-              width={100} height={100}
-              src="https://fittrukkc.com/wp-content/uploads/2021/08/IMG_4765.jpg">
-            </img>
-          </li>
-          <li>
-          <img 
-              className="photo" 
-              width={100} height={100}
-              src="https://fittrukkc.com/wp-content/uploads/2021/08/IMG_4767.jpg">
-            </img>
-          </li>
-          <li>
-          <img 
-              className="photo" 
-              width={100} height={100}
-              src="https://fittrukkc.com/wp-content/uploads/2021/08/IMG_4791.jpg">
-            </img>
-          </li>
-          <li>
-          <img 
-              className="photo" 
-              width={100} height={100}
-              src="https://fittrukkc.com/wp-content/uploads/2021/08/IMG_4776-scaled.jpg">
-            </img>
-          </li>
-          <li>
-          <img 
-              className="photo" 
-              width={100} height={100}
-              src="https://fittrukkc.com/wp-content/uploads/2021/08/IMG_4793.jpg">
-            </img>
-          </li>
-        </div> 
-      </div> 
-      
+          <ImageList sx={{ width: 500, height: 450 }} cols={3} rowHeight={164}>
+            {itemData.map((item) => (
+              <ImageListItem key={item.img}>
+                <img
+                  src={`${item.img}?w=164&h=164&fit=crop&auto=format`}
+                  srcSet={`${item.img}?w=164&h=164&fit=crop&auto=format&dpr=2 2x`}
+                  alt={item.title}
+                  loading="lazy"
+                />
+              </ImageListItem>
+            ))}
+          </ImageList>
+        </div>
+      </Container>
     </>
   );
 }
