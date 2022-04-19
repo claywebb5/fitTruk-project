@@ -15,7 +15,10 @@ function AttendanceItem (props) {
         console.log('this will update a piece of local state');
         dispatch({
             type: 'CHECK_USER_IN',
-            payload: attendees
+            payload: {
+                attendees: attendees,
+                userId: props.customer.id
+            }
         })
     }
 

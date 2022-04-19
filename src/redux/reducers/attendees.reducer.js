@@ -4,8 +4,12 @@ const attendeesReducer = (state = [], action) => {
         return action.payload;
       case 'CHECK_USER_IN':
         console.log('this dispatch should be triggered');
-        for (let i = 0; i < action.payload.length; i++) {
-          console.log(action.payload[i]);
+        
+        const users = action.payload.attendees
+        const userId = action.payload.userId
+        
+        for (let i = 0; i < users.length; i++) {
+          console.log(users[i],'this should just be an ID',  userId);
           
           
         }
