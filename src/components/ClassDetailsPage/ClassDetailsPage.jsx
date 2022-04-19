@@ -11,19 +11,23 @@ function ClassDetailsPage() {
     
     useEffect(() => {
         dispatch({
+            type: 'FETCH_CLASS_SIZE',
+            payload: id
+        })
+        dispatch({
             type: 'FETCH_CLASS_DETAILS',
             // payload: id // PART OF DUMMY DATA, WILL BE UPDATED ONCE :id IS ADDED TO ROUTING
             payload: id
         });
     }, [])
-    
-    
+
     // ---------USED FOR TESTS, REMOVE LATER---------- USED FOR TESTS, REMOVE LATER ----------------USED FOR TESTS, REMOVE LATER--------
     const user = useSelector(store => store.user)
     // ---------USED FOR TESTS, REMOVE LATER---------- USED FOR TESTS, REMOVE LATER ----------------USED FOR TESTS, REMOVE LATER--------
     
     
     //------------<  Variables  >----------
+    const isClassFull = useSelector(store => store.selectedClass.classSize.full_class);
     const classDetails = useSelector(store => store.selectedClass.classDetails)
     const [showMap, setShowMap] = useState(false)
     const { id } = useParams()
@@ -48,6 +52,8 @@ function ClassDetailsPage() {
     const handleGpsClick = (showMap) => {
         // console.log('This will show google maps');
         // setShowMap(!showMap)
+        console.log('is the class full? isClassFull:',isClassFull) 
+
     }
 
     const handleCancelClick = () => {
@@ -94,7 +100,7 @@ function ClassDetailsPage() {
                 if (classDetails.is_my_class) {
                     return <button onClick={handleCancelClick}>Cancel Reservation</button>;
                 } else {
-                    return <button onClick={handleReserveClick}>Reserve</button>;
+                    return <button onClick={handleReserveClick} disabled={isClassFull}>Reserve</button>;
                 }
             })()}
 

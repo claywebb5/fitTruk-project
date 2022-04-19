@@ -43,12 +43,26 @@ function* fetchDetails (action){
         console.log('Error fetching Class Details', error);
     } 
 }
+function* classSize (action){
+    // Will send a request to the class router to retrieve size of class
+    console.log('hopefully class size?', action.payload);
+    try {
+       
+        const size = yield axios.get(`/api/class/class-size/${action.payload}`); // * Goes to SERVER "class.router"
+        console.log('size.data', size.data)
+        yield put({ type: 'SET_CLASS_SIZE', payload: size.data }); // * Goes to REDUCER 
+    } catch (error) {
+        console.log('Error setting class size', error);
+    } 
+}
+
 
 
 function* classSaga() {
     yield takeLatest('FETCH_CLASSES', fetchClasses);
     yield takeLatest('SEARCH_CLASSES', searchClasses); // Currently commented out
     yield takeLatest('FETCH_CLASS_DETAILS', fetchDetails);
+    yield takeLatest('FETCH_CLASS_SIZE', classSize);
 }
   
 export default classSaga;
