@@ -35,7 +35,7 @@ function UserPage() {
   const [editUser, setEditUser] = useState(userObj);
   const name = user.name
   const words = name.split(' ');
-  const initials = name.split(' ');
+  const initials = [];
 
   const handleTest = () => {
     console.log('The user is:', user);
@@ -45,9 +45,10 @@ function UserPage() {
     // console.log('name', name)
     // console.log('words', words)
     for (const i of words) {
-      console.log(i[0])
+      initials.push(i[0])
     }
-
+    console.log('initials are:', initials)
+    console.log('initials together are', )
   }
 
   //  ============< Pronoun Change >=============
