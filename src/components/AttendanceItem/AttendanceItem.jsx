@@ -3,7 +3,8 @@ import { useDispatch, useSelector } from 'react-redux';
 
 function AttendanceItem (props) {
 
-    // console.log(customer);
+    //------------<  Setup  >-------------
+    const dispatch = useDispatch();
 
     const handleMessage = () => {
         console.log('this will open the option to send a specific user a message. Think "Hey, still able to make it today?"');
@@ -11,6 +12,9 @@ function AttendanceItem (props) {
 
     const checkUserIn = () => {
         console.log('this will update a piece of local state');
+        dispatch({
+            type: 'CHECK_USER_IN'
+        })
     }
 
     return (
