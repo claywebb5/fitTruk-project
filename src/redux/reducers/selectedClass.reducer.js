@@ -75,19 +75,11 @@ const selectedTrainer = (
   return state;
 };
 
-const classSize = (
-  state = {
-    class_size: '',
-    
-  }, action) => {
+const classSize = (state = '', action) => {
 
   if (action.type === 'SET_CLASS_SIZE') {
     const class_size = action.payload;
-    return {
-      ...state,
-      class_size: class_size,
-      
-    };
+    return action.payload;
   }
 
   return state;

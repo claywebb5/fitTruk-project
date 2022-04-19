@@ -60,10 +60,11 @@ router.get('/:search', (req, res) => {
 });
 
 router.get('/class-size/:id', (req, res) => {
-console.log('in router get class_id is:', req.params.id)
-    let queryText = `select count(user_id),
+    console.log('in router get class_id is:', req.params.id)
+
+    let queryText = `select 
     CASE
-    WHEN count(user_id) >= 2 
+    WHEN count(user_id) >= ( SELECT class_size FROM classes WHERE id = $1) 
     THEN true
     ELSE
     false
@@ -72,7 +73,7 @@ console.log('in router get class_id is:', req.params.id)
     where class_id = $1;`;
     pool.query(queryText, [req.params.id])
         .then((result) => {
-            res.send(result.rows)
+            res.send(result.rows[0])
         }).catch((error) => {
             console.log(error)
             res.sendStatus(500)

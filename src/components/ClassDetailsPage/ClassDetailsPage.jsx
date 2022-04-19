@@ -8,7 +8,6 @@ function ClassDetailsPage() {
     const history = useHistory();
     const dispatch = useDispatch();
     const { id } = useParams()
-    const [max, setMax] = useState(false)
 
 
 
@@ -23,11 +22,10 @@ function ClassDetailsPage() {
             // payload: id // PART OF DUMMY DATA, WILL BE UPDATED ONCE :id IS ADDED TO ROUTING
             payload: { id: id, userId: user.id }
         });
-        handleGpsClick();
     }, [])
 
     const classDetails = useSelector(store => store.selectedClass.classDetails)
-    const classSize = useSelector(store => store.selectedClass.classSize.class_size[0]);
+    const classSize = useSelector(store => store.selectedClass.classSize.full_class);
     // ---------USED FOR TESTS, REMOVE LATER---------- USED FOR TESTS, REMOVE LATER ----------------USED FOR TESTS, REMOVE LATER--------
     const user = useSelector(store => store.user)
     // ---------USED FOR TESTS, REMOVE LATER---------- USED FOR TESTS, REMOVE LATER ----------------USED FOR TESTS, REMOVE LATER--------
@@ -55,10 +53,7 @@ function ClassDetailsPage() {
     const handleGpsClick = (showMap) => {
         // console.log('This will show google maps');
         // setShowMap(!showMap)
-        if (Number(classSize.count) === classDetails.class_size) {
-            console.log('we reached our limit!!!')
-            setMax(true)
-        }
+        console.log('classSize',classSize) 
 
     }
     const handleCancelClick = () => {
@@ -110,7 +105,7 @@ function ClassDetailsPage() {
                 if (classDetails.is_my_class) {
                     return <button onClick={handleCancelClick}>Cancel Reservation</button>;
                 } else {
-                    return <button onClick={handleReserveClick} disabled={max}>Reserve</button>;
+                    return <button onClick={handleReserveClick} disabled={classSize}>Reserve</button>;
                 }
             })()}
 
