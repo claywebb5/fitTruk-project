@@ -32,6 +32,7 @@ function AttendeesPage(){
         <>
             {/* <li>{attendees.name}</li> */}
             {attendees.map((customer, i)=>(
+                // console.log(customer, i)
                 <AttendanceItem key={i} customer={customer}/>
             ))}
        

@@ -8,15 +8,17 @@ import {
 
 import { useDispatch, useSelector } from 'react-redux';
 
-function AttendanceItem (customer) {
+function AttendanceItem (props) {
 
-    console.log(customer);
+    // console.log(customer);
     return (
         <>
+        <div>
          <input type="checkbox" id="customer" value="user?"></input>
-         <label htmlFor="customer">{customer.customer.username}</label><br></br>
-    
-
+         <img src={props.customer.profile_image} alt="a pretty picture" />
+         <label htmlFor="customer">{props.customer.username}</label>
+         <button>Message user</button>
+         </div>
         </>
     )
 }
