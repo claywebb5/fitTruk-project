@@ -7,20 +7,27 @@ function ClassDetailsPage() {
     //------------<  Setup  >-------------
     const history = useHistory();
     const dispatch = useDispatch();
-
     const { id } = useParams()
+    const [max, setMax] = useState(false)
+
+
+
 
     useEffect(() => {
-
+        dispatch({
+            type: 'FETCH_CLASS_SIZE',
+            payload: id
+        })
         dispatch({
             type: 'FETCH_CLASS_DETAILS',
             // payload: id // PART OF DUMMY DATA, WILL BE UPDATED ONCE :id IS ADDED TO ROUTING
             payload: { id: id, userId: user.id }
         });
+        handleGpsClick();
     }, [])
 
     const classDetails = useSelector(store => store.selectedClass.classDetails)
-    const classSize = useSelector(store => store.selectedClass.classSize.class_size[0].count);
+    const classSize = useSelector(store => store.selectedClass.classSize.class_size[0]);
     // ---------USED FOR TESTS, REMOVE LATER---------- USED FOR TESTS, REMOVE LATER ----------------USED FOR TESTS, REMOVE LATER--------
     const user = useSelector(store => store.user)
     // ---------USED FOR TESTS, REMOVE LATER---------- USED FOR TESTS, REMOVE LATER ----------------USED FOR TESTS, REMOVE LATER--------
@@ -48,12 +55,11 @@ function ClassDetailsPage() {
     const handleGpsClick = (showMap) => {
         // console.log('This will show google maps');
         // setShowMap(!showMap)
-        dispatch({
-            type: 'FETCH_CLASS_SIZE',
-            payload: id
-        })
-    console.log('This is the class size dude!', classSize);
-    console.log('The max class size is', classDetails.class_size )
+        if (Number(classSize.count) === classDetails.class_size) {
+            console.log('we reached our limit!!!')
+            setMax(true)
+        }
+
     }
     const handleCancelClick = () => {
         console.log('you canceled the class', classDetails)
@@ -104,7 +110,7 @@ function ClassDetailsPage() {
                 if (classDetails.is_my_class) {
                     return <button onClick={handleCancelClick}>Cancel Reservation</button>;
                 } else {
-                    return <button onClick={handleReserveClick}>Reserve</button>;
+                    return <button onClick={handleReserveClick} disabled={max}>Reserve</button>;
                 }
             })()}
 
