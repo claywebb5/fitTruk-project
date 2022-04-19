@@ -5,6 +5,7 @@ function AttendanceItem (props) {
 
     //------------<  Setup  >-------------
     const dispatch = useDispatch();
+    const attendees = useSelector(store => store.attendees);
 
     const handleMessage = () => {
         console.log('this will open the option to send a specific user a message. Think "Hey, still able to make it today?"');
@@ -13,7 +14,8 @@ function AttendanceItem (props) {
     const checkUserIn = () => {
         console.log('this will update a piece of local state');
         dispatch({
-            type: 'CHECK_USER_IN'
+            type: 'CHECK_USER_IN',
+            payload: attendees
         })
     }
 

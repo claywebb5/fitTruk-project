@@ -64,7 +64,7 @@ router.get('/attendance/:id', (req, res) => {
     if (req.isAuthenticated()) {
         console.log('req.params.id', req.params.id)
         const queryText =
-            `SELECT "username", "profile_image"
+            `SELECT "user"."id", "user"."username", "user"."profile_image", "class_list"."checked_in"
         FROM "classes"
         JOIN "class_list"
         ON "classes"."id"="class_list"."class_id" 

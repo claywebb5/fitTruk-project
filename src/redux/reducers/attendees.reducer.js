@@ -4,6 +4,11 @@ const attendeesReducer = (state = [], action) => {
         return action.payload;
       case 'CHECK_USER_IN':
         console.log('this dispatch should be triggered');
+        for (let i = 0; i < action.payload.length; i++) {
+          console.log(action.payload[i]);
+          
+          
+        }
         
       default:
         return state;
