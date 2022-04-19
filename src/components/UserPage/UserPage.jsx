@@ -36,6 +36,7 @@ function UserPage() {
   const name = user.name
   const words = name.split(' ');
   const initials = [];
+ 
 
   const handleTest = () => {
     console.log('The user is:', user);
@@ -47,8 +48,9 @@ function UserPage() {
     for (const i of words) {
       initials.push(i[0])
     }
+
     console.log('initials are:', initials)
-    console.log('initials together are', )
+    console.log('initials together are', initials.join('') )
   }
 
   //  ============< Pronoun Change >=============
