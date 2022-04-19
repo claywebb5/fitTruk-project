@@ -61,7 +61,13 @@ router.get('/:search', (req, res) => {
 
 router.get('/class-size/:id', (req, res) => {
 console.log('in router get class_id is:', req.params.id)
-    let queryText = `select count(user_id)
+    let queryText = `select count(user_id),
+    CASE
+    WHEN count(user_id) >= 2 
+    THEN true
+    ELSE
+    false
+    END AS "full_class"
     from class_list 
     where class_id = $1;`;
     pool.query(queryText, [req.params.id])
