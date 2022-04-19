@@ -2,9 +2,10 @@ import { put, takeLatest } from 'redux-saga/effects';
 import axios from 'axios';
 
 // =============***< (GET) ALL ATTENDEES FOR A CLASS >***==============================
-function* fetchAttendance(){
+function* fetchAttendance(action){
     // TRAINER/ADMIN ONLY
     // Will send a request to the trainer router to get all users signed up for a class
+    
     try {
         const attendance = yield axios.get(`/api/trainer/attendance/${action.payload}`) // * Goes to SERVER "trainer.router"
         yield put({ type: 'SET_ATTENDEES', payload: attendance.data }); // * Goes to REDUCERS "attendees.reducer"

@@ -18,13 +18,14 @@ function AttendeesPage(){
     // const userId = useSelector(store => store.user.id);
     const { id } = useParams()
 
-    // useEffect(() => {
-    //     dispatch({
-    //         type: 'FETCH_ATTENDANCE',
-    //         payload: id
-    //     });
-    // }, [])
+    useEffect(() => {
+        dispatch({
+            type: 'FETCH_ATTENDANCE',
+            payload: id
+        });
+    }, [])
 
+    console.log('this is the attendees info', attendees);
     return(
         <>
         <ul>
