@@ -2,7 +2,9 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-
+import Avatar from '@mui/material/Avatar';
+import Stack from '@mui/material/Stack';
+import { deepOrange, deepPurple } from '@mui/material/colors';
 
 function UserPage() {
 
@@ -107,10 +109,11 @@ function UserPage() {
 
           <div> {/* CAN EDIT  */}
             <h2>*Profile Image Here*</h2>
+          <Avatar sx={{ bgcolor: deepPurple[500] }}>{initials.join('')}</Avatar>
+
           </div>
 
           <h2>Welcome, {user.name}!</h2>
-
           <div> {/* CAN EDIT  */}
             <p><b>Pronouns:</b> {user.pronouns}</p>
             <select onChange={handlePronounChange} value={editUser.pronouns}>
