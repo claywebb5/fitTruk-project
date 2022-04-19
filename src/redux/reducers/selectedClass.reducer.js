@@ -1,6 +1,7 @@
 import { combineReducers } from 'redux';
 
 // This reducer holds the data of the class you are actively editing or creating
+
 const classDetails = (
   state = {
     trainer_user_id: '',
@@ -74,10 +75,29 @@ const selectedTrainer = (
   return state;
 };
 
+const classSize = (
+  state = {
+    class_size: '',
+    
+  }, action) => {
+
+  if (action.type === 'SET_CLASS_SIZE') {
+    const class_size = action.payload;
+    return {
+      ...state,
+      class_size: class_size,
+      
+    };
+  }
+
+  return state;
+};
+
 
 
 
 export default combineReducers({
+  classSize,
   classDetails,
   selectedTrainer
 });

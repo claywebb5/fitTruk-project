@@ -11,6 +11,7 @@ function ClassDetailsPage() {
     const { id } = useParams()
 
     useEffect(() => {
+
         dispatch({
             type: 'FETCH_CLASS_DETAILS',
             // payload: id // PART OF DUMMY DATA, WILL BE UPDATED ONCE :id IS ADDED TO ROUTING
@@ -19,7 +20,7 @@ function ClassDetailsPage() {
     }, [])
 
     const classDetails = useSelector(store => store.selectedClass.classDetails)
-
+    const classSize = useSelector(store => store.selectedClass.classSize.class_size[0].count);
     // ---------USED FOR TESTS, REMOVE LATER---------- USED FOR TESTS, REMOVE LATER ----------------USED FOR TESTS, REMOVE LATER--------
     const user = useSelector(store => store.user)
     // ---------USED FOR TESTS, REMOVE LATER---------- USED FOR TESTS, REMOVE LATER ----------------USED FOR TESTS, REMOVE LATER--------
@@ -47,6 +48,12 @@ function ClassDetailsPage() {
     const handleGpsClick = (showMap) => {
         // console.log('This will show google maps');
         // setShowMap(!showMap)
+        dispatch({
+            type: 'FETCH_CLASS_SIZE',
+            payload: id
+        })
+    console.log('This is the class size dude!', classSize);
+    console.log('The max class size is', classDetails.class_size )
     }
     const handleCancelClick = () => {
         console.log('you canceled the class', classDetails)
