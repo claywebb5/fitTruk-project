@@ -18,19 +18,50 @@ import Menu from '@mui/material/Menu';
 
 
 // =================**< ADMIN VIEW >**=========================
-    // [] Add Class
-    // [] All Classes
-    // [] Class Schedule
-    // [] Profile
-    // [] Sign Out
+// [] Add Class
+// [] All Classes
+// [] Class Schedule
+// [] Profile
+// [] Sign Out
 
 
 
 function AdminNav() {
+    // ========< TOOLS >==============
+    const history = useHistory();
+    const user = useSelector((store) => store.user);
 
-    return(
+    // =====< USESTATE >=============================
+    // For the hamburger icon menu
+    const [anchorElMenu, setAnchorElMenu] = useState(null);
+    // For the user icon menu
+    const [anchorElUser, setAnchorElUser] = useState(null);
+
+    // =====< CLICK LISTENERS >=============================
+    // Go to all classes view
+    const handleLogo = () => {
+        history.push("/all-classes")
+    };
+    // OPEN the hamburger icon menu
+    const handleOpenMenu = (event) => {
+        setAnchorElMenu(event.currentTarget);
+    };
+    // OPEN the user icon menu
+    const handleOpenUser = (event) => {
+        setAnchorElUser(event.currentTarget);
+    };
+    // CLOSE the hamburger icon menu
+    const handleCloseMenu = () => {
+        setAnchorElMenu(null);
+    };
+    // CLOSE the user icon menu
+    const handleCloseUser = (event) => {
+        setAnchorElUser(null);
+    };
+
+    return (
         <>
-        
+
         </>
     );
 }

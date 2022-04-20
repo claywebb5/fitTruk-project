@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import AdminNav from './AdminNav';
+import ProspectNav from './ProspectNav';
 // ---------< MUI IMPORTS >----------------
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
@@ -92,7 +93,16 @@ function Nav() {
               onClose={handleCloseMenu}
             >
               <MenuItem onClick={handleCloseMenu}>
-                <Typography textAlign="center"></Typography>
+                <Typography textAlign="center">Profile</Typography>
+              </MenuItem>
+              <MenuItem onClick={handleCloseMenu}>
+                <Typography textAlign="center">All Classes</Typography>
+              </MenuItem>
+              <MenuItem onClick={handleCloseMenu}>
+                <Typography textAlign="center">My Classes</Typography>
+              </MenuItem>
+              <MenuItem onClick={handleCloseMenu}>
+                <Typography textAlign="center">About</Typography>
               </MenuItem>
             </Menu>
           </Box>
