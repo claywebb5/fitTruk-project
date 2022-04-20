@@ -33,32 +33,54 @@ router.put('/edit-class/:id', (req, res) => {
 
 // -------------------------- check in customers for classes (PUT)
 
-router.put('/check-in/:id', (req, res) => {
+router.put('/check-in/:id', async (req, res) => {
 
     // console.log('Im just tryin to do stuffs with this stuffs', req.body);
     
     if (req.isAuthenticated()) {
 
         let users = req.body
-
-        for (let i = 0; i < users.length; i++) {
-            // console.log('this is the user info when looping', users[i]);
-            if (users[i].checked_in) {
-                console.log('this person is checked in', users[i].username);
-                
-            }
-            else if (!users[i].checked_in) {
-                console.log('this person is NOT checked in', users[i].username);
-                
-            }
+        const connection = await pool.connect();
+        
+        try {
             
             
+            connection.query('BEGIN;')
+            
+            sqlText = `
+            UPDATE "class_list"
+            SET "checked_in" = TRUE
+            WHERE user_id = $1 and "class_id" = $2`;
+            
+            for (let i = 0; i < users.length; i++) {
+                // console.log('this is the user info when looping', users[i]);
+                if (users[i].checked_in) {
+                    console.log('this person is checked in', users[i].username);
+                    
+                    console.log('not sure if I can see this in here',req.params.id);
+                    await connection.query(sqlText, [users[i].id, req.params.id])
+                    
+                }
+                else if (!users[i].checked_in) {
+                    console.log('not sure if I can see this in here',req.params.id);
+                    console.log('this person is NOT checked in', users[i].username);
+                    
+                }
+            }
+            
+            await connection.query('COMMIT;')
+            res.sendStatus(200)   
+        } catch (error) {
+            await connection.query('ROLLBACK;')
+            console.log('the error while checking in', error);
+            
+        } finally {
+            connection.release();
         }
+
         
     //     const queryText =
-    //         `UPDATE "class_list"
-    // SET "checked_in" = TRUE
-    // WHERE user_id = $1 and "class_id" = $2`;
+    //         
 
     //     pool.query(queryText, [req.body.data, req.params.id])
 
