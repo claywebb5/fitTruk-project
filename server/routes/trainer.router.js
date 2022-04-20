@@ -35,14 +35,22 @@ router.put('/edit-class/:id', (req, res) => {
 
 router.put('/check-in/:id', (req, res) => {
 
-    console.log('Im just tryin to do stuffs with this stuffs', req.body);
+    // console.log('Im just tryin to do stuffs with this stuffs', req.body);
     
     if (req.isAuthenticated()) {
 
         let users = req.body
 
         for (let i = 0; i < users.length; i++) {
-            console.log('this is the user info when looping', users[i]);
+            // console.log('this is the user info when looping', users[i]);
+            if (users[i].checked_in) {
+                console.log('this person is checked in', users[i].username);
+                
+            }
+            else if (!users[i].checked_in) {
+                console.log('this person is NOT checked in', users[i].username);
+                
+            }
             
             
         }
