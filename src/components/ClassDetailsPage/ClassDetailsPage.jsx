@@ -51,7 +51,7 @@ function ClassDetailsPage() {
 
     const handleGpsClick = (showMap) => {
         // console.log('This will show google maps');
-        // setShowMap(!showMap)
+        setShowMap(!showMap)
         console.log('is the class full? isClassFull:',isClassFull) 
 
     }
@@ -90,7 +90,7 @@ function ClassDetailsPage() {
                 height="250"
                 frameBorder="0" style={{ border: 0 }}
                 // referrerpolicy="no-referrer-when-downgrade"
-                src="https://www.google.com/maps/embed/v1/place?key=ADD_KEY_HERE&q=44.952975,-93.21846" //the 'q' or "Query" can be text aswell as coordinates, these coords are DUMMY DATA
+                src={`https://www.google.com/maps/embed/v1/place?key=${process.env.GOOGLE_MAP_API_KEY}&q=44.952975,-93.21846`} //the 'q' or "Query" can be text aswell as coordinates, these coords are DUMMY DATA
             >
             </iframe> : <p>Im not a map</p>}
             <h3>{classDetails.start_time}-{classDetails.end_time}</h3>
