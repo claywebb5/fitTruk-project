@@ -1,9 +1,10 @@
+// import './Nav.css';
 import React from 'react';
 import { Link } from 'react-router-dom';
-// import './Nav.css';
 import { useSelector } from 'react-redux';
+import AdminNav from './AdminNav';
 
-// ------------------ *** NEED TO SPECIFY BETWEEN AUTH LEVEL *** ----------------------------
+// =================**< CUSTOMER/PROSPECT/TRAINER VIEW >**=========================
 
 function Nav() {
   const user = useSelector((store) => store.user);
