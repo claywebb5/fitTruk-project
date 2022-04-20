@@ -1,10 +1,11 @@
 // import './Nav.css';
 import React, { useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import logoWhite from './logoWhite.png';
 import AdminNav from './AdminNav';
 import ProspectNav from './ProspectNav';
+import LogOutButton from '../LogOutButton/LogOutButton';
 // ---------< MUI IMPORTS >----------------
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
@@ -19,13 +20,15 @@ import FormGroup from '@mui/material/FormGroup';
 import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
 import Avatar from '@mui/material/Avatar';
+import { deepOrange, deepPurple } from '@mui/material/colors';
+
 
 
 // =================**< CUSTOMER/TRAINER VIEW >**=========================
-// [] Profile
-// [] All Classes
-// [] My Classes
-// [] Sign out
+// [x] Profile
+// [x] All Classes
+// [x] My Classes
+// [x] Sign out
 
 
 
@@ -33,6 +36,15 @@ function Nav() {
   // ========< TOOLS >==============
   const history = useHistory();
   const user = useSelector((store) => store.user);
+  const dispatch = useDispatch();
+  // -------< PROFILE ICON >---------------
+  const name = user.name.toUpperCase()
+  const words = name.split(' ');
+  const initials = [];
+  // ---------< CREATES ICON >-------------
+  for (const i of words) {
+    initials.push(i[0])
+  }
 
   // =====< USESTATE >=============================
   // For the hamburger icon menu
@@ -41,10 +53,6 @@ function Nav() {
   const [anchorElUser, setAnchorElUser] = useState(null);
 
   // =====< CLICK LISTENERS >=============================
-  // Go to all classes view
-  const handleLogo = () => {
-    history.push("/all-classes")
-  };
   // OPEN the hamburger icon menu
   const handleOpenMenu = (event) => {
     setAnchorElMenu(event.currentTarget);
@@ -61,26 +69,56 @@ function Nav() {
   const handleCloseUser = (event) => {
     setAnchorElUser(null);
   };
+  // GO to All Classes (Maybe new Home.jsx Component?)
+  const handleLogo = () => {
+    history.push("/all-classes")
+  };
+  // GO to Profile
+  const handleProfile = () => {
+    history.push('/personal-info');
+  };
+  // GO to Home
+  const handleHome = () => {
+    alert('See Home.jsx Component!!!')
+    // history.push('');
+  };
+  // GO to All Classes
+  const handleAllClasses = () => {
+    history.push('/all-classes');
+  };
+  // GO to My Classes
+  const handleMyClasses = () => {
+    history.push('/my-classes');
+  };
+  // GO to About
+  const handleAbout = () => {
+    history.push('/about');
+  };
+  // SIGN OUT
+  const handleSignOut = () => {
+    dispatch({ type: 'LOGOUT' });
+    // history.push('');
+  };
 
   // ===========*< COLOR THEME >*===============
-  // const theme = createTheme({
-  //   typography: {
-  //     fontFamily: [
-  //       'FATFRANK',
-  //       'CENTURY GOTHIC',
-  //       'Montserrat',
-  //     ].join(','),
-  //   },
-  //   palette: {
-  //     mode: 'main',
-  //     primary: {
-  //       darkGreen: '#80bd02',
-  //       lightGreen: '#ace23a',
-  //       darkGrey: '#41414c',
-  //       lightGrey: '#6d6e71'
-  //     },
-  //   },
-  // })
+    // const theme = createTheme({
+    //   typography: {
+    //     fontFamily: [
+    //       'FATFRANK',
+    //       'CENTURY GOTHIC',
+    //       'Montserrat',
+    //     ].join(','),
+    //   },
+    //   palette: {
+    //     mode: 'main',
+    //     primary: {
+    //       darkGreen: '#80bd02',
+    //       lightGreen: '#ace23a',
+    //       darkGrey: '#41414c',
+    //       lightGrey: '#6d6e71'
+    //     },
+    //   },
+    // })
 
   return (
     <>
@@ -94,7 +132,7 @@ function Nav() {
               aria-label="menu"
               aria-controls="menu-appbar"
               onClick={handleOpenMenu}
-              sx={{ mr: 2 }}
+              sx={{ mr: 2, color: "#ace23a" }}
             >
               <MenuIcon />
             </IconButton>
@@ -115,16 +153,16 @@ function Nav() {
               onClose={handleCloseMenu}
             >
               <MenuItem onClick={handleCloseMenu}>
-                <Typography textAlign="center">Home</Typography>
+                <Typography textAlign="center" onClick={handleHome}>Home</Typography>
               </MenuItem>
               <MenuItem onClick={handleCloseMenu}>
-                <Typography textAlign="center">All Classes</Typography>
+                <Typography textAlign="center" onClick={handleAllClasses}>All Classes</Typography>
               </MenuItem>
+              {/* <MenuItem onClick={handleCloseMenu}>
+                <Typography textAlign="center" onClick={handleMyClasses}>My Classes</Typography>
+              </MenuItem> */}
               <MenuItem onClick={handleCloseMenu}>
-                <Typography textAlign="center">My Classes</Typography>
-              </MenuItem>
-              <MenuItem onClick={handleCloseMenu}>
-                <Typography textAlign="center">About</Typography>
+                <Typography textAlign="center" onClick={handleAbout}>About</Typography>
               </MenuItem>
             </Menu>
           </Box>
@@ -143,7 +181,38 @@ function Nav() {
           </Box>
           {/* ------< USER ICON >--------------- */}
           <Box sx={{ flexGrow: 0 }}>
-
+            <IconButton
+              onClick={handleOpenUser}
+              sx={{ p: 0 }}
+            >
+              <Avatar sx={{ bgcolor: '#80bd02' }}>{initials.join('')}</Avatar>
+            </IconButton>
+            <Menu
+              sx={{ mt: '45px' }}
+              id="user-appbar"
+              anchorEl={anchorElUser}
+              anchorOrigin={{
+                vertical: 'top',
+                horizontal: 'right',
+              }}
+              keepMounted
+              transformOrigin={{
+                vertical: 'top',
+                horizontal: 'right',
+              }}
+              open={Boolean(anchorElUser)}
+              onClose={handleCloseUser}
+            >
+              <MenuItem onClick={handleCloseUser}>
+                <Typography textAlign="center" onClick={handleProfile}>Profile</Typography>
+              </MenuItem>
+              <MenuItem onClick={handleCloseUser}>
+                <Typography textAlign="center" onClick={handleMyClasses}>My Classes</Typography>
+              </MenuItem>
+              <MenuItem onClick={handleCloseUser}>
+                <Typography textAlign="center" onClick={handleSignOut}>Sign Out</Typography>
+              </MenuItem>
+            </Menu>
           </Box>
         </Toolbar>
       </AppBar>
