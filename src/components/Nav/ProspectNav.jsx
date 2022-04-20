@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import AdminNav from './AdminNav';
 // ---------< MUI IMPORTS >----------------
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
@@ -16,23 +17,7 @@ import FormGroup from '@mui/material/FormGroup';
 import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
 
-
-// =================**< ADMIN VIEW >**=========================
-    // [] Add Class
-    // [] All Classes
-    // [] Class Schedule
-    // [] Profile
-    // [] Sign Out
-
-
-
-function AdminNav() {
-
-    return(
-        <>
-        
-        </>
-    );
-}
-
-export default AdminNav;
+// =================**< PROSPECTS VIEW >**=========================
+  // [] All Classes
+  // [] Sign in
+  // [] Register

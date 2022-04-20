@@ -18,13 +18,7 @@ import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
 
 
-// =================**< CUSTOMER/PROSPECT/TRAINER VIEW >**=========================
-// ------< PROSPECTS >---------
-  // [] All Classes
-  // [] Sign in
-  // [] Register
-
-// -------< CUSTOMERS/TRAINERS >----------
+// =================**< CUSTOMER/TRAINER VIEW >**=========================
   // [] Profile
   // [] All Classes
   // [] My Classes
