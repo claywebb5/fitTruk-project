@@ -8,15 +8,20 @@ const attendeesReducer = (state = [], action) => {
         // const users = action.payload.attendees
         const userId = action.payload.userId
         
+        // loop over array of attendees sent in payload
         for (let i = 0; i < action.payload.attendees.length; i++) {
-          // console.log(users[i],'this should just be an ID',  userId);
+          // initialized variable to make writing if logic more readable
           let user = action.payload.attendees[i]
+
+          // finds user inside action.payload.attendees array by comparing the user id from array with userId sent in payload
           if(userId === user.id){
-            console.log('Im matching IDs!');
+            // this sets the boolean value of the users checked in to the opposite of what it just was
+            // this is what allow the value to toggle back and forth on the frontend
             user.checked_in = !user.checked_in;
           }
           
         }
+        // updates local reduce state with the new boolean values that were set above
         return action.payload.attendees
       default:
         return state;
