@@ -13,7 +13,7 @@ const attendeesReducer = (state = [], action) => {
           let user = action.payload.attendees[i]
           if(userId === user.id){
             console.log('Im matching IDs!');
-            user.check_in = true
+            user.checked_in = true
           }
           
         }

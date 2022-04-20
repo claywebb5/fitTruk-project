@@ -31,6 +31,10 @@ function AttendeesPage(){
     const handleMassMessage = () => {
         console.log('this will open the option to send a mass message to all members signed up for a class');
     }
+
+    const handleCheckIn = () => {
+        console.log('send a dispatch to the server to update if users are checked in in the database');
+    }
     console.log('this is the attendees info', attendees);
     return(
         <>
@@ -39,7 +43,7 @@ function AttendeesPage(){
                 // console.log(customer, i)
                 <AttendanceItem key={i} customer={customer}/>
             ))}
-       
+            <button onClick={handleCheckIn}>Check-In</button>
 
         </>
     )
