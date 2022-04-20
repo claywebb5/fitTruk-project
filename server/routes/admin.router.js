@@ -26,7 +26,7 @@ router.post('/new-class', (req, res) => {
 });
 
 // -------------------------- Admin GET trainer list (trainers have access level of 2)
-router.get('/', (req, res) => {
+router.get('/trainer-list', (req, res) => {
 
   if (req.isAuthenticated()) {
     let queryText = `select "id" AS "trainer_user_id", "name" AS "trainer_name", "profile_image" AS "trainer_image",  "pronouns" AS "trainer_pronouns"

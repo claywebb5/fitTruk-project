@@ -21,6 +21,11 @@ function CreateClassPage() {
 
 
     useEffect(() => {
+        if(user.access_level===3){
+            dispatch({
+                type: 
+            })
+        }
         // Edit class view
         if (classId) {
             dispatch({
@@ -160,8 +165,8 @@ function CreateClassPage() {
                             <option key={i} value={trainer.trainer_user_id}>{trainer.trainer_name}</option>
                         ))}
                     </select>
+                    
                     {/* ---- Here's the trainer's image ---- */}
-                    {/* <TrainerProfileImage /> */}
                     {selectedTrainer.trainer_image ?
                         <img className='trainer-image' src={selectedTrainer.trainer_image} alt="Profile image of the selected trainer" />
                         :

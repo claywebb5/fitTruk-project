@@ -18,6 +18,9 @@ function AllClassesPage() {
       type: 'FETCH_CLASSES'
     });
     dispatch({
+      type: 'FETCH_AVAILABLE_TRAINERS'
+    });
+    dispatch({
       type: 'RESET_SEARCH_TERM'
     });
     dispatch({
