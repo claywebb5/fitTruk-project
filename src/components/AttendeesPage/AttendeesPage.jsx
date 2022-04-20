@@ -34,6 +34,14 @@ function AttendeesPage(){
 
     const handleCheckIn = () => {
         console.log('send a dispatch to the server to update if users are checked in in the database');
+        dispatch({
+            type: 'UPDATE_ATTENDANCE',
+            payload: {
+                attendees,
+                id
+            }
+        })
+
     }
     console.log('this is the attendees info', attendees);
     return(
