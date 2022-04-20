@@ -32,12 +32,12 @@ function* updateAttendance(action){
     // Will send a request to the trainer router to update attendance with those who arrived for the class
     console.log(action.payload);
     
-    // try{
-    //     yield axios.put(`/api/trainer/check-in/${action.payload.id}`, action.payload); // * Goes to SERVER "trainer.router"
-    //     yield put({type: 'FETCH_ATTENDANCE'}) // * Goes to THIS SAGA "trainer.saga" (fetchAttendance)
-    // } catch (error){
-    //     console.log('Error updating checked in status', error);
-    // }
+    try{
+        yield axios.put(`/api/trainer/check-in/${action.payload.id}`, action.payload.attendees); // * Goes to SERVER "trainer.router"
+        yield put({type: 'FETCH_ATTENDANCE'}) // * Goes to THIS SAGA "trainer.saga" (fetchAttendance)
+    } catch (error){
+        console.log('Error updating checked in status', error);
+    }
 }
 
 function* trainerSaga(){

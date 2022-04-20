@@ -35,26 +35,29 @@ router.put('/edit-class/:id', (req, res) => {
 
 router.put('/check-in/:id', (req, res) => {
 
-    if (req.isAuthenticated()) {
+    console.log('Im just tryin to do stuffs with this stuffs', req.body);
+    
+    // if (req.isAuthenticated()) {
 
-        const queryText =
-            `UPDATE "class_list"
-    SET "checked_in" = TRUE
-    WHERE user_id = $1 and "class_id" = $2`;
 
-        pool.query(queryText, [req.body.data, req.params.id])
+    //     const queryText =
+    //         `UPDATE "class_list"
+    // SET "checked_in" = TRUE
+    // WHERE user_id = $1 and "class_id" = $2`;
 
-            .then((result) => {
-                res.send(result.rows)
-            })
-            .catch((error) => {
-                console.log(error);
-                res.sendStatus(500);
-            })
+    //     pool.query(queryText, [req.body.data, req.params.id])
 
-    } else {
-        res.sendStatus(403);
-    }
+    //         .then((result) => {
+    //             res.send(result.rows)
+    //         })
+    //         .catch((error) => {
+    //             console.log(error);
+    //             res.sendStatus(500);
+    //         })
+
+    // } else {
+    //     res.sendStatus(403);
+    // }
 });
 
 
