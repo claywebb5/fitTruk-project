@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import logoWhite from './logoWhite.png';
 import AdminNav from './AdminNav';
 import ProspectNav from './ProspectNav';
 // ---------< MUI IMPORTS >----------------
@@ -17,13 +18,14 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import FormGroup from '@mui/material/FormGroup';
 import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
+import Avatar from '@mui/material/Avatar';
 
 
 // =================**< CUSTOMER/TRAINER VIEW >**=========================
-  // [] Profile
-  // [] All Classes
-  // [] My Classes
-  // [] Sign out
+// [] Profile
+// [] All Classes
+// [] My Classes
+// [] Sign out
 
 
 
@@ -60,9 +62,29 @@ function Nav() {
     setAnchorElUser(null);
   };
 
+  // ===========*< COLOR THEME >*===============
+  // const theme = createTheme({
+  //   typography: {
+  //     fontFamily: [
+  //       'FATFRANK',
+  //       'CENTURY GOTHIC',
+  //       'Montserrat',
+  //     ].join(','),
+  //   },
+  //   palette: {
+  //     mode: 'main',
+  //     primary: {
+  //       darkGreen: '#80bd02',
+  //       lightGreen: '#ace23a',
+  //       darkGrey: '#41414c',
+  //       lightGrey: '#6d6e71'
+  //     },
+  //   },
+  // })
+
   return (
     <>
-      <AppBar position="sticky"> {/* UPDATE COLOR */}
+      <AppBar position="sticky" sx={{ bgcolor: "#41414c" }}> {/* UPDATE COLOR */}
         <Toolbar>
           {/* ------< HAMBURGER ICON >--------------- */}
           <Box sx={{ flexGrow: 1 }}>
@@ -93,7 +115,7 @@ function Nav() {
               onClose={handleCloseMenu}
             >
               <MenuItem onClick={handleCloseMenu}>
-                <Typography textAlign="center">Profile</Typography>
+                <Typography textAlign="center">Home</Typography>
               </MenuItem>
               <MenuItem onClick={handleCloseMenu}>
                 <Typography textAlign="center">All Classes</Typography>
@@ -105,6 +127,23 @@ function Nav() {
                 <Typography textAlign="center">About</Typography>
               </MenuItem>
             </Menu>
+          </Box>
+          {/* ------< LOGO ICON >--------------- */}
+          <Box sx={{ flexGrow: 1 }}>
+            <IconButton
+              size="large"
+              edge="start"
+              aria-label="logo"
+              aria-controls="logo-appbar"
+              onClick={handleLogo}
+              sx={{ mr: 2 }}
+            >
+              <Avatar alt="logoWhite" src={logoWhite} variant="square" />
+            </IconButton>
+          </Box>
+          {/* ------< USER ICON >--------------- */}
+          <Box sx={{ flexGrow: 0 }}>
+
           </Box>
         </Toolbar>
       </AppBar>
