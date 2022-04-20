@@ -3,7 +3,6 @@ import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import ClassListItem from '../ClassListItem/ClassListItem';
-import Nav from '../Nav/Nav';
 
 
 function AllClassesPage() {
@@ -91,7 +90,6 @@ const searchFunction = (array) =>{
 
 return (
     <div>
-      <Nav />
 
       <input
         type="text"

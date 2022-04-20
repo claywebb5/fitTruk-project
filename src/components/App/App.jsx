@@ -10,7 +10,7 @@ import AdminRoute from '../AdminRoute/AdminRoute';
 import LandingPage from '../LandingPage/LandingPage'; // (1.1)
 import LoginPage from '../LoginPage/LoginPage'; // (1.2a)
 import RegisterPage from '../RegisterPage/RegisterPage'; // (1.2b)
-import Nav from '../Nav/Nav'; // (1.3 a&b) <-- **** SPECIFY BETWEEN AUTH LEVEL ****
+import Nav from '../Nav/Nav'; // (1.3 a&b) 
 import AllClassesPage from '../AllClassesPage/AllClassesPage'; // (1.4 a&c) <-- **** NEED TO SPECIFY BETWEEN AUTH LEVEL ****
 import MyClassesPage from '../MyClassesPage/MyClassesPage'; // (1.4b)
 import ClassDetailsPage from '../ClassDetailsPage/ClassDetailsPage'; // (1.5)
@@ -42,22 +42,8 @@ function App() {
 
     <Router>
       <div>
-        {/* --------------------------< START DEV BAR >-------------------------- */}  
-        {/* <Nav />   (** NEED TO SPECIFY BETWEEN AUTH LEVEL **)  */}
-        <nav>
-          <h1>DEV BAR</h1>
-          <Link to="/home">Home</Link> | 
-          <Link to="/about">About</Link> | 
-          <Link to="/registration">Registration</Link> | 
-          <Link to="/login">Login</Link> | 
-          <Link to="/all-classes">All Classes</Link> | 
-          <Link to="/my-classes">My Classes</Link> | 
-          <Link to="/class-details">Class Details</Link> | 
-          <Link to="/class-details/:id/attendees">Class Attendance</Link> | 
-          <Link to="/create-class">Create Class</Link> | 
-          <Link to="/personal-info">Personal Info</Link>
-        </nav> {/* --------------------------< END DEV BAR >-------------------------- */}
-        
+        <Nav />
+
         <Switch>
 
           <Redirect exact from="/" to="/home" /> {/* Visiting localhost:3000 will redirect to localhost:3000/home */}
