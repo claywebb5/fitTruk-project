@@ -93,9 +93,8 @@ function ClassDetailsPage() {
             <h3>{classDetails.start_time}-{classDetails.end_time}</h3>
             <h3>{classDetails.description}</h3>
             <button onClick={() => handleReturnClick(classDetails)}>Return</button>
-            {user.access_level >= 2 ?
-                <button onClick={() => history.push(`/class-details/${id}/attendees`)}>Attendance</button> :
-                (function () {
+            <button onClick={() => history.push(`/class-details/${id}/attendees`)}>Attendance</button> 
+                {(function () {
                     if (classDetails.is_my_class) {
                         return <button onClick={handleCancelClick}>Cancel Reservation</button>;
                     } else {
