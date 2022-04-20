@@ -29,6 +29,7 @@ function ClassDetailsPage() {
     //------------<  Variables  >----------
     const isClassFull = useSelector(store => store.selectedClass.classSize.full_class);
     const classDetails = useSelector(store => store.selectedClass.classDetails)
+    const {street , city , state, zip} = classDetails;
     const [showMap, setShowMap] = useState(false)
     const { id } = useParams()
     // const user = useSelector(store => store.user)
@@ -51,7 +52,7 @@ function ClassDetailsPage() {
 
     const handleGpsClick = (showMap) => {
         // console.log('This will show google maps');
-        // setShowMap(!showMap)
+        setShowMap(!showMap)
         console.log('is the class full? isClassFull:',isClassFull) 
 
     }
@@ -67,12 +68,11 @@ function ClassDetailsPage() {
     }
     //---------------<  E N D  C l i c k   H a n d l e r s  >----------------------------
 
+    const extractFirstName = (fullName) => { // This function will extract the first name of a trainer from their full name
+        let firstName = fullName.split(' ')[0]; // If the database changes from one name to a first name and last name, this will
+        return firstName;
+      }
 
-
-    // To be completed on this page:
-    // Eventually we'll get a trainer name, that will replace the trainer_user_id below
-    // Link the gps to an actual google search query.
-    //---------------< // END Temporary things to be deleted  >----------------------------
 
     // console.log('these are the details pulled in from the reducer:', classDetails); // TEST LOG
     // console.log('this is the class id pulled from the url with params', id); // TEST LOG
@@ -83,18 +83,19 @@ function ClassDetailsPage() {
             <h1>{classDetails.clean_format_date}</h1>
             <h1>{classDetails.week_day_name}</h1>
             <h3>{classDetails.classname}</h3>
-            <h3>led by: {classDetails.trainer_user_id}</h3>
-            <h3>{classDetails.location} <button onClick={() => handleGpsClick(showMap)}>gps</button></h3>
+            <h3>led by: {extractFirstName(classDetails.name)}</h3>
+            <h3>{street +' '+ city +' '+ state +' '+ zip}<button onClick={() => handleGpsClick(showMap)}>gps</button></h3>
             {showMap ? <iframe
                 width="100%"
                 height="250"
                 frameBorder="0" style={{ border: 0 }}
                 // referrerpolicy="no-referrer-when-downgrade"
-                src="https://www.google.com/maps/embed/v1/place?key=ADD_KEY_HERE&q=44.952975,-93.21846" //the 'q' or "Query" can be text aswell as coordinates, these coords are DUMMY DATA
+                src={`https://www.google.com/maps/embed/v1/place?key=ADD_KEY_HERE&q=`} //the 'q' or "Query" can be text aswell as coordinates, these coords are DUMMY DATA
             >
             </iframe> : <p>Im not a map</p>}
             <h3>{classDetails.start_time}-{classDetails.end_time}</h3>
             <h3>{classDetails.description}</h3>
+            <h3>Spots remaining: {classDetails.spots_remaining}</h3>
             <button onClick={() => handleReturnClick(classDetails)}>Return</button>
             {(function () {
                 if (classDetails.is_my_class) {
