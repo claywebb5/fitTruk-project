@@ -37,9 +37,16 @@ router.put('/check-in/:id', (req, res) => {
 
     console.log('Im just tryin to do stuffs with this stuffs', req.body);
     
-    // if (req.isAuthenticated()) {
+    if (req.isAuthenticated()) {
 
+        let users = req.body
 
+        for (let i = 0; i < users.length; i++) {
+            console.log('this is the user info when looping', users[i]);
+            
+            
+        }
+        
     //     const queryText =
     //         `UPDATE "class_list"
     // SET "checked_in" = TRUE
@@ -55,9 +62,9 @@ router.put('/check-in/:id', (req, res) => {
     //             res.sendStatus(500);
     //         })
 
-    // } else {
-    //     res.sendStatus(403);
-    // }
+    } else {
+        res.sendStatus(403);
+    }
 });
 
 
