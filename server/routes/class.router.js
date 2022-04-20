@@ -25,7 +25,7 @@ router.get('/details/:classId/', (req, res) => {
     let classId = req.params.classId
     // If the user is signed in, this will return the class details AS WELL AS 
     // a boolean of whether or not the user is registered for this class.
-    if (req.user.id) {
+    if (req.user) {
         let registeredUserQuery = `SELECT "c"."id", to_char("c"."date", 'FMDay') AS "week_day_name",
 		to_char("c"."date", 'FMMM/FMDD/YYYY') AS "clean_format_date", "c"."classname",
 		"c"."description", "c"."trainer_user_id", to_char("c"."date", 'YYYY-MM-DD') AS "date",
@@ -61,7 +61,13 @@ router.get('/details/:classId/', (req, res) => {
 		to_char("c"."date", 'FMMM/FMDD/YYYY') AS "clean_format_date", "c"."classname",
 		"c"."description", "c"."trainer_user_id", to_char("c"."date", 'YYYY-MM-DD') AS "date",
 		"c"."start_time", "c"."end_time", "c"."street", "c"."city", "c"."state", "c"."zip", "c"."class_size",
-		"user"."name", "user"."pronouns"
+		"user"."name", "user"."pronouns",
+        (select "class_size" - 
+		(select count(user_id)
+		from class_list
+		where class_id = $1)
+		from "classes" 
+		where id = $1) as spots_remaining
         FROM "classes" AS "c"
         JOIN "user" ON "user"."id" = "c"."trainer_user_id"
         WHERE "c"."id" = $1;`;
