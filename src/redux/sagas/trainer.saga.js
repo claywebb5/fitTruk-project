@@ -34,7 +34,7 @@ function* updateAttendance(action){
     
     try{
         yield axios.put(`/api/trainer/check-in/${action.payload.id}`, action.payload.attendees); // * Goes to SERVER "trainer.router"
-        yield put({type: 'FETCH_ATTENDANCE'}) // * Goes to THIS SAGA "trainer.saga" (fetchAttendance)
+        yield put({type: 'FETCH_ATTENDANCE', payload: action.payload.id }) // * Goes to THIS SAGA "trainer.saga" (fetchAttendance)
     } catch (error){
         console.log('Error updating checked in status', error);
     }
