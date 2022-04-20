@@ -29,7 +29,7 @@ router.post('/new-class', (req, res) => {
 router.get('/', (req, res) => {
 
   if (req.isAuthenticated()) {
-    let queryText = `select "name", "id", "profile_image"
+    let queryText = `select "id" AS "trainer_user_id", "name" AS "trainer_name", "profile_image" AS "trainer_image",  "pronouns" AS "trainer_pronouns"
       from "user"
       where "access_level" = 2;`;
     pool.query(queryText).then((result) => {

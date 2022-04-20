@@ -106,7 +106,7 @@ return (
         onChange={(event) => { handleSearchTrainer(event.target.value) }}>
           <option value={''}>All trainers</option> {/*  Clicking "All Trainers" resets the trainer value to null */}
         {availableTrainers.map((trainer, i) => (
-          <option key={i} value={trainer.trainer_user_id}>{trainer.name}</option>
+          <option key={i} value={trainer.trainer_user_id}>{trainer.trainer_name}</option>
         ))}
       </select>
 

@@ -72,8 +72,9 @@ function CreateClassPage() {
                     type: 'SET_SELECTED_TRAINER',
                     payload: {
                         trainer_user_id: trainer.trainer_user_id,
-                        profile_image: trainer.profile_image,
-                        name: trainer.name
+                        trainer_image: trainer.trainer_image,
+                        trainer_name: trainer.trainer_name,
+                        trainer_pronouns: trainer.trainer_pronouns
                     }
                 });
 
@@ -156,13 +157,13 @@ function CreateClassPage() {
                         {/* <option key={-1} onClick={dispatch({type:''})}>Select a Trainer</option> */}
                         <option key={-1} value={'reset'}>Select a Trainer</option>
                         {availableTrainers.map((trainer, i) => (
-                            <option key={i} value={trainer.trainer_user_id}>{trainer.name}</option>
+                            <option key={i} value={trainer.trainer_user_id}>{trainer.trainer_name}</option>
                         ))}
                     </select>
                     {/* ---- Here's the trainer's image ---- */}
                     {/* <TrainerProfileImage /> */}
-                    {selectedTrainer.profile_image ?
-                        <img className='trainer-image' src={selectedTrainer.profile_image} alt="Profile image of the selected trainer" />
+                    {selectedTrainer.trainer_image ?
+                        <img className='trainer-image' src={selectedTrainer.trainer_image} alt="Profile image of the selected trainer" />
                         :
                         <div className='trainer-image' style={{ display: 'block' }}>This is a div</div>
                     }

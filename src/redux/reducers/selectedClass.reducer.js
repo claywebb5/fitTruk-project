@@ -5,6 +5,9 @@ import { combineReducers } from 'redux';
 const classDetails = (
   state = {
     trainer_user_id: '',
+    trainer_name: '',
+    trainer_pronouns: '',
+    trainer_image: '',
     date: '',
     classname: '',
     start_time: '',
@@ -36,8 +39,10 @@ const classDetails = (
     case 'RESET_CLASS_DETAILS': // This resets a class's details to an empty state.
     return {
       trainer_user_id: '',
+      trainer_name: '',
+      trainer_pronouns: '',
       date: '',
-      classname: '',
+      class_name: '',
       start_time: '',
       end_time: '',
       street: '',
@@ -61,22 +66,24 @@ const selectedTrainer = (
   state = {
     trainer_user_id: '',
     profile_image: '',
-    name: ''
+    trainer_name: '',
+    trainer_pronouns: '',
   }, action) => {
 
   if (action.type === 'SET_SELECTED_TRAINER') {
-    const { trainer_user_id, profile_image, name } = action.payload;
+    const { trainer_user_id, trainer_image, trainer_name, trainer_pronouns } = action.payload;
     return {
       ...state,
       trainer_user_id: trainer_user_id,
-      profile_image: profile_image,
-      name: name
+      trainer_image: trainer_image,
+      trainer_name: trainer_name,
+      trainer_pronouns: trainer_pronouns
     };
   } else if (action.type === 'RESET_SELECTED_TRAINER'){
     return {
       trainer_user_id: '',
-      profile_image: '',
-      name: ''
+      trainer_image: '',
+      trainer_name: ''
     }
   }
 

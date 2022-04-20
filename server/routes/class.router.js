@@ -7,7 +7,7 @@ const router = express.Router();
 router.get('/', (req, res) => {
 
     let queryText = `SELECT "c"."id", to_char("c"."date", 'FMDay') AS "week_day_name", to_char("c"."date", 'FMMM/FMDD') AS "abbreviated_date", to_char("c"."date", 'YYYY-MM-DD') AS "date", "c"."start_time", "c"."end_time", "c"."classname", "c"."trainer_user_id",
-    "user"."name", "user"."pronouns"  
+    "user"."name" AS "trainer_name",  "user"."pronouns" AS "trainer_pronouns", "user"."profile_image" AS "trainer_image"
     FROM "classes" AS "c"
     JOIN "user" ON "user"."id" = "c"."trainer_user_id"
     ORDER BY date, start_time;`;
@@ -30,7 +30,7 @@ router.get('/details/:classId/', (req, res) => {
 		to_char("c"."date", 'FMMM/FMDD/YYYY') AS "clean_format_date", "c"."classname",
 		"c"."description", "c"."trainer_user_id", to_char("c"."date", 'YYYY-MM-DD') AS "date",
 		"c"."start_time", "c"."end_time", "c"."street", "c"."city", "c"."state", "c"."zip", "c"."class_size",
-		"user"."name", "user"."pronouns",
+		"user"."name" AS "trainer_name", "user"."pronouns" AS "trainer_pronouns", "user"."profile_image" AS "trainer_image",
         CASE
         WHEN (SELECT "cl"."id" FROM "class_list" AS "cl" WHERE "cl"."class_id" = $1 AND "cl"."user_id" = $2 limit 1) > 0
         THEN true
@@ -55,7 +55,7 @@ router.get('/details/:classId/', (req, res) => {
 		to_char("c"."date", 'FMMM/FMDD/YYYY') AS "clean_format_date", "c"."classname",
 		"c"."description", "c"."trainer_user_id", to_char("c"."date", 'YYYY-MM-DD') AS "date",
 		"c"."start_time", "c"."end_time", "c"."street", "c"."city", "c"."state", "c"."zip", "c"."class_size",
-		"user"."name", "user"."pronouns"
+		"user"."name" AS "trainer_name", "user"."pronouns" AS "trainer_pronouns", "user"."profile_image" AS "trainer_image"
         FROM "classes" AS "c"
         JOIN "user" ON "user"."id" = "c"."trainer_user_id"
         WHERE "c"."id" = $1;`;
