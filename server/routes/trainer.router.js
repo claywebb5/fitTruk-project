@@ -49,23 +49,26 @@ router.put('/check-in/:id', async (req, res) => {
             
             sqlText = `
             UPDATE "class_list"
-            SET "checked_in" = TRUE
-            WHERE user_id = $1 and "class_id" = $2`;
+            SET "checked_in" = $1
+            WHERE user_id = $2 and "class_id" = $3`;
             
             for (let i = 0; i < users.length; i++) {
                 // console.log('this is the user info when looping', users[i]);
-                if (users[i].checked_in) {
-                    console.log('this person is checked in', users[i].username);
+                
+                await connection.query(sqlText, [users[i].checked_in, users[i].id, req.params.id])
+
+                // if (users[i].checked_in) {
+                //     console.log('this person is checked in', users[i].username);
                     
-                    console.log('not sure if I can see this in here',req.params.id);
-                    await connection.query(sqlText, [users[i].id, req.params.id])
+                //     console.log('not sure if I can see this in here',req.params.id);
+                //     await connection.query(sqlText, [users[i].id, req.params.id])
                     
-                }
-                else if (!users[i].checked_in) {
-                    console.log('not sure if I can see this in here',req.params.id);
-                    console.log('this person is NOT checked in', users[i].username);
+                // }
+                // else if (!users[i].checked_in) {
+                //     console.log('not sure if I can see this in here',req.params.id);
+                //     console.log('this person is NOT checked in', users[i].username);
                     
-                }
+                // }
             }
             
             await connection.query('COMMIT;')
