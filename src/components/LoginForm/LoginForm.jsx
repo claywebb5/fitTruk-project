@@ -55,7 +55,7 @@ function LoginForm() {
             justifyContent: 'center',
             alignItems: 'center',
             color: '#ace23a',
-            borderRadius: 10
+            // borderRadius: 10
             
             
           }}
