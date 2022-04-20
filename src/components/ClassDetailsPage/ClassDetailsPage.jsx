@@ -52,7 +52,7 @@ function ClassDetailsPage() {
 
     const handleGpsClick = (showMap) => {
         // console.log('This will show google maps');
-        // setShowMap(!showMap)
+        setShowMap(!showMap)
         console.log('is the class full? isClassFull:',isClassFull) 
 
     }
