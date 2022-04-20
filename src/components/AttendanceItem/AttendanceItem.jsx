@@ -23,13 +23,21 @@ function AttendanceItem (props) {
     }
 
     return (
-        <>
+        <>{props.customer.checked_in ?
+        <div>
+         <input type="checkbox" id="customer" value="user?" onClick={checkUserIn} defaultChecked></input>
+         <img src={props.customer.profile_image} alt="a pretty picture" />
+         <label htmlFor="customer">{props.customer.username}</label>
+         <button onClick={handleMessage}>Message user</button>
+         </div>
+           : 
         <div>
          <input type="checkbox" id="customer" value="user?" onClick={checkUserIn}></input>
          <img src={props.customer.profile_image} alt="a pretty picture" />
          <label htmlFor="customer">{props.customer.username}</label>
          <button onClick={handleMessage}>Message user</button>
          </div>
+        }
         </>
     )
 }
