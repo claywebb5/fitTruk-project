@@ -61,7 +61,7 @@ function* fetchTrainers (){
     // Will send a request to the admin router to retrieve all available trainers
     console.log('in fetchTrainers, this is the dispatch I received');
     try {
-        const availableTrainerList = yield axios.get(`/api/admin/`); // * Goes to SERVER "class.router"
+        const availableTrainerList = yield axios.get(`/api/admin/available-trainers`); // * Goes to SERVER "class.router"
         console.log('these are the trainers', availableTrainerList.data);
         yield put({ type: 'SET_AVAILABLE_TRAINERS', payload: availableTrainerList.data }); // * Goes to REDUCER "availableTrainers.reducer.js"
     } catch (error) {

@@ -22,8 +22,9 @@ function CreateClassPage() {
 
     useEffect(() => {
         if(user.access_level===3){
+            console.log('User access level is 3, fetching trainer data');
             dispatch({
-                type: 
+                type: 'FETCH_AVAILABLE_TRAINERS'
             })
         }
         // Edit class view
