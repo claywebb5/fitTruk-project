@@ -34,68 +34,41 @@ router.put('/edit-class/:id', (req, res) => {
 // -------------------------- check in customers for classes (PUT)
 
 router.put('/check-in/:id', async (req, res) => {
-
-    // console.log('Im just tryin to do stuffs with this stuffs', req.body);
     
     if (req.isAuthenticated()) {
-
+        // initialize variable for array of to be looped over, variable name user picked to match loop in saga which does similar logic but with local state
         let users = req.body
+        // this forms a connection to the database which will allow us to make multiple sql actions during the transaction
         const connection = await pool.connect();
         
         try {
-            
-            
+            // this marks the beginning of the sql transaction
             connection.query('BEGIN;')
-            
+            // create sql text to be used during transaction
             sqlText = `
             UPDATE "class_list"
             SET "checked_in" = $1
             WHERE user_id = $2 and "class_id" = $3`;
             
             for (let i = 0; i < users.length; i++) {
-                // console.log('this is the user info when looping', users[i]);
                 
+                // this runs the sql command above and waits for it to be finished before moving on through the array
                 await connection.query(sqlText, [users[i].checked_in, users[i].id, req.params.id])
-
-                // if (users[i].checked_in) {
-                //     console.log('this person is checked in', users[i].username);
-                    
-                //     console.log('not sure if I can see this in here',req.params.id);
-                //     await connection.query(sqlText, [users[i].id, req.params.id])
-                    
-                // }
-                // else if (!users[i].checked_in) {
-                //     console.log('not sure if I can see this in here',req.params.id);
-                //     console.log('this person is NOT checked in', users[i].username);
-                    
-                // }
             }
-            
+            // after the For loop is complete, this will save the changes that were made and complete the transaction
             await connection.query('COMMIT;')
             res.sendStatus(200)   
         } catch (error) {
+            //incase of error during transaction, this will revert any changes that might have been made during the transaction
             await connection.query('ROLLBACK;')
             console.log('the error while checking in', error);
             
         } finally {
+            // this will disconnect us from the database
             connection.release();
         }
-
-        
-    //     const queryText =
-    //         
-
-    //     pool.query(queryText, [req.body.data, req.params.id])
-
-    //         .then((result) => {
-    //             res.send(result.rows)
-    //         })
-    //         .catch((error) => {
-    //             console.log(error);
-    //             res.sendStatus(500);
-    //         })
-
     } else {
+        // when a request is made by an unauthorized user, this will be triggered instead of any logic.
         res.sendStatus(403);
     }
 });
