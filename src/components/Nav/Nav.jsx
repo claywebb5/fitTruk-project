@@ -9,7 +9,7 @@ import CustomerNav from './CustomerNav';
 
 // =================**< NAV BAR PARENT COMPONENT >**=========================
 
-// ===========*< COLOR THEME >*===============
+// ===========*< COLOR/FONT THEME >*===============
 // const theme = createTheme({
 //   typography: {
 //     fontFamily: [
