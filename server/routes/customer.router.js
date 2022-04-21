@@ -11,15 +11,14 @@ router.get('/', (req, res) => {
   
 
   if (req.isAuthenticated()) {
-    const queryText = ` SELECT classes.id, to_char("date", 'FMMM/FMDD') AS "abbreviated_date", to_char("date", 'FMDay') AS "week_day_name", to_char("date", 'YYYY-MM-DD') AS "date", start_time, end_time, classname, trainer_user_id 
+    const queryText = `SELECT classes.id, to_char("date", 'FMMM/FMDD') AS "abbreviated_date", to_char("date", 'FMDay') AS "week_day_name", to_char("date", 'YYYY-MM-DD') AS "date", start_time, end_time, classname, trainer_user_id 
         FROM "classes" 
         JOIN "class_list" 
         ON "classes"."id" = "class_list"."class_id"
         JOIN "user" ON "class_list"."user_id" = "user".id
-        WHERE "user"."id" = ${req.user.id}
-        ORDER BY date, start_time
-        ;`;
-    pool.query(queryText)
+        WHERE "user"."id" = $1
+        ORDER BY date, start_time;`;
+    pool.query(queryText, [req.user.id])
       .then((result) => {
         res.send(result.rows);
       }).catch((error) => {

@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, useParams } from 'react-router-dom';
-import Nav from "../Nav/Nav";
 import './CreateClassPage.css';
 
 // ** ONLY ADMIN CAN SEE **
@@ -74,7 +73,8 @@ function CreateClassPage() {
                         payload: {
                             trainer_user_id: trainer.trainer_user_id,
                             trainer_image: trainer.trainer_image,
-                            trainer_name: trainer.trainer_name,
+                            trainer_first_name: trainer.trainer_first_name,
+                            trainer_last_name: trainer.trainer_last_name,
                             trainer_pronouns: trainer.trainer_pronouns
                         }
                     });
@@ -121,7 +121,6 @@ function CreateClassPage() {
 
     return (
         <>
-            <Nav />
             <h1>Create Class</h1>
             <form onSubmit={submitHandler}>
 
@@ -148,7 +147,7 @@ function CreateClassPage() {
                         {/* <option key={-1} onClick={dispatch({type:''})}>Select a Trainer</option> */}
                         <option key={-1} value={'reset'}>Select a Trainer</option>
                         {availableTrainers.map((trainer, i) => (
-                            <option key={i} value={trainer.trainer_user_id}>{trainer.trainer_name}</option>
+                            <option key={i} value={trainer.trainer_user_id}>{trainer.trainer_first_name} {trainer.trainer_last_name}</option>
                         ))}
                     </select>
 

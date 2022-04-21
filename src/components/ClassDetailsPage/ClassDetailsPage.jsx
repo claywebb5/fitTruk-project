@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import Nav from '../Nav/Nav';
 import { useParams } from 'react-router-dom/cjs/react-router-dom.min';
 function ClassDetailsPage() {
     //------------<  Setup  >-------------
@@ -29,12 +28,7 @@ function ClassDetailsPage() {
     //------------<  Variables  >----------
     const isClassFull = useSelector(store => store.selectedClass.classSize.full_class);
     const classDetails = useSelector(store => store.selectedClass.classDetails)
-    // const {street , city , state, zip} = classDetails;
-    // let fullName = "Dane Smith".split(' ');
-    // console.log('Fullname is:', fullName);
 
-    // console.log('Firstname is:', fullName);
-    // console.log('Lastname is:', fullName);
     const [showMap, setShowMap] = useState(false)
     const { id } = useParams()
     // const user = useSelector(store => store.user)
@@ -73,33 +67,18 @@ function ClassDetailsPage() {
     }
     //---------------<  E N D  C l i c k   H a n d l e r s  >----------------------------
 
-    const extractFirstName = (fullName) => {
-        console.log('fullName is', fullName); // This function will extract the first name of a trainer from their full name
-        // fullName = "dane testsmith"
-        let firstName = [];
-        firstName = fullName.split(' ')[0]; // If the database changes from one name to a first name and last name, this will
-        firstName.toString();
-        return firstName;
-        // return fullName;
-      }
       
-      const extractMapUrl = () => { // This function will extract a url-encoded address from different address variables
-        let {street, city, state, zip } = classDetails
-        console.log('place is', street);
-        console.log('place is', city);
-        console.log('place is', state);
-        console.log('place is', zip);
-        let addressString = `${street}, ${city}, ${state} ${zip}`;
-        let urlString = "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(addressString);
-        console.log(urlString);
-        // fullName = "dane testsmith"
-        // let firstName = [];
-        // firstName = fullName.split(' '); // If the database changes from one name to a first name and last name, this will
-        // firstName.toString();
-        // let mapUrl = `https://www.google.com/maps/search/?api=1&parameters`;
-        //   return mapUrl;
-          // return fullName;
-        }
+    //   const extractMapUrl = () => { // This function will extract a url-encoded address from different address variables
+    //     let {street, city, state, zip } = classDetails
+    //     console.log('place is', street);
+    //     console.log('place is', city);
+    //     console.log('place is', state);
+    //     console.log('place is', zip);
+    //     let addressString = `${street}, ${city}, ${state} ${zip}`;
+    //     let urlString = "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(addressString);
+    //     console.log(urlString); // Test log
+    //     return urlString;
+    //     }
     // const streetAddress;
 
 
@@ -108,15 +87,15 @@ function ClassDetailsPage() {
     // console.log('this is the value of show map', showMap); // TEST LOG
     return (
         <>
-            <Nav />
             <h1>{classDetails.clean_format_date}</h1>
             <h1>{classDetails.week_day_name}</h1>
             <h3>{classDetails.classname}</h3>
-            <h3>led by: {extractFirstName(classDetails.trainer_name)}</h3>
-            {/* <h3>led by: {classDetails.trainer_name} TEST TEST TEST</h3> */}
-            {/* <h3>{street +' '+ city +' '+ state +' '+ zip}<button onClick={() => handleGpsClick(showMap)}>gps</button></h3> */}
-            {/* <h3>{street +' '+ city +' '+ state +' '+ zip}<a href={extractMapUrl}>Open in maps</a></h3> */}
-            {/* <h3><button onClick={extractMapUrl}>Open in maps</button></h3> */}
+            <h3>led by: {classDetails.trainer_first_name} {((classDetails.trainer_last_name)[0])}.</h3>
+            <h3>{classDetails.street +' '+ classDetails.city +' '+ classDetails.state +' '+ classDetails.zip}</h3>
+            <a 
+            href={"https://www.google.com/maps/search/?api=1&query="+ (encodeURIComponent(`${classDetails.street}, ${classDetails.city}, ${classDetails.state} ${classDetails.zip}`))}
+            target="_blank"
+            >Open in maps</a>
             {showMap ? <iframe
                 width="100%"
                 height="250"
