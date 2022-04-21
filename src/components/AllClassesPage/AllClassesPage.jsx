@@ -32,7 +32,7 @@ function AllClassesPage() {
 
   // ------- Variables ---------
   const user = useSelector(store => store.user)
-  const classes = useSelector(store => store.allClasses) // SYNTAX-UPDATE : test this later
+  const allClasses = useSelector(store => store.allClasses) // SYNTAX-UPDATE : test this later
   const availableTrainers = useSelector(store => store.availableTrainers)
   const searchTerm = useSelector(store => store.searchQuery.searchTerm)
   const searchByTrainerId = useSelector(store => store.searchQuery.searchByTrainer)
@@ -118,7 +118,7 @@ return (
       {user.id && <button onClick={handleMyClassClick}>Myclasses (this will be an icon eventually)</button>}
       
       <ul>
-        { (searchFunction(classes)).map((classEvent, i) => (
+        { (searchFunction(allClasses)).map((classEvent, i) => (
           <ClassListItem classEvent={classEvent} key={i} />
         ))}
       </ul>

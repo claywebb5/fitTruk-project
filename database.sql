@@ -5,7 +5,8 @@ CREATE TABLE "user" (
 	"id" SERIAL PRIMARY KEY NOT NULL,
 	"username" VARCHAR (80) UNIQUE NOT NULL,
     "password" VARCHAR (1000),
-	"name" VARCHAR(255),
+	"first_name" VARCHAR(255),
+	"last_name" VARCHAR(255),
 	"email" VARCHAR(255),
 	"phone_number" VARCHAR (20),
 	"street" VARCHAR(255),
@@ -44,17 +45,19 @@ CREATE TABLE "class_list" (
 );
 
 --This would be sign up
-insert into "user" ("username", "password", "name", "email", "phone_number", "street", "city", "state", "zip", "dob", "pronouns", "emergency_name", "emergency_number", "profile_image")
+insert into "user" ("username", "password", "first_name", "last_name", "email", "phone_number", "street", "city", "state", "zip", "dob", "pronouns", "emergency_name", "emergency_number", "profile_image")
 values 
-('colinjay', 12345, 'Colin Jaworski', 'colin@yahoo.com', '763-867-5309', '123 first street','Minneapolis', 'MN', '55443', '12/05/1984', 'he', 'clay', '123-4567', 'profileImage.url'),
+('Colin11', 1234, 'Colin', 'Jaworski', 'colin@yahoo.com', '763-867-5309', '123 first street','Minneapolis', 'MN', '55443', '12/05/1984', 'he', 'clay', '123-4567', 'profileImage.url'),
  
-('joshBoss', 1234, 'Josh Kralewski', 'Joshkmanj@Gmail.com', '651-295-8859', '420 milky way', 'Minneapolis', 'MN', '55444', '01/20/1996', 'he/him', 'clay', '123-4567', 'profileImage.url'),
+('Bethany11', 1234, 'Dane', 'Smith', 'Joshkmanj@Gmail.com', '651-295-8859', '420 milky way', 'Minneapolis', 'MN', '55444', '01/20/1996', 'he/him', 'clay', '123-4567', 'https://avatars.githubusercontent.com/u/11574995?s=250&v=4'),
  
-('Koffi', 123, 'Koffi Kittleson', 'koffi.k.collins@gmail.com', '651-354-0552', '8901 south ave', 'Minneapolis', 'MN', '55443', '07/09/1999', 'they, them', 'clay', '123-4567', 'profileImage.url'),
- 
-('Claybaebae', 12, 'Clay Webb', 'clay_webb@outlook.com', '651-964-5585', '38752 orange alcove', 'Bloomington', 'MN', '55122', '07/09/1999', 'he/him', 'colin', '123-4567', 'profileImage.url'), 
+('Dane11', 1234, 'Dane', 'Smith', 'Joshkmanj@Gmail.com', '651-295-8859', '420 milky way', 'Minneapolis', 'MN', '55444', '01/20/1996', 'he/him', 'clay', '123-4567', 'https://avatars.githubusercontent.com/u/11574995?s=250&v=4'),
 
-('Abdi', 12, 'Abdikarim Ibrahim', 'alldayabdi@gmail.com', 'no phone number', '90210 hollywood avenue', 'Saint Paul', 'MN', 'st paul zip here', '07/09/1999', 'he/him', 'colin', '123-4567', 'profileImage.url');
+('Lizz11', 1234, 'Kofi', 'Kittleson', 'koffi.k.collins@gmail.com', '651-354-0552', '8901 south ave', 'Minneapolis', 'MN', '55443', '07/09/1999', 'they, them', 'clay', '123-4567', 'https://avatars.githubusercontent.com/u/17734101?v=4'),
+ 
+('Hailee', 1234, 'Cla', 'Webb', 'clay_webb@outlook.com', '651-964-5585', '38752 orange alcove', 'Bloomington', 'MN', '55122', '07/09/1999', 'he/him', 'colin', '123-4567', 'https://avatars.githubusercontent.com/u/17734101?v=4'), 
+
+('Abdi', 1234, 'Abdikarim', 'Ibrahim', 'alldayabdi@gmail.com', 'no phone number', '90210 hollywood avenue', 'Saint Paul', 'MN', 'st paul zip here', '07/09/1999', 'he/him', 'colin', '123-4567', 'profileImage.url');
 
 --This would be adding a new class
 insert into classes ("classname", "description", "trainer_user_id", "date", "start_time", "end_time", "street", "city", "state", "zip", "class_size" )
