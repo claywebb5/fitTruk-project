@@ -57,7 +57,7 @@ function ClassDetailsPage() {
 
     const handleGpsClick = (showMap) => {
         // console.log('This will show google maps');
-        // setShowMap(!showMap)
+        setShowMap(!showMap)
         console.log('is the class full? isClassFull:',isClassFull) 
 
     }
@@ -127,6 +127,7 @@ function ClassDetailsPage() {
             </iframe> : <p>Im not a map</p>}
             <h3>{classDetails.start_time}-{classDetails.end_time}</h3>
             <h3>{classDetails.description}</h3>
+            <h3>Spots remaining: {classDetails.spots_remaining}</h3>
             <button onClick={() => handleReturnClick(classDetails)}>Return</button>
             {(function () {
                 if (classDetails.is_my_class) {

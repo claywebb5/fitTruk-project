@@ -31,6 +31,12 @@ router.get('/details/:classId/', (req, res) => {
 		"c"."description", "c"."trainer_user_id", to_char("c"."date", 'YYYY-MM-DD') AS "date",
 		"c"."start_time", "c"."end_time", "c"."street", "c"."city", "c"."state", "c"."zip", "c"."class_size",
 		"user"."name" AS "trainer_name", "user"."pronouns" AS "trainer_pronouns", "user"."profile_image" AS "trainer_image",
+        (select "class_size" - 
+		(select count(user_id)
+		from class_list
+		where class_id = $1)
+		from "classes" 
+		where id = $1) as spots_remaining,
         CASE
         WHEN (SELECT "cl"."id" FROM "class_list" AS "cl" WHERE "cl"."class_id" = $1 AND "cl"."user_id" = $2 limit 1) > 0
         THEN true
@@ -55,7 +61,13 @@ router.get('/details/:classId/', (req, res) => {
 		to_char("c"."date", 'FMMM/FMDD/YYYY') AS "clean_format_date", "c"."classname",
 		"c"."description", "c"."trainer_user_id", to_char("c"."date", 'YYYY-MM-DD') AS "date",
 		"c"."start_time", "c"."end_time", "c"."street", "c"."city", "c"."state", "c"."zip", "c"."class_size",
-		"user"."name" AS "trainer_name", "user"."pronouns" AS "trainer_pronouns", "user"."profile_image" AS "trainer_image"
+		"user"."name" AS "trainer_name", "user"."pronouns" AS "trainer_pronouns", "user"."profile_image" AS "trainer_image",
+        (select "class_size" - 
+		(select count(user_id)
+		from class_list
+		where class_id = $1)
+		from "classes" 
+		where id = $1) as spots_remaining
         FROM "classes" AS "c"
         JOIN "user" ON "user"."id" = "c"."trainer_user_id"
         WHERE "c"."id" = $1;`;
