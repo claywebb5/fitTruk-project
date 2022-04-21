@@ -1,6 +1,6 @@
 // import './Nav.css';
 import React, { useState } from 'react';
-import { Link, useHistory } from 'react-router-dom';
+import {useHistory} from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import logoWhite from './logoWhite.png';
 // ---------< MUI IMPORTS >----------------
@@ -10,10 +10,6 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
-import AccountCircle from '@mui/icons-material/AccountCircle';
-import Switch from '@mui/material/Switch';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import FormGroup from '@mui/material/FormGroup';
 import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
 import Avatar from '@mui/material/Avatar';
@@ -26,26 +22,25 @@ import Avatar from '@mui/material/Avatar';
 // [x] My Classes
 // [x] Sign out
 
-// ===========*< COLOR THEME >*===============
-// const theme = createTheme({
-//   typography: {
-//     fontFamily: [
-//       'FATFRANK',
-//       'CENTURY GOTHIC',
-//       'Montserrat',
-//     ].join(','),
-//   },
-//   palette: {
-//     mode: 'main',
-//     primary: {
-//       darkGreen: '#80bd02',
-//       lightGreen: '#ace23a',
-//       darkGrey: '#41414c',
-//       lightGrey: '#6d6e71'
-//     },
-//   },
-// })
-
+// ===========*< COLOR THEME >*================
+    // const theme = createTheme({
+    //   typography: {
+    //     fontFamily: [
+    //       'FATFRANK',
+    //       'CENTURY GOTHIC',
+    //       'Montserrat',
+    //     ].join(','),
+    //   },
+    //   palette: {
+    //     mode: 'main',
+    //     primary: {
+    //       darkGreen: '#80bd02',
+    //       lightGreen: '#ace23a',
+    //       darkGrey: '#41414c',
+    //       lightGrey: '#6d6e71'
+    //     },
+    //   },
+    // })
 
 
 function CustomerNav() {
@@ -66,25 +61,14 @@ function CustomerNav() {
     // =====< USESTATE >=============================
     // For the hamburger icon menu
     const [anchorElMenu, setAnchorElMenu] = useState(null);
-    // For the user icon menu
-    const [anchorElUser, setAnchorElUser] = useState(null);
-
     // =====< CLICK LISTENERS >=============================
     // OPEN the hamburger icon menu
     const handleOpenMenu = (event) => {
         setAnchorElMenu(event.currentTarget);
     };
-    // OPEN the user icon menu
-    const handleOpenUser = (event) => {
-        setAnchorElUser(event.currentTarget);
-    };
     // CLOSE the hamburger icon menu
     const handleCloseMenu = () => {
         setAnchorElMenu(null);
-    };
-    // CLOSE the user icon menu
-    const handleCloseUser = (event) => {
-        setAnchorElUser(null);
     };
     // GO to All Classes (Maybe new Home.jsx Component?)
     const handleLogo = () => {
