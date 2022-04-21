@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux';
 
-// This reducer holds the data of the class you are actively editing or creating
 
+// This reducer holds the data of the class you are actively editing or creating
 const classDetails = (
   state = {
     trainer_user_id: '',
@@ -24,9 +24,6 @@ const classDetails = (
 
     case 'SET_CLASS_DETAILS': // When opening up a class to edit, a saga will retrieve
       return action.payload;    // the class information and it'll be stored here.
-
-    case 'REMOVE_CLASS_TRAINER': // This resets the assigned trainer from the class.
-      return { ...state, trainer_user_id: '' };
 
     case 'EDIT_CLASS_DETAILS': // This handles any individual edits to a class' individual details.
       let propertyName = action.payload.propertyName; // The property name is dynamically inserted into the object
@@ -65,7 +62,8 @@ const classDetails = (
       };
 
     case 'RESET_SELECTED_TRAINER':
-      return {...state,
+      return {
+        ...state,
         trainer_user_id: '',
         trainer_image: '',
         trainer_name: '',
@@ -78,39 +76,6 @@ const classDetails = (
 };
 
 
-
-// This reducer stores the ID, profile image, and name of the trainer that has been
-// selected for a class during editing/class creation.
-// const selectedTrainer = (
-//   state = {
-//     trainer_user_id: '',
-//     trainer_image: '',
-//     trainer_name: '',
-//     trainer_pronouns: '',
-//   }, action) => {
-
-//   if (action.type === 'SET_SELECTED_TRAINER') {
-//     // const { trainer_user_id, trainer_image, trainer_name, trainer_pronouns } = action.payload;
-//     return action.payload;
-//     // {
-//     //   ...state,
-//     //   trainer_user_id: trainer_user_id,
-//     //   trainer_image: trainer_image,
-//     //   trainer_name: trainer_name,
-//     //   trainer_pronouns: trainer_pronouns
-//     // };
-
-//   } else if (action.type === 'RESET_SELECTED_TRAINER'){
-//     return {
-//       trainer_user_id: '',
-//       trainer_image: '',
-//       trainer_name: '',
-//       trainer_pronouns: '',
-//     }
-//   }
-
-//   return state;
-// };
 
 const classSize = (state = '', action) => {
 
@@ -128,5 +93,4 @@ const classSize = (state = '', action) => {
 export default combineReducers({
   classSize,
   classDetails,
-  // selectedTrainer
 });
