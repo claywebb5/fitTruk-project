@@ -30,7 +30,7 @@ router.get('/details/:classId/', (req, res) => {
 		to_char("c"."date", 'FMMM/FMDD/YYYY') AS "clean_format_date", "c"."classname",
 		"c"."description", "c"."trainer_user_id", to_char("c"."date", 'YYYY-MM-DD') AS "date",
 		"c"."start_time", "c"."end_time", "c"."street", "c"."city", "c"."state", "c"."zip", "c"."class_size",
-		"user"."name" AS "trainer_name", "user"."pronouns" AS "trainer_pronouns", "user"."profile_image" AS "trainer_image",
+		"user"."first_name" AS "trainer_first_name", "user"."pronouns" AS "trainer_pronouns", "user"."profile_image" AS "trainer_image",
         (select "class_size" - 
 		(select count(user_id)
 		from class_list
@@ -61,7 +61,7 @@ router.get('/details/:classId/', (req, res) => {
 		to_char("c"."date", 'FMMM/FMDD/YYYY') AS "clean_format_date", "c"."classname",
 		"c"."description", "c"."trainer_user_id", to_char("c"."date", 'YYYY-MM-DD') AS "date",
 		"c"."start_time", "c"."end_time", "c"."street", "c"."city", "c"."state", "c"."zip", "c"."class_size",
-		"user"."name" AS "trainer_name", "user"."pronouns" AS "trainer_pronouns", "user"."profile_image" AS "trainer_image",
+		"user"."first_name" AS "trainer_first_name", "user"."pronouns" AS "trainer_pronouns", "user"."profile_image" AS "trainer_image",
         (select "class_size" - 
 		(select count(user_id)
 		from class_list
