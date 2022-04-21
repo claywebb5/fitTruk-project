@@ -54,7 +54,7 @@ function ProspectNav() {
 
     return (
         <>
-            <AppBar position="sticky" sx={{ bgcolor: "#41414c" }}>
+            <AppBar position="sticky" sx={{ bgcolor: "#41414c", marginBottom: 1 }}>
                 <Toolbar>
                     {/* ------< HAMBURGER ICON >--------------- */}
                     <Box sx={{ flexGrow: 1 }}>
