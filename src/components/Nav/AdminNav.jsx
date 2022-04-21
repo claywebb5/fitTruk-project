@@ -102,7 +102,83 @@ function AdminNav() {
 
     return (
         <>
-
+             <AppBar position="sticky" sx={{ bgcolor: "#41414c" }}>
+                <Toolbar>
+                    {/* ------< HAMBURGER ICON >--------------- */}
+                    <Box sx={{ flexGrow: 1 }}>
+                        <IconButton
+                            size="large"
+                            edge="start"
+                            aria-label="menu"
+                            aria-controls="menu-appbar"
+                            onClick={handleOpenMenu}
+                            sx={{ mr: 2, color: "#ace23a" }}
+                        >
+                            <MenuIcon />
+                        </IconButton>
+                        <Menu
+                            sx={{ mt: '45px' }}
+                            id="menu-appbar"
+                            anchorEl={anchorElMenu}
+                            anchorOrigin={{
+                                vertical: 'top',
+                                horizontal: 'right', // <---- Where the drop down
+                            }}
+                            keepMounted
+                            transformOrigin={{
+                                vertical: 'top',
+                                horizontal: 'right', // <---- Where the drop down
+                            }}
+                            open={Boolean(anchorElMenu)}
+                            onClose={handleCloseMenu}
+                        >
+                            <MenuItem onClick={handleCloseMenu}>
+                                <Typography textAlign="center" onClick={handleHome}>Home</Typography>
+                            </MenuItem>
+                            <MenuItem onClick={handleCloseMenu}>
+                                <Typography textAlign="center" onClick={handleCreateClass}>Create Class</Typography>
+                            </MenuItem>
+                            <MenuItem onClick={handleCloseMenu}>
+                                <Typography textAlign="center" onClick={handleProfile}>Profile</Typography>
+                            </MenuItem>
+                            <MenuItem onClick={handleCloseMenu}>
+                                <Typography textAlign="center" onClick={handleAllClasses}>All Classes</Typography>
+                            </MenuItem>
+                            <MenuItem onClick={handleCloseMenu}>
+                                <Typography textAlign="center" onClick={handleMyClasses}>My Classes</Typography>
+                            </MenuItem>
+                            <MenuItem onClick={handleCloseMenu}>
+                                <Typography textAlign="center" onClick={handleAbout}>About</Typography>
+                            </MenuItem>
+                            <MenuItem onClick={handleCloseMenu}>
+                                <Typography textAlign="center" onClick={handleSignOut}>Sign Out</Typography>
+                            </MenuItem>
+                        </Menu>
+                    </Box>
+                    {/* ------< LOGO ICON >--------------- */}
+                    <Box sx={{ flexGrow: 1 }}>
+                        <IconButton
+                            size="large"
+                            edge="start"
+                            aria-label="logo"
+                            aria-controls="logo-appbar"
+                            onClick={handleLogo}
+                            sx={{ mr: 2 }}
+                        >
+                            <Avatar alt="logoWhite" src={logoWhite} variant="square" />
+                        </IconButton>
+                    </Box>
+                    {/* ------< USER ICON >--------------- */}
+                    <Box sx={{ flexGrow: 0 }}>
+                        <IconButton
+                            onClick={handleProfile}
+                            sx={{ p: 0 }}
+                        >
+                            <Avatar sx={{ bgcolor: '#80bd02' }}>{initials.join('')}</Avatar>
+                        </IconButton>
+                    </Box>
+                </Toolbar>
+            </AppBar>
         </>
     );
 }
