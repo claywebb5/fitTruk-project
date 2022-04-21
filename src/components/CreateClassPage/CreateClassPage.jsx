@@ -21,6 +21,12 @@ function CreateClassPage() {
 
 
     useEffect(() => {
+        if (user.access_level == 3) {
+            console.log('User access level is 3, fetching trainer data');
+            dispatch({
+                type: 'FETCH_AVAILABLE_TRAINERS'
+            })
+        }
         // Edit class view
         if (classId) {
             dispatch({
@@ -39,7 +45,7 @@ function CreateClassPage() {
     const availableTrainers = useSelector(store => store.availableTrainers)
     const user = useSelector(store => store.user)
     const classDetails = useSelector(store => store.selectedClass.classDetails)
-    const selectedTrainer = useSelector(store => store.selectedClass.selectedTrainer)
+    let disabledState; // This controls whether or not input fields are disabled, based on if it's an administrator or a trainer. (user.access_level)
 
 
     // -------- TEST CODE, TO BE DELETED -------- TEST CODE, TO BE DELETED -------- TEST CODE, TO BE DELETED
@@ -56,37 +62,25 @@ function CreateClassPage() {
 
         if (selectedTrainerId === 'reset') { // This checks for a reset command, which would then reset the selected trainer values.
             dispatch({
-                type: 'REMOVE_CLASS_TRAINER'
-            })
-            dispatch({
                 type: 'RESET_SELECTED_TRAINER'
-            })
-            return; // This stops the function from running further.
+            });
+        } else {
+            for (let trainer of availableTrainers) { // If a valid trainer is selected, this will loop through the list of possible trainers
+                if (trainer.trainer_user_id == selectedTrainerId) { // to find matching information.
+
+                    // This dispatch will set the trainer data in the classDetails reducer, which will update the trainer's photo on this page.
+                    dispatch({
+                        type: 'SET_SELECTED_TRAINER',
+                        payload: {
+                            trainer_user_id: trainer.trainer_user_id,
+                            trainer_image: trainer.trainer_image,
+                            trainer_name: trainer.trainer_name,
+                            trainer_pronouns: trainer.trainer_pronouns
+                        }
+                    });
+                }// End conditional statement
+            }// End loop through trainer array
         }
-
-        for (let trainer of availableTrainers) { // If a valid trainer is selected, this will loop through the list of possible trainers
-            if (trainer.trainer_user_id == selectedTrainerId) { // to find matching information.
-
-                // This dispatch will set the selectedTrainer reducer, which will update the trainer's photo.
-                dispatch({
-                    type: 'SET_SELECTED_TRAINER',
-                    payload: {
-                        trainer_user_id: trainer.trainer_user_id,
-                        profile_image: trainer.profile_image,
-                        name: trainer.name
-                    }
-                });
-
-                // This dispatch will remove any trainer's Id from the classDetails reducer.
-                dispatch({
-                    type: 'EDIT_CLASS_DETAILS',
-                    payload: {
-                        propertyName: 'trainer_user_id',
-                        key: trainer.trainer_user_id
-                    }
-                });
-            }// End conditional statement
-        }// End loop through trainer array
     }; // END handleTrainerSelection
 
 
@@ -100,7 +94,7 @@ function CreateClassPage() {
         });
     }; // END handleChange
 
-    const submitHandler = (event) => {
+    const submitHandler = (event) => { //=============This needs to be updated to allow for '/edit-class' functionality====================================
         event.preventDefault();
         console.log('This will submit the form');
         console.log(classDetails);
@@ -118,14 +112,12 @@ function CreateClassPage() {
         history.goBack();
     }
 
-    let disabledState;
 
     if (user.access_level == 3) {
         disabledState = false;
     } else {
         disabledState = true;
     }
-
 
     return (
         <>
@@ -156,13 +148,13 @@ function CreateClassPage() {
                         {/* <option key={-1} onClick={dispatch({type:''})}>Select a Trainer</option> */}
                         <option key={-1} value={'reset'}>Select a Trainer</option>
                         {availableTrainers.map((trainer, i) => (
-                            <option key={i} value={trainer.trainer_user_id}>{trainer.name}</option>
+                            <option key={i} value={trainer.trainer_user_id}>{trainer.trainer_name}</option>
                         ))}
                     </select>
+
                     {/* ---- Here's the trainer's image ---- */}
-                    {/* <TrainerProfileImage /> */}
-                    {selectedTrainer.profile_image ?
-                        <img className='trainer-image' src={selectedTrainer.profile_image} alt="Profile image of the selected trainer" />
+                    {classDetails.trainer_image ?
+                        <img className='trainer-image' src={classDetails.trainer_image} alt="Profile image of the selected trainer" />
                         :
                         <div className='trainer-image' style={{ display: 'block' }}>This is a div</div>
                     }
