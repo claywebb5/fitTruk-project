@@ -29,7 +29,7 @@ router.post('/new-class', (req, res) => {
 router.get('/available-trainers', (req, res) => {
 
   if (req.isAuthenticated()) { // Authenticated users get more information about trainers than unauthenticated users.
-    let queryText = `select "id" AS "trainer_user_id", "name" AS "trainer_name", "profile_image" AS "trainer_image",  "pronouns" AS "trainer_pronouns"
+    let queryText = `select "id" AS "trainer_user_id", "first_name" AS "trainer_first_name", "last_name AS "trainer_last_name", "profile_image" AS "trainer_image",  "pronouns" AS "trainer_pronouns"
       from "user"
       where "access_level" = 2;`;
     pool.query(queryText)
@@ -41,7 +41,7 @@ router.get('/available-trainers', (req, res) => {
     })
   } else {
     // This condition allows unauthenticated users to still use a "search by trainer" function as of right now, but they can't retrieve as much information about trainers.
-    let unauthenticatedQueryText = `select "id" AS "trainer_user_id", "name" AS "trainer_name"
+    let unauthenticatedQueryText = `select "id" AS "trainer_user_id", "first_name" AS "trainer_first_name", "last_name" AS "trainer_last_name"
     from "user"
     where "access_level" = 2;`;
     pool.query(unauthenticatedQueryText)
