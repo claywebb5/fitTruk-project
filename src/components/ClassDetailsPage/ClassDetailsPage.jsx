@@ -29,7 +29,7 @@ function ClassDetailsPage() {
     //------------<  Variables  >----------
     const isClassFull = useSelector(store => store.selectedClass.classSize.full_class);
     const classDetails = useSelector(store => store.selectedClass.classDetails)
-    const {street , city , state, zip} = classDetails;
+    // const {street , city , state, zip} = classDetails;
     // let fullName = "Dane Smith".split(' ');
     // console.log('Fullname is:', fullName);
 

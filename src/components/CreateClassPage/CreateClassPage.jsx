@@ -45,7 +45,7 @@ function CreateClassPage() {
     const availableTrainers = useSelector(store => store.availableTrainers)
     const user = useSelector(store => store.user)
     const classDetails = useSelector(store => store.selectedClass.classDetails)
-    const selectedTrainer = useSelector(store => store.selectedClass.selectedTrainer)
+    // const selectedTrainer = useSelector(store => store.selectedClass.selectedTrainer)
 
 
     // -------- TEST CODE, TO BE DELETED -------- TEST CODE, TO BE DELETED -------- TEST CODE, TO BE DELETED
@@ -73,7 +73,7 @@ function CreateClassPage() {
         for (let trainer of availableTrainers) { // If a valid trainer is selected, this will loop through the list of possible trainers
             if (trainer.trainer_user_id == selectedTrainerId) { // to find matching information.
 
-                // This dispatch will set the selectedTrainer reducer, which will update the trainer's photo.
+                // This dispatch will set the trainer data in the classDetails reducer, which will update the trainer's photo.
                 dispatch({
                     type: 'SET_SELECTED_TRAINER',
                     payload: {
@@ -168,8 +168,8 @@ function CreateClassPage() {
                     </select>
                     
                     {/* ---- Here's the trainer's image ---- */}
-                    {selectedTrainer.trainer_image ?
-                        <img className='trainer-image' src={selectedTrainer.trainer_image} alt="Profile image of the selected trainer" />
+                    {classDetails.trainer_image ?
+                        <img className='trainer-image' src={classDetails.trainer_image} alt="Profile image of the selected trainer" />
                         :
                         <div className='trainer-image' style={{ display: 'block' }}>This is a div</div>
                     }
