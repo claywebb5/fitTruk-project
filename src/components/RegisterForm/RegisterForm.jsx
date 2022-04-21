@@ -1,6 +1,10 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-
+import TextField from '@mui/material/TextField';
+import Select, { SelectChangeEvent } from '@mui/material/Select';
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import FitnessCenterIcon from '@mui/icons-material/FitnessCenter';
 
 function RegisterForm() {
   const [username, setUsername] = useState('');
@@ -13,17 +17,18 @@ function RegisterForm() {
   const [state, setState] = useState('');
   const [zip, setZip] = useState('');
   const [dob, setDob] = useState('');
-  const [pronouns, setPronouns] = useState();
+  const [pronouns, setPronouns] = useState('');
   const [emergencyName, setEmergencyName] = useState('');
   const [emergencyNumber, setEmergencyNumber] = useState('')
 
   const errors = useSelector((store) => store.errors);
   const dispatch = useDispatch();
 
-  // function handlePronounSelection(e){
-  //   setPronouns(e.target.value)
-    
-  // }
+  const handlePronounSelection = (event: SelectChangeEvent) => {
+    setPronouns(event.target.value);
+  };
+
+  console.log(pronouns);
 
   const registerUser = (event) => {
     event.preventDefault();
@@ -51,8 +56,16 @@ function RegisterForm() {
   // console.log(pronouns);
 
   return (
-    <form className="formPanel" onSubmit={registerUser}>
-      <h2>Register User</h2>
+    <div style = {{
+      justifyContent: 'center',
+      alignItems: 'center',
+      display: 'flex',
+      
+    }}>
+    <form 
+    
+    className="formPanel" onSubmit={registerUser}>
+      <h2>Sign Up Below! </h2>
       {errors.registrationMessage && (
         <h3 className="alert" role="alert">
           {errors.registrationMessage}
@@ -60,8 +73,14 @@ function RegisterForm() {
       )}
       <div>
         <label htmlFor="username">
-          Username:
-          <input
+          
+          <TextField
+        style ={{
+          width: '100%'
+        }}
+          label="Username" variant="outlined"
+          
+          
             type="text"
             name="username"
             value={username}
@@ -70,10 +89,20 @@ function RegisterForm() {
           />
         </label>
       </div>
+      <br />
+      
       <div>
+      
         <label htmlFor="password">
-          Password:
-          <input
+         
+          <TextField
+          
+          style ={{
+            width: '100%',
+            
+          
+          }}
+          label="Password" variant="outlined"
             type="password"
             name="password"
             value={password}
@@ -82,10 +111,15 @@ function RegisterForm() {
           />
         </label>
       </div>
+      <br />
       <div>
         <label htmlFor="name">
-          Name:
-          <input
+          
+          <TextField
+          style ={{
+          width: '100%'
+        }}
+          label="Name" variant="outlined"
             type="text"
             name="name"
             value={name}
@@ -94,10 +128,15 @@ function RegisterForm() {
           />
         </label>
       </div>
+      <br />
       <div>
         <label htmlFor="email">
-          Email:
-          <input
+          
+          <TextField
+          style ={{
+          width: '100%'
+        }}
+          label="Email" variant="outlined"
             type="text"
             name="email"
             value={email}
@@ -106,10 +145,15 @@ function RegisterForm() {
           />
         </label>
       </div>
+      <br />
       <div>
         <label htmlFor="phone">
-          Phone:
-          <input
+          
+          <TextField
+          style ={{
+          width: '100%'
+        }}
+          label="Phone" variant="outlined"
             type="text"
             name="phone"
             value={phoneNumber}
@@ -118,10 +162,15 @@ function RegisterForm() {
           />
         </label>
       </div>
+      <br />
       <div>
         <label htmlFor="street">
-          street:
-          <input
+          
+          <TextField
+          style ={{
+          width: '100%'
+        }}
+          label="Street" variant="outlined"
             type="text"
             name="street"
             value={street}
@@ -130,10 +179,15 @@ function RegisterForm() {
           />
         </label>
       </div>
+      <br />
       <div>
         <label htmlFor="City">
-          City:
-          <input
+          
+          <TextField
+          style ={{
+          width: '100%'
+        }}
+          label="City" variant="outlined"
             type="text"
             name="City"
             value={city}
@@ -142,10 +196,15 @@ function RegisterForm() {
           />
         </label>
       </div>
+      <br />
       <div>
         <label htmlFor="state">
-          State:
-          <input
+         
+          <TextField
+          style ={{
+          width: '100%'
+        }}
+          label="State" variant="outlined"
             type="text"
             name="State"
             value={state}
@@ -154,10 +213,15 @@ function RegisterForm() {
           />
         </label>
       </div>
+      <br />
       <div>
         <label htmlFor="zip">
-          Zip:
-          <input
+          
+          <TextField
+          style ={{
+          width: '100%'
+        }}
+          label="Zip" variant="outlined"
             type="text"
             name="Zip"
             value={zip}
@@ -166,19 +230,30 @@ function RegisterForm() {
           />
         </label>
       </div>
+      <br />
       <div>
-        <select onChange={(event) => setPronouns(event.target.value)}> 
-        <option> Select Pronouns</option>
-          <option> He/Him</option>
-          <option> She/Her</option>
-          <option> They/Them</option>
-          
-          </select>
+       <InputLabel id="demo-simple-select-label">Pronouns</InputLabel>
+        <Select
+          labelId="demo-simple-select-label"
+          id="demo-simple-select"
+          value={pronouns}
+          label="Pronouns"
+          onChange={handlePronounSelection}
+        >
+          <MenuItem value = "He/Him">He/Him</MenuItem>
+          <MenuItem value = "She/Her">She/Her</MenuItem>
+          <MenuItem value ="They/Them" >They/Them</MenuItem>
+        </Select>
       </div>
+      <br />
       <div>
         <label htmlFor="dob">
-          Date of Birth:
-          <input
+         DOB:
+          <TextField
+          style ={{
+          width: '100%'
+        }}
+           variant="outlined"
             type="date"
             name="dob"
             value={dob}
@@ -187,10 +262,15 @@ function RegisterForm() {
           />
         </label>
       </div>
+      <br />
       <div>
         <label htmlFor="emergencyName">
-          Emergency Name:
-          <input
+          
+          <TextField
+          style ={{
+          width: '100%'
+        }}
+          label="Emergency Name" variant="outlined"
             type="text"
             name="emergency Name"
             value={emergencyName}
@@ -199,10 +279,15 @@ function RegisterForm() {
           />
         </label>
       </div>
+      <br />
       <div>
         <label htmlFor="emergencyNumber">
-          Emergency Number:
-          <input
+          
+          <TextField
+          style ={{
+          width: '100%'
+        }}
+          label="Emergency Number" variant="outlined"
             type="text"
             name="emergency Number"
             value={emergencyNumber}
@@ -211,6 +296,7 @@ function RegisterForm() {
           />
         </label>
       </div>
+      <br />
 
       
       
@@ -233,6 +319,7 @@ function RegisterForm() {
         <input className="btn" type="submit" name="submit" value="Register" />
       </div>
     </form>
+    </div>
   );
 }
 
