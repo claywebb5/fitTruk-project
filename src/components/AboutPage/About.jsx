@@ -1,4 +1,6 @@
 import React from 'react';
+import BtnCreateClass from '../BtnCreateClass/BtnCreateClass';
+import { useSelector, useDispatch } from 'react-redux';
 // ---------< MUI IMPORTS >----------------
 import Container from '@mui/material/Container';
 import ImageList from '@mui/material/ImageList';
@@ -19,6 +21,9 @@ import Box from '@mui/material/Box';
 
 
 function AboutTab() {
+
+  const user = useSelector(store => store.user)
+
 
     // ======< IMAGE DATA >==================
     const itemData = [
@@ -373,6 +378,10 @@ function AboutTab() {
                 </Card>
                 {/*======< END HERES WHAT'S ON THE TRUK CARD >======================== */}
             </Container>
+            {/* Logged in as an Admin show the Admin Nav Bar */}
+            {user.access_level === 3 && (
+                <BtnCreateClass />
+            )}
         </>
     );
 }
