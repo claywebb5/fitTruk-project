@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import ClassListItem from '../ClassListItem/ClassListItem';
-import Nav from '../Nav/Nav';
 
 
 function MyClassesPage() {
@@ -30,7 +29,6 @@ function MyClassesPage() {
 
   return (
     <div>
-      <Nav />
       <input
         type="text"
         value={searchTerm}
