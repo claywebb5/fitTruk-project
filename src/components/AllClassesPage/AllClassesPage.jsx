@@ -34,7 +34,7 @@ function AllClassesPage() {
 
   // ------- Variables ---------
   const user = useSelector(store => store.user)
-  const classes = useSelector(store => store.allClasses) // SYNTAX-UPDATE : test this later
+  const allClasses = useSelector(store => store.allClasses) // SYNTAX-UPDATE : test this later
   const availableTrainers = useSelector(store => store.availableTrainers)
   const searchTerm = useSelector(store => store.searchQuery.searchTerm)
   const searchByTrainerId = useSelector(store => store.searchQuery.searchByTrainer)
@@ -110,24 +110,24 @@ function AllClassesPage() {
           placeholder='Trainer'
           onChange={(event) => { handleSearchTrainer(event.target.value) }}>
           <option value={''}>All trainers</option> {/*  Clicking "All Trainers" resets the trainer value to null */}
-          {availableTrainers.map((trainer, i) => (
-            <option key={i} value={trainer.trainer_user_id}>{trainer.trainer_name}</option>
-          ))}
-        </select>
+        {availableTrainers.map((trainer, i) => (
+          <option key={i} value={trainer.trainer_user_id}>{trainer.trainer_first_name} {(trainer.trainer_last_name)[0]}.</option>
+        ))}
+      </select>
 
+      
+      <h3>If logged in, myclass button appears below, if not then no button</h3>
+      {user.id && <button onClick={handleMyClassClick}>Myclasses (this will be an icon eventually)</button>}
+      
+      <ul>
+        { (searchFunction(allClasses)).map((classEvent, i) => (
+          <ClassListItem classEvent={classEvent} key={i} />
+        ))}
+      </ul>
 
-        <h3>If logged in, myclass button appears below, if not then no button</h3>
-        {user.id && <button onClick={handleMyClassClick}>Myclasses (this will be an icon eventually)</button>}
-
-        <ul>
-          {(searchFunction(classes)).map((classEvent, i) => (
-            <ClassListItem classEvent={classEvent} key={i} />
-          ))}
-        </ul>
-
-      </div>
-      {/* Logged in as an Admin show the Admin Nav Bar */}
-      {user.access_level === 3 && (
+    </div>
+          {/* Logged in as an Admin show the Admin Nav Bar */}
+          {user.access_level === 3 && (
         <BtnCreateClass />
       )}
     </>

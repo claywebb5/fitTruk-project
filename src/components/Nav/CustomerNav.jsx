@@ -50,13 +50,23 @@ function CustomerNav() {
     const dispatch = useDispatch();
     // -------< PROFILE ICON >---------------
 
-    const name = user.name.toUpperCase();
-    const words = name.split(' ');
-    const initials = [];
-    // ---------< CREATES ICON >-------------
-    for (const i of words) {
-        initials.push(i[0])
-    }
+    const {first_name, last_name} = user;
+    let initials = '';
+
+    const getInitials = (firstName, lastName) => {
+        let firstLetter = 'H';
+        let secondLetter = 'i';
+    
+        if (firstName && lastName) {
+          firstLetter = (firstName[0]).toUpperCase();
+          secondLetter = (lastName[0]).toUpperCase();
+        } else if (firstName) {
+          firstLetter = (firstName[0]).toUpperCase();
+          secondLetter = (firstName[1]);
+        }
+        initials = firstLetter + secondLetter;
+        return true;
+      }
 
     // =====< USESTATE >=============================
     // For the hamburger icon menu
@@ -173,7 +183,7 @@ function CustomerNav() {
                             onClick={handleProfile}
                             sx={{ p: 0 }}
                         >
-                            <Avatar sx={{ bgcolor: '#80bd02' }}>{initials.join('')}</Avatar>
+                            {(getInitials(first_name, last_name)) && <Avatar sx={{ bgcolor: '#80bd02' }}>{initials}</Avatar>}
                         </IconButton>
                     </Box>
                 </Toolbar>

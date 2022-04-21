@@ -5,11 +5,15 @@ import ClassListItem from '../ClassListItem/ClassListItem';
 
 
 function MyClassesPage() {
+// --------- Tools ----------
+const history = useHistory();
+const dispatch = useDispatch();
 
-  const history = useHistory();
-  const dispatch = useDispatch();
 
+// --------- Functions ----------
   useEffect(() => {
+
+    // This dispatch sends a request to the database to retrieve all the classes a user is signed up for.
     dispatch({
       type: 'FETCH_CUSTOMER_CLASS'
     });
@@ -18,14 +22,13 @@ function MyClassesPage() {
   const handleAllClassClick = () => {
     history.push("/all-classes");
   }
+
   // ------- Search Bar -------
-  const [searchTerm, setSearchTerm] = useState('')
+  const [searchTerm, setSearchTerm] = useState('') // SYNTAX-UPDATE  this search bar might need to be replaced with the same searchbar that's currently in the AllClassesPage
 
 
-  const classes = useSelector(store => store.userClass) // SYNTAX-UPDATE: May not be needed, unsure if the 'tested' status mentioned in AllClassesPage
-  // ----- DELETE this when we have our classes reducer running------
-  // const classes = [{id: 1,classname: "HIIT",description: "high intensity interval training",trainer_user_id: 2,date: "2022-04-12",start_time: "12:00:00",end_time: "13:00:00",location: "at the park?",class_size: 20},{id: 3,classname: "Kick boxing",description: "This is a class where we are going to kick and box",trainer_user_id: 1,date: "2022-04-13",start_time: "09:00:00",end_time: "10:00:00",location: "Near the truck",class_size: 18},{id: 2,classname: "Yoga",description: "Its yoga",trainer_user_id: 1,date: "2022-04-13",start_time: "14:00:00",end_time: "15:00:00",location: "Some place noisy",class_size: 10}]
-  // ^^^^^^^^^^^^DELETE this when we have our classes reducer running^^^^^^^^^^^^^^^^^
+  const myClasses = useSelector(store => store.myClasses) // SYNTAX-UPDATE: May not be needed, unsure if the 'tested' status mentioned in AllClassesPage
+
 
   return (
     <div>
@@ -36,13 +39,13 @@ function MyClassesPage() {
         onChange={(e) => setSearchTerm(e.target.value)} />
       <button onClick={handleAllClassClick}>All Available classes(this will be an icon eventually)</button>
       <ul>
-        {classes.filter((val) => {
+        {myClasses.filter((val) => {
           if (searchTerm == "") {
             return val
           } else if (val.classname.toLowerCase().includes(searchTerm.toLowerCase())) {
             return val
           }
-        }).map((classEvent, i) => ( // "classEvent" was formerly called "event", look out for any residual errors from this.
+        }).map((classEvent, i) => ( // classEvent refers to a singular class event and it's basic details.
           <ClassListItem classEvent={classEvent} key={i} />
         ))}
       </ul>

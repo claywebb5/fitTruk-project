@@ -73,7 +73,8 @@ function CreateClassPage() {
                         payload: {
                             trainer_user_id: trainer.trainer_user_id,
                             trainer_image: trainer.trainer_image,
-                            trainer_name: trainer.trainer_name,
+                            trainer_first_name: trainer.trainer_first_name,
+                            trainer_last_name: trainer.trainer_last_name,
                             trainer_pronouns: trainer.trainer_pronouns
                         }
                     });
@@ -146,7 +147,7 @@ function CreateClassPage() {
                         {/* <option key={-1} onClick={dispatch({type:''})}>Select a Trainer</option> */}
                         <option key={-1} value={'reset'}>Select a Trainer</option>
                         {availableTrainers.map((trainer, i) => (
-                            <option key={i} value={trainer.trainer_user_id}>{trainer.trainer_name}</option>
+                            <option key={i} value={trainer.trainer_user_id}>{trainer.trainer_first_name} {trainer.trainer_last_name}</option>
                         ))}
                     </select>
 
