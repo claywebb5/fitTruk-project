@@ -3,7 +3,9 @@ import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import ClassListItem from '../ClassListItem/ClassListItem';
-import Nav from '../Nav/Nav';
+import BtnCreateClass from '../BtnCreateClass/BtnCreateClass'; // <- The floating "speed dial" button to create a class
+// ---< MUI IMPORTS >-----
+import Box from '@mui/material/Box';
 
 
 function AllClassesPage() {
@@ -42,74 +44,74 @@ function AllClassesPage() {
   const handleMyClassClick = () => {
     history.push("/my-classes");
   }
-  
-// --------------<  I n p u t   H a n d l e r s  >------------------
-const handleSearchTrainer = (trainerId) => { // This changes the search-by-trainer filter settings
-  // console.log('trainer Id:', trainerId); // Test log
-  dispatch({
-    type: 'SET_SEARCH_TRAINER',
-    payload: trainerId
-  })
-};
-const handleSearchTerm = (searchValue) => { // This changes the search-by-class-name filter settings
-  dispatch({
-    type: 'SET_SEARCH_TERM',
-    payload: searchValue
-  })
-};
-// --------------< // E N D  I n p u t   H a n d l e r s  >------------------
+
+  // --------------<  I n p u t   H a n d l e r s  >------------------
+  const handleSearchTrainer = (trainerId) => { // This changes the search-by-trainer filter settings
+    // console.log('trainer Id:', trainerId); // Test log
+    dispatch({
+      type: 'SET_SEARCH_TRAINER',
+      payload: trainerId
+    })
+  };
+  const handleSearchTerm = (searchValue) => { // This changes the search-by-class-name filter settings
+    dispatch({
+      type: 'SET_SEARCH_TERM',
+      payload: searchValue
+    })
+  };
+  // --------------< // E N D  I n p u t   H a n d l e r s  >------------------
 
 
-// --------------<  S e a r c h   Q u e r y   H a n d l e r s  >------------------
-const checkTrainer = (item) => {
-  if (!searchByTrainerId) {
-    return item
-  } else if (item.trainer_user_id == searchByTrainerId) {
-    return item;
+  // --------------<  S e a r c h   Q u e r y   H a n d l e r s  >------------------
+  const checkTrainer = (item) => {
+    if (!searchByTrainerId) {
+      return item
+    } else if (item.trainer_user_id == searchByTrainerId) {
+      return item;
+    }
   }
-}
-const checkTerm = (item) => {
-  
-  let resultTerm = item.classname.toLowerCase();
-  let theSearchTerm = searchTerm.toLowerCase();
-  
-  
-  if (searchTerm == "") { // Checks if search bar is empty and returns all classes
-    return item
-  } else if (resultTerm.includes(theSearchTerm)) { // Otherwise returns the class name that matches the search term
-    return item
+  const checkTerm = (item) => {
+
+    let resultTerm = item.classname.toLowerCase();
+    let theSearchTerm = searchTerm.toLowerCase();
+
+
+    if (searchTerm == "") { // Checks if search bar is empty and returns all classes
+      return item
+    } else if (resultTerm.includes(theSearchTerm)) { // Otherwise returns the class name that matches the search term
+      return item
+    }
   }
-}
 
-const searchFunction = (array) =>{
-  
-  let searchResults = array.filter(checkTrainer)
-  let fullResults = searchResults.filter(checkTerm)
-  
-  return fullResults;
-};
-// --------------<  // E N D   S e a r c h   Q u e r y   H a n d l e r s  >------------------
+  const searchFunction = (array) => {
 
+    let searchResults = array.filter(checkTrainer)
+    let fullResults = searchResults.filter(checkTerm)
+
+    return fullResults;
+  };
+  // --------------<  // E N D   S e a r c h   Q u e r y   H a n d l e r s  >------------------
 
 
-return (
-    <div>
-      <Nav />
 
-      <input
-        type="text"
-        value={searchTerm}
-        placeholder='Search'
-        onChange={(event) => (handleSearchTerm(event.target.value))} />
-      <hr />
-      
+  return (
+    <>
+      <div>
 
-      <select name="trainer" id="trainer-selector"
-        placeholder='Trainer'
-        onChange={(event) => { handleSearchTrainer(event.target.value) }}>
+        <input
+          type="text"
+          value={searchTerm}
+          placeholder='Search'
+          onChange={(event) => (handleSearchTerm(event.target.value))} />
+        <hr />
+
+
+        <select name="trainer" id="trainer-selector"
+          placeholder='Trainer'
+          onChange={(event) => { handleSearchTrainer(event.target.value) }}>
           <option value={''}>All trainers</option> {/*  Clicking "All Trainers" resets the trainer value to null */}
         {availableTrainers.map((trainer, i) => (
-          <option key={i} value={trainer.trainer_user_id}>{trainer.trainer_name}</option>
+          <option key={i} value={trainer.trainer_user_id}>{trainer.trainer_first_name} {(trainer.trainer_last_name)[0]}.</option>
         ))}
       </select>
 
@@ -124,6 +126,11 @@ return (
       </ul>
 
     </div>
+          {/* Logged in as an Admin show the Admin Nav Bar */}
+          {user.access_level === 3 && (
+        <BtnCreateClass />
+      )}
+    </>
   );
 }
 

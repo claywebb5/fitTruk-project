@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import Nav from '../Nav/Nav';
 import { useParams } from 'react-router-dom/cjs/react-router-dom.min';
 function ClassDetailsPage() {
     //------------<  Setup  >-------------
@@ -88,7 +87,6 @@ function ClassDetailsPage() {
     // console.log('this is the value of show map', showMap); // TEST LOG
     return (
         <>
-            <Nav />
             <h1>{classDetails.clean_format_date}</h1>
             <h1>{classDetails.week_day_name}</h1>
             <h3>{classDetails.classname}</h3>

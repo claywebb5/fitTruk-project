@@ -17,17 +17,17 @@ function PackagesTab() {
 
             <Container>
                 {/*========< START HEADING CARD >================*/}
-                <Card>
-                    <CardContent>
-                        <Typography variant="h2" align="center">
+                <Card >
+                    <CardContent >
+                        <Typography variant="h3" align="center">
                             CLASSES & PACKAGES
                         </Typography>
                     </CardContent>
                     <CardContent>
-                        <Typography variant="h5" align="left">
+                        <Typography variant="h5" align="center">
                             We bring the gym outside.
                         </Typography>
-                        <Typography variant="body1" align="left">
+                        <Typography variant="body1" align="center">
                             Certified personal trainers lead strength based workouts at a location near you. Time to think outside the box.
                         </Typography>
                     </CardContent>
