@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, useParams } from 'react-router-dom';
-import Nav from "../Nav/Nav";
 import './CreateClassPage.css';
 
 // ** ONLY ADMIN CAN SEE **
@@ -121,7 +120,6 @@ function CreateClassPage() {
 
     return (
         <>
-            <Nav />
             <h1>Create Class</h1>
             <form onSubmit={submitHandler}>
 
