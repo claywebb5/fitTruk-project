@@ -5,6 +5,9 @@ import Select, { SelectChangeEvent } from '@mui/material/Select';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FitnessCenterIcon from '@mui/icons-material/FitnessCenter';
+import Box, { BoxProps } from '@mui/material/Box';
+import logo from './logo.png'
+
 
 function RegisterForm() {
   const [username, setUsername] = useState('');
@@ -28,7 +31,7 @@ function RegisterForm() {
     setPronouns(event.target.value);
   };
 
-  console.log(pronouns);
+
 
   const registerUser = (event) => {
     event.preventDefault();
@@ -53,15 +56,27 @@ function RegisterForm() {
       },
     });
   }; // end registerUser
-  // console.log(pronouns);
+
 
   return (
+    <>
+   
     <div style = {{
+      // marginTop: '5px',
       justifyContent: 'center',
       alignItems: 'center',
-      display: 'flex',
+      display: 'grid',
+     
+      
+      
       
     }}>
+     <img src= {logo} alt="" style={{
+      height: '100px',
+     
+    
+      
+    }}  />
     <form 
     
     className="formPanel" onSubmit={registerUser}>
@@ -320,6 +335,7 @@ function RegisterForm() {
       </div>
     </form>
     </div>
+    </>
   );
 }
 
