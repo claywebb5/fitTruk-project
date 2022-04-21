@@ -68,15 +68,6 @@ function ClassDetailsPage() {
     }
     //---------------<  E N D  C l i c k   H a n d l e r s  >----------------------------
 
-    const extractFirstName = (fullName) => {
-        console.log('fullName is', fullName); // This function will extract the first name of a trainer from their full name
-        // fullName = "dane testsmith"
-        let firstName = [];
-        firstName = fullName.split(' ')[0]; // If the database changes from one name to a first name and last name, this will
-        firstName.toString();
-        return firstName;
-        // return fullName;
-      }
       
     //   const extractMapUrl = () => { // This function will extract a url-encoded address from different address variables
     //     let {street, city, state, zip } = classDetails
@@ -101,7 +92,7 @@ function ClassDetailsPage() {
             <h1>{classDetails.clean_format_date}</h1>
             <h1>{classDetails.week_day_name}</h1>
             <h3>{classDetails.classname}</h3>
-            <h3>led by: {extractFirstName(classDetails.trainer_name)}</h3>
+            <h3>led by: {classDetails.trainer_first_name} {((classDetails.trainer_last_name)[0])}.</h3>
             <h3>{classDetails.street +' '+ classDetails.city +' '+ classDetails.state +' '+ classDetails.zip}</h3>
             <a 
             href={"https://www.google.com/maps/search/?api=1&query="+ (encodeURIComponent(`${classDetails.street}, ${classDetails.city}, ${classDetails.state} ${classDetails.zip}`))}

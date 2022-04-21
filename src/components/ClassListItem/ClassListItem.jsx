@@ -14,10 +14,10 @@ function ClassListItem({classEvent, i}) {
   }
 
 
-  const extractFirstName = (fullName) => { // This function will extract the first name of a trainer from their full name
-    let firstName = fullName.split(' ')[0]; // If the database changes from one name to a first name and last name, this will need to be changed as well
-    return firstName;
-  }
+  // const extractFirstName = (fullName) => { // This function will extract the first name of a trainer from their full name
+  //   let firstName = fullName.split(' ')[0]; // If the database changes from one name to a first name and last name, this will need to be changed as well
+  //   return firstName;
+  // }
 
   return (
     <>
@@ -25,7 +25,7 @@ function ClassListItem({classEvent, i}) {
       <b>Date:</b> {classEvent.week_day_name} <br />
       <b>Date:</b> {classEvent.abbreviated_date} <br />
       <b>Time:</b> {classEvent.start_time}-{classEvent.end_time} <br />
-      <b>Class:</b> {classEvent.classname} with <b>Trainer:</b> {extractFirstName(classEvent.trainer_name)}
+      <b>Class:</b> {classEvent.classname} with <b>Trainer:</b> {classEvent.trainer_first_name}
       </li> <br />
     </>
   )

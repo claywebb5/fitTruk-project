@@ -74,7 +74,8 @@ function CreateClassPage() {
                         payload: {
                             trainer_user_id: trainer.trainer_user_id,
                             trainer_image: trainer.trainer_image,
-                            trainer_name: trainer.trainer_name,
+                            trainer_first_name: trainer.trainer_first_name,
+                            trainer_last_name: trainer.trainer_last_name,
                             trainer_pronouns: trainer.trainer_pronouns
                         }
                     });
