@@ -15,8 +15,9 @@ function ClassListItem({classEvent, i}) {
 
 
   const extractFirstName = (fullName) => { // This function will extract the first name of a trainer from their full name
-    let firstName = fullName.split(' ')[0]; // If the database changes from one name to a first name and last name, this will need to be changed as well
-    return firstName;
+    // let firstName = fullName.split(' ')[0]; // If the database changes from one name to a first name and last name, this will need to be changed as well
+    // return firstName;
+    return fullName;
   }
 
   return (
