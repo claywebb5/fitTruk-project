@@ -31,12 +31,22 @@ function LoginForm() {
 
   return (
     <>
+    <div style ={{
+      textAlign: 'center'
+    }}>
     <img src= {fittruck} alt="" style={{
       height: '100px',
       
-    }}  />
+     
+      
+      
+      
+      
+    }}  /></div>
     <form  style ={{
-      marginTop: '50px'
+      marginTop: '50px',
+      
+
     }} className="formPanel" onSubmit={login}>
       {/* <h2>Login</h2> */}
       {errors.loginMessage && (
@@ -110,6 +120,7 @@ function LoginForm() {
         }} className="btn" type="submit" name="submit" value="Log In" />
       </div>
     </form>
+    
     </>
   );
 }
