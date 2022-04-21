@@ -129,12 +129,12 @@ function Nav() {
       )}
 
       {/* Logged in as a Customer or a Trainer */}
-      {user.id && (
+      {user.access_level <= 2 && (
         <CustomerNav />
       )}
 
       {/* Logged in as an Admin show the Admin Nav Bar */}
-      {user.access_level == 3 && (
+      {user.access_level === 3 && (
         <AdminNav />
       )}
     </>

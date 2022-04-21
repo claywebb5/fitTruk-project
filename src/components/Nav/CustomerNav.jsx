@@ -154,13 +154,19 @@ function CustomerNav() {
                                 <Typography textAlign="center" onClick={handleHome}>Home</Typography>
                             </MenuItem>
                             <MenuItem onClick={handleCloseMenu}>
+                                <Typography textAlign="center" onClick={handleProfile}>Profile</Typography>
+                            </MenuItem>
+                            <MenuItem onClick={handleCloseMenu}>
                                 <Typography textAlign="center" onClick={handleAllClasses}>All Classes</Typography>
                             </MenuItem>
-                            {/* <MenuItem onClick={handleCloseMenu}>
-                <Typography textAlign="center" onClick={handleMyClasses}>My Classes</Typography>
-              </MenuItem> */}
+                            <MenuItem onClick={handleCloseMenu}>
+                                <Typography textAlign="center" onClick={handleMyClasses}>My Classes</Typography>
+                            </MenuItem>
                             <MenuItem onClick={handleCloseMenu}>
                                 <Typography textAlign="center" onClick={handleAbout}>About</Typography>
+                            </MenuItem>
+                            <MenuItem onClick={handleCloseMenu}>
+                                <Typography textAlign="center" onClick={handleSignOut}>Sign Out</Typography>
                             </MenuItem>
                         </Menu>
                     </Box>
@@ -180,37 +186,11 @@ function CustomerNav() {
                     {/* ------< USER ICON >--------------- */}
                     <Box sx={{ flexGrow: 0 }}>
                         <IconButton
-                            onClick={handleOpenUser}
+                            onClick={handleProfile}
                             sx={{ p: 0 }}
                         >
                             <Avatar sx={{ bgcolor: '#80bd02' }}>{initials.join('')}</Avatar>
                         </IconButton>
-                        <Menu
-                            sx={{ mt: '45px' }}
-                            id="user-appbar"
-                            anchorEl={anchorElUser}
-                            anchorOrigin={{
-                                vertical: 'top',
-                                horizontal: 'right',
-                            }}
-                            keepMounted
-                            transformOrigin={{
-                                vertical: 'top',
-                                horizontal: 'right',
-                            }}
-                            open={Boolean(anchorElUser)}
-                            onClose={handleCloseUser}
-                        >
-                            <MenuItem onClick={handleCloseUser}>
-                                <Typography textAlign="center" onClick={handleProfile}>Profile</Typography>
-                            </MenuItem>
-                            <MenuItem onClick={handleCloseUser}>
-                                <Typography textAlign="center" onClick={handleMyClasses}>My Classes</Typography>
-                            </MenuItem>
-                            <MenuItem onClick={handleCloseUser}>
-                                <Typography textAlign="center" onClick={handleSignOut}>Sign Out</Typography>
-                            </MenuItem>
-                        </Menu>
                     </Box>
                 </Toolbar>
             </AppBar>

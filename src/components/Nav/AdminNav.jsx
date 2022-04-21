@@ -1,7 +1,8 @@
 // import './Nav.css';
 import React, { useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import logoWhite from './logoWhite.png';
 // ---------< MUI IMPORTS >----------------
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
@@ -15,6 +16,7 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import FormGroup from '@mui/material/FormGroup';
 import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
+import Avatar from '@mui/material/Avatar';
 
 
 // =================**< ADMIN VIEW >**=========================
@@ -30,6 +32,16 @@ function AdminNav() {
     // ========< TOOLS >==============
     const history = useHistory();
     const user = useSelector((store) => store.user);
+    const dispatch = useDispatch();
+    // -------< PROFILE ICON >---------------
+
+    const name = user.name.toUpperCase();
+    const words = name.split(' ');
+    const initials = [];
+    // ---------< CREATES ICON >-------------
+    for (const i of words) {
+        initials.push(i[0])
+    }
 
     // =====< USESTATE >=============================
     // For the hamburger icon menu
@@ -38,10 +50,6 @@ function AdminNav() {
     const [anchorElUser, setAnchorElUser] = useState(null);
 
     // =====< CLICK LISTENERS >=============================
-    // Go to all classes view
-    const handleLogo = () => {
-        history.push("/all-classes")
-    };
     // OPEN the hamburger icon menu
     const handleOpenMenu = (event) => {
         setAnchorElMenu(event.currentTarget);
@@ -57,6 +65,39 @@ function AdminNav() {
     // CLOSE the user icon menu
     const handleCloseUser = (event) => {
         setAnchorElUser(null);
+    };
+    // Go to All Classes view (Maybe new Home.jsx Component?)
+    const handleLogo = () => {
+        history.push("/all-classes")
+    };
+    // GO to Profile
+    const handleProfile = () => {
+        history.push('/personal-info');
+    };
+    // GO to Home
+    const handleHome = () => {
+        alert('See Home.jsx Component!!!')
+        // history.push('');
+    };
+    // GO to All Classes
+    const handleAllClasses = () => {
+        history.push('/all-classes');
+    };
+    // GO to My Classes
+    const handleMyClasses = () => {
+        history.push('/my-classes');
+    };
+    // GO to About
+    const handleAbout = () => {
+        history.push('/about');
+    };
+    // SIGN OUT
+    const handleSignOut = () => {
+        dispatch({ type: 'LOGOUT' });
+    };
+    // GO to Create Class
+    const handleCreateClass = () => {
+        history.push('/create-class');
     };
 
     return (

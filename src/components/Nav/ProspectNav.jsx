@@ -1,9 +1,7 @@
 // import './Nav.css';
 import React, { useState } from 'react';
-import { Link, useHistory } from 'react-router-dom';
-import { useSelector, useDispatch } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 import logoWhite from './logoWhite.png';
-
 // ---------< MUI IMPORTS >----------------
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
@@ -11,29 +9,20 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
-import AccountCircle from '@mui/icons-material/AccountCircle';
-import Switch from '@mui/material/Switch';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import FormGroup from '@mui/material/FormGroup';
 import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
 import Avatar from '@mui/material/Avatar';
 import NoAccountsIcon from '@mui/icons-material/NoAccounts';
 
 // =================**< PROSPECTS VIEW >**=========================
-// [] All Classes
-// [] Sign in
-// [] Register
-
+// [x] All Classes
+// [x] Sign in
+// [x] Register
 
 function ProspectNav() {
-
     // ========< TOOLS >==============
     const history = useHistory();
-    // const user = useSelector((store) => store.user);
-    const dispatch = useDispatch();
-
-    // =====< USESTATE >=============================
+    
     // For the hamburger icon menu
     const [anchorElMenu, setAnchorElMenu] = useState(null);
 
