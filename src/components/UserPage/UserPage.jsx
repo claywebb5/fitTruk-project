@@ -14,7 +14,7 @@ function UserPage() {
   // Default user info from original repo
   const user = useSelector((store) => store.user);
 
-
+  console.log('User:', user);
   //  ============<>=============
   let userObj = {
     id: user.id,
@@ -32,7 +32,8 @@ function UserPage() {
     pronouns: user.pronouns,
     emergency_name: user.emergency_name,
     emergency_number: user.emergency_number,
-    access_level: user.access_level
+    access_level: user.access_level,
+    profile_pic: user.profile_image
   }
 
   const [editUser, setEditUser] = useState(userObj);
@@ -117,9 +118,13 @@ function UserPage() {
         <form onSubmit={handleSubmit}>
 
           <div> {/* CAN EDIT  */}
+            
 
             {/* ------ This will conditionally render a two letter string from the first/last name of the user, and it won't break the app if either of those two values isn't present ------ */}
             {(getInitials(user)) && <Avatar sx={{ bgcolor: deepPurple[500] }}>{initials}</Avatar>}
+
+            {/*=====< AVATAR WITH USER PROFILE PICTURE >====*/}
+            {/* <Avatar src={user.profile_image} /> */}
 
           </div>
 
