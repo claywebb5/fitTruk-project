@@ -2,10 +2,8 @@ const express = require('express');
 const pool = require('../modules/pool');
 const router = express.Router();
 
-// -------------------------- Get all classes (GET) (Everyone can see this)
-
+// ----------------- Get all classes (GET) (Everyone can see this)
 router.get('/', (req, res) => {
-
     let queryText = `SELECT "c"."id", to_char("c"."date", 'FMDay') AS "week_day_name", to_char("c"."date", 'FMMM/FMDD') AS "abbreviated_date", to_char("c"."date", 'YYYY-MM-DD') AS "date", "c"."start_time", "c"."end_time", "c"."classname", "c"."trainer_user_id",
     "user"."first_name" AS "trainer_first_name", "user"."last_name" AS "trainer_last_name",  "user"."pronouns" AS "trainer_pronouns", "user"."profile_image" AS "trainer_image"
     FROM "classes" AS "c"
@@ -19,8 +17,7 @@ router.get('/', (req, res) => {
     })
 });
 
-// -------------------------- Get class details (GET)(Everyone can see this)
-
+// -------------------- Get class details (GET)(Everyone can see this)
 router.get('/details/:classId/', (req, res) => {
     let classId = req.params.classId
     // If the user is signed in, this will return the class details AS WELL AS 
@@ -45,16 +42,15 @@ router.get('/details/:classId/', (req, res) => {
         FROM "classes" AS "c"
         JOIN "user" ON "user"."id" = "c"."trainer_user_id"
         WHERE "c"."id" = $1;`;
-
         pool.query(registeredUserQuery, [classId, req.user.id])
-
             .then((result) => {
                 res.send(result.rows[0])
             }).catch((error) => {
                 console.log(error)
                 res.sendStatus(500)
             })
-    } else {
+    } 
+    else {
         // Else if a user is not signed in, this will only return the class details
         // without checking any sort of reservation status.
         let unregisteredUserQuery = `SELECT "c"."id", to_char("c"."date", 'FMDay') AS "week_day_name",
@@ -71,9 +67,7 @@ router.get('/details/:classId/', (req, res) => {
         FROM "classes" AS "c"
         JOIN "user" ON "user"."id" = "c"."trainer_user_id"
         WHERE "c"."id" = $1;`;
-
         pool.query(unregisteredUserQuery, [classId])
-
             .then((result) => {
                 res.send(result.rows[0])
             }).catch((error) => {
@@ -83,10 +77,8 @@ router.get('/details/:classId/', (req, res) => {
     }
 });
 
-// -------------------------- Get classes, search by name that includes not case sensitive text
-
+// ------------- Get classes, search by name that includes not case sensitive text
 router.get('/:search', (req, res) => {
-
     let queryText = `SELECT * 
     FROM "classes" 
     WHERE "classname" ILIKE $1;`;
@@ -97,12 +89,11 @@ router.get('/:search', (req, res) => {
             console.log(error)
             res.sendStatus(500)
         })
-
 });
 
+// ---------------------------- GET the class size 
 router.get('/class-size/:id', (req, res) => {
     console.log('in router get class_id is:', req.params.id)
-
     let queryText = `select 
     CASE
     WHEN count(user_id) >= ( SELECT class_size FROM classes WHERE id = $1) 
@@ -119,7 +110,6 @@ router.get('/class-size/:id', (req, res) => {
             console.log(error)
             res.sendStatus(500)
         })
-
 });
 
 

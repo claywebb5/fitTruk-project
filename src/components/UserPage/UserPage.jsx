@@ -8,6 +8,8 @@ import { deepOrange, deepPurple } from '@mui/material/colors';
 
 function UserPage() {
 
+  // ======*** LINK TO MUI CHIPS FOR EDITABLE INPUTS: https://mui.com/material-ui/react-chip/
+
   const dispatch = useDispatch();
   const history = useHistory();
 

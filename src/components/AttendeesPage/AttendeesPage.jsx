@@ -1,23 +1,19 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 import { useParams } from 'react-router-dom/cjs/react-router-dom.min';
-//-------------- COMPONENTS ------------
 import AttendanceItem from '../AttendanceItem/AttendanceItem';
-
-// ** Trainers can view the list of signed up guests/members for a specific class
-// ** Trainers can check in guests/members upon arrival
-// ** Trainers can send individual messages to guests/members
-// ** STRETCH: Trainers can remove guests/members
-// ** STRETCH: Trainers can send messages to ALL guests/members
+//--------------< MUI IMPORTS >------------
 
 
 
-function AttendeesPage(){
-    
+
+
+function AttendeesPage() {
     //------------<  Setup  >-------------
     const dispatch = useDispatch();
+    const history = useHistory();
     const attendees = useSelector(store => store.attendees);
-    // const userId = useSelector(store => store.user.id);
     const { id } = useParams()
 
     useEffect(() => {
@@ -25,13 +21,9 @@ function AttendeesPage(){
             type: 'FETCH_ATTENDANCE',
             payload: id
         });
-    }, [])
+    }, []);
 
-    //------------< Functions >----------------
-    const handleMassMessage = () => {
-        console.log('this will open the option to send a mass message to all members signed up for a class');
-    }
-
+    // =====< CHECKING IN CUSTOMERS >===============
     const handleCheckIn = () => {
         console.log('send a dispatch to the server to update if users are checked in in the database');
         dispatch({
@@ -41,19 +33,27 @@ function AttendeesPage(){
                 id
             }
         })
+    };
 
+    // --< GO BACK >-----
+    const handleReturnClick = () => {
+        history.goBack();
+        console.log('Clicked Cancel');
     }
-    console.log('this is the attendees info', attendees);
-    return(
+
+
+    return (
         <>
-            <button onClick={handleMassMessage}>Message all</button>
-            {attendees.map((customer, i)=>(
-                // console.log(customer, i)
-                <AttendanceItem key={i} customer={customer}/>
-            ))}
             <button onClick={handleCheckIn}>Check-In</button>
 
+            {attendees.map((customer, i)=>(
+                <AttendanceItem key={i} customer={customer}/>
+            ))}
+
+            <button onClick={handleReturnClick}>Back</button>
         </>
-    )
-}
+    );
+};
+
+
 export default AttendeesPage;
