@@ -1,5 +1,4 @@
 import React from 'react';
-import BtnCreateClass from '../BtnCreateClass/BtnCreateClass';
 import { useSelector, useDispatch } from 'react-redux';
 // ---------< MUI IMPORTS >----------------
 import Container from '@mui/material/Container';
@@ -398,10 +397,6 @@ function AboutTab() {
                 </Card>
                 {/*======< END HERES WHAT'S ON THE TRUK CARD >======================== */}
             </Container>
-            {/* Logged in as an Admin show the Admin Nav Bar */}
-            {user.access_level === 3 && (
-                <BtnCreateClass />
-            )}
         </>
     );
 }
