@@ -63,38 +63,9 @@ function AttendeesPage() {
     const user = useSelector((store) => store.user);
     const { id } = useParams()
 
-    // console.log('Attendees:', attendees);
-    // console.log('Class Details:', classDetails);
-    // console.log('User:', user);
-
-    // ------------ Submit Button Settings ---------
-    // const subBtn = [
-    //     {
-
-    //     }
-    // ]
 
 
     // ==========================< CLICK LISTENERS >===============================
-
-    // ----------< INDIVIDUAL MESSAGE >---------------
-    // LINK TO MUI SNACKBAR FOR MESSAGE SENT NOTIFICATION: https://mui.com/material-ui/react-snackbar/ 
-    const handleMessage = () => {
-        console.log('this will open the option to send a specific user a message. Think "Hey, still able to make it today?"');
-    };
-
-    //----------< CLICKED INDIVIDUAL CHECKBOXES >--------------
-    // this sends a dispatch to the attendees reducer to update local state
-    const checkUserIn = (customer) => {
-        // console.log('this will update a piece of local state');
-        dispatch({
-            type: 'CHECK_USER_IN',
-            payload: {
-                attendees: attendees,
-                userId: customer.id
-            }
-        });
-    };
 
     // -------< SUBMIT CHECKING IN CUSTOMERS >---------
     const handleCheckIn = () => {
