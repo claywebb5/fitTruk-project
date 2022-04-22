@@ -121,7 +121,7 @@ function UserPage() {
             
 
             {/* ------ This will conditionally render a two letter string from the first/last name of the user, and it won't break the app if either of those two values isn't present ------ */}
-            {(getInitials(user)) && <Avatar sx={{ bgcolor: deepPurple[500] }}>{initials}</Avatar>}
+            {(getInitials(user)) && <Avatar sx={{ bgcolor: '#ace23a' }}>{initials}</Avatar>}
 
             {/*=====< AVATAR WITH USER PROFILE PICTURE >====*/}
             {/* <Avatar src={user.profile_image} /> */}
