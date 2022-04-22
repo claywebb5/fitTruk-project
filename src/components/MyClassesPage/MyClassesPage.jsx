@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import ClassListItem from '../ClassListItem/ClassListItem';
-
+import TrainersClasses from './TrainersClasses';
 
 function MyClassesPage() {
 // --------- Tools ----------
