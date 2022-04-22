@@ -70,6 +70,7 @@ function AllClassesPage() {
       return item;
     }
   }
+
   const checkTerm = (item) => {
 
     let resultTerm = item.classname.toLowerCase();
@@ -84,7 +85,6 @@ function AllClassesPage() {
   }
 
   const searchFunction = (array) => {
-
     let searchResults = array.filter(checkTrainer)
     let fullResults = searchResults.filter(checkTerm)
 

@@ -41,6 +41,12 @@ function ClassDetailsPage() {
     const handleReturnClick = () => {
         history.goBack();
     }
+
+    // GO to class attendees
+    const handleSeeAttendees = () => {
+
+        history.push(`/class-details/${id}/attendees`);
+    };
     
     const handleReserveClick = () => {
         // console.log('Selected class is:', classDetails.id); // TEST LOG
@@ -111,7 +117,7 @@ function ClassDetailsPage() {
             <h3>{classDetails.description}</h3>
             <h3>Spots remaining: {classDetails.spots_remaining}</h3>
             <button onClick={() => handleReturnClick(classDetails)}>Return</button>
-            <button onClick={() => history.push(`/class-details/${id}/attendees`)}>Attendance</button> 
+            <button onClick={handleSeeAttendees}>Attendance</button> 
                 {(function () {
                     if (classDetails.is_my_class) {
                         return <button onClick={handleCancelClick}>Cancel Reservation</button>;

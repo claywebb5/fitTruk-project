@@ -23,7 +23,7 @@ router.get('/details/:classId/', (req, res) => {
     // If the user is signed in, this will return the class details AS WELL AS 
     // a boolean of whether or not the user is registered for this class.
     if (req.user) {
-        let registeredUserQuery = `SELECT "c"."id", to_char("c"."date", 'FMDay') AS "week_day_name",
+        let registeredUserQuery = `SELECT "c"."id", to_char("c"."date", 'FMDay') AS "week_day_name", to_char("c"."date", 'FMMM/FMDD') AS "abbreviated_date",
 		to_char("c"."date", 'FMMM/FMDD/YYYY') AS "clean_format_date", "c"."classname",
 		"c"."description", "c"."trainer_user_id", to_char("c"."date", 'YYYY-MM-DD') AS "date",
 		"c"."start_time", "c"."end_time", "c"."street", "c"."city", "c"."state", "c"."zip", "c"."class_size",

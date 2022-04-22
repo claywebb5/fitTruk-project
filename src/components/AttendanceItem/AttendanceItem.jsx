@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+//--------------< MUI IMPORTS >------------
 import Avatar from '@mui/material/Avatar';
 
 
@@ -49,7 +50,8 @@ function AttendanceItem(props) {
         <>
             {props.customer.checked_in ?
                 // ===================< CHECKED IN >===================================
-                <div>                    
+                <div>
+                    <h4>Checked In</h4>                    
                     {/* the attribute 'defaultChecked' is what allows the input to render in the 'checked' state */}
                     <input type="checkbox" id="customer" value="user?" onClick={checkUserIn} defaultChecked></input>
                     
@@ -68,6 +70,7 @@ function AttendanceItem(props) {
                 :
                 // ===================< NOT CHECKED IN >===================================
                 <div>
+                    <h4>Not Checked In</h4>
                     {/* onChange could be used here instead of onClick due to it being the type 'checkbox'
                     onClick used just due to it more semantic sense to me */}
                     <input type="checkbox" id="customer" value="user?" onClick={checkUserIn}></input>
