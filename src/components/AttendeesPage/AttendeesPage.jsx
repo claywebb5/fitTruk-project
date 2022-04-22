@@ -15,15 +15,26 @@ import Avatar from '@mui/material/Avatar';
 import IconButton from '@mui/material/IconButton';
 import SendIcon from '@mui/icons-material/Send'; // SEND MESSAGE TO CUSTOMER
 import Typography from '@mui/material/Typography';
+import Divider from '@mui/material/Divider';
+import { makeStyles } from '@material-ui/core/styles';
 
 
-
+// ==========================< MUI THEME >===============================
+const useStyles = makeStyles({
+    newroot: {
+        padding: 16,
+        '&:last-child': {
+            paddingBottom: 16,
+        },
+    },
+});
 
 function AttendeesPage() {
     // =============================< SETUP >========================================
     //------------< TOOLS >-------------
     const dispatch = useDispatch();
     const history = useHistory();
+    const classes = useStyles(); // MUI Theme
 
     //---< FETCH ATTENDANCE >------
     useEffect(() => {
@@ -68,14 +79,20 @@ function AttendeesPage() {
         console.log('Clicked Cancel');
     }
 
-
     return (
         <>
             <Container>
                 <Card sx={{ maxWidth: 345 }}>
-                    <CardContent>
+                    <CardContent className={classes.newroot}>
                         <Typography variant="h5" align="center">
-                            {classDetails.week_day_name} {classDetails.abbreviated_date} 
+                            {classDetails.week_day_name} {classDetails.abbreviated_date}
+                        </Typography>
+                        <Typography variant="h5" align="center">
+                            {classDetails.classname}
+                        </Typography>
+                        <Divider />
+                        <Typography variant="h4" align="center">
+                            Attendee Check-in
                         </Typography>
                     </CardContent>
                 </Card>
