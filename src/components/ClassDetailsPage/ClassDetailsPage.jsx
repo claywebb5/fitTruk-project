@@ -108,13 +108,14 @@ function ClassDetailsPage() {
             <h3>{classDetails.description}</h3>
             <h3>Spots remaining: {classDetails.spots_remaining}</h3>
             <button onClick={() => handleReturnClick(classDetails)}>Return</button>
-            {(function () {
-                if (classDetails.is_my_class) {
-                    return <button onClick={handleCancelClick}>Cancel Reservation</button>;
-                } else {
-                    return <button onClick={handleReserveClick} disabled={isClassFull}>Reserve</button>;
-                }
-            })()}
+            <button onClick={() => history.push(`/class-details/${id}/attendees`)}>Attendance</button> 
+                {(function () {
+                    if (classDetails.is_my_class) {
+                        return <button onClick={handleCancelClick}>Cancel Reservation</button>;
+                    } else {
+                        return <button onClick={handleReserveClick}>Reserve</button>;
+                    }
+                })()}
 
             {/* ---------USED FOR TESTS, REMOVE LATER---------- USED FOR TESTS, REMOVE LATER ----------------USED FOR TESTS, REMOVE LATER-------- */}
             {user.access_level >= 2 && <button onClick={() => { history.push(`/edit-class/${classDetails.id}`) }}>edit class</button>}
