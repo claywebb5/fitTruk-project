@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import TextField from '@mui/material/TextField';
-import Select, { SelectChangeEvent } from '@mui/material/Select';
+import Select from '@mui/material/Select';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FitnessCenterIcon from '@mui/icons-material/FitnessCenter';
@@ -28,10 +28,11 @@ function RegisterForm() {
   const errors = useSelector((store) => store.errors);
   const dispatch = useDispatch();
 
-  const handlePronounSelection = (event: SelectChangeEvent) => {
+  const handlePronounSelection = (event) => {
     setPronouns(event.target.value);
   };
-
+  
+console.log('pronouns test is:', pronouns);
 
 
   const registerUser = (event) => {
@@ -136,9 +137,9 @@ function RegisterForm() {
           style ={{
           width: '100%'
         }}
-          label="first_name" variant="outlined"
+          label="First Name" variant="outlined"
             type="text"
-            name="first_name"
+            name="first-name"
             value={firstName}
             required
             onChange={(event) => setFirstName(event.target.value)}
@@ -153,9 +154,9 @@ function RegisterForm() {
           style ={{
           width: '100%'
         }}
-          label="last_name" variant="outlined"
+          label="Last Name" variant="outlined"
             type="text"
-            name="last_name"
+            name="last-name"
             value={lastName}
             required
             onChange={(event) => setLastName(event.target.value)}
