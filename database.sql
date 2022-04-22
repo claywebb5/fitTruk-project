@@ -1,134 +1,5 @@
-
 -- *** CREATE DATABASE NAME: fittruk
 
-CREATE TABLE "user" (
-	"id" SERIAL PRIMARY KEY NOT NULL,
-	"username" VARCHAR (80) UNIQUE NOT NULL,
-  "password" VARCHAR (1000),
-	"first_name" VARCHAR(255),
-	"last_name" VARCHAR(255),
-	"email" VARCHAR(255),
-	"phone_number" VARCHAR (20),
-	"street" VARCHAR(255),
-	"city" VARCHAR (50),
-	"state" VARCHAR (50),
-	"zip" VARCHAR (20),
-	"dob" DATE,
-	"pronouns" VARCHAR(255),
-	"emergency_name" VARCHAR(255),
-	"emergency_number" VARCHAR(20),
-	"profile_image" VARCHAR(255),
-	"free_classes" VARCHAR DEFAULT 3,
-	"access_level" INTEGER DEFAULT 1
-);
-
-CREATE TABLE "classes" (
-	"id" SERIAL PRIMARY KEY NOT NULL,
-	"classname" VARCHAR(255),
-	"description" VARCHAR(500),
-	"trainer_user_id" INT REFERENCES "user",
-	"date" DATE,
-	"start_time" TIME,
-	"end_time" TIME,
-	"street" VARCHAR (255),
-	"city" VARCHAR (50),
-	"state" VARCHAR (50),
-	"zip" VARCHAR (20),
-	"class_size" INTEGER
-);
-
-CREATE TABLE "class_list" (
-	"id" SERIAL PRIMARY KEY NOT NULL,
-	"class_id" INT REFERENCES "classes" ON DELETE CASCADE ON UPDATE CASCADE,
-	"user_id" INT REFERENCES "user",
-	"checked_in" BOOLEAN DEFAULT FALSE
-);
-
---This would be sign up
-insert into "user" ("username", "password", "first_name", "last_name", "email", "phone_number", "street", "city", "state", "zip", "dob", "pronouns", "emergency_name", "emergency_number", "profile_image")
-values 
-('Colin11', 1234, 'Colin', 'Jaworski', 'colin@yahoo.com', '763-867-5309', '123 first street','Minneapolis', 'MN', '55443', '12/05/1984', 'he', 'clay', '123-4567', 'profileImage.url'),
- 
-('Bethany11', 1234, 'Dane', 'Smith', 'Joshkmanj@Gmail.com', '651-295-8859', '420 milky way', 'Minneapolis', 'MN', '55444', '01/20/1996', 'He/Him', 'clay', '123-4567', 'https://avatars.githubusercontent.com/u/11574995?s=250&v=4'),
- 
-('Dane11', 1234, 'Dane', 'Smith', 'Joshkmanj@Gmail.com', '651-295-8859', '420 milky way', 'Minneapolis', 'MN', '55444', '01/20/1996', 'He/Him', 'clay', '123-4567', 'https://avatars.githubusercontent.com/u/11574995?s=250&v=4'),
-
-('Lizz11', 1234, 'Kofi', 'Kittleson', 'koffi.k.collins@gmail.com', '651-354-0552', '8901 south ave', 'Minneapolis', 'MN', '55443', '07/09/1999', 'they, them', 'clay', '123-4567', 'https://avatars.githubusercontent.com/u/17734101?v=4'),
- 
-('Hailee', 1234, 'Clay', 'Webb', 'clay_webb@outlook.com', '651-964-5585', '38752 orange alcove', 'Bloomington', 'MN', '55122', '07/09/1999', 'He/Him', 'colin', '123-4567', 'https://avatars.githubusercontent.com/u/17734101?v=4'), 
-
-('Abdi', 1234, 'Abdikarim', 'Ibrahim', 'alldayabdi@gmail.com', 'no phone number', '90210 hollywood avenue', 'Saint Paul', 'MN', 'st paul zip here', '07/09/1999', 'He/Him', 'colin', '123-4567', 'profileImage.url');
-
---This would be adding a new class
-insert into classes ("classname", "description", "trainer_user_id", "date", "start_time", "end_time", "street", "city", "state", "zip", "class_size" )
-values 
-('HIIT', 'high intensity interval training at Joshes place for some reason', 2, '4/12/2022', '12:00', '13:00', '420 milky way', 'Minneapolis', 'MN', '55444', 20), 
-('Yoga', 'Its yoga', 1, '4/13/2022', '14:00', '15:00', '345 coolplace drive', 'Saint Cloud', 'MN', '56301' , 10),
-('Kick boxing', 'This is a class where we are going to kick and box', 1, '4/14/2022', '9:00', '10:00', '8675309 song alcove', 'Brooklyn Park', 'MN', '55444', 18);
-
-
-
------------------------^^^----------------------- INITIAL DUMMY DATA ----------------------^^^------------------------ 
-
-
---Get all classes ordering them by date and then start_time
-select * from classes
-order by date, start_time;
-
---adding Koffi to HIIT class
-Insert into "class_list" ("class_id", "user_id")
-values (1, 3);
-
---adding Abdi to kickboxing and yoga 
-Insert into "class_list" ("class_id", "user_id")
-values (3, 5), (2,5);
-
---adding Clay to yoga, kickboxing, and HIIT
-Insert into "class_list" ("class_id", "user_id")
-values (2, 4), (3,4), (1,4);
-
--- Updating your password to log in (password is 1234), put in your id #
-UPDATE "user" 
-SET "password"='$2a$10$4Sgtt603bqy7iYnQDM58bug6XR.Vh5vBEGlez9h9eKTUdWV/pAiXe' 
-WHERE id = ;
-
---updating checked in status to true for Clay in HIIT class (signing in users)
-UPDATE class_list
-SET checked_in = FALSE
-WHERE class_id = 1 and user_id = 4;
-
---Get all classes that Clay has signed up for
-SELECT classes.*
-FROM "classes"
-JOIN "class_list"
-ON "classes"."id" = "class_list"."class_id"
-JOIN "user" on "class_list"."user_id" = "user"."id"
-WHERE "user"."id" = 4;
-
---Get all users who signed up for yoga
-select username
-from "classes"
-join "class_list"
-on "classes"."id"="class_list"."class_id" 
-join "user" on "class_list"."user_id"="user"."id"
-where "classes"."id" = 2;
-
---Updates pronouns for a specific user
-UPDATE "user"
-SET "pronouns" = 'He/Him'
-WHERE "user"."id" = 1;
-
---Updates access level for a specific user 
-UPDATE "user"
-SET "access_level" = 2
-WHERE "user"."id" = 1;
-
-
-
-
-
-
-
 --==========-- Presentation Data --============-- Presentation Data --============-- Presentation Data --============--
 --==========-- Presentation Data --============-- Presentation Data --============-- Presentation Data --============--
 CREATE TABLE "user" (
@@ -174,177 +45,41 @@ CREATE TABLE "class_list" (
 	"user_id" INT REFERENCES "user",
 	"checked_in" BOOLEAN DEFAULT FALSE
 );
-
-
--------------------------
-INSERT INTO "classes"("id","classname","description","trainer_user_id","date","start_time","end_time","street","city","state","zip","class_size")
-VALUES
-(100,'HIIT','high intensity interval training at Joshes place for some reason',102,'2022-04-12','12:00:00','13:00:00','724 Sibley St NE','Minneapolis','MN','55413',20),
-(101,'Yoga','Its yoga',103,'2022-04-13','14:00:00','15:00:00','1 1st St S','Minneapolis','MN','55401',10),
-(102,'Kick boxing','This is a class where we are going to kick and box',101,'2022-04-14','09:00:00','10:00:00','1 1st St S','Minneapolis','MN','55401',18),
-(103,'Yogayogayoga','Welcome to the YOGA ZONEE',102,'2022-04-23','21:00:00','22:00:00','425 Jefferson St NE','Minneapolis','MN','55413',3),
-(104,'Circuits','No need to call an ambulance, I already brought it.',103,'2022-04-22','09:00:00','22:00:00','724 Sibley St NE','Minneapolis','MN','55413',10),
-(105,'Circuitzz','No need to call an ambulance, I already brought it.',102,'2022-04-22','09:00:00','22:00:00','724 Sibley St NE','Minneapolis','MN','55413',10),
-(106,'Yoga','Yoga in the park',101,'2022-04-16','14:00:00','15:00:00','724 Sibley St NE','Minneapolis','MN','55413',10),
-(107,'Kick boxing','Kick a lot of boxes',103,'2022-04-15','09:00:00','10:00:00','425 Jefferson St NE','Minneapolis','MN','55413',18),
-(108,'Circuitzz','No need to call an ambulance, I already brought it.',102,'2022-04-23','09:00:00','22:00:00','724 Sibley St NE','Minneapolis','MN','55413',10),
-(109,'Yoga','Yoga in the park',101,'2022-04-26','14:00:00','15:00:00','724 Sibley St NE','Minneapolis','MN','55413',10),
-(110,'Kick boxing','Kick a lot of boxes',103,'2022-04-25','09:00:00','10:00:00','425 Jefferson St NE','Minneapolis','MN','55413',18),
-(111,'Circuitzz','No need to call an ambulance, I already brought it.',102,'2022-04-28','09:00:00','22:00:00','724 Sibley St NE','Minneapolis','MN','55413',10),
-(112,'Yoga','Yoga in the park',101,'2022-04-26','14:00:00','15:00:00','724 Sibley St NE','Minneapolis','MN','55413',10),
-(113,'Kick boxing','Kick a lot of boxes',103,'2022-04-25','09:00:00','10:00:00','425 Jefferson St NE','Minneapolis','MN','55413',18),
-(114,'Power lifting','Lift heavy',101,'2022-04-27','09:00:00','10:00:00','200 Dr Justus Ohage Blvd','St Paul','MN','55107',18);
-
-
-INSERT INTO "public"."user"("id","username","password","first_name","last_name","email","phone_number","street","city","state","zip","dob","pronouns","emergency_name","emergency_number","profile_image","free_classes","access_level")
-VALUES
-	(100,'Colin11',
-'','Colin','Jaworski','colin@yahoo.com','651-295-8859','420 milky way','Minneapolis','MN','55444','1996-01-20','He/Him','clay','123-4567','https://media-exp1.licdn.com/dms/image/C4E03AQGlycW9Vpes2w/profile-displayphoto-shrink_400_400/0/1647360104027?e=1655942400&v=beta&t=NtxVQS3k7JYTSq8UQQIiQfFHrscjzNWo4r88V3iodD8','3',1),
-	(101,'Bethany22',
-'','Bethany','Shulz','bethshulz@yemail.com','763-867-5309','123 first street','Minneapolis','MN','55443','1984-12-05','She/Her','clay','123-4567','https://media-exp1.licdn.com/dms/image/C4D03AQFxaonCB1zSsA/profile-displayphoto-shrink_400_400/0/1630027459789?e=1655942400&v=beta&t=pDQynv5qHj7HNsdhFS8CfY7JAKNauNI0yddm3s8GGJE','3',2),
-	(102,'Dane22',
-'','Dane','Smith','danesmith@email.com','651-295-8859','420 milky way','Minneapolis','MN','55444','1996-01-20','He/Him','clay','123-4567','https://avatars.githubusercontent.com/u/11574995?s=250&v=4','3',2),
-	(103,'Lizz22',
-'','Liz','Kerber','lizkerber@email.com','no phone','640 Jackson Street','St Paul','MN','55101','2000-07-20','She/Her','Clay','123-4567','https://avatars.githubusercontent.com/u/17734101?v=4','3',2),
-	(104,'Matt22',
-'','Matt','Black','mattblack@email.com','no phone','640 Jackson Street','St Paul','MN','55101','2000-07-20','She/Her','Clay','123-4567','https://avatars.githubusercontent.com/u/17734101?v=4','3',2),
-	(105,'Clay22',
-'','Clay','Webb','clay_webb@outlook.com','651-964-5585','38752 orange alcove','Bloomington','MN','55122','1999-07-09','He/Him','colin','123-4567','profileImage.url','3',1),
-	(106,'Hailee33',
-'','Hailee','Bland-Walsh','hailee@email.com','no phone','640 Jackson Street','St Paul','MN','55101','2000-07-20','She/Her','Clay','123-4567','https://media-exp1.licdn.com/dms/image/C4E03AQFNQlmK6gdl-A/profile-displayphoto-shrink_400_400/0/1601063689041?e=1655942400&v=beta&t=Cz1HHeP7Qvji74xVa0VOEKtokD73jWV2NOV1ABDzJW4','3',3),
-	(107,'Josh33',
-'','Josh','Kralewski','Joshkmanj@Gmail.com','651-295-8859','420 milky way','Minneapolis','MN','55444','1996-01-20','He/Him','clay','123-4567','profileImage.url','3',1),
-	(108,'Koffi33',
-'','Koffi','Kittleson','koffi.k.collins@gmail.com','651-354-0552','8901 south ave','Minneapolis','MN','55443','1999-07-09','they, them','clay','123-4567','profileImage.url','3',1),
-	(109,'Abdi11',
-'','Abdikarim','Ibrahim','alldayabdi@gmail.com','no phone number','90210 hollywood avenue','Saint Paul','MN','st paul zip here','1999-07-09','He/Him','colin','123-4567','profileImage.url','3',1),
-	(110,'Chandler11',
-'','Josh','Chandler','chandler@email.com','651-354-0552','640 Jackson Street','Saint Paul','MN','55101','1996-01-20','He/Him','Josh Kralewski','651-867-5309','profileImage.url','3',1),
-	(111,'Tony11',
-'','Tony','LaForgia','tony@email.com','651-354-0552','640 Jackson Street','Saint Paul','MN','55101','1996-01-20','He/Him','Josh Kralewski','651-867-5309','profileImage.url','3',1),
-	(112,'Arthur11',
-'','Arthur','Tran','arthurt@email.com','651-123-4567','640 Jackson St','St Paul','MN','55101','1995-11-03','He/Him','Josh Kralewski','651-867-5309','profileImage.url','3',1),
-	(113,'passwordis22',
-'','Brant','McCarthy','brantmct@email.com','651-867-5309','640 Jackson St','St Paul','MN','55101','1995-06-15','He/Him','Clay Webb','651-456-8555','profileImage.url','3',1),
-	(114,'passwordis11',
-'','Heather','Kim','hkim@email.com','651-867-5309','640 Jackson St','St Paul','MN','55101','1995-06-15','He/Him','Clay Webb','651-456-8555','profileImage.url','3',1),
-	(115,'passwordis33',
-'','Dan','Fenske','danfenske@email.com','651-867-5309','640 Jackson St','St Paul','MN','55101','1995-06-15','He/Him','Clay Webb','651-456-8555','profileImage.url','3',1);
-
-
-
-
-INSERT INTO "class_list"("id","class_id","user_id","checked_in")
-VALUES
-(100,100,106,FALSE),
-(101,102,107,FALSE),
-(102,103,108,FALSE),
-(103,109,109,FALSE),
-(104,108,106,FALSE),
-(105,110,107,FALSE),
-(106,106,108,FALSE),
-(107,100,109,FALSE),
-(108,100,110,FALSE),
-(109,102,110,FALSE),
-(110,103,110,FALSE),
-(111,109,110,FALSE),
-(112,108,110,FALSE),
-(113,110,110,FALSE),
-(114,106,110,FALSE),
-(115,100,109,FALSE);
-
-
-
----------------------
-INSERT INTO "user"("id","username","password","first_name","last_name","email","phone_number","street","city","state","zip","dob","pronouns","emergency_name","emergency_number","profile_image","free_classes","access_level")
-VALUES
-		(100,'Colin11',
-'' ,'Colin','Jaworski','colin@yahoo.com','651-295-8859','420 milky way','Minneapolis','MN','55444','1996-01-20','He/Him','clay','123-4567','https://media-exp1.licdn.com/dms/image/C4E03AQGlycW9Vpes2w/profile-displayphoto-shrink_400_400/0/1647360104027?e=1655942400&v=beta&t=NtxVQS3k7JYTSq8UQQIiQfFHrscjzNWo4r88V3iodD8','3',1),
-		(101,'Bethany22',
-'' ,'Bethany','Shulz','bethshulz@yemail.com','763-867-5309','123 first street','Minneapolis','MN','55443','1984-12-05','She/Her','clay','123-4567','https://media-exp1.licdn.com/dms/image/C4D03AQFxaonCB1zSsA/profile-displayphoto-shrink_400_400/0/1630027459789?e=1655942400&v=beta&t=pDQynv5qHj7HNsdhFS8CfY7JAKNauNI0yddm3s8GGJE','3',2),
-		(102,'Dane22',
-'' ,'Dane','Smith','danesmith@email.com','651-295-8859','420 milky way','Minneapolis','MN','55444','1996-01-20','He/Him','clay','123-4567','https://avatars.githubusercontent.com/u/11574995?s=250&v=4','3',2),
-		(103,'Lizz22',
-'' ,'Liz','Kerber','lizkerber@email.com','no phone','640 Jackson Street','St Paul','MN','55101','2000-07-20','She/Her','Clay','123-4567','https://avatars.githubusercontent.com/u/17734101?v=4','3',2),
-		(104,'Matt22',
-'' ,'Matt','Black','mattblack@email.com','no phone','640 Jackson Street','St Paul','MN','55101','2000-07-20','She/Her','Clay','123-4567','https://avatars.githubusercontent.com/u/17734101?v=4','3',2),
-		(105,'Clay22',
-'' ,'Clay','Webb','clay_webb@outlook.com','651-964-5585','38752 orange alcove','Bloomington','MN','55122','1999-07-09','He/Him','colin','123-4567','profileImage.url','3',1),
-		(106,'Hailee33',
-'' ,'Hailee','Bland-Walsh','hailee@email.com','no phone','640 Jackson Street','St Paul','MN','55101','2000-07-20','She/Her','Clay','123-4567','https://media-exp1.licdn.com/dms/image/C4E03AQFNQlmK6gdl-A/profile-displayphoto-shrink_400_400/0/1601063689041?e=1655942400&v=beta&t=Cz1HHeP7Qvji74xVa0VOEKtokD73jWV2NOV1ABDzJW4','3',3),
-		(107,'Josh33',
-'' ,'Josh','Kralewski','Joshkmanj@Gmail.com','651-295-8859','420 milky way','Minneapolis','MN','55444','1996-01-20','He/Him','clay','123-4567','profileImage.url','3',1),
-		(108,'Koffi33',
-'' ,'Koffi','Kittleson','koffi.k.collins@gmail.com','651-354-0552','8901 south ave','Minneapolis','MN','55443','1999-07-09','they, them','clay','123-4567','profileImage.url','3',1),
-		(109,'Abdi11',
-'' ,'Abdikarim','Ibrahim','alldayabdi@gmail.com','no phone number','90210 hollywood avenue','Saint Paul','MN','st paul zip here','1999-07-09','He/Him','colin','123-4567','profileImage.url','3',1),
-		(110,'Chandler11',
-'' ,'Josh','Chandler','chandler@email.com','651-354-0552','640 Jackson Street','Saint Paul','MN','55101','1996-01-20','He/Him','Josh Kralewski','651-867-5309','profileImage.url','3',1),
-		(111,'Tony11',
-'' ,'Tony','LaForgia','tony@email.com','651-354-0552','640 Jackson Street','Saint Paul','MN','55101','1996-01-20','He/Him','Josh Kralewski','651-867-5309','profileImage.url','3',1),
-		(112,'Arthur11',
-'' ,'Arthur','Tran','arthurt@email.com','651-123-4567','640 Jackson St','St Paul','MN','55101','1995-11-03','He/Him','Josh Kralewski','651-867-5309','profileImage.url','3',1),
-		(113,'passwordis22',
-'' ,'Brant','McCarthy','brantmct@email.com','651-867-5309','640 Jackson St','St Paul','MN','55101','1995-06-15','He/Him','Clay Webb','651-456-8555','profileImage.url','3',1),
-		(114,'passwordis11',
-'' ,'Heather','Kim','hkim@email.com','651-867-5309','640 Jackson St','St Paul','MN','55101','1995-06-15','He/Him','Clay Webb','651-456-8555','profileImage.url','3',1),
-		(115,'passwordis33',
-'' ,'Dan','Fenske','danfenske@email.com','651-867-5309','640 Jackson St','St Paul','MN','55101','1995-06-15','He/Him','Clay Webb','651-456-8555','profileImage.url','3',1);
-------------------
-
-
-
-INSERT INTO "user"("id","username","password","first_name","last_name","email","phone_number","street","city","state","zip","dob","pronouns","emergency_name","emergency_number","profile_image","free_classes","access_level")
-VALUES
-(111,'Benito11','$2a$10$vEJ6mSg2fsV5eSnVzSu9tucr.GzXnMo6WoSgvmT.qJZykIELkoXgi','Benito','Mcfarlane','benitomcfarlane@email.com','651-865-1234','1234 street ave','St Paul','MN','55101','2022-04-22','He/Him','Clay','123-123-1234','https://images.pexels.com/photos/733872/pexels-photo-733872.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2','3',1),
-(112,'Lucia11','$2a$10$xYeNI.QXhSObv9Gqqp3jkOpPeG95ABrE2fmjOmTCV/qoSa8eDU/6K','Lucia','Field','luciafield@email.com','no phone','640 Jackson Street','St Paul','MN','55101','2000-07-20','She/Her','Clay','123-4567','https://avatars.githubusercontent.com/u/17734101?v=4','3',1),
-(113,'Alice11','$2a$10$6bzHAPHycRvWVSK7Up/.l.VmxEE3r8VimDlmLmUn80.oUs.0h.F12','Alice','Kaiser','kaisera@email.com','651-354-0552','640 Jackson Street','Saint Paul','MN','55101','1996-01-20','She/Her','Josh Kralewski','651-867-5309','profileImage.url','3',1),
-(114,'Aron11','$2a$10$6bzHAPHycRvWVSK7Up/.l.VmxEE3r8VimDlmLmUn80.oUs.0h.F12','Aron','Sullivan','sullivanaron@email.com','651-354-0552','640 Jackson Street','Saint Paul','MN','55101','1996-01-20','He/Him','Josh Kralewski','651-867-5309','','3',1),
-(115,'Dilan11','$2a$10$6bzHAPHycRvWVSK7Up/.l.VmxEE3r8VimDlmLmUn80.oUs.0h.F12','Dilan','Hogan','dhogan@email.com','651-123-4567','640 Jackson St','St Paul','MN','55101','1995-11-03','He/Him','Josh Kralewski','651-867-5309','','3',1),
-(116,'Tina11','$2a$10$6bzHAPHycRvWVSK7Up/.l.VmxEE3r8VimDlmLmUn80.oUs.0h.F12','Tina','Dodd','tdodd@email.com','651-723-4567','640 Jackson St','St Paul','MN','55101','1995-11-03','She/Her','Josh Kralewski','651-867-5309','','3',1),
-(117,'Mckenzie11','$2a$10$6bzHAPHycRvWVSK7Up/.l.VmxEE3r8VimDlmLmUn80.oUs.0h.F12','Mckenzie','Keller','mkeller@email.com','651-723-4567','640 Jackson St','St Paul','MN','55101','1995-11-03','She/Her','Josh Kralewski','651-867-5309','','3',1),
-(118,'Matteo11','$2a$10$6bzHAPHycRvWVSK7Up/.l.VmxEE3r8VimDlmLmUn80.oUs.0h.F12','Matteo','Guerra','matteoguerra@email.com','651-723-4567','640 Jackson St','St Paul','MN','55101','1995-11-03','He/Him','Josh Kralewski','651-867-5309','','3',1),
-(119,'Devonte11','$2a$10$6bzHAPHycRvWVSK7Up/.l.VmxEE3r8VimDlmLmUn80.oUs.0h.F12','Devonte','Gutierrez','devgutierrez@email.com','651-723-4567','640 Jackson St','St Paul','MN','55101','1995-11-03','He/Him','Josh Kralewski','651-867-5309','','3',1),
-(120,'Parker11','$2a$10$6bzHAPHycRvWVSK7Up/.l.VmxEE3r8VimDlmLmUn80.oUs.0h.F12','Parker','DeWitt','parkerdewitt@email.com','651-723-4567','640 Jackson St','St Paul','MN','55101','1995-11-03','They/Them','Josh Kralewski','651-867-5309','','3',1);
-
-
-
-
 
 
 
 
 INSERT INTO "user"("id","username","password","first_name","profile_image","last_name","email","phone_number","street","city","state","zip","dob","pronouns","emergency_name","emergency_number","free_classes","access_level")
 VALUES
-(100,'Abdi11','$2a$10$6bzHAPHycRvWVSK7Up/.l.VmxEE3r8VimDlmLmUn80.oUs.0h.F12','Abdikarim','https://avatars.githubusercontent.com/u/72318062?v=4','Ibrahim','alldayabdi@gmail.com','651-865-1234','90210 hollywood avenue','Saint Paul','MN','st paul zip here','1999-07-09','he/him','colin','123-4567','3',1),
-(101,'Davey11','$2a$10$6bzHAPHycRvWVSK7Up/.l.VmxEE3r8VimDlmLmUn80.oUs.0h.F12','David','https://avatars.githubusercontent.com/u/75805825?v=4','Meuer','dave@email.com','651-865-1234','1234 street ave','St Paul','MN','55101','2022-04-22','He/Him','Clay','123-123-1234','3',1),
-(102,'Brandon11','$2a$10$6bzHAPHycRvWVSK7Up/.l.VmxEE3r8VimDlmLmUn80.oUs.0h.F12','Brandon','https://avatars.githubusercontent.com/u/90584592?v=4','Lanier','mattblack@email.com','651-865-1234','640 Jackson Street','St Paul','MN','55101','2000-07-20','she/her','Clay','123-4567','3',1),
-(103,'Chandler11','$2a$10$6bzHAPHycRvWVSK7Up/.l.VmxEE3r8VimDlmLmUn80.oUs.0h.F12','Josh','https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1','Chandler','chandler@email.com','651-354-0552','640 Jackson Street','Saint Paul','MN','55101','1996-01-20','he/him','Josh Kralewski','651-867-5309','3',1),
-(104,'Tony11','$2a$10$6bzHAPHycRvWVSK7Up/.l.VmxEE3r8VimDlmLmUn80.oUs.0h.F12','Tony','https://images.pexels.com/photos/2406949/pexels-photo-2406949.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260','LaForgia','tony@email.com','651-354-0552','640 Jackson Street','Saint Paul','MN','55101','1996-01-20','he/him','Josh Kralewski','651-867-5309','3',1),
-(105,'Arthur11','$2a$10$6bzHAPHycRvWVSK7Up/.l.VmxEE3r8VimDlmLmUn80.oUs.0h.F12','Arthur','https://media-exp1.licdn.com/dms/image/C4E03AQGSw9oc0xD6iw/profile-displayphoto-shrink_400_400/0/1607055874737?e=1655942400&v=beta&t=8A1Hxj5XizsbU98he9pKkZK4U8DfPuB_-JUxds-4qVM','Tran','arthurt@email.com','651-123-4567','640 Jackson St','St Paul','MN','55101','1995-11-03','He/Him','Josh Kralewski','651-867-5309','3',1),
-(106,'Sion11','$2a$10$6bzHAPHycRvWVSK7Up/.l.VmxEE3r8VimDlmLmUn80.oUs.0h.F12','Sion','https://images.pexels.com/photos/1310522/pexels-photo-1310522.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260','Graham','siongraham@email.com','651-723-4567','640 Jackson St','St Paul','MN','55101','1995-11-03','She/Her','Josh Kralewski','651-867-5309','3',1),
-(107,'Rhys11','$2a$10$6bzHAPHycRvWVSK7Up/.l.VmxEE3r8VimDlmLmUn80.oUs.0h.F12','Rhys','https://images.pexels.com/photos/1681010/pexels-photo-1681010.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2','Kirk','rhyskirk@email.com','651-723-4567','640 Jackson St','St Paul','MN','55101','1995-11-03','He/Him','Josh Kralewski','651-867-5309','3',1),
-(108,'Kianna11','$2a$10$6bzHAPHycRvWVSK7Up/.l.VmxEE3r8VimDlmLmUn80.oUs.0h.F12','Kianna','https://images.pexels.com/photos/1239288/pexels-photo-1239288.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260','Reed','kiannareed@email.com','651-723-4567','640 Jackson St','St Paul','MN','55101','1995-11-03','She/Her','Josh Kralewski','651-867-5309','3',1),
-(109,'Ellie11','$2a$10$6bzHAPHycRvWVSK7Up/.l.VmxEE3r8VimDlmLmUn80.oUs.0h.F12','Ellie-Louise','https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260','Shepard','ellieshep@email.com','651-723-4567','640 Jackson St','St Paul','MN','55101','1995-11-03','She/Her','Josh Kralewski','651-867-5309','3',1),
-(110,'Kaitlin11','$2a$10$6bzHAPHycRvWVSK7Up/.l.VmxEE3r8VimDlmLmUn80.oUs.0h.F12','Kaitlin','https://images.pexels.com/photos/1181686/pexels-photo-1181686.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260','Torres','ktorres@email.com','651-723-4567','640 Jackson St','St Paul','MN','55101','1995-11-03','She/Her','Josh Kralewski','651-867-5309','3',1),
-(111,'Benito11','$2a$10$6bzHAPHycRvWVSK7Up/.l.VmxEE3r8VimDlmLmUn80.oUs.0h.F12','Benito','https://images.pexels.com/photos/733872/pexels-photo-733872.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2','Mcfarlane','benitomcfarlane@email.com','651-865-1234','1234 street ave','St Paul','MN','55101','2022-04-22','He/Him','Clay','651-123-1234','3',1),
-(112,'Lucia11','$2a$10$6bzHAPHycRvWVSK7Up/.l.VmxEE3r8VimDlmLmUn80.oUs.0h.F12','Lucia','https://images.pexels.com/photos/1036622/pexels-photo-1036622.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260','Field','luciafield@email.com','651-865-1234','640 Jackson Street','St Paul','MN','55101','2000-07-20','She/Her','Clay','651-123-4567','3',1),
-(113,'Alice11','$2a$10$6bzHAPHycRvWVSK7Up/.l.VmxEE3r8VimDlmLmUn80.oUs.0h.F12','Alice','https://images.pexels.com/photos/6984618/pexels-photo-6984618.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260','Kaiser','kaisera@email.com','651-354-0552','640 Jackson Street','Saint Paul','MN','55101','1996-01-20','She/Her','Josh Kralewski','651-867-5309','3',1),
-(114,'Aron11','$2a$10$6bzHAPHycRvWVSK7Up/.l.VmxEE3r8VimDlmLmUn80.oUs.0h.F12','Aron','https://images.pexels.com/photos/1676729/pexels-photo-1676729.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260','Sullivan','sullivanaron@email.com','651-354-0552','640 Jackson Street','Saint Paul','MN','55101','1996-01-20','He/Him','Josh Kralewski','651-867-5309','3',1),
-(115,'Dilan11','$2a$10$6bzHAPHycRvWVSK7Up/.l.VmxEE3r8VimDlmLmUn80.oUs.0h.F12','Dilan','https://images.pexels.com/photos/3785079/pexels-photo-3785079.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260','Mendez','dhogan@email.com','651-123-4567','640 Jackson St','St Paul','MN','55101','1995-11-03','He/Him','Josh Kralewski','651-867-5309','3',1),
-(116,'Tina11','$2a$10$6bzHAPHycRvWVSK7Up/.l.VmxEE3r8VimDlmLmUn80.oUs.0h.F12','Tina','https://images.pexels.com/photos/962337/pexels-photo-962337.png?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260','Dodd','tdodd@email.com','651-723-4567','640 Jackson St','St Paul','MN','55101','1995-11-03','She/Her','Josh Kralewski','651-867-5309','3',1),
-(117,'Mckenzie11','$2a$10$6bzHAPHycRvWVSK7Up/.l.VmxEE3r8VimDlmLmUn80.oUs.0h.F12','Mckenzie','https://images.pexels.com/photos/3992656/pexels-photo-3992656.png?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260','Keller','mkeller@email.com','651-723-4567','640 Jackson St','St Paul','MN','55101','1995-11-03','She/Her','Josh Kralewski','651-867-5309','3',1),
-(118,'Matteo11','$2a$10$6bzHAPHycRvWVSK7Up/.l.VmxEE3r8VimDlmLmUn80.oUs.0h.F12','Italo','https://images.pexels.com/photos/2379005/pexels-photo-2379005.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260','Guerra','matteoguerra@email.com','651-723-4567','640 Jackson St','St Paul','MN','55101','1995-11-03','He/Him','Josh Kralewski','651-867-5309','3',1),
-(119,'Devonte11','$2a$10$6bzHAPHycRvWVSK7Up/.l.VmxEE3r8VimDlmLmUn80.oUs.0h.F12','Francisco','https://images.pexels.com/photos/2932728/pexels-photo-2932728.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260','Hogan','devgutierrez@email.com','651-723-4567','640 Jackson St','St Paul','MN','55101','1995-11-03','He/Him','Josh Kralewski','651-867-5309','3',1),
-(120,'Parker11','$2a$10$6bzHAPHycRvWVSK7Up/.l.VmxEE3r8VimDlmLmUn80.oUs.0h.F12','Parker','https://images.pexels.com/photos/4073954/pexels-photo-4073954.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260','DeWitt','parkerdewitt@email.com','651-723-4567','640 Jackson St','St Paul','MN','55101','1995-11-03','They/Them','Josh Kralewski','651-867-5309','3',1),
-(200,'Clay22','$2a$10$6bzHAPHycRvWVSK7Up/.l.VmxEE3r8VimDlmLmUn80.oUs.0h.F12','Clay','https://avatars.githubusercontent.com/u/90583942?v=4','Webb','clay_webb@outlook.com','651-964-5585','38752 orange alcove','Bloomington','MN','55122','1999-07-09','he/him','colin','651-723-4567','3',2),
-(201,'Mark22','$2a$10$6bzHAPHycRvWVSK7Up/.l.VmxEE3r8VimDlmLmUn80.oUs.0h.F12','Mark','https://media.istockphoto.com/photos/confident-gym-owner-picture-id1324042769?b=1&k=20&m=1324042769&s=170667a&w=0&h=jAwDr6qkVDFxds70ODp0rlzaofDKXNhdaKZyfM_l-eQ=','Jaworski','colin@yahoo.com','651-295-8859','420 milky way','Minneapolis','MN','55444','1996-01-20','he/him','clay','651-723-4567','3',2),
-(202,'Sarah22','$2a$10$6bzHAPHycRvWVSK7Up/.l.VmxEE3r8VimDlmLmUn80.oUs.0h.F12','Sarah','https://www.afaa.com/images/default-source/2020/pages/home/afaa-group-fitness-certification.jpg?sfvrsn=236a314_0','Shulz','bethshulz@yemail.com','763-867-5309','123 first street','Minneapolis','MN','55443','1984-12-05','She/Her','clay','651-723-4567','3',2),
-(203,'Andrew22','$2a$10$6bzHAPHycRvWVSK7Up/.l.VmxEE3r8VimDlmLmUn80.oUs.0h.F12','Andrew','https://images.ctfassets.net/psi7gc0m4mjv/65DGWgJtzd6t2KRanvMsIa/60dc315420b13cd9102751bc014c5a0b/certified_personal_trainer_mobile_hero_image_2x.jpg','Smith','danesmith@email.com','651-295-8859','420 milky way','Minneapolis','MN','55444','1996-01-20','he/him','clay','651-723-4567','3',2),
-(204,'Liz22','$2a$10$6bzHAPHycRvWVSK7Up/.l.VmxEE3r8VimDlmLmUn80.oUs.0h.F12','Liz','https://avatars.githubusercontent.com/u/17734101?v=4','Kerber','lizkerber@email.com','651-865-1234','640 Jackson Street','St Paul','MN','55101','2000-07-20','she/her','Clay','651-723-4567','3',2),
-(300,'Koffi33','$2a$10$6bzHAPHycRvWVSK7Up/.l.VmxEE3r8VimDlmLmUn80.oUs.0h.F12','Koffi','https://avatars.githubusercontent.com/u/80186837?v=4','Kittleson','koffi.k.collins@gmail.com','651-354-0552','8901 south ave','Minneapolis','MN','55443','1999-07-09','they, them','clay','651-723-4567','3',3),
-(301,'Hailee33','$2a$10$6bzHAPHycRvWVSK7Up/.l.VmxEE3r8VimDlmLmUn80.oUs.0h.F12','Hailee','https://media-exp1.licdn.com/dms/image/C4E03AQFNQlmK6gdl-A/profile-displayphoto-shrink_400_400/0/1601063689041?e=1655942400&v=beta&t=Cz1HHeP7Qvji74xVa0VOEKtokD73jWV2NOV1ABDzJW4','Bland-Walsh','hailee@email.com','651-865-1234','640 Jackson Street','St Paul','MN','55101','2000-07-20','she/her','Clay','651-723-4567','3',3),
-(302,'Josh33','$2a$10$6bzHAPHycRvWVSK7Up/.l.VmxEE3r8VimDlmLmUn80.oUs.0h.F12','Josh','https://media-exp1.licdn.com/dms/image/C4E03AQGlycW9Vpes2w/profile-displayphoto-shrink_200_200/0/1647360104027?e=1655942400&v=beta&t=LOr5SZOu40bwdk1o0CROEn8bmyI8WhNF3Ty6wOwpOpI','Kralewski','Joshkmanj@Gmail.com','651-295-8859','420 milky way','Minneapolis','MN','55444','1996-01-20','he/him','clay','651-723-4567','3',3);
+(100,'Abdi11','check_slack','Abdikarim','https://avatars.githubusercontent.com/u/72318062?v=4','Ibrahim','alldayabdi@gmail.com','651-865-1234','90210 hollywood avenue','Saint Paul','MN','st paul zip here','1999-07-09','he/him','colin','123-4567','3',1),
+(101,'Davey11','check_slack','David','https://avatars.githubusercontent.com/u/75805825?v=4','Meuer','dave@email.com','651-865-1234','1234 street ave','St Paul','MN','55101','2022-04-22','He/Him','Clay','123-123-1234','3',1),
+(102,'Brandon11','check_slack','Brandon','https://avatars.githubusercontent.com/u/90584592?v=4','Lanier','mattblack@email.com','651-865-1234','640 Jackson Street','St Paul','MN','55101','2000-07-20','she/her','Clay','123-4567','3',1),
+(103,'Chandler11','check_slack','Josh','https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1','Chandler','chandler@email.com','651-354-0552','640 Jackson Street','Saint Paul','MN','55101','1996-01-20','he/him','Josh Kralewski','651-867-5309','3',1),
+(104,'Tony11','check_slack','Tony','https://images.pexels.com/photos/2406949/pexels-photo-2406949.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260','LaForgia','tony@email.com','651-354-0552','640 Jackson Street','Saint Paul','MN','55101','1996-01-20','he/him','Josh Kralewski','651-867-5309','3',1),
+(105,'Arthur11','check_slack','Arthur','https://media-exp1.licdn.com/dms/image/C4E03AQGSw9oc0xD6iw/profile-displayphoto-shrink_400_400/0/1607055874737?e=1655942400&v=beta&t=8A1Hxj5XizsbU98he9pKkZK4U8DfPuB_-JUxds-4qVM','Tran','arthurt@email.com','651-123-4567','640 Jackson St','St Paul','MN','55101','1995-11-03','He/Him','Josh Kralewski','651-867-5309','3',1),
+(106,'Sion11','check_slack','Sion','https://images.pexels.com/photos/1310522/pexels-photo-1310522.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260','Graham','siongraham@email.com','651-723-4567','640 Jackson St','St Paul','MN','55101','1995-11-03','She/Her','Josh Kralewski','651-867-5309','3',1),
+(107,'Rhys11','check_slack','Rhys','https://images.pexels.com/photos/1681010/pexels-photo-1681010.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2','Kirk','rhyskirk@email.com','651-723-4567','640 Jackson St','St Paul','MN','55101','1995-11-03','He/Him','Josh Kralewski','651-867-5309','3',1),
+(108,'Kianna11','check_slack','Kianna','https://images.pexels.com/photos/1239288/pexels-photo-1239288.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260','Reed','kiannareed@email.com','651-723-4567','640 Jackson St','St Paul','MN','55101','1995-11-03','She/Her','Josh Kralewski','651-867-5309','3',1),
+(109,'Ellie11','check_slack','Ellie-Louise','https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260','Shepard','ellieshep@email.com','651-723-4567','640 Jackson St','St Paul','MN','55101','1995-11-03','She/Her','Josh Kralewski','651-867-5309','3',1),
+(110,'Kaitlin11','check_slack','Kaitlin','https://images.pexels.com/photos/1181686/pexels-photo-1181686.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260','Torres','ktorres@email.com','651-723-4567','640 Jackson St','St Paul','MN','55101','1995-11-03','She/Her','Josh Kralewski','651-867-5309','3',1),
+(111,'Benito11','check_slack','Benito','https://images.pexels.com/photos/733872/pexels-photo-733872.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2','Mcfarlane','benitomcfarlane@email.com','651-865-1234','1234 street ave','St Paul','MN','55101','2022-04-22','He/Him','Clay','651-123-1234','3',1),
+(112,'Lucia11','check_slack','Lucia','https://images.pexels.com/photos/1036622/pexels-photo-1036622.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260','Field','luciafield@email.com','651-865-1234','640 Jackson Street','St Paul','MN','55101','2000-07-20','She/Her','Clay','651-123-4567','3',1),
+(113,'Alice11','check_slack','Alice','https://images.pexels.com/photos/6984618/pexels-photo-6984618.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260','Kaiser','kaisera@email.com','651-354-0552','640 Jackson Street','Saint Paul','MN','55101','1996-01-20','She/Her','Josh Kralewski','651-867-5309','3',1),
+(114,'Aron11','check_slack','Aron','https://images.pexels.com/photos/1676729/pexels-photo-1676729.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260','Sullivan','sullivanaron@email.com','651-354-0552','640 Jackson Street','Saint Paul','MN','55101','1996-01-20','He/Him','Josh Kralewski','651-867-5309','3',1),
+(115,'Dilan11','check_slack','Dilan','https://images.pexels.com/photos/3785079/pexels-photo-3785079.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260','Mendez','dhogan@email.com','651-123-4567','640 Jackson St','St Paul','MN','55101','1995-11-03','He/Him','Josh Kralewski','651-867-5309','3',1),
+(116,'Tina11','check_slack','Tina','https://images.pexels.com/photos/962337/pexels-photo-962337.png?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260','Dodd','tdodd@email.com','651-723-4567','640 Jackson St','St Paul','MN','55101','1995-11-03','She/Her','Josh Kralewski','651-867-5309','3',1),
+(117,'Mckenzie11','check_slack','Mckenzie','https://images.pexels.com/photos/3992656/pexels-photo-3992656.png?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260','Keller','mkeller@email.com','651-723-4567','640 Jackson St','St Paul','MN','55101','1995-11-03','She/Her','Josh Kralewski','651-867-5309','3',1),
+(118,'Matteo11','check_slack','Italo','https://images.pexels.com/photos/2379005/pexels-photo-2379005.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260','Guerra','matteoguerra@email.com','651-723-4567','640 Jackson St','St Paul','MN','55101','1995-11-03','He/Him','Josh Kralewski','651-867-5309','3',1),
+(119,'Devonte11','check_slack','Francisco','https://images.pexels.com/photos/2932728/pexels-photo-2932728.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260','Hogan','devgutierrez@email.com','651-723-4567','640 Jackson St','St Paul','MN','55101','1995-11-03','He/Him','Josh Kralewski','651-867-5309','3',1),
+(120,'Parker11','check_slack','Parker','https://images.pexels.com/photos/4073954/pexels-photo-4073954.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260','DeWitt','parkerdewitt@email.com','651-723-4567','640 Jackson St','St Paul','MN','55101','1995-11-03','They/Them','Josh Kralewski','651-867-5309','3',1),
+(200,'Clay22','check_slack','Clay','https://avatars.githubusercontent.com/u/90583942?v=4','Webb','clay_webb@outlook.com','651-964-5585','38752 orange alcove','Bloomington','MN','55122','1999-07-09','he/him','colin','651-723-4567','3',2),
+(201,'Mark22','check_slack','Mark','https://media.istockphoto.com/photos/confident-gym-owner-picture-id1324042769?b=1&k=20&m=1324042769&s=170667a&w=0&h=jAwDr6qkVDFxds70ODp0rlzaofDKXNhdaKZyfM_l-eQ=','Jaworski','colin@yahoo.com','651-295-8859','420 milky way','Minneapolis','MN','55444','1996-01-20','he/him','clay','651-723-4567','3',2),
+(202,'Sarah22','check_slack','Sarah','https://www.afaa.com/images/default-source/2020/pages/home/afaa-group-fitness-certification.jpg?sfvrsn=236a314_0','Shulz','bethshulz@yemail.com','763-867-5309','123 first street','Minneapolis','MN','55443','1984-12-05','She/Her','clay','651-723-4567','3',2),
+(203,'Andrew22','check_slack','Andrew','https://images.ctfassets.net/psi7gc0m4mjv/65DGWgJtzd6t2KRanvMsIa/60dc315420b13cd9102751bc014c5a0b/certified_personal_trainer_mobile_hero_image_2x.jpg','Smith','danesmith@email.com','651-295-8859','420 milky way','Minneapolis','MN','55444','1996-01-20','he/him','clay','651-723-4567','3',2),
+(204,'Liz22','check_slack','Liz','https://avatars.githubusercontent.com/u/17734101?v=4','Kerber','lizkerber@email.com','651-865-1234','640 Jackson Street','St Paul','MN','55101','2000-07-20','she/her','Clay','651-723-4567','3',2),
+(300,'Koffi33','check_slack','Koffi','https://avatars.githubusercontent.com/u/80186837?v=4','Kittleson','koffi.k.collins@gmail.com','651-354-0552','8901 south ave','Minneapolis','MN','55443','1999-07-09','they, them','clay','651-723-4567','3',3),
+(301,'Hailee33','check_slack','Hailee','https://media-exp1.licdn.com/dms/image/C4E03AQFNQlmK6gdl-A/profile-displayphoto-shrink_400_400/0/1601063689041?e=1655942400&v=beta&t=Cz1HHeP7Qvji74xVa0VOEKtokD73jWV2NOV1ABDzJW4','Bland-Walsh','hailee@email.com','651-865-1234','640 Jackson Street','St Paul','MN','55101','2000-07-20','she/her','Clay','651-723-4567','3',3),
+(302,'Josh33','check_slack','Josh','https://media-exp1.licdn.com/dms/image/C4E03AQGlycW9Vpes2w/profile-displayphoto-shrink_200_200/0/1647360104027?e=1655942400&v=beta&t=LOr5SZOu40bwdk1o0CROEn8bmyI8WhNF3Ty6wOwpOpI','Kralewski','Joshkmanj@Gmail.com','651-295-8859','420 milky way','Minneapolis','MN','55444','1996-01-20','he/him','clay','651-723-4567','3',3);
 
 
 
