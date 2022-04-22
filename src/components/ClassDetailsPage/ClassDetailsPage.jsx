@@ -21,6 +21,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import { styled } from '@mui/material/styles';
+import TextField from '@mui/material/TextField';
 
 
 // ==========================< MUI THEMES >===============================
@@ -135,7 +136,7 @@ function ClassDetailsPage() {
                     </CardContent>
                 </Card>
                 <Box sx={{pt:1}}>
-                    <Typography variant="h5" align="center">
+                    <Typography variant="h6" align="center">
                         {classDetails.classname}
                     </Typography>
                 </Box>
@@ -149,8 +150,20 @@ function ClassDetailsPage() {
                         </Typography>
                     </Box>
                     <Avatar src={classDetails.trainer_image} sx={{align: 'center', ml: 3, mt: 1, height: '90px', width: '90px'}} />
+                </Box>
+                <Box sx={{pt:2}}>
+                    <Typography variant="body1" align='center'>
+                        At:
+                    </Typography>
+
+                    {/* ============< THIS WILL BE CHANGED TO AN INPUT >============ */}
+                    <Typography sx={{align: 'left', }} display="inline">
+                        {classDetails.street}, {classDetails.city}, {classDetails.state}, {classDetails.zip}
+                    </Typography>
                     
                 </Box>
+
+                
             </Container>
 
 
