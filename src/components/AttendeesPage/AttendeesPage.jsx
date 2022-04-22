@@ -14,12 +14,16 @@ import Collapse from '@mui/material/Collapse';
 import Avatar from '@mui/material/Avatar';
 import IconButton from '@mui/material/IconButton';
 import SendIcon from '@mui/icons-material/Send'; // SEND MESSAGE TO CUSTOMER
+import CheckBoxOutlineBlankIcon from '@mui/icons-material/CheckBoxOutlineBlank'; // NOT CHECKED IN
+import CheckBoxIcon from '@mui/icons-material/CheckBox'; // CHECKED IN
 import Typography from '@mui/material/Typography';
 import Divider from '@mui/material/Divider';
 import { makeStyles } from '@material-ui/core/styles';
+import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
+import { styled } from '@mui/material/styles';
 
-
-// ==========================< MUI THEME >===============================
+// ==========================< MUI THEMES >===============================
 const useStyles = makeStyles({
     newroot: {
         padding: 16,
@@ -28,6 +32,7 @@ const useStyles = makeStyles({
         },
     },
 });
+
 
 function AttendeesPage() {
     // =============================< SETUP >========================================
@@ -55,14 +60,43 @@ function AttendeesPage() {
     const attendees = useSelector(store => store.attendees);
     const classDetails = useSelector(store => store.selectedClass.classDetails)
     const allClasses = useSelector(store => store.allClasses)
+    const user = useSelector((store) => store.user);
     const { id } = useParams()
 
-    console.log('Class Details:', classDetails);
+    // console.log('Attendees:', attendees);
+    // console.log('Class Details:', classDetails);
+    // console.log('User:', user);
+
+    // ------------ Submit Button Settings ---------
+    // const subBtn = [
+    //     {
+
+    //     }
+    // ]
 
 
     // ==========================< CLICK LISTENERS >===============================
 
-    // -------< CHECKING IN CUSTOMERS >---------
+    // ----------< INDIVIDUAL MESSAGE >---------------
+    // LINK TO MUI SNACKBAR FOR MESSAGE SENT NOTIFICATION: https://mui.com/material-ui/react-snackbar/ 
+    const handleMessage = () => {
+        console.log('this will open the option to send a specific user a message. Think "Hey, still able to make it today?"');
+    };
+
+    //----------< CLICKED INDIVIDUAL CHECKBOXES >--------------
+    // this sends a dispatch to the attendees reducer to update local state
+    const checkUserIn = (customer) => {
+        // console.log('this will update a piece of local state');
+        dispatch({
+            type: 'CHECK_USER_IN',
+            payload: {
+                attendees: attendees,
+                userId: customer.id
+            }
+        });
+    };
+
+    // -------< SUBMIT CHECKING IN CUSTOMERS >---------
     const handleCheckIn = () => {
         console.log('send a dispatch to the server to update if users are checked in in the database');
         dispatch({
@@ -73,6 +107,7 @@ function AttendeesPage() {
             }
         })
     };
+
     // ---------< GO BACK >--------------
     const handleReturnClick = () => {
         history.goBack();
@@ -96,12 +131,27 @@ function AttendeesPage() {
                         </Typography>
                     </CardContent>
                 </Card>
-                {attendees.map(customer => {
+                {/* {attendees.map(customer => {
                     return (
                         <Card key={customer.id}>
                             <CardContent>
+                                <Box>
+                                    {customer.checked_in ?
+                                        <CheckBoxIcon color="disabled" />
+                                        :
+                                        <IconButton
+                                            size="large"
+                                            edge="start"
+                                            aria-label="menu"
+                                            aria-controls="menu-appbar"
+                                            onClick={() => checkUserIn(customer)}
+                                            sx={{ mr: 2, color: "#ace23a" }}
+                                        >
+                                            <CheckBoxOutlineBlankIcon />
+                                        </IconButton>
+                                    }
+                                </Box>
                                 <Avatar src={customer.profile_image} />
-
                                 <Typography variant="h5">
                                     {customer.first_name} {customer.last_name}
                                 </Typography>
@@ -109,14 +159,19 @@ function AttendeesPage() {
                         </Card>
                     );
 
-                })}
+                })} */}
 
             </Container>
-            <button onClick={handleCheckIn}>Check-In</button>
 
-            {/* {attendees.map((customer, i)=>(
-                <AttendanceItem key={i} customer={customer}/>
-            ))} */}
+            {attendees.map((customer, i) => (
+                <AttendanceItem key={i} customer={customer} />
+            ))}
+
+            <Box textAlign='center' sx={{pt:1}}>
+                <Button onClick={handleCheckIn} variant="outlined" sx={{ color: '#FFFFFF', bgcolor: '#ace23a' }}>Check in</Button>
+            </Box>
+
+
 
             <button onClick={handleReturnClick}>Back</button>
         </>
