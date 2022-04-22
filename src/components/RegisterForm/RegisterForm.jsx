@@ -12,7 +12,8 @@ import logo from './logo.png'
 function RegisterForm() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const [name, setName] = useState('');
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
   const [phoneNumber, setPhoneNumber] = useState('');
   const [street, setStreet] = useState('');
@@ -41,7 +42,8 @@ function RegisterForm() {
       payload: {
         username: username,
         password: password,
-        name: name,
+        first_name: firstName,
+        last_name: lastName,
         email: email,
         street: street,
         city: city,
@@ -128,18 +130,35 @@ function RegisterForm() {
       </div>
       <br />
       <div>
-        <label htmlFor="name">
+        <label htmlFor="first-name">
           
           <TextField
           style ={{
           width: '100%'
         }}
-          label="Name" variant="outlined"
+          label="first_name" variant="outlined"
             type="text"
-            name="name"
-            value={name}
+            name="first_name"
+            value={firstName}
             required
-            onChange={(event) => setName(event.target.value)}
+            onChange={(event) => setFirstName(event.target.value)}
+          />
+        </label>
+      </div>
+      <br />
+      <div>
+        <label htmlFor="last-name">
+          
+          <TextField
+          style ={{
+          width: '100%'
+        }}
+          label="last_name" variant="outlined"
+            type="text"
+            name="last_name"
+            value={lastName}
+            required
+            onChange={(event) => setLastName(event.target.value)}
           />
         </label>
       </div>

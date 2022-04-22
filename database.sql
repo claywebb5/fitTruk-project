@@ -178,14 +178,77 @@ CREATE TABLE "class_list" (
 INSERT INTO "classes"("id","classname","description","trainer_user_id","date","start_time","end_time","street","city","state","zip","class_size")
 VALUES
 (100,'HIIT','high intensity interval training at Joshes place for some reason',102,'2022-04-12','12:00:00','13:00:00','724 Sibley St NE','Minneapolis','MN','55413',20),
-(102,'Yoga','Its yoga',103,'2022-04-13','14:00:00','15:00:00','1 1st St S','Minneapolis','MN','55401',10),
-(103,'Kick boxing','This is a class where we are going to kick and box',101,'2022-04-14','09:00:00','10:00:00','1 1st St S','Minneapolis','MN','55401',18),
-(104,'Yogayogayoga','Welcome to the YOGA ZONEE',102,'2022-04-23','21:00:00','22:00:00','425 Jefferson St NE','Minneapolis','MN','55413',3),
-(106,'Circuits','No need to call an ambulance, I already brought it.',103,'2022-04-22','09:00:00','22:00:00','640 Jackson St','St Paul','MN','55101',5),
-(107,'Circuitzz','No need to call an ambulance, I already brought it.',102,'2022-04-22','09:00:00','22:00:00','640 Jackson St','St Paul','MN','55101',5),
-(108,'Yoga','Yoga in the park',101,'2022-04-16','14:00:00','15:00:00','724 Sibley St NE','Minneapolis','MN','55413',10),
-(109,'Kick boxing','Kick a lot of boxes',103,'2022-04-15','09:00:00','10:00:00','425 Jefferson St NE','Minneapolis','MN','55413',18),
-(110,'Power lifting','Lift heavy',101,'2022-04-17','09:00:00','10:00:00','200 Dr Justus Ohage Blvd','St Paul','MN','55107',18);
+(101,'Yoga','Its yoga',103,'2022-04-13','14:00:00','15:00:00','1 1st St S','Minneapolis','MN','55401',10),
+(102,'Kick boxing','This is a class where we are going to kick and box',101,'2022-04-14','09:00:00','10:00:00','1 1st St S','Minneapolis','MN','55401',18),
+(103,'Yogayogayoga','Welcome to the YOGA ZONEE',102,'2022-04-23','21:00:00','22:00:00','425 Jefferson St NE','Minneapolis','MN','55413',3),
+(104,'Circuits','No need to call an ambulance, I already brought it.',103,'2022-04-22','09:00:00','22:00:00','724 Sibley St NE','Minneapolis','MN','55413',10),
+(105,'Circuitzz','No need to call an ambulance, I already brought it.',102,'2022-04-22','09:00:00','22:00:00','724 Sibley St NE','Minneapolis','MN','55413',10),
+(106,'Yoga','Yoga in the park',101,'2022-04-16','14:00:00','15:00:00','724 Sibley St NE','Minneapolis','MN','55413',10),
+(107,'Kick boxing','Kick a lot of boxes',103,'2022-04-15','09:00:00','10:00:00','425 Jefferson St NE','Minneapolis','MN','55413',18),
+(108,'Circuitzz','No need to call an ambulance, I already brought it.',102,'2022-04-23','09:00:00','22:00:00','724 Sibley St NE','Minneapolis','MN','55413',10),
+(109,'Yoga','Yoga in the park',101,'2022-04-26','14:00:00','15:00:00','724 Sibley St NE','Minneapolis','MN','55413',10),
+(110,'Kick boxing','Kick a lot of boxes',103,'2022-04-25','09:00:00','10:00:00','425 Jefferson St NE','Minneapolis','MN','55413',18),
+(111,'Circuitzz','No need to call an ambulance, I already brought it.',102,'2022-04-28','09:00:00','22:00:00','724 Sibley St NE','Minneapolis','MN','55413',10),
+(112,'Yoga','Yoga in the park',101,'2022-04-26','14:00:00','15:00:00','724 Sibley St NE','Minneapolis','MN','55413',10),
+(113,'Kick boxing','Kick a lot of boxes',103,'2022-04-25','09:00:00','10:00:00','425 Jefferson St NE','Minneapolis','MN','55413',18),
+(114,'Power lifting','Lift heavy',101,'2022-04-27','09:00:00','10:00:00','200 Dr Justus Ohage Blvd','St Paul','MN','55107',18);
 
+
+INSERT INTO "public"."user"("id","username","password","first_name","last_name","email","phone_number","street","city","state","zip","dob","pronouns","emergency_name","emergency_number","profile_image","free_classes","access_level")
+VALUES
+	(100,'Colin11',
+'','Colin','Jaworski','colin@yahoo.com','651-295-8859','420 milky way','Minneapolis','MN','55444','1996-01-20','he/him','clay','123-4567','https://media-exp1.licdn.com/dms/image/C4E03AQGlycW9Vpes2w/profile-displayphoto-shrink_400_400/0/1647360104027?e=1655942400&v=beta&t=NtxVQS3k7JYTSq8UQQIiQfFHrscjzNWo4r88V3iodD8','3',1),
+	(101,'Bethany22',
+'','Bethany','Shulz','bethshulz@yemail.com','763-867-5309','123 first street','Minneapolis','MN','55443','1984-12-05','She/Her','clay','123-4567','https://media-exp1.licdn.com/dms/image/C4D03AQFxaonCB1zSsA/profile-displayphoto-shrink_400_400/0/1630027459789?e=1655942400&v=beta&t=pDQynv5qHj7HNsdhFS8CfY7JAKNauNI0yddm3s8GGJE','3',2),
+	(102,'Dane22',
+'','Dane','Smith','danesmith@email.com','651-295-8859','420 milky way','Minneapolis','MN','55444','1996-01-20','he/him','clay','123-4567','https://avatars.githubusercontent.com/u/11574995?s=250&v=4','3',2),
+	(103,'Lizz22',
+'','Liz','Kerber','lizkerber@email.com','no phone','640 Jackson Street','St Paul','MN','55101','2000-07-20','she/her','Clay','123-4567','https://avatars.githubusercontent.com/u/17734101?v=4','3',2),
+	(104,'Matt22',
+'','Matt','Black','mattblack@email.com','no phone','640 Jackson Street','St Paul','MN','55101','2000-07-20','she/her','Clay','123-4567','https://avatars.githubusercontent.com/u/17734101?v=4','3',2),
+	(105,'Clay22',
+'','Clay','Webb','clay_webb@outlook.com','651-964-5585','38752 orange alcove','Bloomington','MN','55122','1999-07-09','he/him','colin','123-4567','profileImage.url','3',1),
+	(106,'Hailee33',
+'','Hailee','Bland-Walsh','hailee@email.com','no phone','640 Jackson Street','St Paul','MN','55101','2000-07-20','she/her','Clay','123-4567','https://media-exp1.licdn.com/dms/image/C4E03AQFNQlmK6gdl-A/profile-displayphoto-shrink_400_400/0/1601063689041?e=1655942400&v=beta&t=Cz1HHeP7Qvji74xVa0VOEKtokD73jWV2NOV1ABDzJW4','3',3),
+	(107,'Josh33',
+'','Josh','Kralewski','Joshkmanj@Gmail.com','651-295-8859','420 milky way','Minneapolis','MN','55444','1996-01-20','he/him','clay','123-4567','profileImage.url','3',1),
+	(108,'Koffi33',
+'','Koffi','Kittleson','koffi.k.collins@gmail.com','651-354-0552','8901 south ave','Minneapolis','MN','55443','1999-07-09','they, them','clay','123-4567','profileImage.url','3',1),
+	(109,'Abdi11',
+'','Abdikarim','Ibrahim','alldayabdi@gmail.com','no phone number','90210 hollywood avenue','Saint Paul','MN','st paul zip here','1999-07-09','he/him','colin','123-4567','profileImage.url','3',1),
+	(110,'Chandler11',
+'','Josh','Chandler','chandler@email.com','651-354-0552','640 Jackson Street','Saint Paul','MN','55101','1996-01-20','he/him','Josh Kralewski','651-867-5309','profileImage.url','3',1),
+	(111,'Tony11',
+'','Tony','LaForgia','tony@email.com','651-354-0552','640 Jackson Street','Saint Paul','MN','55101','1996-01-20','he/him','Josh Kralewski','651-867-5309','profileImage.url','3',1),
+	(112,'Arthur11',
+'','Arthur','Tran','arthurt@email.com','651-123-4567','640 Jackson St','St Paul','MN','55101','1995-11-03','He/Him','Josh Kralewski','651-867-5309','profileImage.url','3',1),
+	(113,'passwordis22',
+'','Brant','McCarthy','brantmct@email.com','651-867-5309','640 Jackson St','St Paul','MN','55101','1995-06-15','He/Him','Clay Webb','651-456-8555','profileImage.url','3',1),
+	(114,'passwordis11',
+'','Heather','Kim','hkim@email.com','651-867-5309','640 Jackson St','St Paul','MN','55101','1995-06-15','He/Him','Clay Webb','651-456-8555','profileImage.url','3',1),
+	(115,'passwordis33',
+'','Dan','Fenske','danfenske@email.com','651-867-5309','640 Jackson St','St Paul','MN','55101','1995-06-15','He/Him','Clay Webb','651-456-8555','profileImage.url','3',1);
+
+
+
+
+INSERT INTO "class_list"("id","class_id","user_id","checked_in")
+VALUES
+(100,100,106,FALSE),
+(101,102,107,FALSE),
+(102,103,108,FALSE),
+(103,109,109,FALSE),
+(104,108,106,FALSE),
+(105,110,107,FALSE),
+(106,106,108,FALSE),
+(107,100,109,FALSE),
+(108,100,110,FALSE),
+(109,102,110,FALSE),
+(110,103,110,FALSE),
+(111,109,110,FALSE),
+(112,108,110,FALSE),
+(113,110,110,FALSE),
+(114,106,110,FALSE),
+(115,100,109,FALSE);
 
 
