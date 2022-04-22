@@ -177,6 +177,9 @@ function AdminNav() {
                             sx={{ p: 0 }}
                         >
                         {(getInitials(first_name, last_name)) && <Avatar sx={{ bgcolor: '#80bd02' }}>{initials}</Avatar>}
+                        
+                        {/*=====< AVATAR WITH USER PROFILE PICTURE >====*/}
+                        {/* <Avatar src={user.profile_image} /> */}
                         </IconButton>
                     </Box>
                 </Toolbar>
