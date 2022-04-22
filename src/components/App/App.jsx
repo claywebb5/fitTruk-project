@@ -39,6 +39,7 @@ function App() {
   }, [dispatch]);
 
   // ========< MUI GLOBAL THEME >==========
+  // MUI info link https://mui.com/material-ui/customization/theme-components/#global-style-overrides
   const theme = createTheme({
     typography: {
       allVariants: {
