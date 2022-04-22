@@ -2,7 +2,9 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-
+import Avatar from '@mui/material/Avatar';
+import Stack from '@mui/material/Stack';
+import { deepOrange, deepPurple } from '@mui/material/colors';
 
 function UserPage() {
 
@@ -18,7 +20,8 @@ function UserPage() {
     id: user.id,
     username: user.username,
     password: user.password,
-    name: user.name,
+    first_name: user.first_name,
+    last_name: user.last_name,
     email: user.email,
     street: user.street,
     city: user.city,
@@ -33,11 +36,14 @@ function UserPage() {
   }
 
   const [editUser, setEditUser] = useState(userObj);
+  let initials = '';
+
 
   const handleTest = () => {
     console.log('The user is:', user);
     console.log('The userObj is:', userObj);
     console.log('The state of editUser is:', editUser);
+
   }
 
   //  ============< Pronoun Change >=============
@@ -51,15 +57,15 @@ function UserPage() {
 
   //  ============< Address Change >=============
   const handleChangeStreet = (event) => {
-    setEditUser({ ...editUser, street: event.target.value});
+    setEditUser({ ...editUser, street: event.target.value });
   };
 
   const handleChangeCity = (event) => {
-    setEditUser({ ...editUser, city: event.target.value});
+    setEditUser({ ...editUser, city: event.target.value });
   };
 
   const handleChangeState = (event) => {
-    setEditUser({ ...editUser, state: event.target.value});
+    setEditUser({ ...editUser, state: event.target.value });
   };
 
   const handleChangeZip = (event) => {
@@ -84,23 +90,40 @@ function UserPage() {
     console.log('Clicked Cancel');
   }
 
+  const getInitials = (nameObject) => {
+    let firstLetter = 'H';
+    let secondLetter = 'i';
+
+    if (nameObject.first_name && nameObject.last_name) {
+      firstLetter = (nameObject.first_name[0]).toUpperCase();
+      secondLetter = (nameObject.last_name[0]).toUpperCase();
+    } else if (nameObject.first_name) {
+      firstLetter = (nameObject.first_name[0]).toUpperCase();
+      secondLetter = (nameObject.first_name[1]);
+    }
+    initials = firstLetter + secondLetter;
+    return true;
+  }
+
 
   return (
     <>
       <h1><u>Personal Info Page</u></h1>
 
-      <button onClick={handleTest}>Test userObj</button>
+      {/* <button onClick={handleTest}>Test userObj</button> */}
 
 
       <div className="container">
         <form onSubmit={handleSubmit}>
 
           <div> {/* CAN EDIT  */}
-            <h2>*Profile Image Here*</h2>
+
+            {/* ------ This will conditionally render a two letter string from the first/last name of the user, and it won't break the app if either of those two values isn't present ------ */}
+            {(getInitials(user)) && <Avatar sx={{ bgcolor: deepPurple[500] }}>{initials}</Avatar>}
+
           </div>
 
-          <h2>Welcome, {user.name}!</h2>
-
+          <h2>Welcome, {user.first_name}!</h2>
           <div> {/* CAN EDIT  */}
             <p><b>Pronouns:</b> {user.pronouns}</p>
             <select onChange={handlePronounChange} value={editUser.pronouns}>

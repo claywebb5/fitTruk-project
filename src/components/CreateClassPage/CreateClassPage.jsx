@@ -1,9 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, useParams } from 'react-router-dom';
-import Nav from "../Nav/Nav";
 import './CreateClassPage.css';
-// import TrainerProfileImage from './TrainerProfileImage';
 
 // ** ONLY ADMIN CAN SEE **
 // ** Admin can create a new class by: naming the class/selecting a date/..
@@ -18,12 +16,19 @@ function CreateClassPage() {
     const history = useHistory();
     const params = useParams();
     const classId = params.id;
+    //---------- Tools -----------
 
 
     useEffect(() => {
+        if (user.access_level == 3) {
+            console.log('User access level is 3, fetching trainer data');
+            dispatch({
+                type: 'FETCH_AVAILABLE_TRAINERS'
+            })
+        }
         // Edit class view
         if (classId) {
-            dispatch({ 
+            dispatch({
                 type: 'FETCH_CLASS_DETAILS',
                 payload: classId
             });
@@ -39,36 +44,43 @@ function CreateClassPage() {
     const availableTrainers = useSelector(store => store.availableTrainers)
     const user = useSelector(store => store.user)
     const classDetails = useSelector(store => store.selectedClass.classDetails)
-    const selectedTrainer = useSelector(store => store.selectedClass.selectedTrainer)
+    let disabledState; // This controls whether or not input fields are disabled, based on if it's an administrator or a trainer. (user.access_level)
 
-    console.log('access level', user.access_level);
+
+    // -------- TEST CODE, TO BE DELETED -------- TEST CODE, TO BE DELETED -------- TEST CODE, TO BE DELETED
+    // console.log('access level', user.access_level);
+    const testButtonDispatch = () => {
+        console.log('testButtonDispatching');
+        dispatch({ type: 'FETCH_CLASS_DETAILS', payload: 1 });
+    }
+    // -------- TEST CODE, TO BE DELETED -------- TEST CODE, TO BE DELETED -------- TEST CODE, TO BE DELETED
 
 
     //----------<  I n p u t   H a n d l e r s  >-----------
     const handleTrainerSelection = (selectedTrainerId) => {
-        for (let trainer of availableTrainers) {
-            if (trainer.trainer_user_id == selectedTrainerId) {
 
-                // console.log(trainer.name); // Test log to ensure the objects are being retrieved properly.
+        if (selectedTrainerId === 'reset') { // This checks for a reset command, which would then reset the selected trainer values.
+            dispatch({
+                type: 'RESET_SELECTED_TRAINER'
+            });
+        } else {
+            for (let trainer of availableTrainers) { // If a valid trainer is selected, this will loop through the list of possible trainers
+                if (trainer.trainer_user_id == selectedTrainerId) { // to find matching information.
 
-                dispatch({
-                    type: 'SET_ACTIVE_CLASS_TRAINER',
-                    payload: {
-                        trainer_user_id: trainer.trainer_user_id,
-                        profile_image: trainer.profile_image,
-                        name: trainer.name
-                    }
-                });
-
-                dispatch({
-                    type: 'EDIT_CLASS_DETAILS',
-                    payload: {
-                        propertyName: 'trainer_user_id',
-                        key: trainer.trainer_user_id
-                    }
-                });
-            }// End conditional statement
-        }// End loop through trainer array
+                    // This dispatch will set the trainer data in the classDetails reducer, which will update the trainer's photo on this page.
+                    dispatch({
+                        type: 'SET_SELECTED_TRAINER',
+                        payload: {
+                            trainer_user_id: trainer.trainer_user_id,
+                            trainer_image: trainer.trainer_image,
+                            trainer_first_name: trainer.trainer_first_name,
+                            trainer_last_name: trainer.trainer_last_name,
+                            trainer_pronouns: trainer.trainer_pronouns
+                        }
+                    });
+                }// End conditional statement
+            }// End loop through trainer array
+        }
     }; // END handleTrainerSelection
 
 
@@ -82,7 +94,7 @@ function CreateClassPage() {
         });
     }; // END handleChange
 
-    const submitHandler = (event) => {
+    const submitHandler = (event) => { //=============This needs to be updated to allow for '/edit-class' functionality====================================
         event.preventDefault();
         console.log('This will submit the form');
         console.log(classDetails);
@@ -100,7 +112,6 @@ function CreateClassPage() {
         history.goBack();
     }
 
-    let disabledState;
 
     if (user.access_level == 3) {
         disabledState = false;
@@ -108,10 +119,8 @@ function CreateClassPage() {
         disabledState = true;
     }
 
-
     return (
         <>
-            <Nav />
             <h1>Create Class</h1>
             <form onSubmit={submitHandler}>
 
@@ -124,68 +133,90 @@ function CreateClassPage() {
 
                 {/* ------------ Set Class Name --------------------------------------------- */}
                 <h4>Class name:
-                    <input type="text" name="class-name" value={classDetails.classname} onChange={handleChange('classname')} />
+                    <input
+                        disabled={disabledState}
+                        type="text" name="class-name" value={classDetails.classname} onChange={handleChange('classname')} />
                 </h4>
 
                 {/* ------------ Select Trainer ----------------------------------------------- */}
                 <h4>Led by:
                     <select name="trainer" id="trainer-selector"
+                        disabled={disabledState}
                         placeholder='Trainer'
                         onChange={(event) => { handleTrainerSelection(event.target.value) }}>
+                        {/* <option key={-1} onClick={dispatch({type:''})}>Select a Trainer</option> */}
+                        <option key={-1} value={'reset'}>Select a Trainer</option>
                         {availableTrainers.map((trainer, i) => (
-                            <option key={i} value={trainer.trainer_user_id}>{trainer.name}</option>
+                            <option key={i} value={trainer.trainer_user_id}>{trainer.trainer_first_name} {trainer.trainer_last_name}</option>
                         ))}
                     </select>
+
                     {/* ---- Here's the trainer's image ---- */}
-                    {/* <TrainerProfileImage /> */}
-                    {selectedTrainer.profile_image ?
-                        <img className='trainer-image' src={selectedTrainer.profile_image} alt="Profile image of the selected trainer" />
+                    {classDetails.trainer_image ?
+                        <img className='trainer-image' src={classDetails.trainer_image} alt="Profile image of the selected trainer" />
                         :
-                        <div className='trainer-image' >This is a div</div>
+                        <div className='trainer-image' style={{ display: 'block' }}>This is a div</div>
                     }
                 </h4>
 
 
                 {/* ------------- Set Start Time ------------------------------ */}
                 <h4>Start time:
-                    <input type="time" name="start-time" value={classDetails.start_time} onChange={handleChange('start_time')} />
+                    <input
+                        disabled={disabledState}
+                        type="time" name="start-time" value={classDetails.start_time} onChange={handleChange('start_time')} />
 
                     {/* --------- Set End Time -------------------------------------- */}
                     End Time:
-                    <input type="time" name="end-time" value={classDetails.end_time} onChange={handleChange('end_time')} />
+                    <input
+                        disabled={disabledState}
+                        type="time" name="end-time" value={classDetails.end_time} onChange={handleChange('end_time')} />
                 </h4>
 
                 {/* ------------- Set Location ------------------------------------------- */}
                 <h4>Street:
-                    <input type="text" name="street" value={classDetails.street} onChange={handleChange('street')} />
+                    <input
+                        disabled={false}
+                        type="text" name="street" value={classDetails.street} onChange={handleChange('street')} />
                 </h4>
 
                 <h4>City:
-                    <input type="text" name="city" value={classDetails.city} onChange={handleChange('city')} />
+                    <input
+                        disabled={false}
+                        type="text" name="city" value={classDetails.city} onChange={handleChange('city')} />
                 </h4>
 
                 <h4>State:
-                    <input type="text" name="state" value={classDetails.state} onChange={handleChange('state')} />
+                    <input
+                        disabled={false}
+                        type="text" name="state" value={classDetails.state} onChange={handleChange('state')} />
                 </h4>
 
                 <h4>Zip:
-                    <input type="text" name="zip" value={classDetails.zip} onChange={handleChange('zip')} />
+                    <input
+                        disabled={false}
+                        type="text" name="zip" value={classDetails.zip} onChange={handleChange('zip')} />
                 </h4>
 
                 {/* ---------- Set Description ------------------------------------------ */}
                 <h4>Description:
-                    <input type="text" name="" value={classDetails.description} onChange={handleChange('description')} />
+                    <input
+                        disabled={false}
+                        type="text" name="" value={classDetails.description} onChange={handleChange('description')} />
                 </h4>
 
                 {/* ---- Set Class Size ---- */}
                 <h4>Class Size:
-                    <input type="number" name="class-size" value={classDetails.class_size} onChange={handleChange('class_size')} />
+                    <input
+                        disabled={disabledState}
+                        type="number" name="class-size" value={classDetails.class_size} onChange={handleChange('class_size')} />
                 </h4>
 
                 {/* ---- Submit form!! ---- */}
                 <button type="submit">Submit</button>
             </form>
 
+            <button onClick={testButtonDispatch}>TEST BUTTON</button>
             <button onClick={handleReturn}>Return</button>
 
         </>

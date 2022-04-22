@@ -36,19 +36,47 @@ function* fetchDetails (action){
     // Will send a request to the classes router to grab a specific classes details
     console.log('here is the dispatch info:', action.type, action.payload);
     try {
-        const classDetails = yield axios.get(`/api/class/details/${action.payload.id}/${action.payload.userId}`); // * Goes to SERVER "class.router"
+        const classDetails = yield axios.get(`/api/class/details/${action.payload}/`); // * Goes to SERVER "class.router"
         console.log('these are the class details', classDetails.data);
         yield put({ type: 'SET_CLASS_DETAILS', payload: classDetails.data }); // * Goes to REDUCER "classDetails.reducer.js"
     } catch (error) {
         console.log('Error fetching Class Details', error);
     } 
 }
+function* classSize (action){
+    // Will send a request to the class router to retrieve size of class
+    console.log('hopefully class size?', action.payload);
+    try {
+       
+        const size = yield axios.get(`/api/class/class-size/${action.payload}`); // * Goes to SERVER "class.router"
+        console.log('size.data', size.data)
+        yield put({ type: 'SET_CLASS_SIZE', payload: size.data }); // * Goes to REDUCER 
+    } catch (error) {
+        console.log('Error setting class size', error);
+    } 
+}
+
+// =============***< (GET) ALL TRAINERS >***=======================================
+function* fetchTrainers (){
+    // Will send a request to the admin router to retrieve all available trainers
+    console.log('in fetchTrainers, this is the dispatch I received');
+    try {
+        const availableTrainerList = yield axios.get(`/api/admin/available-trainers`); // * Goes to SERVER "class.router"
+        console.log('these are the trainers', availableTrainerList.data);
+        yield put({ type: 'SET_AVAILABLE_TRAINERS', payload: availableTrainerList.data }); // * Goes to REDUCER "availableTrainers.reducer.js"
+    } catch (error) {
+        console.log('Error fetching All Trainers', error);
+    } 
+}
+
 
 
 function* classSaga() {
     yield takeLatest('FETCH_CLASSES', fetchClasses);
     yield takeLatest('SEARCH_CLASSES', searchClasses); // Currently commented out
     yield takeLatest('FETCH_CLASS_DETAILS', fetchDetails);
+    yield takeLatest('FETCH_CLASS_SIZE', classSize);
+    yield takeLatest('FETCH_AVAILABLE_TRAINERS', fetchTrainers);
 }
   
 export default classSaga;

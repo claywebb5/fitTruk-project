@@ -1,12 +1,12 @@
-const userClassReducer = (state = [], action) => {
+const myClassesReducer = (state = [], action) => {
     switch (action.type) {
       case 'SET_MY_CLASSES':
         return action.payload;
+      
         
-    
       default:
         return state;
     }
   };
 
-  export default userClassReducer;
+  export default myClassesReducer;
