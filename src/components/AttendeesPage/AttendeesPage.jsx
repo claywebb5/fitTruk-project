@@ -106,36 +106,6 @@ function AttendeesPage() {
                         </Typography>
                     </CardContent>
                 </Card>
-                {/* {attendees.map(customer => {
-                    return (
-                        <Card key={customer.id}>
-                            <CardContent>
-                                <Box>
-                                    {customer.checked_in ?
-                                        <CheckBoxIcon color="disabled" />
-                                        :
-                                        <IconButton
-                                            size="large"
-                                            edge="start"
-                                            aria-label="menu"
-                                            aria-controls="menu-appbar"
-                                            onClick={() => checkUserIn(customer)}
-                                            sx={{ mr: 2, color: "#ace23a" }}
-                                        >
-                                            <CheckBoxOutlineBlankIcon />
-                                        </IconButton>
-                                    }
-                                </Box>
-                                <Avatar src={customer.profile_image} />
-                                <Typography variant="h5">
-                                    {customer.first_name} {customer.last_name}
-                                </Typography>
-                            </CardContent>
-                        </Card>
-                    );
-
-                })} */}
-
             </Container>
 
             {attendees.map((customer, i) => (

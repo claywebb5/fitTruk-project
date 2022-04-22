@@ -2,14 +2,44 @@ import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { useParams } from 'react-router-dom/cjs/react-router-dom.min';
+//--------------< MUI IMPORTS >-----------------------------
+import Container from '@mui/material/Container';
+import Card from '@mui/material/Card';
+import CardHeader from '@mui/material/CardHeader';
+import CardMedia from '@mui/material/CardMedia';
+import CardContent from '@mui/material/CardContent';
+import CardActions from '@mui/material/CardActions';
+import Collapse from '@mui/material/Collapse';
+import Avatar from '@mui/material/Avatar';
+import IconButton from '@mui/material/IconButton';
+import SendIcon from '@mui/icons-material/Send'; // SEND MESSAGE TO CUSTOMER
+import CheckBoxOutlineBlankIcon from '@mui/icons-material/CheckBoxOutlineBlank'; // NOT CHECKED IN
+import CheckBoxIcon from '@mui/icons-material/CheckBox'; // CHECKED IN
+import Typography from '@mui/material/Typography';
+import Divider from '@mui/material/Divider';
+import { makeStyles } from '@material-ui/core/styles';
+import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
+import { styled } from '@mui/material/styles';
 
+
+// ==========================< MUI THEMES >===============================
+const useStyles = makeStyles({
+    newroot: {
+        padding: 16,
+        '&:last-child': {
+            paddingBottom: 16,
+        },
+    },
+});
 
 
 function ClassDetailsPage() {
     //------------<  Setup  >-------------
     const history = useHistory();
     const dispatch = useDispatch();
-    
+    const classes = useStyles(); // MUI Theme
+
     
     useEffect(() => {
         dispatch({
@@ -96,10 +126,38 @@ function ClassDetailsPage() {
     // console.log('this is the value of show map', showMap); // TEST LOG
     return (
         <>
-            <h1>{classDetails.clean_format_date}</h1>
-            <h1>{classDetails.week_day_name}</h1>
-            <h3>{classDetails.classname}</h3>
-            <h3>led by: {classDetails.trainer_first_name} {((classDetails.trainer_last_name)[0])}.</h3>
+            <Container>
+                <Card sx={{ maxWidth: 345, bgcolor: '#6d6e71', color: '#FFFFFF' }}>
+                    <CardContent className={classes.newroot}>
+                        <Typography variant="h5" align="center">
+                            {classDetails.week_day_name} {classDetails.abbreviated_date}
+                        </Typography>
+                    </CardContent>
+                </Card>
+                <Box sx={{pt:1}}>
+                    <Typography variant="h5" align="center">
+                        {classDetails.classname}
+                    </Typography>
+                </Box>
+                <Box sx={{display: 'inline-flex', pr: 5, pl: 1}}>
+                    <Box sx={{mt: 3, ml: 5}}>
+                        <Typography variant="body1" sx={{align: 'left', mr: 1, mx: 'auto'}}>
+                            Led by:
+                        </Typography>
+                        <Typography variant="h5" sx={{align: 'left', textDecoration: 'underline'}} display="inline">
+                            {classDetails.trainer_first_name} {((classDetails.trainer_last_name)[0])}
+                        </Typography>
+                    </Box>
+                    <Avatar src={classDetails.trainer_image} sx={{align: 'center', ml: 3, mt: 1, height: '90px', width: '90px'}} />
+                    
+                </Box>
+            </Container>
+
+
+
+
+
+
             <h3>{classDetails.street +' '+ classDetails.city +' '+ classDetails.state +' '+ classDetails.zip}</h3>
             <a 
             href={"https://www.google.com/maps/search/?api=1&query="+ (encodeURIComponent(`${classDetails.street}, ${classDetails.city}, ${classDetails.state} ${classDetails.zip}`))}
@@ -113,7 +171,7 @@ function ClassDetailsPage() {
                 src={`https://www.google.com/maps/embed/v1/place?key=ADD_KEY_HERE&q=`} //the 'q' or "Query" can be text aswell as coordinates, these coords are DUMMY DATA
             >
             </iframe> : <p>Im not a map</p>}
-            <h3>{classDetails.start_time}-{classDetails.end_time}</h3>
+            <h3 type="time">{classDetails.start_time}-{classDetails.end_time}</h3>
             <h3>{classDetails.description}</h3>
             <h3>Spots remaining: {classDetails.spots_remaining}</h3>
             <button onClick={() => handleReturnClick(classDetails)}>Return</button>
