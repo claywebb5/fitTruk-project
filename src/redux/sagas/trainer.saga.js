@@ -2,9 +2,10 @@ import { put, takeLatest } from 'redux-saga/effects';
 import axios from 'axios';
 
 // =============***< (GET) ALL ATTENDEES FOR A CLASS >***==============================
-function* fetchAttendance(){
+function* fetchAttendance(action){
     // TRAINER/ADMIN ONLY
     // Will send a request to the trainer router to get all users signed up for a class
+    
     try {
         const attendance = yield axios.get(`/api/trainer/attendance/${action.payload}`) // * Goes to SERVER "trainer.router"
         yield put({ type: 'SET_ATTENDEES', payload: attendance.data }); // * Goes to REDUCERS "attendees.reducer"
@@ -26,12 +27,14 @@ function* updateDetails (){
 }
 
 // =============***< (PUT) UPDATE CLASS ATTENDANCE >***=======================================
-function* updateAttendance(){
+function* updateAttendance(action){
     // TRAINER/ADMIN ONLY
     // Will send a request to the trainer router to update attendance with those who arrived for the class
+    console.log(action.payload);
+    
     try{
-        yield axios.put(`/api/trainer/check-in/${action.payload.id}`, action.payload); // * Goes to SERVER "trainer.router"
-        yield put({type: 'FETCH_ATTENDANCE'}) // * Goes to THIS SAGA "trainer.saga" (fetchAttendance)
+        yield axios.put(`/api/trainer/check-in/${action.payload.id}`, action.payload.attendees); // * Goes to SERVER "trainer.router"
+        yield put({type: 'FETCH_ATTENDANCE', payload: action.payload.id }) // * Goes to THIS SAGA "trainer.saga" (fetchAttendance)
     } catch (error){
         console.log('Error updating checked in status', error);
     }
