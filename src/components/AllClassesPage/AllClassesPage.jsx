@@ -96,7 +96,9 @@ function AllClassesPage() {
 
   return (
     <>
+      <h2 align="center">All Classes</h2>
       <div>
+        
 
         <input
           type="text"
@@ -113,11 +115,13 @@ function AllClassesPage() {
         {availableTrainers.map((trainer, i) => (
           <option key={i} value={trainer.trainer_user_id}>{trainer.trainer_first_name} {(trainer.trainer_last_name)[0]}.</option>
         ))}
-      </select>
+      </select> &nbsp;
 
       
-      <h3>If logged in, myclass button appears below, if not then no button</h3>
-      {user.id && <button onClick={handleMyClassClick}>Myclasses (this will be an icon eventually)</button>}
+      
+      {user.id && 
+            <button align="right" onClick={handleMyClassClick}>Myclasses</button>
+      }
       
       <ul>
         { (searchFunction(allClasses)).map((classEvent, i) => (

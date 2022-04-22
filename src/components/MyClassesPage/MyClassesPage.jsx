@@ -5,12 +5,12 @@ import ClassListItem from '../ClassListItem/ClassListItem';
 import TrainersClasses from './TrainersClasses';
 
 function MyClassesPage() {
-// --------- Tools ----------
-const history = useHistory();
-const dispatch = useDispatch();
+  // --------- Tools ----------
+  const history = useHistory();
+  const dispatch = useDispatch();
 
 
-// --------- Functions ----------
+  // --------- Functions ----------
   useEffect(() => {
 
     // This dispatch sends a request to the database to retrieve all the classes a user is signed up for.
@@ -31,25 +31,28 @@ const dispatch = useDispatch();
 
 
   return (
-    <div>
-      <input
-        type="text"
-        value={searchTerm}
-        placeholder='Search'
-        onChange={(e) => setSearchTerm(e.target.value)} />
-      <button onClick={handleAllClassClick}>All Available classes(this will be an icon eventually)</button>
-      <ul>
-        {myClasses.filter((val) => {
-          if (searchTerm == "") {
-            return val
-          } else if (val.classname.toLowerCase().includes(searchTerm.toLowerCase())) {
-            return val
-          }
-        }).map((classEvent, i) => ( // classEvent refers to a singular class event and it's basic details.
-          <ClassListItem classEvent={classEvent} key={i} />
-        ))}
-      </ul>
-    </div>
+    <>
+      <h2 align="center">My Classes</h2>
+      <div>
+        <input
+          type="text"
+          value={searchTerm}
+          placeholder='Search'
+          onChange={(e) => setSearchTerm(e.target.value)} />
+        <button onClick={handleAllClassClick}>All Available classes(this will be an icon eventually)</button>
+        <ul>
+          {myClasses.filter((val) => {
+            if (searchTerm == "") {
+              return val
+            } else if (val.classname.toLowerCase().includes(searchTerm.toLowerCase())) {
+              return val
+            }
+          }).map((classEvent, i) => ( // classEvent refers to a singular class event and it's basic details.
+            <ClassListItem classEvent={classEvent} key={i} />
+          ))}
+        </ul>
+      </div>
+    </>
   );
 }
 
