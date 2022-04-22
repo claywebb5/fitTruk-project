@@ -51,6 +51,10 @@ function AttendeesPage() {
             payload: id
         })
         dispatch({
+            type: 'FETCH_CLASS_SIZE',
+            payload: id
+        })
+        dispatch({
             type: 'FETCH_CLASS_DETAILS',
             payload: id
         });
@@ -138,7 +142,13 @@ function AttendeesPage() {
                 <AttendanceItem key={i} customer={customer} />
             ))}
 
-            <Box textAlign='center' sx={{pt:1}}>
+            <Box textAlign='center' sx={{pt:2}}>
+                <Typography variant="h5">
+                    Spots Remaining: {classDetails.spots_remaining}
+                </Typography>
+            </Box>
+
+            <Box textAlign='center' sx={{pt:2}}>
                 <Button onClick={handleCheckIn} variant="outlined" sx={{ color: '#FFFFFF', bgcolor: '#ace23a' }}>Check in</Button>
             </Box>
 
