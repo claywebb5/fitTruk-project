@@ -62,7 +62,6 @@ function ClassDetailsPage() {
     //------------<  Variables  >----------
     const isClassFull = useSelector(store => store.selectedClass.classSize.full_class);
     const classDetails = useSelector(store => store.selectedClass.classDetails)
-
     const [showMap, setShowMap] = useState(false)
     const { id } = useParams()
     // const user = useSelector(store => store.user)
@@ -171,7 +170,7 @@ function ClassDetailsPage() {
 
 
 
-            <h3>{classDetails.street +' '+ classDetails.city +' '+ classDetails.state +' '+ classDetails.zip}</h3>
+            {/* <h3>{classDetails.street +' '+ classDetails.city +' '+ classDetails.state +' '+ classDetails.zip}</h3> */}
             <a 
             href={"https://www.google.com/maps/search/?api=1&query="+ (encodeURIComponent(`${classDetails.street}, ${classDetails.city}, ${classDetails.state} ${classDetails.zip}`))}
             target="_blank"
@@ -183,7 +182,8 @@ function ClassDetailsPage() {
                 // referrerpolicy="no-referrer-when-downgrade"
                 src={`https://www.google.com/maps/embed/v1/place?key=ADD_KEY_HERE&q=`} //the 'q' or "Query" can be text aswell as coordinates, these coords are DUMMY DATA
             >
-            </iframe> : <p>Im not a map</p>}
+            </iframe> : 
+            <p>Im not a map</p>}
             <h3 type="time">{classDetails.start_time}-{classDetails.end_time}</h3>
             <h3>{classDetails.description}</h3>
             <h3>Spots remaining: {classDetails.spots_remaining}</h3>
@@ -193,7 +193,7 @@ function ClassDetailsPage() {
                     if (classDetails.is_my_class) {
                         return <button onClick={handleCancelClick}>Cancel Reservation</button>;
                     } else {
-                        return <button onClick={handleReserveClick} disabled="full_class">Reserve</button>;
+                        return <button onClick={handleReserveClick} disabled={isClassFull}>Reserve</button>;
                     }
                 })()}
 
