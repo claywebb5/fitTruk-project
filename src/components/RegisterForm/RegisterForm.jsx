@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import TextField from '@mui/material/TextField';
-import Select, { SelectChangeEvent } from '@mui/material/Select';
+import Select from '@mui/material/Select';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FitnessCenterIcon from '@mui/icons-material/FitnessCenter';
@@ -12,7 +12,8 @@ import logo from './logo.png'
 function RegisterForm() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const [name, setName] = useState('');
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
   const [phoneNumber, setPhoneNumber] = useState('');
   const [street, setStreet] = useState('');
@@ -27,10 +28,11 @@ function RegisterForm() {
   const errors = useSelector((store) => store.errors);
   const dispatch = useDispatch();
 
-  const handlePronounSelection = (event: SelectChangeEvent) => {
+  const handlePronounSelection = (event) => {
     setPronouns(event.target.value);
   };
-
+  
+console.log('pronouns test is:', pronouns);
 
 
   const registerUser = (event) => {
@@ -41,7 +43,8 @@ function RegisterForm() {
       payload: {
         username: username,
         password: password,
-        name: name,
+        first_name: firstName,
+        last_name: lastName,
         email: email,
         street: street,
         city: city,
@@ -128,18 +131,35 @@ function RegisterForm() {
       </div>
       <br />
       <div>
-        <label htmlFor="name">
+        <label htmlFor="first-name">
           
           <TextField
           style ={{
           width: '100%'
         }}
-          label="Name" variant="outlined"
+          label="First Name" variant="outlined"
             type="text"
-            name="name"
-            value={name}
+            name="first-name"
+            value={firstName}
             required
-            onChange={(event) => setName(event.target.value)}
+            onChange={(event) => setFirstName(event.target.value)}
+          />
+        </label>
+      </div>
+      <br />
+      <div>
+        <label htmlFor="last-name">
+          
+          <TextField
+          style ={{
+          width: '100%'
+        }}
+          label="Last Name" variant="outlined"
+            type="text"
+            name="last-name"
+            value={lastName}
+            required
+            onChange={(event) => setLastName(event.target.value)}
           />
         </label>
       </div>
