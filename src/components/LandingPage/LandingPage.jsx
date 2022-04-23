@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 // import './LandingPage.css';
+import './FTLandingPage.css';
 import Button from '@mui/material/Button';
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { fontFamily } from '@mui/system';
@@ -22,7 +23,7 @@ function LandingPage() {
   };
 
   return (
-    <>
+    <div className='body'>
     <img src={blackLogo} 
     style ={{
     height: '67px'
@@ -91,7 +92,7 @@ function LandingPage() {
         </div>
       </div>
     </div>
-    </>
+    </div>
   );
 }
 
