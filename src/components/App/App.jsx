@@ -54,7 +54,9 @@ function App() {
       <ThemeProvider theme={theme}>
         <Router>
           <div>
-            <Nav />
+            {user.id ?
+            <Nav /> : <></>
+            }
 
             <Switch>
 
