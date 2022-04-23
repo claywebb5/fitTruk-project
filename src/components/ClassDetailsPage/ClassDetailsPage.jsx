@@ -20,6 +20,7 @@ import { styled } from '@mui/material/styles';
 import TextField from '@mui/material/TextField';
 import EditIcon from '@mui/icons-material/Edit';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
+import Link from '@mui/material/Link';
 
 
 // ==========================< MUI THEMES >===============================
@@ -58,19 +59,15 @@ function ClassDetailsPage() {
     const { id } = useParams();
 
     //==================< CLICK HANDLERS >==========================
-    // -------< GO Back >-----------------
+    // -------< GO BACK >-----------------
     const handleReturnClick = () => {
         history.goBack();
     };
-    // -------------< Edit Address >-----------------
-    const handleEdit = () => {
-        console.log('Clicked the edit pencil');
-    };
-    //---------< GO to Class Attendees >--------------
+    //---------< GO TO CLASS ATTENDEES >--------------
     const handleSeeAttendees = () => {
         history.push(`/class-details/${id}/attendees`);
     };
-
+    // ----------< RESERVE A CLASS >--------------------------
     const handleReserveClick = () => {
         if (!user.id) {
             alert("Sign in to reserve your spot!")
@@ -83,14 +80,11 @@ function ClassDetailsPage() {
             history.push('/my-classes')
         }
     }
-
+    // -------------< SHOW MAP >------------------------
     const handleGpsClick = (showMap) => {
-        // console.log('This will show google maps');
-        setShowMap(!showMap)
-        console.log('is the class full? isClassFull:', isClassFull)
-
-    }
-
+        // setShowMap(!showMap)
+    };
+    // -------------< CANCEL RESERVATION >-------------------
     const handleCancelClick = () => {
         // console.log('you canceled the class', classDetails) // TEST LOG
         dispatch({
@@ -101,107 +95,91 @@ function ClassDetailsPage() {
         history.push('/my-classes')
     };
 
-    //===========< TIME FUNCTIONS >====================
-    const startTime = (classDetails.start_time).toLocaleString('en-US', { timeZone: 'CST', hour: 'numeric', hour12: true, minute: 'numberic' });
-    const endTime = (classDetails.end_time).toLocaleString('en-US', { timeZone: 'CST', hour: 'numeric', hour12: true, minute: 'numberic' });
-    
-    console.log('Start time:', startTime);
-    console.log('End Time:', endTime);  
 
     return (
         <>
             <Container>
                 <Card sx={{ maxWidth: 345, bgcolor: '#6d6e71', color: '#FFFFFF' }}>
                     <CardContent className={classes.newroot}>
-                        <Typography  variant="h5" align="center">
+                        <Typography variant="h5" align="center">
                             {classDetails.week_day_name} {classDetails.abbreviated_date}
                         </Typography>
                     </CardContent>
                 </Card>
                 <Box sx={{ pt: 1 }}>
-                    <Typography  style={{color:"#000000"}} variant="h6" align="center">
+                    <Typography style={{ color: "#000000" }} variant="h6" align="center">
                         {classDetails.classname}
                     </Typography>
                 </Box>
                 <Box sx={{ display: 'inline-flex', pr: 5, pl: 1 }}>
                     <Box sx={{ mt: 3, ml: 5 }}>
-                        <Typography style={{color:"#000000"}} variant="body1" sx={{ align: 'left', mr: 1, mx: 'auto' }}>
+                        <Typography style={{ color: "#000000" }} variant="body1" sx={{ align: 'left', mr: 1, mx: 'auto' }}>
                             Led by:
                         </Typography>
-                        <Typography  style={{color:"#000000"}} variant="h5" sx={{ align: 'left', textDecoration: 'underline' }} display="inline">
+                        <Typography style={{ color: "#000000" }} variant="h5" sx={{ align: 'left', textDecoration: 'underline' }} display="inline">
                             {classDetails.trainer_first_name} {((classDetails.trainer_last_name)[0])}
                         </Typography>
                     </Box>
                     <Avatar src={classDetails.trainer_image} sx={{ align: 'center', ml: 3, mt: 1, height: '90px', width: '90px' }} />
                 </Box>
                 <Card sx={{ align: 'center', mt: 1 }}>
-                    <Box align='center' sx={{ pt: 1 }}>
+                    <Box align='center' sx={{display: 'inline-flex', pt: 1 }}>
                         <Box align='center' sx={{ display: 'inline', }}>
-                            <Typography  style={{color:"#000000"}} variant="body1" align='center'>
+                            <Typography style={{ color: "#000000" }} variant="body1" align='center'>
                                 Location:
                             </Typography>
-                            {/* ============< THIS WILL BE CHANGED TO AN INPUT >============ */}
-                            <Typography  style={{color:"#000000"}} onClick={handleEdit} align='center' sx={{ textDecoration: 'underline' }}>
+                            <Typography style={{ color: "#000000" }} align='center' sx={{ textDecoration: 'underline' }}>
                                 {classDetails.street}, <br /> {classDetails.city}, {classDetails.state}, {classDetails.zip}
                             </Typography>
-                            {/* <IconButton sx={{ display: 'inline-flex', pt: 2 }} align='right' onClick={handleEdit}>
-                                <EditIcon sx={{ bgcolor: '#80bd02' }} />
-                            </IconButton> */}
                         </Box>
+                        <Link
+                        href={"https://www.google.com/maps/search/?api=1&query=" + (encodeURIComponent(`${classDetails.street}, ${classDetails.city}, ${classDetails.state} ${classDetails.zip}`))}
+                        target="_blank"
+                        >
+                            <Avatar sx={{ bgcolor: '#80bd02' }}>
+                                <LocationOnIcon />
+                            </Avatar>
+                        </Link>
                     </Box>
                 </Card>
-                <Card>
-                    <Avatar sx={{ bgcolor: '#80bd02' }}>
-                        <LocationOnIcon />
-                    </Avatar>
-                </Card>
-            
-            
-            
-            
+                <Box>
+                    
+                </Box>
+
+                {showMap ? <iframe
+                    width="100%"
+                    height="250"
+                    frameBorder="0" style={{ border: 0 }}
+                    // referrerpolicy="no-referrer-when-downgrade"
+                    src={`https://www.google.com/maps/embed/v1/place?key=ADD_KEY_HERE&q=`} //the 'q' or "Query" can be text aswell as coordinates, these coords are DUMMY DATA
+                >
+                </iframe> :
+                    <p></p>}
+                <h3 type="time">{classDetails.start_time}-{classDetails.end_time}</h3>
+                <h3>{classDetails.description}</h3>
+                <h3>Spots remaining: {classDetails.spots_remaining}</h3>
+                <button onClick={() => handleReturnClick(classDetails)}>Return</button>
+
+                {(function () {
+                    if (user.access_level >= 2) {
+                        return <button onClick={handleSeeAttendees}>Attendance</button>
+                    }
+                })()}
+
+                {(function () {
+                    if (classDetails.is_my_class) {
+                        return <button onClick={handleCancelClick}>Cancel Reservation</button>;
+                    } else {
+                        return <button onClick={handleReserveClick} disabled={isClassFull}>Reserve</button>;
+                    }
+                })()}
+
+                {user.access_level >= 2 &&
+                    <button onClick={() => { history.push(`/edit-class/${classDetails.id}`) }}>edit class</button>
+                }
+
             </Container>
 
-
-
-
-
-
-            {/* <h3>{classDetails.street +' '+ classDetails.city +' '+ classDetails.state +' '+ classDetails.zip}</h3> */}
-            <a
-                href={"https://www.google.com/maps/search/?api=1&query=" + (encodeURIComponent(`${classDetails.street}, ${classDetails.city}, ${classDetails.state} ${classDetails.zip}`))}
-                target="_blank"
-            >Open in maps</a>
-            {showMap ? <iframe
-                width="100%"
-                height="250"
-                frameBorder="0" style={{ border: 0 }}
-                // referrerpolicy="no-referrer-when-downgrade"
-                src={`https://www.google.com/maps/embed/v1/place?key=ADD_KEY_HERE&q=`} //the 'q' or "Query" can be text aswell as coordinates, these coords are DUMMY DATA
-            >
-            </iframe> :
-                <p>Im not a map</p>}
-            <h3 type="time">{classDetails.start_time}-{classDetails.end_time}</h3>
-            <h3>{classDetails.description}</h3>
-            <h3>Spots remaining: {classDetails.spots_remaining}</h3>
-            <button onClick={() => handleReturnClick(classDetails)}>Return</button>
-
-            {(function () {
-                if (user.access_level >= 2) {
-                    return <button onClick={handleSeeAttendees}>Attendance</button>
-                } 
-            })()}
-
-            {(function () {
-                if (classDetails.is_my_class) {
-                    return <button onClick={handleCancelClick}>Cancel Reservation</button>;
-                } else {
-                    return <button onClick={handleReserveClick} disabled={isClassFull}>Reserve</button>;
-                }
-            })()}
-
-            {/* ---------USED FOR TESTS, REMOVE LATER---------- USED FOR TESTS, REMOVE LATER ----------------USED FOR TESTS, REMOVE LATER-------- */}
-            {user.access_level >= 2 && <button onClick={() => { history.push(`/edit-class/${classDetails.id}`) }}>edit class</button>}
-            {/* ---------USED FOR TESTS, REMOVE LATER---------- USED FOR TESTS, REMOVE LATER ----------------USED FOR TESTS, REMOVE LATER-------- */}
         </>
     )
 }
