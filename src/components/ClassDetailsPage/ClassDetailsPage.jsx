@@ -41,7 +41,6 @@ function ClassDetailsPage() {
     const dispatch = useDispatch();
     const classes = useStyles(); // MUI Theme
 
-    
     useEffect(() => {
         dispatch({
             type: 'FETCH_CLASS_SIZE',
@@ -56,9 +55,10 @@ function ClassDetailsPage() {
 
     // ---------USED FOR TESTS, REMOVE LATER---------- USED FOR TESTS, REMOVE LATER ----------------USED FOR TESTS, REMOVE LATER--------
     const user = useSelector(store => store.user)
+
     // ---------USED FOR TESTS, REMOVE LATER---------- USED FOR TESTS, REMOVE LATER ----------------USED FOR TESTS, REMOVE LATER--------
-    
-    
+
+
     //------------<  Variables  >----------
     const isClassFull = useSelector(store => store.selectedClass.classSize.full_class);
     const classDetails = useSelector(store => store.selectedClass.classDetails)
@@ -77,21 +77,24 @@ function ClassDetailsPage() {
 
         history.push(`/class-details/${id}/attendees`);
     };
-    
+
     const handleReserveClick = () => {
-        // console.log('Selected class is:', classDetails.id); // TEST LOG
-        dispatch({
-            type: 'ADD_RESERVATION',
-            payload: classDetails
-        });
-        alert("About to Add!")
-        history.push('/my-classes')
+        if (!user.id) {
+            alert("Sign in to reserve your spot!")
+        } else {
+            dispatch({
+                type: 'ADD_RESERVATION',
+                payload: classDetails
+            });
+            alert("About to Add!")
+            history.push('/my-classes')
+        }
     }
 
     const handleGpsClick = (showMap) => {
         // console.log('This will show google maps');
         setShowMap(!showMap)
-        console.log('is the class full? isClassFull:',isClassFull) 
+        console.log('is the class full? isClassFull:', isClassFull)
 
     }
 
@@ -106,7 +109,7 @@ function ClassDetailsPage() {
     }
     //---------------<  E N D  C l i c k   H a n d l e r s  >----------------------------
 
-      
+
     //   const extractMapUrl = () => { // This function will extract a url-encoded address from different address variables
     //     let {street, city, state, zip } = classDetails
     //     console.log('place is', street);
@@ -134,35 +137,35 @@ function ClassDetailsPage() {
                         </Typography>
                     </CardContent>
                 </Card>
-                <Box sx={{pt:1}}>
+                <Box sx={{ pt: 1 }}>
                     <Typography variant="h6" align="center">
                         {classDetails.classname}
                     </Typography>
                 </Box>
-                <Box sx={{display: 'inline-flex', pr: 5, pl: 1}}>
-                    <Box sx={{mt: 3, ml: 5}}>
-                        <Typography variant="body1" sx={{align: 'left', mr: 1, mx: 'auto'}}>
+                <Box sx={{ display: 'inline-flex', pr: 5, pl: 1 }}>
+                    <Box sx={{ mt: 3, ml: 5 }}>
+                        <Typography variant="body1" sx={{ align: 'left', mr: 1, mx: 'auto' }}>
                             Led by:
                         </Typography>
-                        <Typography variant="h5" sx={{align: 'left', textDecoration: 'underline'}} display="inline">
+                        <Typography variant="h5" sx={{ align: 'left', textDecoration: 'underline' }} display="inline">
                             {classDetails.trainer_first_name} {((classDetails.trainer_last_name)[0])}
                         </Typography>
                     </Box>
-                    <Avatar src={classDetails.trainer_image} sx={{align: 'center', ml: 3, mt: 1, height: '90px', width: '90px'}} />
+                    <Avatar src={classDetails.trainer_image} sx={{ align: 'center', ml: 3, mt: 1, height: '90px', width: '90px' }} />
                 </Box>
-                <Box sx={{pt:2}}>
+                <Box sx={{ pt: 2 }}>
                     <Typography variant="body1" align='center'>
                         At:
                     </Typography>
 
                     {/* ============< THIS WILL BE CHANGED TO AN INPUT >============ */}
-                    <Typography sx={{align: 'left', }} display="inline">
+                    <Typography sx={{ align: 'left', }} display="inline">
                         {classDetails.street}, {classDetails.city}, {classDetails.state}, {classDetails.zip}
                     </Typography>
-                    
+
                 </Box>
 
-                
+
             </Container>
 
 
@@ -171,9 +174,9 @@ function ClassDetailsPage() {
 
 
             {/* <h3>{classDetails.street +' '+ classDetails.city +' '+ classDetails.state +' '+ classDetails.zip}</h3> */}
-            <a 
-            href={"https://www.google.com/maps/search/?api=1&query="+ (encodeURIComponent(`${classDetails.street}, ${classDetails.city}, ${classDetails.state} ${classDetails.zip}`))}
-            target="_blank"
+            <a
+                href={"https://www.google.com/maps/search/?api=1&query=" + (encodeURIComponent(`${classDetails.street}, ${classDetails.city}, ${classDetails.state} ${classDetails.zip}`))}
+                target="_blank"
             >Open in maps</a>
             {showMap ? <iframe
                 width="100%"
@@ -182,20 +185,26 @@ function ClassDetailsPage() {
                 // referrerpolicy="no-referrer-when-downgrade"
                 src={`https://www.google.com/maps/embed/v1/place?key=ADD_KEY_HERE&q=`} //the 'q' or "Query" can be text aswell as coordinates, these coords are DUMMY DATA
             >
-            </iframe> : 
-            <p>Im not a map</p>}
+            </iframe> :
+                <p>Im not a map</p>}
             <h3 type="time">{classDetails.start_time}-{classDetails.end_time}</h3>
             <h3>{classDetails.description}</h3>
             <h3>Spots remaining: {classDetails.spots_remaining}</h3>
             <button onClick={() => handleReturnClick(classDetails)}>Return</button>
-            <button onClick={handleSeeAttendees}>Attendance</button> 
-                {(function () {
-                    if (classDetails.is_my_class) {
-                        return <button onClick={handleCancelClick}>Cancel Reservation</button>;
-                    } else {
-                        return <button onClick={handleReserveClick} disabled={isClassFull}>Reserve</button>;
-                    }
-                })()}
+
+            {(function () {
+                if (user.access_level >= 2) {
+                    return <button onClick={handleSeeAttendees}>Attendance</button>
+                } 
+            })()}
+
+            {(function () {
+                if (classDetails.is_my_class) {
+                    return <button onClick={handleCancelClick}>Cancel Reservation</button>;
+                } else {
+                    return <button onClick={handleReserveClick} disabled={isClassFull}>Reserve</button>;
+                }
+            })()}
 
             {/* ---------USED FOR TESTS, REMOVE LATER---------- USED FOR TESTS, REMOVE LATER ----------------USED FOR TESTS, REMOVE LATER-------- */}
             {user.access_level >= 2 && <button onClick={() => { history.push(`/edit-class/${classDetails.id}`) }}>edit class</button>}
