@@ -103,22 +103,22 @@ function ClassDetailsPage() {
             <Container>
                 <Card sx={{ maxWidth: 345, bgcolor: '#6d6e71', color: '#FFFFFF' }}>
                     <CardContent className={classes.newroot}>
-                        <Typography variant="h5" align="center">
+                        <Typography  variant="h5" align="center">
                             {classDetails.week_day_name} {classDetails.abbreviated_date}
                         </Typography>
                     </CardContent>
                 </Card>
                 <Box sx={{ pt: 1 }}>
-                    <Typography variant="h6" align="center">
+                    <Typography  style={{color:"#000000"}} variant="h6" align="center">
                         {classDetails.classname}
                     </Typography>
                 </Box>
                 <Box sx={{ display: 'inline-flex', pr: 5, pl: 1 }}>
                     <Box sx={{ mt: 3, ml: 5 }}>
-                        <Typography variant="body1" sx={{ align: 'left', mr: 1, mx: 'auto' }}>
+                        <Typography style={{color:"#000000"}} variant="body1" sx={{ align: 'left', mr: 1, mx: 'auto' }}>
                             Led by:
                         </Typography>
-                        <Typography variant="h5" sx={{ align: 'left', textDecoration: 'underline' }} display="inline">
+                        <Typography  style={{color:"#000000"}} variant="h5" sx={{ align: 'left', textDecoration: 'underline' }} display="inline">
                             {classDetails.trainer_first_name} {((classDetails.trainer_last_name)[0])}
                         </Typography>
                     </Box>
@@ -127,11 +127,11 @@ function ClassDetailsPage() {
                 <Card sx={{ align: 'center', mt: 1 }}>
                     <Box align='center' sx={{ pt: 1 }}>
                         <Box align='center' sx={{ display: 'inline', }}>
-                            <Typography variant="body1" align='center'>
+                            <Typography  style={{color:"#000000"}} variant="body1" align='center'>
                                 Location:
                             </Typography>
                             {/* ============< THIS WILL BE CHANGED TO AN INPUT >============ */}
-                            <Typography onClick={handleEdit} align='center' sx={{ textDecoration: 'underline' }}>
+                            <Typography  style={{color:"#000000"}} onClick={handleEdit} align='center' sx={{ textDecoration: 'underline' }}>
                                 {classDetails.street}, <br /> {classDetails.city}, {classDetails.state}, {classDetails.zip}
                             </Typography>
                             {/* <IconButton sx={{ display: 'inline-flex', pt: 2 }} align='right' onClick={handleEdit}>
@@ -140,6 +140,15 @@ function ClassDetailsPage() {
                         </Box>
                     </Box>
                 </Card>
+                <Card>
+                    <Avatar sx={{ bgcolor: '#80bd02' }}>
+                        <LocationOnIcon />
+                    </Avatar>
+                </Card>
+            
+            
+            
+            
             </Container>
 
 
@@ -151,14 +160,8 @@ function ClassDetailsPage() {
                 href={"https://www.google.com/maps/search/?api=1&query=" + (encodeURIComponent(`${classDetails.street}, ${classDetails.city}, ${classDetails.state} ${classDetails.zip}`))}
                 target="_blank"
             >Open in maps</a>
-            {showMap ? <iframe
-                width="100%"
-                height="250"
-                frameBorder="0" style={{ border: 0 }}
-                // referrerpolicy="no-referrer-when-downgrade"
-                src={`https://www.google.com/maps/embed/v1/place?key=ADD_KEY_HERE&q=`} //the 'q' or "Query" can be text aswell as coordinates, these coords are DUMMY DATA
-            >
-            </iframe> : <p>Im not a map</p>}
+            
+
             <h3 type="time">{classDetails.start_time}-{classDetails.end_time}</h3>
             <h3>{classDetails.description}</h3>
             <h3>Spots remaining: {classDetails.spots_remaining}</h3>

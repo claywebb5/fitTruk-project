@@ -78,7 +78,8 @@ function AdminNav() {
     };
     // GO to Home
     const handleHome = () => {
-        alert('See Home.jsx Component!!!')
+        // alert('See Home.jsx Component!!!')
+        history.push('/about');
         // history.push('');
     };
     // GO to All Classes
