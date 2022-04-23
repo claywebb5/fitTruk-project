@@ -70,17 +70,27 @@ function ClassDetailsPage() {
     const handleSeeAttendees = () => {
         history.push(`/class-details/${id}/attendees`);
     };
-    //----------< RESERVE CLASS >-----------------------
+
     const handleReserveClick = () => {
-        // console.log('Selected class is:', classDetails.id); // TEST LOG
-        dispatch({
-            type: 'ADD_RESERVATION',
-            payload: classDetails
-        });
-        alert("About to Add!")
-        history.push('/my-classes')
-    };
-    //----------< CANCEL CLASS >-----------------------
+        if (!user.id) {
+            alert("Sign in to reserve your spot!")
+        } else {
+            dispatch({
+                type: 'ADD_RESERVATION',
+                payload: classDetails
+            });
+            alert("About to Add!")
+            history.push('/my-classes')
+        }
+    }
+
+    const handleGpsClick = (showMap) => {
+        // console.log('This will show google maps');
+        setShowMap(!showMap)
+        console.log('is the class full? isClassFull:', isClassFull)
+
+    }
+
     const handleCancelClick = () => {
         // console.log('you canceled the class', classDetails) // TEST LOG
         dispatch({
@@ -156,22 +166,36 @@ function ClassDetailsPage() {
 
 
 
+            {/* <h3>{classDetails.street +' '+ classDetails.city +' '+ classDetails.state +' '+ classDetails.zip}</h3> */}
             <a
                 href={"https://www.google.com/maps/search/?api=1&query=" + (encodeURIComponent(`${classDetails.street}, ${classDetails.city}, ${classDetails.state} ${classDetails.zip}`))}
                 target="_blank"
             >Open in maps</a>
-            
-
+            {showMap ? <iframe
+                width="100%"
+                height="250"
+                frameBorder="0" style={{ border: 0 }}
+                // referrerpolicy="no-referrer-when-downgrade"
+                src={`https://www.google.com/maps/embed/v1/place?key=ADD_KEY_HERE&q=`} //the 'q' or "Query" can be text aswell as coordinates, these coords are DUMMY DATA
+            >
+            </iframe> :
+                <p>Im not a map</p>}
             <h3 type="time">{classDetails.start_time}-{classDetails.end_time}</h3>
             <h3>{classDetails.description}</h3>
             <h3>Spots remaining: {classDetails.spots_remaining}</h3>
             <button onClick={() => handleReturnClick(classDetails)}>Return</button>
-            <button onClick={handleSeeAttendees}>Attendance</button>
+
+            {(function () {
+                if (user.access_level >= 2) {
+                    return <button onClick={handleSeeAttendees}>Attendance</button>
+                } 
+            })()}
+
             {(function () {
                 if (classDetails.is_my_class) {
                     return <button onClick={handleCancelClick}>Cancel Reservation</button>;
                 } else {
-                    return <button onClick={handleReserveClick}>Reserve</button>;
+                    return <button onClick={handleReserveClick} disabled={isClassFull}>Reserve</button>;
                 }
             })()}
 
