@@ -193,7 +193,7 @@ function ClassDetailsPage() {
                     if (classDetails.is_my_class) {
                         return <button onClick={handleCancelClick}>Cancel Reservation</button>;
                     } else {
-                        return <button onClick={handleReserveClick}>Reserve</button>;
+                        return <button onClick={handleReserveClick} disabled="full_class">Reserve</button>;
                     }
                 })()}
 
