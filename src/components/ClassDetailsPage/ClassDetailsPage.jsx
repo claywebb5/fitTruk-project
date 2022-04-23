@@ -5,11 +5,7 @@ import { useParams } from 'react-router-dom/cjs/react-router-dom.min';
 //--------------< MUI IMPORTS >-----------------------------
 import Container from '@mui/material/Container';
 import Card from '@mui/material/Card';
-import CardHeader from '@mui/material/CardHeader';
-import CardMedia from '@mui/material/CardMedia';
 import CardContent from '@mui/material/CardContent';
-import CardActions from '@mui/material/CardActions';
-import Collapse from '@mui/material/Collapse';
 import Avatar from '@mui/material/Avatar';
 import IconButton from '@mui/material/IconButton';
 import SendIcon from '@mui/icons-material/Send'; // SEND MESSAGE TO CUSTOMER
@@ -23,6 +19,7 @@ import Button from '@mui/material/Button';
 import { styled } from '@mui/material/styles';
 import TextField from '@mui/material/TextField';
 import EditIcon from '@mui/icons-material/Edit';
+import LocationOnIcon from '@mui/icons-material/LocationOn';
 
 
 // ==========================< MUI THEMES >===============================
@@ -37,11 +34,10 @@ const useStyles = makeStyles({
 
 
 function ClassDetailsPage() {
-    //------------<  Setup  >-------------
+    //==================< SETUP >==========================
     const history = useHistory();
     const dispatch = useDispatch();
     const classes = useStyles(); // MUI Theme
-
 
     useEffect(() => {
         dispatch({
@@ -50,16 +46,11 @@ function ClassDetailsPage() {
         })
         dispatch({
             type: 'FETCH_CLASS_DETAILS',
-            // payload: id // PART OF DUMMY DATA, WILL BE UPDATED ONCE :id IS ADDED TO ROUTING
             payload: id
         });
     }, [])
 
-    // ---------USED FOR TESTS, REMOVE LATER---------- USED FOR TESTS, REMOVE LATER ----------------USED FOR TESTS, REMOVE LATER--------
-    // ---------USED FOR TESTS, REMOVE LATER---------- USED FOR TESTS, REMOVE LATER ----------------USED FOR TESTS, REMOVE LATER--------
-
-
-    //------------<  Variables  >----------
+    //==================< VARIABLES >==========================
     const isClassFull = useSelector(store => store.selectedClass.classSize.full_class);
     const classDetails = useSelector(store => store.selectedClass.classDetails);
     const user = useSelector(store => store.user);
@@ -89,12 +80,6 @@ function ClassDetailsPage() {
         alert("About to Add!")
         history.push('/my-classes')
     };
-    //----------< SHOW MAP >-----------------------
-    const handleGpsClick = (showMap) => {
-        // console.log('This will show google maps');
-        setShowMap(!showMap)
-        console.log('is the class full? isClassFull:', isClassFull)
-    };
     //----------< CANCEL CLASS >-----------------------
     const handleCancelClick = () => {
         // console.log('you canceled the class', classDetails) // TEST LOG
@@ -106,25 +91,12 @@ function ClassDetailsPage() {
         history.push('/my-classes')
     };
 
-
-    //   const extractMapUrl = () => { // This function will extract a url-encoded address from different address variables
-    //     let {street, city, state, zip } = classDetails
-    //     console.log('place is', street);
-    //     console.log('place is', city);
-    //     console.log('place is', state);
-    //     console.log('place is', zip);
-    //     let addressString = `${street}, ${city}, ${state} ${zip}`;
-    //     let urlString = "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(addressString);
-    //     console.log(urlString); // Test log
-    //     return urlString;
-    //     }
-    // const streetAddress;
-
-
-    // console.log('these are the details pulled in from the reducer:', classDetails); // TEST LOG
-    // console.log('this is the class id pulled from the url with params', id); // TEST LOG
-    // console.log('this is the value of show map', showMap); // TEST LOG
-
+    //===========< TIME FUNCTIONS >====================
+    const startTime = (classDetails.start_time).toLocaleString('en-US', { timeZone: 'CST', hour: 'numeric', hour12: true, minute: 'numberic' });
+    const endTime = (classDetails.end_time).toLocaleString('en-US', { timeZone: 'CST', hour: 'numeric', hour12: true, minute: 'numberic' });
+    
+    console.log('Start time:', startTime);
+    console.log('End Time:', endTime);  
 
     return (
         <>
@@ -156,7 +128,7 @@ function ClassDetailsPage() {
                     <Box align='center' sx={{ pt: 1 }}>
                         <Box align='center' sx={{ display: 'inline', }}>
                             <Typography variant="body1" align='center'>
-                                At:
+                                Location:
                             </Typography>
                             {/* ============< THIS WILL BE CHANGED TO AN INPUT >============ */}
                             <Typography onClick={handleEdit} align='center' sx={{ textDecoration: 'underline' }}>
