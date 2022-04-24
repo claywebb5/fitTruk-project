@@ -6,6 +6,7 @@ import Button from '@mui/material/Button';
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { fontFamily } from '@mui/system';
 import blackLogo from '../LandingPage/blackFitTrucklogo.png'
+import LogoAlt from './FitTruk_Logo_Alt.png'
 function LandingPage() {
   const [heading, setHeading] = useState('Landing Page View');
   const history = useHistory();
@@ -24,73 +25,70 @@ function LandingPage() {
 
   return (
     <div className='body'>
-    <img src={blackLogo} 
-    style ={{
-    height: '67px',
-    width: '100%',
-    }}
-   /> 
-    <div style={{
-     
-      marginTop: '250px'
-    }} className="container">
-      {/* <h2><u>{heading}</u></h2> */}
 
-      <div className="grid">
-        <div className="grid-col grid-col_4">
-          
-          
-          <center>
-            {/* <h4>What's Offered?</h4> */}
-            <Button 
-            style = {{
-              backgroundColor: "#ace23a",
-              color: "black",
-              fontFamily: 'Muli',
-              padding: 5,
-              width: 170,
-              // border: 0,
-              outline: 'solid',
-              // display: 'flex'
-              
-            }}
-            variant = "contained" className="btn btn_sizeSm" onClick={onSeeClasses}>
-              See Classes
-            </Button>
-          </center>
-          <br />
+      <div style={{
 
-          <center>
-            {/* <h4>Want to Join?</h4> */}
-            <Button 
-            style = {{
-              backgroundColor: "#ace23a",
-              color: "black",
-              fontFamily: 'Muli',
-              padding: 5,
-              width: 170,
-              // border: 0,
-              outline: 'solid'
-              
-            }}
-            variant = "contained"className="btn btn_sizeSm" onClick={onRegister}>
-              Register
-            </Button>
-          </center>
+        paddingTop: '250px'
+      }} className="container">
+        {/* <h2><u>{heading}</u></h2> */}
+        <div className='logo'>
+          <img src={LogoAlt} />
+        </div>
+        <div className="grid">
+          <div className="grid-col grid-col_4">
+
+
+            <center>
+              {/* <h4>What's Offered?</h4> */}
+              <Button
+                style={{
+                  backgroundColor: "#ace23a",
+                  color: "black",
+                  fontFamily: 'Muli',
+                  padding: 5,
+                  width: 170,
+                  // border: 0,
+                  outline: 'solid',
+                  // display: 'flex'
+
+                }}
+                variant="contained" className="btn btn_sizeSm" onClick={onSeeClasses}>
+                See Classes
+              </Button>
+            </center>
             <br />
-          <center>
-            {/* <h4>Already a Member?</h4> */}
-            <Button  
-            style ={{
-              color : 'black'
-            }}
-            size ='small'className="btn btn_sizeSm" onClick={onLogin}>
-            Already a Member? Login
-            </Button>
-          </center>
+
+            <center>
+              {/* <h4>Want to Join?</h4> */}
+              <Button
+                style={{
+                  backgroundColor: "#ace23a",
+                  color: "black",
+                  fontFamily: 'Muli',
+                  padding: 5,
+                  width: 170,
+                  // border: 0,
+                  outline: 'solid'
+
+                }}
+                variant="contained" className="btn btn_sizeSm" onClick={onRegister}>
+                Register
+              </Button>
+            </center>
+            <br />
+            <center>
+              {/* <h4>Already a Member?</h4> */}
+              <Button
+                style={{
+                  color: 'black'
+                }}
+                size='small' className="btn btn_sizeSm" onClick={onLogin}>
+                Already a Member? Login
+              </Button>
+            </center>
+          </div>
         </div>
       </div>
-    </div>
     </div>
   );
 }
