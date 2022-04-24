@@ -25,6 +25,7 @@ import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 import EditIcon from '@mui/icons-material/Edit';
 import PeopleAltIcon from '@mui/icons-material/PeopleAlt';
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
+import swal from 'sweetalert';
 
 
 
@@ -90,12 +91,26 @@ function ClassDetailsPage() {
     // -------------< CANCEL RESERVATION >-------------------
     const handleCancelClick = () => {
         // console.log('you canceled the class', classDetails) // TEST LOG
-        dispatch({
-            type: 'REMOVE_RESERVATION',
-            payload: classDetails
-        });
-        alert(`Class Removed`)
-        history.push('/my-classes')
+        swal({
+            title: "Are you sure?",
+            text: "Pressing ok will cancel your reservation",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+          })
+          .then((willDelete) => {
+            if (willDelete) {
+              swal("Reservation canceled", {
+                icon: "success",   
+              });
+              dispatch({
+                type: 'REMOVE_RESERVATION',
+                payload: classDetails
+            });
+            } else {
+            }
+          });
+
     };
 
 
