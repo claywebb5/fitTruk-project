@@ -77,11 +77,16 @@ function ClassDetailsPage() {
         if (!user.id) {
             alert("Sign in to reserve your spot!")
         } else {
+            swal({
+                title: "Success", 
+                text: "Class reserved!",
+                icon: "success",
+            })
             dispatch({
                 type: 'ADD_RESERVATION',
                 payload: classDetails
             });
-            history.push('/my-classes')
+            // history.push('/my-classes')
         }
     }
     // -------------< SHOW MAP >------------------------
