@@ -46,11 +46,12 @@ function LoginForm() {
             }} 
           onClick={handleHomeScreen} />
       </div>
-      <form style={{
+      <form 
+        style={{
         marginTop: '50px',
-
-
-      }} className="formPanel" onSubmit={login}>
+        }}
+        className="formPanel"
+        onSubmit={login}>
         {/* <h2>Login</h2> */}
         {errors.loginMessage && (
           <h3 className="alert" role="alert">
@@ -61,7 +62,6 @@ function LoginForm() {
           <label htmlFor="username">
 
             <TextField
-
               size='small'
               style={{
                 display: 'flex',
@@ -69,8 +69,6 @@ function LoginForm() {
                 alignItems: 'center',
                 color: '#ace23a',
                 // borderRadius: 10
-
-
               }}
               placeholder='Username'
               type="text"
@@ -89,7 +87,7 @@ function LoginForm() {
               display: 'flex',
               justifyContent: 'center',
               alignItems: 'center',
-              width: '200px',
+              // width: '200px',
             }}
               size='large'
               placeholder='Password'
@@ -107,17 +105,26 @@ function LoginForm() {
           justifyContent: 'center',
 
         }}>
-          <input style={{
+          {/* <input style={{
             backgroundColor: '#ace23a',
             color: '#41414c',
             borderRadius: '0.5rem',
-            padding: '0.5rem, 1.25rem',
-            width: '100px',
+            padding: '5',
+            width: '250',
             fontFamily: 'Muli',
-
-
-
-          }} className="btn" type="submit" name="submit" value="Log In" />
+          }} className="btn" type="submit" name="submit" value="Log In" /> */}
+          <Button
+                style={{
+                  backgroundColor: "#ace23a",
+                  color: "black",
+                  fontFamily: 'Muli',
+                  padding: 0,
+                  width: 250,
+                  outline: 'solid'
+                }}
+                variant="contained" className="btn btn_sizeSm" >
+                <p>Login</p> 
+              </Button>
         </div>
       </form>
 
