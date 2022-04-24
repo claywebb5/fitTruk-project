@@ -1,4 +1,5 @@
 .body {
     background-color: orange;
-    background-size: cover;
+    /* background-size: cover; */
+    height: 100%;
   }
