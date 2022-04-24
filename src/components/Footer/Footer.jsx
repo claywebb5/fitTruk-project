@@ -10,8 +10,8 @@ function Footer() {
   return (
 
     <>
-      <footer>&copy; FitTruk</footer>
-      {!userId ? <> </>: <LogOutButton /> }
+      {/* <footer>&copy; FitTruk</footer> */}
+      {/* {!userId ? <> </>: <LogOutButton /> } */}
       
     </>
   )

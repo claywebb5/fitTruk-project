@@ -97,25 +97,24 @@ function ClassDetailsPage() {
 
     return (
         <>
-            <Container>
+            <Container sx={{ bgcolor: '#90ee90'}}>
                 {/* ============< WEEKDAY AND DATE >============== */}
-                <Card sx={{ maxWidth: 345, bgcolor: '#6d6e71', color: '#FFFFFF' }}>
+                <Card sx={{ bgcolor: '#6d6e71', color: '#FFFFFF' }}>
                     <CardContent className={classes.newroot}>
                         <Typography variant="h5" align="center">
                             {classDetails.week_day_name} {classDetails.abbreviated_date}
                         </Typography>
                     </CardContent>
                 </Card>
+
                 {/* ============< CLASS NAME >============== */}
                 <Box sx={{ pt: 1 }}>
                     <Typography style={{ color: "#000000" }} variant="h6" align="center">
                         {classDetails.classname}
                     </Typography>
                 </Box>
+
                 {/* ============< INSTRUCTOR >============== */}
-                {/* <Grid item>
-                        
-                    </Grid> */}
                 <Box sx={{ display: 'flex', flexDirection: 'row', pt: 1 }}>
                     <Grid container justifyContent="center" alignItems="center" direction="row" spacing={2}>
                             <Grid item>
@@ -132,52 +131,48 @@ function ClassDetailsPage() {
                     </Grid>
                 </Box>
 
-
-                {/* <Box sx={{ display: 'inline-flex', pr: 5, pl: 1 }}>
-                    <Box sx={{ mt: 3, ml: 5 }}>
-                        <Typography style={{ color: "#000000" }} variant="body1" sx={{ align: 'left', mr: 1, mx: 'auto' }}>
-                            Led by:
-                        </Typography>
-                        <Typography style={{ color: "#000000" }} variant="h5" sx={{ align: 'left', textDecoration: 'underline' }} display="inline">
-                            {classDetails.trainer_first_name} {((classDetails.trainer_last_name)[0])}
-                        </Typography>
-                    </Box>
-                    <Avatar src={classDetails.trainer_image} sx={{ align: 'center', ml: 3, mt: 1, height: '90px', width: '90px' }} />
-                </Box> */}
                 {/* ============< LOCATION >============== */}
-                <Box>
-                <Grid container justifyContent="center">
-                    <Grid item>
-                    
-                    </Grid>
-                </Grid>
-                </Box>
-
-
-
-                <Card sx={{ align: 'center', mt: 1 }}>
-                    <Box align='center' sx={{display: 'inline-flex', pt: 1 }}>
-                        <Box align='center' sx={{ display: 'inline', }}>
+                <Box sx={{ display: 'flex', flexDirection: 'row', pt: 1 }}>
+                    <Grid container justifyContent="center" alignItems="center" direction="row" spacing={2}>
+                        <Grid item>
                             <Typography style={{ color: "#000000" }} variant="body1" align='center'>
                                 Location:
                             </Typography>
                             <Typography style={{ color: "#000000" }} align='center' sx={{ textDecoration: 'underline' }}>
                                 {classDetails.street}, <br /> {classDetails.city}, {classDetails.state}, {classDetails.zip}
                             </Typography>
-                        </Box>
-                        <Link
-                        href={"https://www.google.com/maps/search/?api=1&query=" + (encodeURIComponent(`${classDetails.street}, ${classDetails.city}, ${classDetails.state} ${classDetails.zip}`))}
-                        target="_blank"
-                        >
-                            <Avatar sx={{ bgcolor: '#80bd02' }}>
-                                <LocationOnIcon />
-                            </Avatar>
-                        </Link>
-                    </Box>
-                </Card>
+                        </Grid>
+                        <Grid item>
+                            <Link
+                            href={"https://www.google.com/maps/search/?api=1&query=" + (encodeURIComponent(`${classDetails.street}, ${classDetails.city}, ${classDetails.state} ${classDetails.zip}`))}
+                            target="_blank"
+                            >
+                                <Avatar sx={{ bgcolor: '#80bd02' }}>
+                                    <LocationOnIcon />
+                                </Avatar>
+                            </Link>
+                        </Grid>
+                    </Grid>
+                </Box> 
+
+                {/* ============< TIME >============== */}
+                <Box sx={{ display: 'flex', flexDirection: 'row', pt: 1 }}>
+                <Grid container justifyContent="center" alignItems="center" direction="row" spacing={2}>
+                    <Grid item>
+                        <Typography style={{ color: "#000000" }} variant="body1" align='center'>
+                            From
+                        </Typography>
+                        <Typography style={{ color: "#000000" }} variant="h5" sx={{textDecoration: 'underline' }} align='center'>
+                            {classDetails.start_time}-{classDetails.end_time}
+                        </Typography>
+                    </Grid>
+                </Grid>
+                </Box>
+
+
                 {/* ============<  >============== */}
-                <Box>
-                <Grid container justifyContent="center">
+                <Box sx={{ display: 'flex', flexDirection: 'row', pt: 1 }}>
+                <Grid container justifyContent="center" alignItems="center" direction="row" spacing={2}>
                     <Grid item>
                     
                     </Grid>
@@ -186,7 +181,12 @@ function ClassDetailsPage() {
                     
                 
 
-                {showMap ? <iframe
+                
+
+            </Container>
+
+
+            {showMap ? <iframe
                     width="100%"
                     height="250"
                     frameBorder="0" style={{ border: 0 }}
@@ -195,7 +195,7 @@ function ClassDetailsPage() {
                 >
                 </iframe> :
                     <p></p>}
-                <h3 type="time">{classDetails.start_time}-{classDetails.end_time}</h3>
+                <h3 type="time"></h3>
                 <h3>{classDetails.description}</h3>
                 <h3>Spots remaining: {classDetails.spots_remaining}</h3>
                 <button onClick={() => handleReturnClick(classDetails)}>Return</button>
@@ -217,8 +217,6 @@ function ClassDetailsPage() {
                 {user.access_level >= 2 &&
                     <button onClick={() => { history.push(`/edit-class/${classDetails.id}`) }}>edit class</button>
                 }
-
-            </Container>
 
         </>
     )
