@@ -86,11 +86,8 @@ function handleHomeScreen(){
             display: 'flex',
             justifyContent: 'center',
             alignItems: 'center',
-           
-           
-          
-            
           }}
+          color="secondary"
           size='small'
           placeholder='Password'
             type="password"
