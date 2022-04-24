@@ -17,10 +17,9 @@ import { makeStyles } from '@material-ui/core/styles';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import { styled } from '@mui/material/styles';
-import TextField from '@mui/material/TextField';
-import EditIcon from '@mui/icons-material/Edit';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import Link from '@mui/material/Link';
+import Grid from '@mui/material/Grid';
 
 
 // ==========================< MUI THEMES >===============================
@@ -99,6 +98,7 @@ function ClassDetailsPage() {
     return (
         <>
             <Container>
+                {/* ============< WEEKDAY AND DATE >============== */}
                 <Card sx={{ maxWidth: 345, bgcolor: '#6d6e71', color: '#FFFFFF' }}>
                     <CardContent className={classes.newroot}>
                         <Typography variant="h5" align="center">
@@ -106,12 +106,34 @@ function ClassDetailsPage() {
                         </Typography>
                     </CardContent>
                 </Card>
+                {/* ============< CLASS NAME >============== */}
                 <Box sx={{ pt: 1 }}>
                     <Typography style={{ color: "#000000" }} variant="h6" align="center">
                         {classDetails.classname}
                     </Typography>
                 </Box>
-                <Box sx={{ display: 'inline-flex', pr: 5, pl: 1 }}>
+                {/* ============< INSTRUCTOR >============== */}
+                {/* <Grid item>
+                        
+                    </Grid> */}
+                <Box sx={{ display: 'flex', flexDirection: 'row', pt: 1 }}>
+                    <Grid container justifyContent="center" alignItems="center" direction="row" spacing={2}>
+                            <Grid item>
+                                <Typography style={{ color: "#000000" }} variant="body1" >
+                                    Led by:
+                                </Typography>
+                                <Typography style={{ color: "#000000" }} variant="h5" sx={{textDecoration: 'underline' }}>
+                                    {classDetails.trainer_first_name} {((classDetails.trainer_last_name)[0])}
+                                </Typography>
+                            </Grid>
+                            <Grid item>
+                                <Avatar src={classDetails.trainer_image} sx={{height: '90px', width: '90px' }} />
+                            </Grid>
+                    </Grid>
+                </Box>
+
+
+                {/* <Box sx={{ display: 'inline-flex', pr: 5, pl: 1 }}>
                     <Box sx={{ mt: 3, ml: 5 }}>
                         <Typography style={{ color: "#000000" }} variant="body1" sx={{ align: 'left', mr: 1, mx: 'auto' }}>
                             Led by:
@@ -121,7 +143,18 @@ function ClassDetailsPage() {
                         </Typography>
                     </Box>
                     <Avatar src={classDetails.trainer_image} sx={{ align: 'center', ml: 3, mt: 1, height: '90px', width: '90px' }} />
+                </Box> */}
+                {/* ============< LOCATION >============== */}
+                <Box>
+                <Grid container justifyContent="center">
+                    <Grid item>
+                    
+                    </Grid>
+                </Grid>
                 </Box>
+
+
+
                 <Card sx={{ align: 'center', mt: 1 }}>
                     <Box align='center' sx={{display: 'inline-flex', pt: 1 }}>
                         <Box align='center' sx={{ display: 'inline', }}>
@@ -142,9 +175,16 @@ function ClassDetailsPage() {
                         </Link>
                     </Box>
                 </Card>
+                {/* ============<  >============== */}
                 <Box>
+                <Grid container justifyContent="center">
+                    <Grid item>
                     
+                    </Grid>
+                </Grid>
                 </Box>
+                    
+                
 
                 {showMap ? <iframe
                     width="100%"
