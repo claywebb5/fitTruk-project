@@ -26,7 +26,8 @@ function LandingPage() {
     <div className='body'>
     <img src={blackLogo} 
     style ={{
-    height: '67px'
+    height: '67px',
+    width: '100%',
     }}
    /> 
 
