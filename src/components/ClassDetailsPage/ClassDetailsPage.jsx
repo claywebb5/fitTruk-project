@@ -5,11 +5,7 @@ import { useParams } from 'react-router-dom/cjs/react-router-dom.min';
 //--------------< MUI IMPORTS >-----------------------------
 import Container from '@mui/material/Container';
 import Card from '@mui/material/Card';
-import CardHeader from '@mui/material/CardHeader';
-import CardMedia from '@mui/material/CardMedia';
 import CardContent from '@mui/material/CardContent';
-import CardActions from '@mui/material/CardActions';
-import Collapse from '@mui/material/Collapse';
 import Avatar from '@mui/material/Avatar';
 import IconButton from '@mui/material/IconButton';
 import SendIcon from '@mui/icons-material/Send'; // SEND MESSAGE TO CUSTOMER
@@ -21,7 +17,15 @@ import { makeStyles } from '@material-ui/core/styles';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import { styled } from '@mui/material/styles';
-import TextField from '@mui/material/TextField';
+import LocationOnIcon from '@mui/icons-material/LocationOn';
+import Link from '@mui/material/Link';
+import Grid from '@mui/material/Grid';
+import InsertInvitationIcon from '@mui/icons-material/InsertInvitation';
+import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
+import EditIcon from '@mui/icons-material/Edit';
+import PeopleAltIcon from '@mui/icons-material/PeopleAlt';
+import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
+
 
 
 // ==========================< MUI THEMES >===============================
@@ -34,9 +38,8 @@ const useStyles = makeStyles({
     },
 });
 
-
 function ClassDetailsPage() {
-    //------------<  Setup  >-------------
+    //==================< SETUP >==========================
     const history = useHistory();
     const dispatch = useDispatch();
     const classes = useStyles(); // MUI Theme
@@ -48,36 +51,27 @@ function ClassDetailsPage() {
         })
         dispatch({
             type: 'FETCH_CLASS_DETAILS',
-            // payload: id // PART OF DUMMY DATA, WILL BE UPDATED ONCE :id IS ADDED TO ROUTING
             payload: id
         });
     }, [])
 
-    // ---------USED FOR TESTS, REMOVE LATER---------- USED FOR TESTS, REMOVE LATER ----------------USED FOR TESTS, REMOVE LATER--------
-    const user = useSelector(store => store.user)
-
-    // ---------USED FOR TESTS, REMOVE LATER---------- USED FOR TESTS, REMOVE LATER ----------------USED FOR TESTS, REMOVE LATER--------
-
-
-    //------------<  Variables  >----------
+    //==================< VARIABLES >==========================
     const isClassFull = useSelector(store => store.selectedClass.classSize.full_class);
-    const classDetails = useSelector(store => store.selectedClass.classDetails)
-    const [showMap, setShowMap] = useState(false)
-    const { id } = useParams()
-    // const user = useSelector(store => store.user)
+    const classDetails = useSelector(store => store.selectedClass.classDetails);
+    const user = useSelector(store => store.user);
+    const [showMap, setShowMap] = useState(false);
+    const { id } = useParams();
 
-
-    //---------------<  C l i c k   H a n d l e r s  >----------------------------
+    //==================< CLICK HANDLERS >==========================
+    // -------< GO BACK >-----------------
     const handleReturnClick = () => {
         history.goBack();
-    }
-
-    // GO to class attendees
+    };
+    //---------< GO TO CLASS ATTENDEES >--------------
     const handleSeeAttendees = () => {
-
         history.push(`/class-details/${id}/attendees`);
     };
-
+    // ----------< RESERVE A CLASS >--------------------------
     const handleReserveClick = () => {
         if (!user.id) {
             alert("Sign in to reserve your spot!")
@@ -86,129 +80,205 @@ function ClassDetailsPage() {
                 type: 'ADD_RESERVATION',
                 payload: classDetails
             });
-            alert("About to Add!")
             history.push('/my-classes')
         }
     }
-
+    // -------------< SHOW MAP >------------------------
     const handleGpsClick = (showMap) => {
-        // console.log('This will show google maps');
-        setShowMap(!showMap)
-        console.log('is the class full? isClassFull:', isClassFull)
-
-    }
-
+        // setShowMap(!showMap)
+    };
+    // -------------< CANCEL RESERVATION >-------------------
     const handleCancelClick = () => {
         // console.log('you canceled the class', classDetails) // TEST LOG
         dispatch({
             type: 'REMOVE_RESERVATION',
             payload: classDetails
         });
-        alert(`About to Remove`)
+        alert(`Class Removed`)
         history.push('/my-classes')
-    }
-    //---------------<  E N D  C l i c k   H a n d l e r s  >----------------------------
+    };
 
 
-    //   const extractMapUrl = () => { // This function will extract a url-encoded address from different address variables
-    //     let {street, city, state, zip } = classDetails
-    //     console.log('place is', street);
-    //     console.log('place is', city);
-    //     console.log('place is', state);
-    //     console.log('place is', zip);
-    //     let addressString = `${street}, ${city}, ${state} ${zip}`;
-    //     let urlString = "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(addressString);
-    //     console.log(urlString); // Test log
-    //     return urlString;
-    //     }
-    // const streetAddress;
-
-
-    // console.log('these are the details pulled in from the reducer:', classDetails); // TEST LOG
-    // console.log('this is the class id pulled from the url with params', id); // TEST LOG
-    // console.log('this is the value of show map', showMap); // TEST LOG
     return (
         <>
-            <Container>
-                <Card sx={{ maxWidth: 345, bgcolor: '#6d6e71', color: '#FFFFFF' }}>
+            <Container sx={{ border: 4, borderColor: '#c3c4c5', bgcolor: '#FFFFFF' }}>
+
+                {/* ============< WEEKDAY AND DATE >============== */}
+                <Card sx={{ bgcolor: '#6d6e71', color: '#FFFFFF' }}>
                     <CardContent className={classes.newroot}>
                         <Typography variant="h5" align="center">
                             {classDetails.week_day_name} {classDetails.abbreviated_date}
                         </Typography>
                     </CardContent>
                 </Card>
-                <Box sx={{ pt: 1 }}>
-                    <Typography variant="h6" align="center">
+
+                {/* ============< CLASS NAME >============== */}
+                <Box sx={{ mt: 1 }}>
+                    <Typography style={{ color: "#000000" }} variant="h5" align="center">
                         {classDetails.classname}
                     </Typography>
                 </Box>
-                <Box sx={{ display: 'inline-flex', pr: 5, pl: 1 }}>
-                    <Box sx={{ mt: 3, ml: 5 }}>
-                        <Typography variant="body1" sx={{ align: 'left', mr: 1, mx: 'auto' }}>
-                            Led by:
-                        </Typography>
-                        <Typography variant="h5" sx={{ align: 'left', textDecoration: 'underline' }} display="inline">
-                            {classDetails.trainer_first_name} {((classDetails.trainer_last_name)[0])}
+
+                {/* ============< INSTRUCTOR >============== */}
+                <Box sx={{ display: 'flex', flexDirection: 'row', mt: 2, pl: 1 }}>
+                    <Grid container justifyContent="center" alignItems="center" direction="row" spacing={2}>
+                        <Grid item>
+                            <Typography style={{ color: "#000000" }} variant="body1" >
+                                Led by:
+                            </Typography>
+                            <Typography style={{ color: "#000000" }} variant="h5" >
+                                {classDetails.trainer_first_name} {((classDetails.trainer_last_name)[0])}
+                            </Typography>
+                            <Divider sx={{ bgcolor: "#000000" }} />
+                        </Grid>
+                        <Grid item>
+                            <Avatar src={classDetails.trainer_image} sx={{ height: '120px', width: '120px' }} />
+                        </Grid>
+                    </Grid>
+                </Box>
+
+                {/* ============< LOCATION >============== */}
+                <Box sx={{ display: 'flex', flexDirection: 'row', mt: 3 }}>
+                    <Grid container justifyContent="center" alignItems="center" direction="row" spacing={2}>
+                        <Grid item>
+                            <Typography style={{ color: "#000000" }} variant="body1" align='center'>
+                                Location:
+                            </Typography>
+                            <Typography style={{ color: "#000000" }} align='center'>
+                                {classDetails.street}, <br /> {classDetails.city}, {classDetails.state}, {classDetails.zip}
+                            </Typography>
+                            <Divider sx={{ bgcolor: "#000000" }} />
+                        </Grid>
+                        <Grid item>
+                            <Link
+                                href={"https://www.google.com/maps/search/?api=1&query=" + (encodeURIComponent(`${classDetails.street}, ${classDetails.city}, ${classDetails.state} ${classDetails.zip}`))}
+                                target="_blank"
+                            >
+                                <Avatar sx={{ bgcolor: '#80bd02' }}>
+                                    <LocationOnIcon />
+                                </Avatar>
+                            </Link>
+                        </Grid>
+                    </Grid>
+                </Box>
+                {/* -------* CODE FOR SHOWING MAP IN APP *------- */}
+                {/* 
+                {showMap ? <iframe width="100%" height="250" frameBorder="0" style={{ border: 0 }} // referrerpolicy="no-referrer-when-downgrade" src={`https://www.google.com/maps/embed/v1/place?key=ADD_KEY_HERE&q=`} //the 'q' or "Query" can be text aswell as coordinates, these coords are DUMMY DATA > </iframe> : <p></p>}
+                */}
+
+                {/* ============< TIME >============== */}
+                <Box sx={{ display: 'flex', flexDirection: 'row', mt: 3 }}>
+                    <Grid container justifyContent="center" alignItems="center" direction="row" spacing={2}>
+                        <Grid item>
+                            <Typography style={{ color: "#000000" }} variant="body1" align='center'>
+                                From
+                            </Typography>
+                            <Typography style={{ color: "#000000" }} variant="h5" align='center'>
+                                {classDetails.start_time}-{classDetails.end_time}
+                            </Typography>
+                            <Divider sx={{ bgcolor: "#000000" }} />
+                        </Grid>
+                    </Grid>
+                </Box>
+
+                {/* ============< CLASS SIZE >============== */}
+                <Box sx={{ display: 'flex', flexDirection: 'row', mt: 3 }}>
+                    <Grid container justifyContent="center" alignItems="center" direction="column" spacing={1}>
+                        <Grid container justifyContent="center" alignItems="center" direction="row" spacing={1}>
+                            <Grid item>
+                                <Typography style={{ color: "#80bd02" }} variant="h5" align='center'>
+                                    {classDetails.spots_remaining}
+                                </Typography>
+                            </Grid>
+                            <Grid item>
+                                <Typography style={{ color: "#000000" }} variant="h5" align='center'>
+                                    open spots
+                                </Typography>
+                            </Grid>
+                        </Grid>
+                        <Grid item>
+                            <Typography style={{ color: "#000000" }} variant="body2" align='center'>
+                                Max: {classDetails.class_size} people
+                            </Typography>
+                        </Grid>
+                    </Grid>
+                </Box>
+
+                {/* ============< DESCRIPTION >============== */}
+
+                <Box sx={{ border: 4, borderColor: '#80bd02', mt: 3 }}>
+                    <Box sx={{ px: 8 }}>
+                        <Typography variant="h5" align="center" >
+                            {classDetails.description}
                         </Typography>
                     </Box>
-                    <Avatar src={classDetails.trainer_image} sx={{ align: 'center', ml: 3, mt: 1, height: '90px', width: '90px' }} />
-                </Box>
-                <Box sx={{ pt: 2 }}>
-                    <Typography variant="body1" align='center'>
-                        At:
-                    </Typography>
-
-                    {/* ============< THIS WILL BE CHANGED TO AN INPUT >============ */}
-                    <Typography sx={{ align: 'left', }} display="inline">
-                        {classDetails.street}, {classDetails.city}, {classDetails.state}, {classDetails.zip}
-                    </Typography>
-
                 </Box>
 
 
-            </Container>
-
-
-
-
-
-
-            {/* <h3>{classDetails.street +' '+ classDetails.city +' '+ classDetails.state +' '+ classDetails.zip}</h3> */}
-            <a
-                href={"https://www.google.com/maps/search/?api=1&query=" + (encodeURIComponent(`${classDetails.street}, ${classDetails.city}, ${classDetails.state} ${classDetails.zip}`))}
-                target="_blank"
-            >Open in maps</a>
-            {showMap ? <iframe
-                width="100%"
-                height="250"
-                frameBorder="0" style={{ border: 0 }}
-                // referrerpolicy="no-referrer-when-downgrade"
-                src={`https://www.google.com/maps/embed/v1/place?key=ADD_KEY_HERE&q=`} //the 'q' or "Query" can be text aswell as coordinates, these coords are DUMMY DATA
-            >
-            </iframe> :
-                <p>Im not a map</p>}
-            <h3 type="time">{classDetails.start_time}-{classDetails.end_time}</h3>
-            <h3>{classDetails.description}</h3>
-            <h3>Spots remaining: {classDetails.spots_remaining}</h3>
-            <button onClick={() => handleReturnClick(classDetails)}>Return</button>
-
-            {(function () {
-                if (user.access_level >= 2) {
-                    return <button onClick={handleSeeAttendees}>Attendance</button>
-                } 
-            })()}
-
-            {(function () {
-                if (classDetails.is_my_class) {
-                    return <button onClick={handleCancelClick}>Cancel Reservation</button>;
-                } else {
-                    return <button onClick={handleReserveClick} disabled={isClassFull}>Reserve</button>;
+                {/* ============< BUTTONS >============== */}
+                {
+                    (function () {
+                        if (user.access_level >= 2) {
+                            return <Box sx={{ display: 'flex', flexDirection: 'row', mt: 3 }}>
+                                <Grid container justifyContent="center" alignItems="center" direction="column" spacing={2}>
+                                    <Button onClick={handleSeeAttendees} sx={{ bgcolor: '#80bd02', color: "#000000" }}>
+                                        View Attendees &nbsp;
+                                        <PeopleAltIcon />
+                                    </Button>
+                                </Grid>
+                            </Box>
+                        }
+                    })()
                 }
-            })()}
 
-            {/* ---------USED FOR TESTS, REMOVE LATER---------- USED FOR TESTS, REMOVE LATER ----------------USED FOR TESTS, REMOVE LATER-------- */}
-            {user.access_level >= 2 && <button onClick={() => { history.push(`/edit-class/${classDetails.id}`) }}>edit class</button>}
-            {/* ---------USED FOR TESTS, REMOVE LATER---------- USED FOR TESTS, REMOVE LATER ----------------USED FOR TESTS, REMOVE LATER-------- */}
+                {
+                    (function () {
+                        if (user.access_level === 1) {
+                            if (classDetails.is_my_class) {
+                                return <Box sx={{ display: 'flex', flexDirection: 'row', mt: 3 }}>
+                                    <Grid container justifyContent="center" alignItems="center" direction="column" spacing={2}>
+                                        <Button onClick={handleCancelClick} sx={{ bgcolor: '#80bd02', color: "#000000" }}>
+                                            Cancel Reservation &nbsp;
+                                            <DeleteOutlineIcon />
+                                        </Button>
+                                    </Grid>
+                                </Box>
+
+                            } else {
+                                return <Box sx={{ display: 'flex', flexDirection: 'row', mt: 3 }}>
+                                    <Grid container justifyContent="center" alignItems="center" direction="column" spacing={2}>
+                                        <Button onClick={handleReserveClick} sx={{ bgcolor: '#80bd02', color: "#000000" }} disabled={isClassFull}>
+                                            Reserve &nbsp;
+                                            <InsertInvitationIcon />
+                                        </Button>
+                                    </Grid>
+                                </Box>
+                            }
+                        }
+                    })()
+                }
+
+                {
+                    (function () {
+                        if (user.access_level >= 2) {
+                            return <Box sx={{ display: 'flex', flexDirection: 'row', mt: 3 }}>
+                                <Grid container justifyContent="center" alignItems="center" direction="column" spacing={2}>
+                                    <Button onClick={() => { history.push(`/edit-class/${classDetails.id}`) }} sx={{ bgcolor: '#80bd02', color: "#000000" }}>
+                                        Edit Class &nbsp;
+                                        <EditIcon />
+                                    </Button>
+                                </Grid>
+                            </Box>
+                        }
+                    })()
+                }
+
+
+
+                <Button onClick={handleReturnClick} sx={{ border: 2, borderColor: '#80bd02', color: "#000000", mt: 3 }}>
+                    <ArrowBackIosNewIcon /> &nbsp;
+                </Button>
+            </Container>
         </>
     )
 }
