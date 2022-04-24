@@ -67,12 +67,10 @@ function LandingPage() {
                   fontFamily: 'Muli',
                   padding: 5,
                   width: 250,
-                  // border: 0,
                   outline: 'solid'
-
                 }}
                 variant="contained" className="btn btn_sizeSm" onClick={onRegister}>
-                <p>Register</p> 
+                <p>sign in</p> 
               </Button>
             </center>
             <br />
@@ -80,10 +78,15 @@ function LandingPage() {
               {/* <h4>Already a Member?</h4> */}
               <Button
                 style={{
-                  color: 'black'
+                  color: 'white',
+                  backgroundColor: "rgba(255, 255, 255, 0.4)",
+                  fontFamily: 'Muli',
+                  padding: 0,
+                  width: 150,
+                  outline: 'solid'
                 }}
-                size='small' className="btn btn_sizeSm" onClick={onLogin}>
-               <p>Already a Member? Login</p> 
+                onClick={onLogin}>
+               <p>REGISTER</p> 
               </Button>
             </center>
           </div>
