@@ -22,6 +22,8 @@ import { makeStyles } from '@material-ui/core/styles';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import { styled } from '@mui/material/styles';
+import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
+
 
 // ==========================< MUI THEMES >===============================
 const useStyles = makeStyles({
@@ -91,7 +93,7 @@ function AttendeesPage() {
 
     return (
         <>
-            <Container>
+            <Container sx={{ border: 4, borderColor: '#c3c4c5', bgcolor: '#FFFFFF' }}>
                 <Card sx={{ maxWidth: 345 }}>
                     <CardContent className={classes.newroot}>
                         <Typography variant="h5" align="center">
@@ -106,25 +108,27 @@ function AttendeesPage() {
                         </Typography>
                     </CardContent>
                 </Card>
+
+                {attendees.map((customer, i) => (
+                    <AttendanceItem key={i} customer={customer} />
+                ))}
+
+                <Box textAlign='center' sx={{ pt: 2 }}>
+                    <Typography variant="h5">
+                        Spots Remaining: {classDetails.spots_remaining}
+                    </Typography>
+                </Box>
+
+                <Box textAlign='center' sx={{ pt: 2 }}>
+                    <Button onClick={handleCheckIn} variant="outlined" sx={{ color: "#000000", bgcolor: '#ace23a' }}>Check in</Button>
+                </Box>
+
+
+
+                <Button onClick={handleReturnClick} sx={{ border: 2, borderColor: '#80bd02', color: "#000000", mt: 3 }}>
+                    <ArrowBackIosNewIcon /> &nbsp;
+                </Button>
             </Container>
-
-            {attendees.map((customer, i) => (
-                <AttendanceItem key={i} customer={customer} />
-            ))}
-
-            <Box textAlign='center' sx={{pt:2}}>
-                <Typography variant="h5">
-                    Spots Remaining: {classDetails.spots_remaining}
-                </Typography>
-            </Box>
-
-            <Box textAlign='center' sx={{pt:2}}>
-                <Button onClick={handleCheckIn} variant="outlined" sx={{ color: '#FFFFFF', bgcolor: '#ace23a' }}>Check in</Button>
-            </Box>
-
-
-
-            <button onClick={handleReturnClick}>Back</button>
         </>
     );
 };

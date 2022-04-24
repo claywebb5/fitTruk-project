@@ -80,7 +80,6 @@ function ClassDetailsPage() {
                 type: 'ADD_RESERVATION',
                 payload: classDetails
             });
-            alert("About to Add!")
             history.push('/my-classes')
         }
     }
@@ -95,14 +94,15 @@ function ClassDetailsPage() {
             type: 'REMOVE_RESERVATION',
             payload: classDetails
         });
-        alert(`About to Remove`)
+        alert(`Class Removed`)
         history.push('/my-classes')
     };
 
 
     return (
         <>
-            <Container sx={{width: '100%', border: 4, borderColor: '#c3c4c5', m: 1, mr: 1, bgcolor: '#FFFFFF' }}>
+            <Container sx={{ border: 4, borderColor: '#c3c4c5', bgcolor: '#FFFFFF' }}>
+
                 {/* ============< WEEKDAY AND DATE >============== */}
                 <Card sx={{ bgcolor: '#6d6e71', color: '#FFFFFF' }}>
                     <CardContent className={classes.newroot}>
@@ -216,48 +216,64 @@ function ClassDetailsPage() {
 
 
                 {/* ============< BUTTONS >============== */}
-                <Box sx={{ display: 'flex', flexDirection: 'row', mt: 3 }}>
-                    <Grid container justifyContent="center" alignItems="center" direction="column" spacing={2}>
-                        {
-                            (function () {
-                                if (user.access_level >= 2) {
-                                    return <Button onClick={handleSeeAttendees} sx={{ bgcolor: '#80bd02', color: "#000000" }}>
-                                                View Attendees &nbsp;
-                                                <PeopleAltIcon />
-                                            </Button>
-                                } else {
-                                    (function () {
-                                        if (classDetails.is_my_class) {
-                                            return <Button onClick={handleCancelClick} sx={{ bgcolor: '#80bd02', color: "#000000" }}>
-                                                        Cancel Reservation &nbsp;
-                                                        <DeleteOutlineIcon />
-                                                    </Button>
-                                        } else {
-                                            return <Button onClick={handleReserveClick} sx={{ bgcolor: '#80bd02', color: "#000000" }} disabled={isClassFull}>
-                                                        Reserve &nbsp;
-                                                        <InsertInvitationIcon />
-                                                    </Button>
-                                        }
-                                    })()
-                                }
-                            })()
+                {
+                    (function () {
+                        if (user.access_level >= 2) {
+                            return <Box sx={{ display: 'flex', flexDirection: 'row', mt: 3 }}>
+                                <Grid container justifyContent="center" alignItems="center" direction="column" spacing={2}>
+                                    <Button onClick={handleSeeAttendees} sx={{ bgcolor: '#80bd02', color: "#000000" }}>
+                                        View Attendees &nbsp;
+                                        <PeopleAltIcon />
+                                    </Button>
+                                </Grid>
+                            </Box>
                         }
-                        
-                        
+                    })()
+                }
 
-                    </Grid>
-                </Box>
-                <Box sx={{ display: 'flex', flexDirection: 'row', mt: 3 }}>
-                    <Grid container justifyContent="center" alignItems="center" direction="column" spacing={2}>
-                        {
-                            user.access_level >= 2 &&
-                            <Button onClick={() => { history.push(`/edit-class/${classDetails.id}`) }}  sx={{ bgcolor: '#80bd02', color: "#000000" }}>
-                                Edit Class &nbsp;
-                                <EditIcon />    
-                            </Button>
+                {
+                    (function () {
+                        if (user.access_level === 1) {
+                            if (classDetails.is_my_class) {
+                                return <Box sx={{ display: 'flex', flexDirection: 'row', mt: 3 }}>
+                                    <Grid container justifyContent="center" alignItems="center" direction="column" spacing={2}>
+                                        <Button onClick={handleCancelClick} sx={{ bgcolor: '#80bd02', color: "#000000" }}>
+                                            Cancel Reservation &nbsp;
+                                            <DeleteOutlineIcon />
+                                        </Button>
+                                    </Grid>
+                                </Box>
+
+                            } else {
+                                return <Box sx={{ display: 'flex', flexDirection: 'row', mt: 3 }}>
+                                    <Grid container justifyContent="center" alignItems="center" direction="column" spacing={2}>
+                                        <Button onClick={handleReserveClick} sx={{ bgcolor: '#80bd02', color: "#000000" }} disabled={isClassFull}>
+                                            Reserve &nbsp;
+                                            <InsertInvitationIcon />
+                                        </Button>
+                                    </Grid>
+                                </Box>
+                            }
                         }
-                    </Grid>
-                </Box>
+                    })()
+                }
+
+                {
+                    (function () {
+                        if (user.access_level >= 2) {
+                            return <Box sx={{ display: 'flex', flexDirection: 'row', mt: 3 }}>
+                                <Grid container justifyContent="center" alignItems="center" direction="column" spacing={2}>
+                                    <Button onClick={() => { history.push(`/edit-class/${classDetails.id}`) }} sx={{ bgcolor: '#80bd02', color: "#000000" }}>
+                                        Edit Class &nbsp;
+                                        <EditIcon />
+                                    </Button>
+                                </Grid>
+                            </Box>
+                        }
+                    })()
+                }
+
+
 
                 <Button onClick={handleReturnClick} sx={{ border: 2, borderColor: '#80bd02', color: "#000000", mt: 3 }}>
                     <ArrowBackIosNewIcon /> &nbsp;
