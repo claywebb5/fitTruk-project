@@ -46,14 +46,14 @@ function LandingPage() {
                   color: "black",
                   fontFamily: 'Muli',
                   padding: 5,
-                  width: 170,
+                  width: 250,
                   // border: 0,
                   outline: 'solid',
                   // display: 'flex'
 
                 }}
                 variant="contained" className="btn btn_sizeSm" onClick={onSeeClasses}>
-                See Classes
+                <p>See Classes</p> 
               </Button>
             </center>
             <br />
@@ -66,13 +66,13 @@ function LandingPage() {
                   color: "black",
                   fontFamily: 'Muli',
                   padding: 5,
-                  width: 170,
+                  width: 250,
                   // border: 0,
                   outline: 'solid'
 
                 }}
                 variant="contained" className="btn btn_sizeSm" onClick={onRegister}>
-                Register
+                <p>Register</p> 
               </Button>
             </center>
             <br />
@@ -83,7 +83,7 @@ function LandingPage() {
                   color: 'black'
                 }}
                 size='small' className="btn btn_sizeSm" onClick={onLogin}>
-                Already a Member? Login
+               <p>Already a Member? Login</p> 
               </Button>
             </center>
           </div>
