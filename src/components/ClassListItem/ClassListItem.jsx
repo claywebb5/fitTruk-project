@@ -37,7 +37,7 @@ function ClassListItem({ classEvent, i }) {
           expandIcon={<ExpandMoreIcon />}
           aria-controls="panel1a-content"
           id="panel1a-header">
-          <Typography>{classEvent.classname} at {classEvent.start_time} with {classEvent.trainer_first_name}</Typography>
+          <Typography>{classEvent.classname} at {classEvent.abrv_start_time} with {classEvent.trainer_first_name}</Typography>
         </AccordionSummary>
         {/* ------< DETAILS >-------- */}
         <AccordionDetails>

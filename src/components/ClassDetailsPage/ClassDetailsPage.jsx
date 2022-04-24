@@ -25,6 +25,7 @@ import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 import EditIcon from '@mui/icons-material/Edit';
 import PeopleAltIcon from '@mui/icons-material/PeopleAlt';
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
+import swal from 'sweetalert';
 
 
 
@@ -74,13 +75,23 @@ function ClassDetailsPage() {
     // ----------< RESERVE A CLASS >--------------------------
     const handleReserveClick = () => {
         if (!user.id) {
-            alert("Sign in to reserve your spot!")
+            swal({
+                title: "Error", 
+                text: "You must register or sign in to reserve a class",
+                icon: "error",
+            })
+
         } else {
+            swal({
+                title: "Success", 
+                text: "Class reserved!",
+                icon: "success",
+            })
             dispatch({
                 type: 'ADD_RESERVATION',
                 payload: classDetails
             });
-            history.push('/my-classes')
+            // history.push('/my-classes')
         }
     }
     // -------------< SHOW MAP >------------------------
@@ -90,12 +101,26 @@ function ClassDetailsPage() {
     // -------------< CANCEL RESERVATION >-------------------
     const handleCancelClick = () => {
         // console.log('you canceled the class', classDetails) // TEST LOG
-        dispatch({
-            type: 'REMOVE_RESERVATION',
-            payload: classDetails
-        });
-        alert(`Class Removed`)
-        history.push('/my-classes')
+        swal({
+            title: "Are you sure?",
+            text: "Pressing ok will cancel your reservation",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+          })
+          .then((willDelete) => {
+            if (willDelete) {
+              swal("Reservation canceled", {
+                icon: "success",   
+              });
+              dispatch({
+                type: 'REMOVE_RESERVATION',
+                payload: classDetails
+            });
+            } else {
+            }
+          });
+
     };
 
 
@@ -174,7 +199,7 @@ function ClassDetailsPage() {
                                 From
                             </Typography>
                             <Typography style={{ color: "#000000" }} variant="h5" align='center'>
-                                {classDetails.start_time}-{classDetails.end_time}
+                                {classDetails.abrv_start_time} - {classDetails.abrv_end_time}
                             </Typography>
                             <Divider sx={{ bgcolor: "#000000" }} />
                         </Grid>
@@ -233,7 +258,7 @@ function ClassDetailsPage() {
 
                 {
                     (function () {
-                        if (user.access_level === 1) {
+                        if (user.access_level === 1 || !user.id) {
                             if (classDetails.is_my_class) {
                                 return <Box sx={{ display: 'flex', flexDirection: 'row', mt: 3 }}>
                                     <Grid container justifyContent="center" alignItems="center" direction="column" spacing={2}>

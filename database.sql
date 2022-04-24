@@ -4,7 +4,7 @@
 
 -- Important SQL commands --
 SELECT "c"."id", to_char("c"."date", 'FMDay') AS "week_day_name", to_char("c"."date", 'FMMM/FMDD') AS "abbreviated_date", to_char("c"."date", 'YYYY-MM-DD') AS "date",
-		to_char("c"."start_time", 'FMHH:MMAM') AS "start_time", to_char("c"."end_time", 'FMHH:MMAM') AS "end_time", "c"."classname", "c"."trainer_user_id",
+		to_char("c"."start_time", 'FMHH:MMAM') AS "abrv_start_time","c"."start_time", to_char("c"."end_time", 'FMHH:MMAM') AS "abrv_end_time", "c"."end_time", "c"."classname", "c"."trainer_user_id",
     "user"."first_name" AS "trainer_first_name", "user"."last_name" AS "trainer_last_name",  "user"."pronouns" AS "trainer_pronouns", "user"."profile_image" AS "trainer_image"
     FROM "classes" AS "c"
     JOIN "user" ON "user"."id" = "c"."trainer_user_id" -- This join allows the database to grab the class trainer's data based off the class' trainer_user_id.
