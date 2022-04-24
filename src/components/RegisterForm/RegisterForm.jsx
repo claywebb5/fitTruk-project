@@ -345,12 +345,12 @@ function handleHomeScreen(){
       
       
       {/* =========<LIABILITY WAIVER>================ */}
-      <div>
+      {/* <div>
         <label>
           Liability Waiver will go here:
           <input/>
         </label>
-      </div>
+      </div> */}
       
       {/* =========<LIABILITY WAIVER>================ */}
 
