@@ -1,4 +1,4 @@
-// import './App.css';
+import './App.css';
 import React, { useEffect } from 'react';
 import { HashRouter as Router, Redirect, Route, Switch, Link, } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';

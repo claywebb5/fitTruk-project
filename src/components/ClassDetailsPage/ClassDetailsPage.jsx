@@ -20,6 +20,12 @@ import { styled } from '@mui/material/styles';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import Link from '@mui/material/Link';
 import Grid from '@mui/material/Grid';
+import InsertInvitationIcon from '@mui/icons-material/InsertInvitation';
+import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
+import EditIcon from '@mui/icons-material/Edit';
+import PeopleAltIcon from '@mui/icons-material/PeopleAlt';
+import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
+
 
 
 // ==========================< MUI THEMES >===============================
@@ -31,7 +37,6 @@ const useStyles = makeStyles({
         },
     },
 });
-
 
 function ClassDetailsPage() {
     //==================< SETUP >==========================
@@ -97,7 +102,7 @@ function ClassDetailsPage() {
 
     return (
         <>
-            <Container sx={{ bgcolor: '#90ee90'}}>
+            <Container sx={{width: '100%', border: 4, borderColor: '#c3c4c5', m: 1, mr: 1, bgcolor: '#FFFFFF' }}>
                 {/* ============< WEEKDAY AND DATE >============== */}
                 <Card sx={{ bgcolor: '#6d6e71', color: '#FFFFFF' }}>
                     <CardContent className={classes.newroot}>
@@ -108,44 +113,46 @@ function ClassDetailsPage() {
                 </Card>
 
                 {/* ============< CLASS NAME >============== */}
-                <Box sx={{ pt: 1 }}>
-                    <Typography style={{ color: "#000000" }} variant="h6" align="center">
+                <Box sx={{ mt: 1 }}>
+                    <Typography style={{ color: "#000000" }} variant="h5" align="center">
                         {classDetails.classname}
                     </Typography>
                 </Box>
 
                 {/* ============< INSTRUCTOR >============== */}
-                <Box sx={{ display: 'flex', flexDirection: 'row', pt: 1 }}>
+                <Box sx={{ display: 'flex', flexDirection: 'row', mt: 2, pl: 1 }}>
                     <Grid container justifyContent="center" alignItems="center" direction="row" spacing={2}>
-                            <Grid item>
-                                <Typography style={{ color: "#000000" }} variant="body1" >
-                                    Led by:
-                                </Typography>
-                                <Typography style={{ color: "#000000" }} variant="h5" sx={{textDecoration: 'underline' }}>
-                                    {classDetails.trainer_first_name} {((classDetails.trainer_last_name)[0])}
-                                </Typography>
-                            </Grid>
-                            <Grid item>
-                                <Avatar src={classDetails.trainer_image} sx={{height: '90px', width: '90px' }} />
-                            </Grid>
+                        <Grid item>
+                            <Typography style={{ color: "#000000" }} variant="body1" >
+                                Led by:
+                            </Typography>
+                            <Typography style={{ color: "#000000" }} variant="h5" >
+                                {classDetails.trainer_first_name} {((classDetails.trainer_last_name)[0])}
+                            </Typography>
+                            <Divider sx={{ bgcolor: "#000000" }} />
+                        </Grid>
+                        <Grid item>
+                            <Avatar src={classDetails.trainer_image} sx={{ height: '120px', width: '120px' }} />
+                        </Grid>
                     </Grid>
                 </Box>
 
                 {/* ============< LOCATION >============== */}
-                <Box sx={{ display: 'flex', flexDirection: 'row', pt: 1 }}>
+                <Box sx={{ display: 'flex', flexDirection: 'row', mt: 3 }}>
                     <Grid container justifyContent="center" alignItems="center" direction="row" spacing={2}>
                         <Grid item>
                             <Typography style={{ color: "#000000" }} variant="body1" align='center'>
                                 Location:
                             </Typography>
-                            <Typography style={{ color: "#000000" }} align='center' sx={{ textDecoration: 'underline' }}>
+                            <Typography style={{ color: "#000000" }} align='center'>
                                 {classDetails.street}, <br /> {classDetails.city}, {classDetails.state}, {classDetails.zip}
                             </Typography>
+                            <Divider sx={{ bgcolor: "#000000" }} />
                         </Grid>
                         <Grid item>
                             <Link
-                            href={"https://www.google.com/maps/search/?api=1&query=" + (encodeURIComponent(`${classDetails.street}, ${classDetails.city}, ${classDetails.state} ${classDetails.zip}`))}
-                            target="_blank"
+                                href={"https://www.google.com/maps/search/?api=1&query=" + (encodeURIComponent(`${classDetails.street}, ${classDetails.city}, ${classDetails.state} ${classDetails.zip}`))}
+                                target="_blank"
                             >
                                 <Avatar sx={{ bgcolor: '#80bd02' }}>
                                     <LocationOnIcon />
@@ -153,71 +160,109 @@ function ClassDetailsPage() {
                             </Link>
                         </Grid>
                     </Grid>
-                </Box> 
+                </Box>
+                {/* -------* CODE FOR SHOWING MAP IN APP *------- */}
+                {/* 
+                {showMap ? <iframe width="100%" height="250" frameBorder="0" style={{ border: 0 }} // referrerpolicy="no-referrer-when-downgrade" src={`https://www.google.com/maps/embed/v1/place?key=ADD_KEY_HERE&q=`} //the 'q' or "Query" can be text aswell as coordinates, these coords are DUMMY DATA > </iframe> : <p></p>}
+                */}
 
                 {/* ============< TIME >============== */}
-                <Box sx={{ display: 'flex', flexDirection: 'row', pt: 1 }}>
-                <Grid container justifyContent="center" alignItems="center" direction="row" spacing={2}>
-                    <Grid item>
-                        <Typography style={{ color: "#000000" }} variant="body1" align='center'>
-                            From
-                        </Typography>
-                        <Typography style={{ color: "#000000" }} variant="h5" sx={{textDecoration: 'underline' }} align='center'>
-                            {classDetails.start_time}-{classDetails.end_time}
-                        </Typography>
+                <Box sx={{ display: 'flex', flexDirection: 'row', mt: 3 }}>
+                    <Grid container justifyContent="center" alignItems="center" direction="row" spacing={2}>
+                        <Grid item>
+                            <Typography style={{ color: "#000000" }} variant="body1" align='center'>
+                                From
+                            </Typography>
+                            <Typography style={{ color: "#000000" }} variant="h5" align='center'>
+                                {classDetails.start_time}-{classDetails.end_time}
+                            </Typography>
+                            <Divider sx={{ bgcolor: "#000000" }} />
+                        </Grid>
                     </Grid>
-                </Grid>
+                </Box>
+
+                {/* ============< CLASS SIZE >============== */}
+                <Box sx={{ display: 'flex', flexDirection: 'row', mt: 3 }}>
+                    <Grid container justifyContent="center" alignItems="center" direction="column" spacing={1}>
+                        <Grid container justifyContent="center" alignItems="center" direction="row" spacing={1}>
+                            <Grid item>
+                                <Typography style={{ color: "#80bd02" }} variant="h5" align='center'>
+                                    {classDetails.spots_remaining}
+                                </Typography>
+                            </Grid>
+                            <Grid item>
+                                <Typography style={{ color: "#000000" }} variant="h5" align='center'>
+                                    open spots
+                                </Typography>
+                            </Grid>
+                        </Grid>
+                        <Grid item>
+                            <Typography style={{ color: "#000000" }} variant="body2" align='center'>
+                                Max: {classDetails.class_size} people
+                            </Typography>
+                        </Grid>
+                    </Grid>
+                </Box>
+
+                {/* ============< DESCRIPTION >============== */}
+
+                <Box sx={{ border: 4, borderColor: '#80bd02', mt: 3 }}>
+                    <Box sx={{ px: 8 }}>
+                        <Typography variant="h5" align="center" >
+                            {classDetails.description}
+                        </Typography>
+                    </Box>
                 </Box>
 
 
-                {/* ============<  >============== */}
-                <Box sx={{ display: 'flex', flexDirection: 'row', pt: 1 }}>
-                <Grid container justifyContent="center" alignItems="center" direction="row" spacing={2}>
-                    <Grid item>
-                    
+                {/* ============< BUTTONS >============== */}
+                <Box sx={{ display: 'flex', flexDirection: 'row', mt: 3 }}>
+                    <Grid container justifyContent="center" alignItems="center" direction="column" spacing={2}>
+                        {
+                            (function () {
+                                if (user.access_level >= 2) {
+                                    return <Button onClick={handleSeeAttendees} sx={{ bgcolor: '#80bd02', color: "#000000" }}>
+                                                View Attendees &nbsp;
+                                                <PeopleAltIcon />
+                                            </Button>
+                                } else {
+                                    (function () {
+                                        if (classDetails.is_my_class) {
+                                            return <Button onClick={handleCancelClick} sx={{ bgcolor: '#80bd02', color: "#000000" }}>
+                                                        Cancel Reservation &nbsp;
+                                                        <DeleteOutlineIcon />
+                                                    </Button>
+                                        } else {
+                                            return <Button onClick={handleReserveClick} sx={{ bgcolor: '#80bd02', color: "#000000" }} disabled={isClassFull}>
+                                                        Reserve &nbsp;
+                                                        <InsertInvitationIcon />
+                                                    </Button>
+                                        }
+                                    })()
+                                }
+                            })()
+                        }
+                        
+                        
+
                     </Grid>
-                </Grid>
                 </Box>
-                    
-                
+                <Box sx={{ display: 'flex', flexDirection: 'row', mt: 3 }}>
+                    <Grid container justifyContent="center" alignItems="center" direction="column" spacing={2}>
+                        {
+                            user.access_level >= 2 &&
+                            <Button onClick={() => { history.push(`/edit-class/${classDetails.id}`) }}  sx={{ bgcolor: '#80bd02', color: "#000000" }}>
+                                Edit Class &nbsp;
+                                <EditIcon />    
+                            </Button>
+                        }
+                    </Grid>
+                </Box>
 
-                
-
+                <Button onClick={handleReturnClick} sx={{ border: 2, borderColor: '#80bd02', color: "#000000", mt: 3 }}>
+                    <ArrowBackIosNewIcon /> &nbsp;
+                </Button>
             </Container>
-
-
-            {showMap ? <iframe
-                    width="100%"
-                    height="250"
-                    frameBorder="0" style={{ border: 0 }}
-                    // referrerpolicy="no-referrer-when-downgrade"
-                    src={`https://www.google.com/maps/embed/v1/place?key=ADD_KEY_HERE&q=`} //the 'q' or "Query" can be text aswell as coordinates, these coords are DUMMY DATA
-                >
-                </iframe> :
-                    <p></p>}
-                <h3 type="time"></h3>
-                <h3>{classDetails.description}</h3>
-                <h3>Spots remaining: {classDetails.spots_remaining}</h3>
-                <button onClick={() => handleReturnClick(classDetails)}>Return</button>
-
-                {(function () {
-                    if (user.access_level >= 2) {
-                        return <button onClick={handleSeeAttendees}>Attendance</button>
-                    }
-                })()}
-
-                {(function () {
-                    if (classDetails.is_my_class) {
-                        return <button onClick={handleCancelClick}>Cancel Reservation</button>;
-                    } else {
-                        return <button onClick={handleReserveClick} disabled={isClassFull}>Reserve</button>;
-                    }
-                })()}
-
-                {user.access_level >= 2 &&
-                    <button onClick={() => { history.push(`/edit-class/${classDetails.id}`) }}>edit class</button>
-                }
-
         </>
     )
 }
