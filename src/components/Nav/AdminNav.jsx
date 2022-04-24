@@ -97,6 +97,7 @@ function AdminNav() {
     // SIGN OUT
     const handleSignOut = () => {
         dispatch({ type: 'LOGOUT' });
+        history.push('/login');
     };
     // GO to Create Class
     const handleCreateClass = () => {

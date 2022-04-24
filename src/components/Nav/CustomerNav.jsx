@@ -109,7 +109,7 @@ function CustomerNav() {
     // SIGN OUT
     const handleSignOut = () => {
         dispatch({ type: 'LOGOUT' });
-        // history.push('');
+        history.push('/login');
     };
 
 
