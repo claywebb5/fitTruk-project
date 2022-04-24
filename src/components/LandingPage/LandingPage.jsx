@@ -28,7 +28,7 @@ function LandingPage() {
 
       <div style={{
 
-        paddingTop: '250px'
+        paddingTop: '150px'
       }} className="container">
         {/* <h2><u>{heading}</u></h2> */}
         <div className='logo'>
