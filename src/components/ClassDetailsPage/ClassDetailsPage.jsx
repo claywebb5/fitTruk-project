@@ -75,7 +75,15 @@ function ClassDetailsPage() {
     // ----------< RESERVE A CLASS >--------------------------
     const handleReserveClick = () => {
         if (!user.id) {
-            alert("Sign in to reserve your spot!")
+            swal({
+                title: "Error", 
+                text: "You must sign in to reserve for a class",
+                icon: "error",
+            })
+            dispatch({
+                type: 'ADD_RESERVATION',
+                payload: classDetails
+            });
         } else {
             swal({
                 title: "Success", 
@@ -253,7 +261,7 @@ function ClassDetailsPage() {
 
                 {
                     (function () {
-                        if (user.access_level === 1) {
+                        if (user.access_level === 1 || !user.id) {
                             if (classDetails.is_my_class) {
                                 return <Box sx={{ display: 'flex', flexDirection: 'row', mt: 3 }}>
                                     <Grid container justifyContent="center" alignItems="center" direction="column" spacing={2}>
