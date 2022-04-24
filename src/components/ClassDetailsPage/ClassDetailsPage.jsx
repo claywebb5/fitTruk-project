@@ -77,13 +77,10 @@ function ClassDetailsPage() {
         if (!user.id) {
             swal({
                 title: "Error", 
-                text: "You must sign in to reserve for a class",
+                text: "You must register or sign in to reserve a class",
                 icon: "error",
             })
-            dispatch({
-                type: 'ADD_RESERVATION',
-                payload: classDetails
-            });
+
         } else {
             swal({
                 title: "Success", 
