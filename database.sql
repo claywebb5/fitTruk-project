@@ -1,5 +1,22 @@
 -- *** CREATE DATABASE NAME: fittruk
 
+
+
+-- Important SQL commands --
+SELECT "c"."id", to_char("c"."date", 'FMDay') AS "week_day_name", to_char("c"."date", 'FMMM/FMDD') AS "abbreviated_date", to_char("c"."date", 'YYYY-MM-DD') AS "date",
+		to_char("c"."start_time", 'FMHH:MMAM') AS "start_time", to_char("c"."end_time", 'FMHH:MMAM') AS "end_time", "c"."classname", "c"."trainer_user_id",
+    "user"."first_name" AS "trainer_first_name", "user"."last_name" AS "trainer_last_name",  "user"."pronouns" AS "trainer_pronouns", "user"."profile_image" AS "trainer_image"
+    FROM "classes" AS "c"
+    JOIN "user" ON "user"."id" = "c"."trainer_user_id" -- This join allows the database to grab the class trainer's data based off the class' trainer_user_id.
+    JOIN "class_list" ON "c"."id" = "class_list"."class_id" -- This line and the following, are what differentiate the server grabbing data for ALL classes,
+    WHERE "class_list"."user_id" = $1 											-- and the server grabbing data for a SINGLE USER's classes schedule.
+    ORDER BY date, to_char("start_time",'HH24'); -- This orders by date first, then orders by a 24hr time format (This solves issues with DB logic thinking 12:00pm is an earlier time than 6:00am)
+
+
+
+
+
+
 --==========-- Presentation Data --============-- Presentation Data --============-- Presentation Data --============--
 --==========-- Presentation Data --============-- Presentation Data --============-- Presentation Data --============--
 CREATE TABLE "user" (
