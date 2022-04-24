@@ -6,13 +6,18 @@ import TextField from '@mui/material/TextField';
 import Paper from '@mui/material/Paper';
 import { borderRadius } from '@mui/system';
 import fittruck from './fittruck.jpg'
+import {useHistory} from 'react-router-dom';
 
 function LoginForm() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const errors = useSelector(store => store.errors);
   const dispatch = useDispatch();
+  const history = useHistory();
 
+function handleHomeScreen(){
+  history.push('/home');
+}
   const login = (event) => {
     event.preventDefault();
 
@@ -36,13 +41,8 @@ function LoginForm() {
     }}>
     <img src= {fittruck} alt="" style={{
       height: '100px',
-      
-     
-      
-      
-      
-      
-    }}  /></div>
+    }} onClick={handleHomeScreen}/>
+    </div>
     <form  style ={{
       marginTop: '50px',
       
