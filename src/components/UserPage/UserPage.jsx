@@ -25,12 +25,12 @@ import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 
 
 const useStyles = makeStyles({
-    newroot: {
-        padding: 8,
-        '&:last-child': {
-            paddingBottom: 8,
-        },
+  newroot: {
+    padding: 8,
+    '&:last-child': {
+      paddingBottom: 8,
     },
+  },
 });
 
 // ======*** LINK TO MUI CHIPS FOR EDITABLE INPUTS: https://mui.com/material-ui/react-chip/
@@ -132,26 +132,32 @@ function UserPage() {
         {/* ============< HEADER >============== */}
         <Card sx={{ bgcolor: '#6d6e71', color: '#FFFFFF' }}>
           <CardContent className={classes.newroot}>
-            {/* <Box sx={{ display: 'flex', flexDirection: 'row' }}> */}
-              <Grid container justifyContent="center" alignItems="center" direction="row" spacing={2}>
-                <Grid item>
-                  <Typography variant="h5">
-                    Welcome, {user.first_name}!
-                  </Typography>
-                </Grid>
-                <Grid item>
-                  <Avatar src={user.profile_image} sx={{ height: '70px', width: '70px' }} />
-                </Grid>
+            <Grid container justifyContent="center" alignItems="center" direction="row" spacing={2}>
+              <Grid item>
+                <Typography variant="h5">
+                  Welcome, {user.first_name}!
+                </Typography>
               </Grid>
-            {/* </Box> */}
+              <Grid item>
+                {
+                  (function () {
+                    if (user.profile_image) {
+                      return <Avatar src={user.profile_image} sx={{ height: '70px', width: '70px' }} />
+                    } else {
+                      return <div>
+                        {(getInitials(user)) && <Avatar sx={{ bgcolor: '#ace23a' }}>{initials}</Avatar>}
+                      </div>
+
+
+                    }
+
+
+                  })()
+                }
+              </Grid>
+            </Grid>
           </CardContent>
         </Card>
-
-
-        <Typography variant="h5" align="center">
-
-        </Typography>
-
 
 
 
@@ -162,7 +168,7 @@ function UserPage() {
 
 
               {/* ------ This will conditionally render a two letter string from the first/last name of the user, and it won't break the app if either of those two values isn't present ------ */}
-              {(getInitials(user)) && <Avatar sx={{ bgcolor: '#ace23a' }}>{initials}</Avatar>}
+
 
               {/*=====< AVATAR WITH USER PROFILE PICTURE >====*/}
               {/* <Avatar src={user.profile_image} /> */}
