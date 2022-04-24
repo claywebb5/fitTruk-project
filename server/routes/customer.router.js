@@ -11,15 +11,15 @@ router.get('/', (req, res) => {
   
 
   if (req.isAuthenticated()) {
-    const queryText = ` SELECT classes.id, to_char("date", 'FMMM/FMDD') AS "abbreviated_date", to_char("date", 'FMDay') AS "week_day_name", to_char("date", 'YYYY-MM-DD') AS "date", start_time, end_time, classname, trainer_user_id 
-        FROM "classes" 
-        JOIN "class_list" 
-        ON "classes"."id" = "class_list"."class_id"
-        JOIN "user" ON "class_list"."user_id" = "user".id
-        WHERE "user"."id" = ${req.user.id}
-        ORDER BY date, start_time
-        ;`;
-    pool.query(queryText)
+    const queryText = `SELECT "c"."id", "c"."description", to_char("c"."date", 'FMDay') AS "week_day_name", to_char("c"."date", 'FMMM/FMDD') AS "abbreviated_date", to_char("c"."date", 'YYYY-MM-DD') AS "date",
+		to_char("c"."start_time", 'FMHH:MMAM') AS "start_time", to_char("c"."end_time", 'FMHH:MMAM') AS "end_time", "c"."classname", "c"."trainer_user_id",
+    "user"."first_name" AS "trainer_first_name", "user"."last_name" AS "trainer_last_name",  "user"."pronouns" AS "trainer_pronouns", "user"."profile_image" AS "trainer_image"
+    FROM "classes" AS "c"
+    JOIN "user" ON "user"."id" = "c"."trainer_user_id"
+    JOIN "class_list" ON "c"."id" = "class_list"."class_id"
+    WHERE "class_list"."user_id" = $1
+    ORDER BY date, to_char("start_time",'HH24');`;
+    pool.query(queryText, [req.user.id])
       .then((result) => {
         res.send(result.rows);
       }).catch((error) => {

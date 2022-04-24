@@ -34,10 +34,10 @@ function* searchClasses (action){
 // =============***< (GET) CLASS DETAILS >***======================================
 function* fetchDetails (action){
     // Will send a request to the classes router to grab a specific classes details
-    console.log('here is the dispatch info:', action.type, action.payload);
+    console.log('GET Class DETAILS, ID is:', action.payload);
     try {
         const classDetails = yield axios.get(`/api/class/details/${action.payload}/`); // * Goes to SERVER "class.router"
-        console.log('these are the class details', classDetails.data);
+        console.log('Selected Class Details are:', classDetails.data);
         yield put({ type: 'SET_CLASS_DETAILS', payload: classDetails.data }); // * Goes to REDUCER "classDetails.reducer.js"
     } catch (error) {
         console.log('Error fetching Class Details', error);
@@ -45,11 +45,11 @@ function* fetchDetails (action){
 }
 function* classSize (action){
     // Will send a request to the class router to retrieve size of class
-    console.log('hopefully class size?', action.payload);
+    console.log('GET Class SIZE, ID is:', action.payload);
     try {
        
         const size = yield axios.get(`/api/class/class-size/${action.payload}`); // * Goes to SERVER "class.router"
-        console.log('size.data', size.data)
+        console.log('Is The Class Full?:', size.data)
         yield put({ type: 'SET_CLASS_SIZE', payload: size.data }); // * Goes to REDUCER 
     } catch (error) {
         console.log('Error setting class size', error);

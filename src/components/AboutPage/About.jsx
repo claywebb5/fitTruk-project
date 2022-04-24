@@ -1,4 +1,5 @@
 import React from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 // ---------< MUI IMPORTS >----------------
 import Container from '@mui/material/Container';
 import ImageList from '@mui/material/ImageList';
@@ -19,6 +20,29 @@ import Box from '@mui/material/Box';
 
 
 function AboutTab() {
+
+    const user = useSelector(store => store.user)
+
+    // ===========*< COLOR/FONT THEME >*===============
+    // const theme = createTheme({
+    //     typography: {
+    //         fontFamily: [
+    //             'FATFRANK',
+    //             'CENTURY GOTHIC',
+    //             'Montserrat',
+    //         ].join(','),
+    //     },
+    //     palette: {
+    //         mode: 'main',
+    //         primary: {
+    //             darkGreen: '#80bd02',
+    //             lightGreen: '#ace23a',
+    //             darkGrey: '#41414c',
+    //             lightGrey: '#6d6e71'
+    //         },
+    //     },
+    // })
+
 
     // ======< IMAGE DATA >==================
     const itemData = [
@@ -62,7 +86,7 @@ function AboutTab() {
                 {/*========< START HEADING CARD >================*/}
                 <Card>
                     <CardContent>
-                        <Typography variant="h2" align="center">
+                        <Typography variant="h3" align="center">
                             ABOUT THE TRUK
                         </Typography>
                     </CardContent>

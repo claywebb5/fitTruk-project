@@ -1,26 +1,133 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useHistory } from 'react-router-dom';
+import { useParams } from 'react-router-dom/cjs/react-router-dom.min';
+import AttendanceItem from '../AttendanceItem/AttendanceItem';
+//--------------< MUI IMPORTS >-----------------------------
+import Container from '@mui/material/Container';
+import Card from '@mui/material/Card';
+import CardHeader from '@mui/material/CardHeader';
+import CardMedia from '@mui/material/CardMedia';
+import CardContent from '@mui/material/CardContent';
+import CardActions from '@mui/material/CardActions';
+import Collapse from '@mui/material/Collapse';
+import Avatar from '@mui/material/Avatar';
+import IconButton from '@mui/material/IconButton';
+import SendIcon from '@mui/icons-material/Send'; // SEND MESSAGE TO CUSTOMER
+import CheckBoxOutlineBlankIcon from '@mui/icons-material/CheckBoxOutlineBlank'; // NOT CHECKED IN
+import CheckBoxIcon from '@mui/icons-material/CheckBox'; // CHECKED IN
+import Typography from '@mui/material/Typography';
+import Divider from '@mui/material/Divider';
+import { makeStyles } from '@material-ui/core/styles';
+import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
+import { styled } from '@mui/material/styles';
 
-// ** Trainers can view the list of signed up guests/members for a specific class
-// ** Trainers can check in guests/members upon arrival
-// ** Trainers can send individual messages to guests/members
-// ** STRETCH: Trainers can remove guests/members
-// ** STRETCH: Trainers can send messages to ALL guests/members
+// ==========================< MUI THEMES >===============================
+const useStyles = makeStyles({
+    newroot: {
+        padding: 16,
+        '&:last-child': {
+            paddingBottom: 16,
+        },
+    },
+});
 
 
-
-function AttendeesPage(){
+function AttendeesPage() {
+    // =============================< SETUP >========================================
+    //------------< TOOLS >-------------
     const dispatch = useDispatch();
+    const history = useHistory();
+    const classes = useStyles(); // MUI Theme
+
+    //---< FETCH ATTENDANCE >------
+    useEffect(() => {
+        dispatch({
+            type: 'FETCH_CLASSES'
+        })
+        dispatch({
+            type: 'FETCH_ATTENDANCE',
+            payload: id
+        })
+        dispatch({
+            type: 'FETCH_CLASS_SIZE',
+            payload: id
+        })
+        dispatch({
+            type: 'FETCH_CLASS_DETAILS',
+            payload: id
+        });
+    }, [])
+
+    // -------< VARIABLES >---------
     const attendees = useSelector(store => store.attendees);
-    const userId = useSelector(store => store.user.id);
+    const classDetails = useSelector(store => store.selectedClass.classDetails)
+    const allClasses = useSelector(store => store.allClasses)
+    const user = useSelector((store) => store.user);
+    const { id } = useParams()
 
-    return(
+
+
+    // ==========================< CLICK LISTENERS >===============================
+
+    // -------< SUBMIT CHECKING IN CUSTOMERS >---------
+    const handleCheckIn = () => {
+        console.log('send a dispatch to the server to update if users are checked in in the database');
+        dispatch({
+            type: 'UPDATE_ATTENDANCE',
+            payload: {
+                attendees,
+                id
+            }
+        })
+    };
+
+    // ---------< GO BACK >--------------
+    const handleReturnClick = () => {
+        history.goBack();
+        console.log('Clicked Cancel');
+    }
+
+    return (
         <>
-        <ul>
-            <li>{attendees.name}</li>
-        </ul>
+            <Container>
+                <Card sx={{ maxWidth: 345 }}>
+                    <CardContent className={classes.newroot}>
+                        <Typography variant="h5" align="center">
+                            {classDetails.week_day_name} {classDetails.abbreviated_date}
+                        </Typography>
+                        <Typography variant="h5" align="center">
+                            {classDetails.classname}
+                        </Typography>
+                        <Divider />
+                        <Typography variant="h4" align="center">
+                            Attendee Check-in
+                        </Typography>
+                    </CardContent>
+                </Card>
+            </Container>
 
+            {attendees.map((customer, i) => (
+                <AttendanceItem key={i} customer={customer} />
+            ))}
+
+            <Box textAlign='center' sx={{pt:2}}>
+                <Typography variant="h5">
+                    Spots Remaining: {classDetails.spots_remaining}
+                </Typography>
+            </Box>
+
+            <Box textAlign='center' sx={{pt:2}}>
+                <Button onClick={handleCheckIn} variant="outlined" sx={{ color: '#FFFFFF', bgcolor: '#ace23a' }}>Check in</Button>
+            </Box>
+
+
+
+            <button onClick={handleReturnClick}>Back</button>
         </>
-    )
-}
+    );
+};
+
+
 export default AttendeesPage;

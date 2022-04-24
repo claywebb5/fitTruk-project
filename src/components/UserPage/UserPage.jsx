@@ -8,19 +8,22 @@ import { deepOrange, deepPurple } from '@mui/material/colors';
 
 function UserPage() {
 
+  // ======*** LINK TO MUI CHIPS FOR EDITABLE INPUTS: https://mui.com/material-ui/react-chip/
+
   const dispatch = useDispatch();
   const history = useHistory();
 
   // Default user info from original repo
   const user = useSelector((store) => store.user);
 
-
+  console.log('User:', user);
   //  ============<>=============
   let userObj = {
     id: user.id,
     username: user.username,
     password: user.password,
-    name: user.name,
+    first_name: user.first_name,
+    last_name: user.last_name,
     email: user.email,
     street: user.street,
     city: user.city,
@@ -31,17 +34,12 @@ function UserPage() {
     pronouns: user.pronouns,
     emergency_name: user.emergency_name,
     emergency_number: user.emergency_number,
-    access_level: user.access_level
+    access_level: user.access_level,
+    profile_pic: user.profile_image
   }
 
   const [editUser, setEditUser] = useState(userObj);
-  const name = user.name.toUpperCase()
-  const words = name.split(' ');
-  const initials = [];
-
-  for (const i of words) {
-    initials.push(i[0])
-  }
+  let initials = '';
 
 
   const handleTest = () => {
@@ -95,6 +93,21 @@ function UserPage() {
     console.log('Clicked Cancel');
   }
 
+  const getInitials = (nameObject) => {
+    let firstLetter = 'H';
+    let secondLetter = 'i';
+
+    if (nameObject.first_name && nameObject.last_name) {
+      firstLetter = (nameObject.first_name[0]).toUpperCase();
+      secondLetter = (nameObject.last_name[0]).toUpperCase();
+    } else if (nameObject.first_name) {
+      firstLetter = (nameObject.first_name[0]).toUpperCase();
+      secondLetter = (nameObject.first_name[1]);
+    }
+    initials = firstLetter + secondLetter;
+    return true;
+  }
+
 
   return (
     <>
@@ -107,13 +120,17 @@ function UserPage() {
         <form onSubmit={handleSubmit}>
 
           <div> {/* CAN EDIT  */}
-            {/* <h2>*Profile Image Here*</h2> */}
+            
 
-          <Avatar sx={{ bgcolor: deepPurple[500] }}>{initials.join('')}</Avatar>
+            {/* ------ This will conditionally render a two letter string from the first/last name of the user, and it won't break the app if either of those two values isn't present ------ */}
+            {(getInitials(user)) && <Avatar sx={{ bgcolor: '#ace23a' }}>{initials}</Avatar>}
+
+            {/*=====< AVATAR WITH USER PROFILE PICTURE >====*/}
+            {/* <Avatar src={user.profile_image} /> */}
 
           </div>
 
-          <h2>Welcome, {user.name}!</h2>
+          <h2>Welcome, {user.first_name}!</h2>
           <div> {/* CAN EDIT  */}
             <p><b>Pronouns:</b> {user.pronouns}</p>
             <select onChange={handlePronounChange} value={editUser.pronouns}>

@@ -48,6 +48,7 @@ function AboutPage() {
 
         </TabContext>
       </Box>
+      
     </>
   );
 }
