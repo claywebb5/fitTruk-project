@@ -69,7 +69,7 @@ function LandingPage() {
                   width: 250,
                   outline: 'solid'
                 }}
-                variant="contained" className="btn btn_sizeSm" onClick={onRegister}>
+                variant="contained" className="btn btn_sizeSm" onClick={onLogin}>
                 <p>sign in</p> 
               </Button>
             </center>
@@ -85,7 +85,7 @@ function LandingPage() {
                   width: 150,
                   outline: 'solid'
                 }}
-                onClick={onLogin}>
+                onClick={onRegister}>
                <p>REGISTER</p> 
               </Button>
             </center>
