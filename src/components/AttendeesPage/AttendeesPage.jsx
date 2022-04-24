@@ -23,6 +23,8 @@ import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import { styled } from '@mui/material/styles';
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
+import swal from 'sweetalert';
+
 
 
 // ==========================< MUI THEMES >===============================
@@ -75,7 +77,8 @@ function AttendeesPage() {
 
     // -------< SUBMIT CHECKING IN CUSTOMERS >---------
     const handleCheckIn = () => {
-        console.log('send a dispatch to the server to update if users are checked in in the database');
+        // console.log('send a dispatch to the server to update if users are checked in in the database');
+        swal("Success", "Attendees have been checked in", "success");
         dispatch({
             type: 'UPDATE_ATTENDANCE',
             payload: {
@@ -83,12 +86,13 @@ function AttendeesPage() {
                 id
             }
         })
+
     };
 
     // ---------< GO BACK >--------------
     const handleReturnClick = () => {
         history.goBack();
-        console.log('Clicked Cancel');
+        // console.log('Clicked Cancel');
     }
 
     return (
@@ -109,6 +113,7 @@ function AttendeesPage() {
                     </CardContent>
                 </Card>
 
+
                 {attendees.map((customer, i) => (
                     <AttendanceItem key={i} customer={customer} />
                 ))}
@@ -122,8 +127,6 @@ function AttendeesPage() {
                 <Box textAlign='center' sx={{ pt: 2 }}>
                     <Button onClick={handleCheckIn} variant="outlined" sx={{ color: "#000000", bgcolor: '#ace23a' }}>Check in</Button>
                 </Box>
-
-
 
                 <Button onClick={handleReturnClick} sx={{ border: 2, borderColor: '#80bd02', color: "#000000", mt: 3 }}>
                     <ArrowBackIosNewIcon /> &nbsp;
