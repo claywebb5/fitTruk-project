@@ -174,7 +174,7 @@ function ClassDetailsPage() {
                                 From
                             </Typography>
                             <Typography style={{ color: "#000000" }} variant="h5" align='center'>
-                                {classDetails.start_time}-{classDetails.end_time}
+                                {classDetails.abrv_start_time} - {classDetails.abrv_end_time}
                             </Typography>
                             <Divider sx={{ bgcolor: "#000000" }} />
                         </Grid>
