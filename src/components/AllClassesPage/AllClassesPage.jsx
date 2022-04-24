@@ -7,6 +7,15 @@ import BtnCreateClass from '../BtnCreateClass/BtnCreateClass'; // <- The floatin
 // ---< MUI IMPORTS >-----
 import Box from '@mui/material/Box';
 
+// import ListItemText from '@mui/material/ListItemText';
+// import Typography from '@mui/material/Typography';
+// import Paper from '@mui/material/Paper';
+// import List from '@mui/material/List';
+// import ListItem from '@mui/material/ListItem';
+// import ListItemAvatar from '@mui/material/ListItemAvatar';
+// import ListSubheader from '@mui/material/ListSubheader';
+// import Avatar from '@mui/material/Avatar';
+
 
 function AllClassesPage() {
   // ------- Tools ---------
@@ -122,6 +131,30 @@ function AllClassesPage() {
       {user.id && 
             <button align="right" onClick={handleMyClassClick}>Myclasses</button>
       }
+
+      {/* ------ Josh is working on this currently ----- */}
+      {/* <Paper square sx={{ pb: '50px' }}>
+          <Typography variant="h5" gutterBottom component="div" sx={{ p: 2, pb: 0 }}>
+            All Classes
+          </Typography>
+          <List sx={{ mb: 2 }}>
+            {allClasses.map(classEvent => (
+              <React.Fragment key={classEvent.id}>
+                {classEvent.week_day_name === 'Monday' && (
+                  <ListSubheader sx={{ bgcolor: 'background.paper' }}>
+                  {classEvent.week_day_name}
+                  </ListSubheader>
+                )}
+                <ListItem button>
+                  <ListItemAvatar>
+                    <Avatar sx={{ fontSize: 'medium' }}>{classEvent.abrv_date}</Avatar>
+                  </ListItemAvatar>
+                  <ListItemText primary={classEvent.week_day_name} secondary={classEvent.classname} sx={{ bgcolor: '#9aca38', width: 270, borderRadius: '5px', p: 1 }} /> 
+                </ListItem>
+              </React.Fragment>
+            ))}
+          </List>
+        </Paper> */}
       
       <ul>
         { (searchFunction(allClasses)).map((classEvent, i) => (
