@@ -200,7 +200,7 @@ function App() {
               <Route> <h1>404</h1> </Route>
 
             </Switch> {/*====================================< END SWITCH >==================================== */}
-            <Footer /> {/* ---------------------< FOOTER COMPONENT >--------------------- */}
+            {/* <Footer /> ---------------------< FOOTER COMPONENT >--------------------- */}
           </div>
         </Router> 
       </ThemeProvider>
