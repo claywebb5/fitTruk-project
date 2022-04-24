@@ -54,7 +54,6 @@ function App() {
       <ThemeProvider theme={theme}>
         <Router>
           <div>
-            <Nav />
 
             <Switch>
 
@@ -65,6 +64,7 @@ function App() {
               <Route
                 exact
                 path="/about">
+                <Nav />
                 <AboutPage />
               </Route>
               {/* --------------------------< INFO PAGE >-------------------------- */}
@@ -108,6 +108,7 @@ function App() {
                 // shows classes page at all times (logged in or not)
                 exact
                 path="/all-classes">
+                <Nav />
                 <AllClassesPage />
               </Route>
               {/* -----< End All Classes >----- */}
@@ -118,6 +119,7 @@ function App() {
                 exact
                 path="/my-classes"
               >
+                <Nav />
                 <MyClassesPage />
               </ProtectedRoute>
               {/* -----< End My Classes >----- */}
@@ -127,6 +129,7 @@ function App() {
                 // shows Class Details page at all times (logged in or not)
                 exact
                 path="/class-details/:id">
+                <Nav />
                 <ClassDetailsPage />
               </Route>
               {/* -----< End Class Details >----- */}
@@ -136,6 +139,7 @@ function App() {
                 // Only administrators can see the edit class view
                 exact
                 path="/edit-class/:id">
+                <Nav />
                 <CreateClassPage />
               </TrainerRoute>
               {/* -----< End Edit Class Details >----- */}
@@ -145,6 +149,7 @@ function App() {
                 // If logged in: Shows the class details for a class the guest/member has registered for.
                 exact
                 path="/registered-class">
+                <Nav />
                 <RegisteredClassPage />
               </ProtectedRoute>
               {/* -----< End Registered Class >----- */}
@@ -154,6 +159,7 @@ function App() {
                 // Only trainers and admin can see the class attendees view
                 exact
                 path="/class-details/:id/attendees">
+                <Nav />
                 <AttendeesPage />
               </TrainerRoute>
               {/* -----< End Attendees >----- */}
@@ -164,6 +170,7 @@ function App() {
                 exact
                 path="/personal-info/"
               >
+                <Nav />
                 <UserPage />
               </ProtectedRoute>
               {/* -----< Personal Info (1.9)>----- */}
@@ -173,6 +180,7 @@ function App() {
                 // Only administrators can see the create a class view
                 exact
                 path="/create-class">
+                <Nav />
                 <CreateClassPage />
               </AdminRoute>
               {/* ===============< Create Class (1.10)>----- */}
@@ -188,12 +196,12 @@ function App() {
                 {user.id ?
                   // If the user is already logged in, 
                   // redirect them to the /user page
-                  // --------------------------< LOGGED IN: VIEW MY CLASSES >-------------------------- */}
-                  <Redirect to="/my-classes" />
-                  :
-                  // --------------------------< LOGGED OUT: LANDING PAGE >-------------------------- */}
-                  <LandingPage />
-                }
+                // --------------------------< LOGGED IN: VIEW MY CLASSES >-------------------------- */}
+                <Redirect to="/my-classes" />
+                :
+              // --------------------------< LOGGED OUT: LANDING PAGE >-------------------------- */}
+              <LandingPage />
+            }
               </Route>
 
               {/* --------------------------<If none of the other routes matched, we will show a 404. >--------------------------*/}
@@ -202,10 +210,11 @@ function App() {
             </Switch> {/*====================================< END SWITCH >==================================== */}
             {/* <Footer /> ---------------------< FOOTER COMPONENT >--------------------- */}
           </div>
-        </Router> 
+        </Router>
       </ThemeProvider>
     </>
   ); //====================================< END RETURN >====================================
+  
 
 } //====================================< END FUNCTION >====================================
 
