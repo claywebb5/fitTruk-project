@@ -1,0 +1,9 @@
+.body {
+    background-image: url(./Fit_Truk_App_BG.gif);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position-x: center;
+
+    /* background-size: cover; */
+    height: 736px;
+  }
