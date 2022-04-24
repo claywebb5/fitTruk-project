@@ -2,22 +2,38 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
+//--------------< MUI IMPORTS >-----------------------------
 import Avatar from '@mui/material/Avatar';
 import Stack from '@mui/material/Stack';
-import { deepOrange, deepPurple } from '@mui/material/colors';
-
-function UserPage() {
+import Container from '@mui/material/Container';
+import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
+import Typography from '@mui/material/Typography';
+import Divider from '@mui/material/Divider';
+import { makeStyles } from '@material-ui/core/styles';
+import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
+import { styled } from '@mui/material/styles';
+import LocationOnIcon from '@mui/icons-material/LocationOn';
+import Link from '@mui/material/Link';
+import Grid from '@mui/material/Grid';
+import InsertInvitationIcon from '@mui/icons-material/InsertInvitation';
+import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
+import EditIcon from '@mui/icons-material/Edit';
+import PeopleAltIcon from '@mui/icons-material/PeopleAlt';
+import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 
   // ======*** LINK TO MUI CHIPS FOR EDITABLE INPUTS: https://mui.com/material-ui/react-chip/
 
+
+
+function UserPage() {
+  //==================< SETUP >==========================
   const dispatch = useDispatch();
   const history = useHistory();
 
-  // Default user info from original repo
+  //==================< VARIABLES >==========================
   const user = useSelector((store) => store.user);
-
-  console.log('User:', user);
-  //  ============<>=============
   let userObj = {
     id: user.id,
     username: user.username,
@@ -36,33 +52,19 @@ function UserPage() {
     emergency_number: user.emergency_number,
     access_level: user.access_level,
     profile_pic: user.profile_image
-  }
-
+  };
   const [editUser, setEditUser] = useState(userObj);
   let initials = '';
 
-
-  const handleTest = () => {
-    console.log('The user is:', user);
-    console.log('The userObj is:', userObj);
-    console.log('The state of editUser is:', editUser);
-
-  }
-
   //  ============< Pronoun Change >=============
   const handlePronounChange = (event) => {
-    console.log('New Pronoun:', event.target.value);
-
     setEditUser({ ...editUser, pronouns: event.target.value });
-    console.log('In handlePronounChange');
-
   };
-
   //  ============< Address Change >=============
   const handleChangeStreet = (event) => {
     setEditUser({ ...editUser, street: event.target.value });
   };
-
+  //  ============< Pronoun Change >=============
   const handleChangeCity = (event) => {
     setEditUser({ ...editUser, city: event.target.value });
   };
