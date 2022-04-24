@@ -1,4 +1,4 @@
-// import './App.css';
+import './App.css';
 import React, { useEffect } from 'react';
 import { HashRouter as Router, Redirect, Route, Switch, Link, } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
@@ -208,7 +208,7 @@ function App() {
               <Route> <h1>404</h1> </Route>
 
             </Switch> {/*====================================< END SWITCH >==================================== */}
-            <Footer /> {/* ---------------------< FOOTER COMPONENT >--------------------- */}
+            {/* <Footer /> ---------------------< FOOTER COMPONENT >--------------------- */}
           </div>
         </Router>
       </ThemeProvider>

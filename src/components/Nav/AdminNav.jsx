@@ -78,7 +78,8 @@ function AdminNav() {
     };
     // GO to Home
     const handleHome = () => {
-        alert('See Home.jsx Component!!!')
+        // alert('See Home.jsx Component!!!')
+        history.push('/about');
         // history.push('');
     };
     // GO to All Classes
@@ -96,6 +97,7 @@ function AdminNav() {
     // SIGN OUT
     const handleSignOut = () => {
         dispatch({ type: 'LOGOUT' });
+        history.push('/home');
     };
     // GO to Create Class
     const handleCreateClass = () => {

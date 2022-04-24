@@ -90,7 +90,8 @@ function CustomerNav() {
     };
     // GO to Home
     const handleHome = () => {
-        alert('See Home.jsx Component!!!')
+        // alert('See Home.jsx Component!!!')
+        history.push('/about');
         // history.push('');
     };
     // GO to All Classes
@@ -108,13 +109,14 @@ function CustomerNav() {
     // SIGN OUT
     const handleSignOut = () => {
         dispatch({ type: 'LOGOUT' });
-        // history.push('');
+        history.push('/home');
     };
 
 
     return (
         <>
-            <AppBar position="sticky" sx={{ bgcolor: "#41414c", marginBottom: 1 }}>
+            {/* ** CHANGE sticky TO fixed ** */}
+            <AppBar position="sticky" sx={{ bgcolor: "#41414c", marginBottom: 1 }}> 
                 <Toolbar>
                     {/* ------< HAMBURGER ICON >--------------- */}
                     <Box sx={{ flexGrow: 1 }}>

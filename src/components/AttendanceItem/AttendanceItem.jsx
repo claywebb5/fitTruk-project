@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 //--------------< MUI IMPORTS >------------
 import Avatar from '@mui/material/Avatar';
@@ -34,7 +34,7 @@ function AttendanceItem(props) {
     const dispatch = useDispatch();
     const attendees = useSelector(store => store.attendees);
     const classes = useStyles(); // MUI Theme
-
+    const [clicked, setClicked] = useState(false)
 
     // ======< USER ICON LOGIC >============================== 
     let initials = '';
@@ -61,7 +61,8 @@ function AttendanceItem(props) {
     //----------< CLICKED INDIVIDUAL CHECKBOXES >--------------
     // this sends a dispatch to the attendees reducer to update local state
     const checkUserIn = () => {
-        console.log('this will update a piece of local state');
+        // console.log('this will update a piece of local state');
+        setClicked(!clicked);
         dispatch({
             type: 'CHECK_USER_IN',
             payload: {
@@ -70,17 +71,17 @@ function AttendanceItem(props) {
             }
         });
     };
-
+    
 
 
     return (
         <>
-            {props.customer.checked_in ?
+            {props.customer.checked_in || clicked?
                 // ===================< CHECKED IN >===================================
                 <Card>
                     <CardContent  component="div" sx={{ display: 'inline-flex'}} className={classes.newroot}>
                         <Box component="div" sx={{display: 'inline-flex'}}>
-                            <CheckBoxIcon onClick={checkUserIn} sx={{ mr: 1, p: 1, mt: 1,  }}/>
+                            <CheckBoxIcon onClick={checkUserIn} sx={{ mr: 1, p: 1, mt: 1,  }}/> 
                             <Avatar src={props.customer.profile_image} sx={{ mr: 1, mt: 1, mx: 'auto' }} />
                             <Typography variant="h5" sx={{ mx: 'auto', width: 200, p: 1, mt: 1, ml: 1  }}>
                                 {props.customer.first_name} {props.customer.last_name}
@@ -92,7 +93,7 @@ function AttendanceItem(props) {
                         </Box>
                     </CardContent>
                 </Card>
-                :
+                : 
                 // ===================< NOT CHECKED IN >===================================
                 <Card>
                     <CardContent  component="div" sx={{ display: 'inline-flex'}} className={classes.newroot}>
