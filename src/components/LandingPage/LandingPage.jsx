@@ -30,8 +30,6 @@ function LandingPage() {
     width: '100%',
     }}
    /> 
-
-<h1> VIDEO GOES HERE</h1>
     <div style={{
      
       marginTop: '250px'
