@@ -1,6 +1,6 @@
 // import './Nav.css';
 import React, { useState } from 'react';
-import {useHistory} from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import logoWhite from './logoWhite.png';
 // ---------< MUI IMPORTS >----------------
@@ -36,23 +36,23 @@ function AdminNav() {
     const dispatch = useDispatch();
 
     // -------< PROFILE ICON >---------------
-    const {first_name, last_name} = user;
+    const { first_name, last_name } = user;
     let initials = '';
 
     const getInitials = (firstName, lastName) => {
         let firstLetter = 'H';
         let secondLetter = 'i';
-    
+
         if (firstName && lastName) {
-          firstLetter = (firstName[0]).toUpperCase();
-          secondLetter = (lastName[0]).toUpperCase();
+            firstLetter = (firstName[0]).toUpperCase();
+            secondLetter = (lastName[0]).toUpperCase();
         } else if (firstName) {
-          firstLetter = (firstName[0]).toUpperCase();
-          secondLetter = (firstName[1]);
+            firstLetter = (firstName[0]).toUpperCase();
+            secondLetter = (firstName[1]);
         }
         initials = firstLetter + secondLetter;
         return true;
-      }
+    }
     // ---------< CREATES ICON >-------------
 
 
@@ -110,7 +110,7 @@ function AdminNav() {
 
     return (
         <>
-             <AppBar position="fixed" sx={{ bgcolor: "#41414c", marginBottom: 1, }}>
+            <AppBar position="fixed" sx={{ bgcolor: "#41414c", marginBottom: 1, }}>
                 <Toolbar>
                     {/* ------< HAMBURGER ICON >--------------- */}
                     <Box sx={{ flexGrow: 1 }}>
@@ -182,10 +182,22 @@ function AdminNav() {
                             onClick={handleProfile}
                             sx={{ p: 0 }}
                         >
-                        {(getInitials(first_name, last_name)) && <Avatar sx={{ bgcolor: '#80bd02' }}>{initials}</Avatar>}
-                        
-                        {/*=====< AVATAR WITH USER PROFILE PICTURE >====*/}
-                        {/* <Avatar src={user.profile_image} /> */}
+
+                            {
+                                (function () {
+                                    if (user.profile_image) {
+                                        return <Avatar src={user.profile_image} sx={{ border: 2, borderColor: '#80bd02'  }} />
+                                    } else {
+                                        return <div>
+                                            {(getInitials(first_name, last_name)) && <Avatar sx={{ bgcolor: '#80bd02' }}>{initials}</Avatar>}
+                                        </div>
+                                    }
+                                })()
+                            }
+                            
+
+                            {/*=====< AVATAR WITH USER PROFILE PICTURE >====*/}
+                            {/* <Avatar src={user.profile_image} /> */}
                         </IconButton>
                     </Box>
                 </Toolbar>

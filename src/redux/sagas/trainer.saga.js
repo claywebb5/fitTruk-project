@@ -15,12 +15,12 @@ function* fetchAttendance(action){
 }
 
 // =============***< (PUT) UPDATE CLASS DETAILS >***===================================
-function* updateDetails (){
+function* updateDetails (action){
     // TRAINER/ADMIN ONLY
     // Will send a request to the trainer router to update the details of a specific class
     try{
         yield axios.put(`/api/trainer/edit-class/${action.payload.id}`, action.payload); // * Goes to SERVER "trainer.router"
-        yield put({type: 'SET_CLASS_DETAILS'}) // * Goes to REDUCERS "classDetails.reducer"
+        yield put({type: 'FETCH_CLASS_DETAILS', payload: action.payload.id}) // * Goes to REDUCERS "classDetails.reducer"
     } catch (error){
         console.log('Error editing class details', error);
     }

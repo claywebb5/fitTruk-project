@@ -3,8 +3,6 @@ import { useDispatch, useSelector } from 'react-redux';
 //--------------< MUI IMPORTS >------------
 import Avatar from '@mui/material/Avatar';
 import Card from '@mui/material/Card';
-import CardHeader from '@mui/material/CardHeader';
-import CardMedia from '@mui/material/CardMedia';
 import CardContent from '@mui/material/CardContent';
 import CardActions from '@mui/material/CardActions';
 import Collapse from '@mui/material/Collapse';
@@ -18,6 +16,17 @@ import { makeStyles } from '@material-ui/core/styles';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import { styled } from '@mui/material/styles';
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+import DialogTitle from '@mui/material/DialogTitle';
+import TextField from '@mui/material/TextField';
+import Snackbar from '@mui/material/Snackbar';
+import MuiAlert from '@mui/material/Alert';
+
+
+
 
 const useStyles = makeStyles({
     newroot: {
@@ -35,6 +44,8 @@ function AttendanceItem(props) {
     const attendees = useSelector(store => store.attendees);
     const classes = useStyles(); // MUI Theme
     const [clicked, setClicked] = useState(false)
+    const [messageOpen, setMessageOpen] = useState(false);
+    const [alertOpen, setAlertOpen] = useState(false);
 
     // ======< USER ICON LOGIC >============================== 
     let initials = '';
@@ -55,8 +66,17 @@ function AttendanceItem(props) {
     // ======< INDIVIDUAL MESSAGE >===============================
     // LINK TO MUI SNACKBAR FOR MESSAGE SENT NOTIFICATION: https://mui.com/material-ui/react-snackbar/ 
     const handleMessage = () => {
-        console.log('this will open the option to send a specific user a message. Think "Hey, still able to make it today?"');
+        setMessageOpen(true);
     };
+
+    const sendMessage = () => {
+        setMessageOpen(false);
+        setAlertOpen(true);
+    }
+
+    const handleClose = () => {
+        setAlertOpen(false);
+    }
 
     //----------< CLICKED INDIVIDUAL CHECKBOXES >--------------
     // this sends a dispatch to the attendees reducer to update local state
@@ -83,7 +103,7 @@ function AttendanceItem(props) {
                         <Box component="div" sx={{display: 'inline-flex'}}>
                             <CheckBoxIcon onClick={checkUserIn} sx={{ mr: 1, p: 1, mt: 1,  }}/> 
                             <Avatar src={props.customer.profile_image} sx={{ mr: 1, mt: 1, mx: 'auto' }} />
-                            <Typography variant="h5" sx={{ mx: 'auto', width: 200, p: 1, mt: 1, ml: 1  }}>
+                            <Typography variant="h5" sx={{ width: 200,  mt: 1, ml: 1  }}>
                                 {props.customer.first_name} {props.customer.last_name}
                             </Typography>
                             {/* <Typography variant="h5">
@@ -100,7 +120,7 @@ function AttendanceItem(props) {
                         <Box component="div" sx={{display: 'inline-flex'}}>
                             <CheckBoxOutlineBlankIcon onClick={checkUserIn} sx={{ mr: 1, p: 1, mt: 1,  }}/>
                             <Avatar src={props.customer.profile_image} sx={{ mr: 1, mt: 1, mx: 'auto' }} />
-                            <Typography variant="h5" sx={{ mx: 'auto', width: 200, p: 1, mt: 1, ml: 1  }}>
+                            <Typography variant="h5" sx={{ width: 200, mt: 1, ml: 1  }}>
                                 {props.customer.first_name} {props.customer.last_name}
                             </Typography>
                             {/* <Typography variant="h5">
@@ -111,6 +131,40 @@ function AttendanceItem(props) {
                     </CardContent>
                 </Card>
             }
+
+            <Dialog open={messageOpen} onClose={sendMessage}>
+                <DialogTitle>Message {props.customer.first_name} {props.customer.last_name}</DialogTitle>
+                <DialogContent>
+                    <DialogContentText>
+                        *Emergency contacts*
+                    </DialogContentText>
+                    <TextField
+                        autoFocus
+                        margin="dense"
+                        id="name"
+                        label="SMS Message"
+                        type="email"
+                        fullWidth
+                        // variant="standard"
+                    />
+                </DialogContent>
+                <DialogActions>
+                    <Button onClick={sendMessage}>Cancel</Button>
+                    <Button onClick={sendMessage}>Send</Button>
+                </DialogActions>
+            </Dialog>
+
+            <Snackbar 
+                open={alertOpen} 
+                autoHideDuration={6000} 
+                onClose={handleClose}
+                anchorOrigin={{ 
+                    vertical: 'top',
+                    horizontal: 'right',
+                }}
+                message="Message Sent!"
+                
+            />
 
 
 
