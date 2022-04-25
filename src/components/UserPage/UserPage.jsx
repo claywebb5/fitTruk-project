@@ -232,11 +232,12 @@ function UserPage() {
           {
             (function () {
               if (!isEditing) {
-                return <Box sx={{ border: 1, borderColor: '#80bd02', mt: 3 }}>
+                return <Box sx={{ mt: 3 }}>
                   <Box sx={{ px: 8 }}>
                     <Typography variant="body1" align="center" >
                       {user.street}, {user.city}, {user.state} {user.zip}
                     </Typography>
+                    <Divider sx={{ bgcolor: "#80bd02", borderBottomWidth: 2 }} />
                   </Box>
                 </Box>
               }
@@ -246,7 +247,7 @@ function UserPage() {
           {
             (function () {
               if (isEditing) {
-                return <Box sx={{ border: 1, borderColor: '#80bd02', mt: 3, justifyContent: 'center', display: 'flex' }}>
+                return <Box sx={{ border: 2, borderColor: '#80bd02', mt: 3, justifyContent: 'center', display: 'flex' }}>
                   <Box sx={{ justifyContent: 'center', display: 'flex', flexWrap: 'wrap', p: 1 }}>
                     <TextField
                       margin="dense"
