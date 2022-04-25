@@ -26,7 +26,9 @@ import EditIcon from '@mui/icons-material/Edit';
 import PeopleAltIcon from '@mui/icons-material/PeopleAlt';
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import swal from 'sweetalert';
-
+import TextField from '@mui/material/TextField';
+import CancelIcon from '@mui/icons-material/Cancel';
+import CheckIcon from '@mui/icons-material/Check';
 
 
 // ==========================< MUI THEMES >===============================
@@ -44,6 +46,8 @@ function ClassDetailsPage() {
     const history = useHistory();
     const dispatch = useDispatch();
     const classes = useStyles(); // MUI Theme
+    const [isEditing, setIsEditing] = useState(false);
+
 
     useEffect(() => {
         dispatch({
@@ -76,14 +80,14 @@ function ClassDetailsPage() {
     const handleReserveClick = () => {
         if (!user.id) {
             swal({
-                title: "Error", 
+                title: "Error",
                 text: "You must register or sign in to reserve a class",
                 icon: "error",
             })
 
         } else {
             swal({
-                title: "Success", 
+                title: "Success",
                 text: "Class reserved!",
                 icon: "success",
             })
@@ -107,21 +111,43 @@ function ClassDetailsPage() {
             icon: "warning",
             buttons: true,
             dangerMode: true,
-          })
-          .then((willDelete) => {
-            if (willDelete) {
-              swal("Reservation canceled", {
-                icon: "success",   
-              });
-              dispatch({
-                type: 'REMOVE_RESERVATION',
-                payload: classDetails
+        })
+            .then((willDelete) => {
+                if (willDelete) {
+                    swal("Reservation canceled", {
+                        icon: "success",
+                    });
+                    dispatch({
+                        type: 'REMOVE_RESERVATION',
+                        payload: classDetails
+                    });
+                } else {
+                }
             });
-            } else {
-            }
-          });
 
     };
+
+
+    // =============< OPEN EDIT >===============
+    const handleEdit = () => {
+        setIsEditing(true);
+    };
+
+    // =============< CANCEL EDIT >===============
+    const handleCancel = () => {
+        setIsEditing(false);
+    };
+
+    const handleDescriptionChange = () => {
+        console.log('Change');
+
+    }
+    const handleSubmit = () => {
+        console.log('Submit');
+        setIsEditing(false);
+        
+    }
+
 
 
     return (
@@ -233,11 +259,43 @@ function ClassDetailsPage() {
 
                 <Box sx={{ border: 4, borderColor: '#80bd02', mt: 3 }}>
                     <Box sx={{ px: 8 }}>
-                        <Typography variant="h5" align="center" >
-                            {classDetails.description}
-                        </Typography>
+                        {/*---------- NOT EDITING -----------*/}
+                        {
+                            (function () {
+                                if (!isEditing) {
+                                    return <Typography variant="h5" align="center" >
+                                        {classDetails.description}
+                                    </Typography>
+
+                                }
+                            })()
+                        }
+                        {/*---------- EDITING-----------*/}
+                        {
+                            (function () {
+                                if (isEditing) {
+                                    return <>
+                                        <TextField
+                                            margin="dense"
+                                            multiline
+                                            maxRows={4}
+                                            size="small"
+                                            id="outlined-name"
+                                            label="Description"
+                                            value={classDetails.description}
+                                            onChange={handleDescriptionChange}
+                                        />
+                                        <Divider sx={{ bgcolor: "#80bd02", borderBottomWidth: 2 }} />
+                                    </>
+                                }
+                            })()
+                        }
                     </Box>
                 </Box>
+
+
+
+
 
 
                 {/* ============< BUTTONS >============== */}
@@ -283,7 +341,41 @@ function ClassDetailsPage() {
                     })()
                 }
 
+                {/* ============< BUTTONS >============== */}
                 {
+                    (function () {
+                        if (user.access_level >= 2) {
+                            if (isEditing) { // --------- IS EDITING: TRUE --------------
+                                return <Box sx={{ display: 'flex', flexDirection: 'row', mt: 2 }}>
+                                    <Grid container justifyContent="center" alignItems="center" direction="row" spacing={7}>
+                                        <Grid item>
+                                            <Button variant="outlined" onClick={handleCancel} color="error">
+                                                Cancel &nbsp;
+                                                <CancelIcon />
+                                            </Button>
+                                        </Grid>
+                                        <Grid item>
+                                            <Button onClick={handleSubmit} sx={{ bgcolor: '#80bd02', color: "#000000" }}>
+                                                Save &nbsp;
+                                                <CheckIcon />
+                                            </Button>
+                                        </Grid>
+                                    </Grid>
+                                </Box>
+                            } else { // -------------------- IS EDITING: FALSE -------------
+                                return <Box sx={{ display: 'flex', flexDirection: 'row', mt: 3 }}>
+                                    <Grid container justifyContent="center" alignItems="center" direction="column" spacing={2}>
+                                        <Button onClick={handleEdit} sx={{ bgcolor: '#80bd02', color: "#000000" }}>
+                                            Edit
+                                        </Button>
+                                    </Grid>
+                                </Box>
+                            }
+                        }
+                    })()
+                }
+
+                {/* {
                     (function () {
                         if (user.access_level >= 2) {
                             return <Box sx={{ display: 'flex', flexDirection: 'row', mt: 3 }}>
@@ -296,7 +388,7 @@ function ClassDetailsPage() {
                             </Box>
                         }
                     })()
-                }
+                } */}
 
 
 
