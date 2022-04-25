@@ -1,6 +1,6 @@
 // import './Nav.css';
 import React, { useState } from 'react';
-import {useHistory} from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import logoWhite from './logoWhite.png';
 // ---------< MUI IMPORTS >----------------
@@ -13,6 +13,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
 import Avatar from '@mui/material/Avatar';
+import { styled } from '@mui/material/styles';
 
 
 
@@ -23,24 +24,24 @@ import Avatar from '@mui/material/Avatar';
 // [x] Sign out
 
 // ===========*< COLOR THEME >*================
-    // const theme = createTheme({
-    //   typography: {
-    //     fontFamily: [
-    //       'FATFRANK',
-    //       'CENTURY GOTHIC',
-    //       'Montserrat',
-    //     ].join(','),
-    //   },
-    //   palette: {
-    //     mode: 'main',
-    //     primary: {
-    //       darkGreen: '#80bd02',
-    //       lightGreen: '#ace23a',
-    //       darkGrey: '#41414c',
-    //       lightGrey: '#6d6e71'
-    //     },
-    //   },
-    // })
+// const theme = createTheme({
+//   typography: {
+//     fontFamily: [
+//       'FATFRANK',
+//       'CENTURY GOTHIC',
+//       'Montserrat',
+//     ].join(','),
+//   },
+//   palette: {
+//     mode: 'main',
+//     primary: {
+//       darkGreen: '#80bd02',
+//       lightGreen: '#ace23a',
+//       darkGrey: '#41414c',
+//       lightGrey: '#6d6e71'
+//     },
+//   },
+// })
 
 
 function CustomerNav() {
@@ -50,23 +51,23 @@ function CustomerNav() {
     const dispatch = useDispatch();
     // -------< PROFILE ICON >---------------
 
-    const {first_name, last_name} = user;
+    const { first_name, last_name } = user;
     let initials = '';
 
     const getInitials = (firstName, lastName) => {
         let firstLetter = 'H';
         let secondLetter = 'i';
-    
+
         if (firstName && lastName) {
-          firstLetter = (firstName[0]).toUpperCase();
-          secondLetter = (lastName[0]).toUpperCase();
+            firstLetter = (firstName[0]).toUpperCase();
+            secondLetter = (lastName[0]).toUpperCase();
         } else if (firstName) {
-          firstLetter = (firstName[0]).toUpperCase();
-          secondLetter = (firstName[1]);
+            firstLetter = (firstName[0]).toUpperCase();
+            secondLetter = (firstName[1]);
         }
         initials = firstLetter + secondLetter;
         return true;
-      }
+    }
 
     // =====< USESTATE >=============================
     // For the hamburger icon menu
@@ -112,11 +113,14 @@ function CustomerNav() {
         history.push('/home');
     };
 
+    // ------ This is supposed to help the dom scroll without being hidden under the app bar, but it currently does not do that -------
+    const Offset = styled('div')(({ theme }) => theme.mixins.toolbar);
+
 
     return (
         <>
             {/* ** CHANGE sticky TO fixed ** */}
-            <AppBar position="sticky" sx={{ bgcolor: "#41414c", marginBottom: 1 }}> 
+            <AppBar position="fixed" sx={{ bgcolor: "#41414c", marginBottom: 1 }}>
                 <Toolbar>
                     {/* ------< HAMBURGER ICON >--------------- */}
                     <Box sx={{ flexGrow: 1 }}>
@@ -186,14 +190,14 @@ function CustomerNav() {
                             sx={{ p: 0 }}
                         >
                             {(getInitials(first_name, last_name)) && <Avatar sx={{ bgcolor: '#80bd02' }}>{initials}</Avatar>}
-                        
+
                             {/*=====< AVATAR WITH USER PROFILE PICTURE >====*/}
                             {/* <Avatar src={user.profile_image} /> */}
-                        
                         </IconButton>
                     </Box>
                 </Toolbar>
             </AppBar>
+            <Offset />
         </>
     );
 }

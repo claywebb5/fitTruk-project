@@ -19,7 +19,7 @@ function BtnCreateClass() {
 
     return (
         <>
-            <Box sx={{ height: 320, flexGrow: 1 }}>
+            <Box sx={{ height: 80, flexGrow: 1 }}>
                 <SpeedDial
                     ariaLabel="SpeedDial basic example"
                     sx={{ position: 'fixed', bottom: 16, right: 16 }}

@@ -10,6 +10,7 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import IconButton from '@mui/material/IconButton';
 import Avatar from '@mui/material/Avatar';
+import { styled } from '@mui/material/styles';
 // ----------< MUI MENU >----------------
 import MenuIcon from '@mui/icons-material/Menu';
 import MenuItem from '@mui/material/MenuItem';
@@ -33,8 +34,8 @@ function AdminNav() {
     const history = useHistory();
     const user = useSelector((store) => store.user);
     const dispatch = useDispatch();
-    // -------< PROFILE ICON >---------------
 
+    // -------< PROFILE ICON >---------------
     const {first_name, last_name} = user;
     let initials = '';
 
@@ -104,9 +105,12 @@ function AdminNav() {
         history.push('/create-class');
     };
 
+    // ------ This is supposed to help the dom scroll without being hidden under the app bar, but it currently does not do that -------
+    const Offset = styled('div')(({ theme }) => theme.mixins.toolbar);
+
     return (
         <>
-             <AppBar position="sticky" sx={{ bgcolor: "#41414c", marginBottom: 1 }}>
+             <AppBar position="fixed" sx={{ bgcolor: "#41414c", marginBottom: 1, }}>
                 <Toolbar>
                     {/* ------< HAMBURGER ICON >--------------- */}
                     <Box sx={{ flexGrow: 1 }}>
@@ -186,6 +190,7 @@ function AdminNav() {
                     </Box>
                 </Toolbar>
             </AppBar>
+            <Offset />
         </>
     );
 }

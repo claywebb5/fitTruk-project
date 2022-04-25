@@ -54,7 +54,7 @@ router.get('/details/:classId/', (req, res) => {
     else {
         // Else if a user is not signed in, this will only return the class details
         // without checking any sort of reservation status.
-        let unregisteredUserQuery = `SELECT "c"."id", to_char("c"."date", 'FMDay') AS "week_day_name",
+        let unregisteredUserQuery = `SELECT "c"."id", to_char("c"."date", 'FMDay') AS "week_day_name", to_char("c"."date", 'FMMM/FMDD') AS "abbreviated_date",
 		to_char("c"."date", 'FMMM/FMDD/YYYY') AS "clean_format_date", "c"."classname",
 		"c"."description", "c"."trainer_user_id", to_char("c"."date", 'YYYY-MM-DD') AS "date",
 		to_char("c"."start_time", 'FMHH:MMAM') AS "abrv_start_time", "c"."start_time", to_char("c"."end_time", 'FMHH:MMAM') AS "abrv_end_time", "c"."end_time", "c"."street", "c"."city", "c"."state", "c"."zip", "c"."class_size",

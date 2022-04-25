@@ -7,26 +7,46 @@ const router = express.Router();
 // -------------------------- Gets classes a specific customer signed up for
 
 router.get('/', (req, res) => {
-  console.log('req.user.id:', req.user.id);
-  
+  // console.log('req.user.id:', req.user); // Test log
 
   if (req.isAuthenticated()) {
-    const queryText = `SELECT "c"."id", "c"."description", to_char("c"."date", 'FMDay') AS "week_day_name", to_char("c"."date", 'FMMM/FMDD') AS "abbreviated_date", to_char("c"."date", 'YYYY-MM-DD') AS "date",
-		to_char("c"."start_time", 'FMHH:MMAM') AS "abrv_start_time","c"."start_time", to_char("c"."end_time", 'FMHH:MMAM') AS "abrv_end_time", "c"."end_time", "c"."classname", "c"."trainer_user_id",
-    "user"."first_name" AS "trainer_first_name", "user"."last_name" AS "trainer_last_name",  "user"."pronouns" AS "trainer_pronouns", "user"."profile_image" AS "trainer_image"
-    FROM "classes" AS "c"
-    JOIN "user" ON "user"."id" = "c"."trainer_user_id"
-    JOIN "class_list" ON "c"."id" = "class_list"."class_id"
-    WHERE "class_list"."user_id" = $1
-    ORDER BY date, to_char("start_time",'HH24');`;
-    pool.query(queryText, [req.user.id])
+    if (req.user.access_level == 2) { // If a user's authenticated and they're also a trainer, then they retrieve all the classes in which they are teaching.
+      
+      const trainerQueryText = `SELECT "c"."id", "c"."description", to_char("c"."date", 'FMDay') AS "week_day_name", to_char("c"."date", 'FMMM/FMDD') AS "abbreviated_date", to_char("c"."date", 'YYYY-MM-DD') AS "date",
+      to_char("c"."start_time", 'FMHH:MMAM') AS "abrv_start_time","c"."start_time", to_char("c"."end_time", 'FMHH:MMAM') AS "abrv_end_time", "c"."end_time", "c"."classname", "c"."trainer_user_id",
+      "user"."first_name" AS "trainer_first_name", "user"."last_name" AS "trainer_last_name",  "user"."pronouns" AS "trainer_pronouns", "user"."profile_image" AS "trainer_image"
+      FROM "classes" AS "c"
+      JOIN "user" ON "user"."id" = "c"."trainer_user_id"
+      WHERE "c"."trainer_user_id" = $1
+      ORDER BY date, to_char("start_time",'HH24');`;
+
+      pool.query(trainerQueryText, [req.user.id])
       .then((result) => {
         res.send(result.rows);
       }).catch((error) => {
         console.log(error);
         res.sendStatus(500);
       });
-  } else {
+    } else { // If a user is authenticated but they ARE NOT a trainer, then they retrieve all the classes that they're signed up for.
+  
+      const queryText = `SELECT "c"."id", "c"."description", to_char("c"."date", 'FMDay') AS "week_day_name", to_char("c"."date", 'FMMM/FMDD') AS "abbreviated_date", to_char("c"."date", 'YYYY-MM-DD') AS "date",
+      to_char("c"."start_time", 'FMHH:MMAM') AS "abrv_start_time","c"."start_time", to_char("c"."end_time", 'FMHH:MMAM') AS "abrv_end_time", "c"."end_time", "c"."classname", "c"."trainer_user_id",
+      "user"."first_name" AS "trainer_first_name", "user"."last_name" AS "trainer_last_name",  "user"."pronouns" AS "trainer_pronouns", "user"."profile_image" AS "trainer_image"
+      FROM "classes" AS "c"
+      JOIN "user" ON "user"."id" = "c"."trainer_user_id"
+      JOIN "class_list" ON "c"."id" = "class_list"."class_id"
+      WHERE "class_list"."user_id" = $1
+      ORDER BY date, to_char("start_time",'HH24');`;
+   
+      pool.query(queryText, [req.user.id])
+        .then((result) => {
+          res.send(result.rows);
+        }).catch((error) => {
+          console.log(error);
+          res.sendStatus(500);
+        });
+    }
+  } else { // If a user is not authenticated, they cannot retrieve any personal classes
     res.sendStatus(403);
   }
 });
@@ -57,7 +77,7 @@ router.put('/pronouns/:id', (req, res) => {
 
 //  -------------------------- cancels a customers reservation 
 router.delete('/delete/:id', (req, res) => {
-// console.log('req.params.id', req.params.id);
+  // console.log('req.params.id', req.params.id);
   if (req.isAuthenticated()) {
     let queryText = `DELETE FROM class_list
         WHERE class_list.user_id = $1 and class_list.class_id = $2`;
@@ -74,7 +94,7 @@ router.delete('/delete/:id', (req, res) => {
 router.post('/reserve-class/:id', (req, res) => {
   console.log('req.body.user_id:', req.user.id);
   console.log('req.params.id:', req.params.id);
-  
+
 
   if (req.isAuthenticated()) {
     const queryText = `INSERT into "class_list" ("class_id", "user_id")
