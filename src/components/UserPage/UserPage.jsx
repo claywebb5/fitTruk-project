@@ -16,7 +16,7 @@ import Button from '@mui/material/Button';
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import CancelIcon from '@mui/icons-material/Cancel';
 import CheckIcon from '@mui/icons-material/Check';
-import swal from 'sweetalert';
+import TextField from '@mui/material/TextField';
 
 
 
@@ -87,22 +87,19 @@ function UserPage() {
     setEditUser({ ...editUser, zip: event.target.value });
   };
   //  ============< SUBMIT >==============================================
-  // const handleSubmit = (event) => {
-  //   event.preventDefault();
-  //   let updatedUser = editUser;
-  //   updatedUser = { ...updatedUser };
-  //   console.log('Clicked Submit');
-  //   console.log('Updated user info is:', updatedUser);
-  //   dispatch({
-  //     type: 'UPDATE_CUSTOMER_INFO',
-  //     payload: updatedUser
-  //   });
-  //   setEdit(false);
-  // };
-
-  const handleSubmit = () => {
-    setIsEditing(true);
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    let updatedUser = editUser;
+    updatedUser = { ...updatedUser };
+    console.log('Clicked Submit');
+    console.log('Updated user info is:', updatedUser);
+    dispatch({
+      type: 'UPDATE_CUSTOMER_INFO',
+      payload: updatedUser
+    });
+    setIsEditing(false);
   };
+
   //  ============< GO BACK >=============
   const handleReturnClick = () => {
     history.goBack();
@@ -129,6 +126,7 @@ function UserPage() {
 
   // =============< CANCEL EDIT >===============
   const handleCancel = () => {
+    setEditUser(userObj);
     setIsEditing(false);
   };
 
@@ -137,85 +135,136 @@ function UserPage() {
 
   return (
     <>
-      <Container sx={{ border: 4, borderColor: '#c3c4c5', bgcolor: '#FFFFFF' }}>
 
-        {/* ============< HEADER >============== */}
-        <Card sx={{ bgcolor: '#6d6e71', color: '#FFFFFF' }}>
-          <CardContent className={classes.newroot}>
+      <Container sx={{ border: 4, borderColor: '#c3c4c5', bgcolor: '#FFFFFF' }}>
+        <form onSubmit={handleSubmit}>
+
+          {/* ============< HEADER >============== */}
+          <Card sx={{ bgcolor: '#6d6e71', color: '#FFFFFF' }}>
+            <CardContent className={classes.newroot}>
+              <Grid container justifyContent="center" alignItems="center" direction="row" spacing={2}>
+                <Grid item>
+                  <Typography variant="h5">
+                    Welcome, {user.first_name}!
+                  </Typography>
+                </Grid>
+              </Grid>
+            </CardContent>
+          </Card>
+
+          {/* ============< PROFILE PICTURE >============== */}
+          <Box sx={{ display: 'flex', flexDirection: 'row', mt: 3 }}>
+            <Grid container justifyContent="center" alignItems="center" direction="column" spacing={2}>
+              {
+                (function () {
+                  if (user.profile_image) {
+                    return <Avatar src={user.profile_image} sx={{ height: '120px', width: '120px' }} />
+                  } else {
+                    return <div>
+                      {(getInitials(user)) && <Avatar sx={{ bgcolor: '#ace23a' }}>{initials}</Avatar>}
+                    </div>
+                  }
+                })()
+              }
+            </Grid>
+          </Box>
+
+
+          {/* ============< NAME & PRONOUN >============== */}
+          <Box sx={{ display: 'flex', flexDirection: 'row', mt: 2 }}>
             <Grid container justifyContent="center" alignItems="center" direction="row" spacing={2}>
               <Grid item>
-                <Typography variant="h5">
-                  Welcome, {user.first_name}!
+                <Typography style={{ color: "#000000" }} variant="h5" >
+                  {user.first_name} {user.last_name}
                 </Typography>
+                <Divider sx={{ bgcolor: "#000000", borderBottomWidth: 2 }} />
+              </Grid>
+
+
+              {/*---------- NOT EDITING -----------*/}
+              {
+                (function () {
+                  if (!isEditing) {
+                    return <Grid item>
+                      <Typography style={{ color: "#000000" }} variant="h6" >
+                        {user.pronouns}
+                      </Typography>
+                      <Divider sx={{ bgcolor: "#80bd02", borderBottomWidth: 2 }} />
+                    </Grid>
+                  }
+                })()
+              }
+              {/*---------- EDITING-----------*/}
+              {
+                (function () {
+                  if (isEditing) {
+                    return <Grid item>
+                      <TextField
+                        id="outlined-name"
+                        label="Pronouns"
+                        value={editUser.pronouns}
+                        onChange={handlePronounChange}
+                      />
+
+
+                      <Divider sx={{ bgcolor: "#80bd02", borderBottomWidth: 2 }} />
+                    </Grid>
+                  }
+                })()
+              }
+
+
+            </Grid>
+          </Box>
+
+          {/* ============< CONTACT INFO >============== */}
+          <Box sx={{ display: 'flex', flexDirection: 'row', mt: 3 }}>
+            <Grid container justifyContent="center" alignItems="center" direction="column" spacing={1}>
+              <Grid item>
+                <Typography style={{ color: "#000000" }} variant="body1" align='center'>
+                  {user.email}
+                </Typography>
+                <Divider sx={{ bgcolor: "#000000" }} />
+              </Grid>
+              <Grid item>
+                <Typography style={{ color: "#000000" }} align='center'>
+                  {user.phone_number}
+                </Typography>
+                <Divider sx={{ bgcolor: "#000000" }} />
               </Grid>
             </Grid>
-          </CardContent>
-        </Card>
-
-        {/* ============< PROFILE PICTURE >============== */}
-        <Box sx={{ display: 'flex', flexDirection: 'row', mt: 3 }}>
-          <Grid container justifyContent="center" alignItems="center" direction="column" spacing={2}>
-            {
-              (function () {
-                if (user.profile_image) {
-                  return <Avatar src={user.profile_image} sx={{ height: '120px', width: '120px' }} />
-                } else {
-                  return <div>
-                    {(getInitials(user)) && <Avatar sx={{ bgcolor: '#ace23a' }}>{initials}</Avatar>}
-                  </div>
-                }
-              })()
-            }
-          </Grid>
-        </Box>
-
-
-        {/* ============< NAME & PRONOUN >============== */}
-        <Box sx={{ display: 'flex', flexDirection: 'row', mt: 2 }}>
-          <Grid container justifyContent="center" alignItems="center" direction="row" spacing={2}>
-            <Grid item>
-              <Typography style={{ color: "#000000" }} variant="h5" >
-                {user.first_name} {user.last_name}
-              </Typography>
-              <Divider sx={{ bgcolor: "#000000", borderBottomWidth: 2 }} />
-            </Grid>
-            <Grid item>
-              <Typography style={{ color: "#000000" }} variant="h6" >
-                {user.pronouns}
-              </Typography>
-              <Divider sx={{ bgcolor: "#80bd02", borderBottomWidth: 2 }} />
-            </Grid>
-          </Grid>
-        </Box>
-
-        {/* ============< CONTACT INFO >============== */}
-        <Box sx={{ display: 'flex', flexDirection: 'row', mt: 3 }}>
-          <Grid container justifyContent="center" alignItems="center" direction="column" spacing={1}>
-            <Grid item>
-              <Typography style={{ color: "#000000" }} variant="body1" align='center'>
-                {user.email}
-              </Typography>
-              <Divider sx={{ bgcolor: "#000000" }} />
-            </Grid>
-            <Grid item>
-              <Typography style={{ color: "#000000" }} align='center'>
-                {user.phone_number}
-              </Typography>
-              <Divider sx={{ bgcolor: "#000000" }} />
-            </Grid>
-          </Grid>
-        </Box>
-
-        {/* ============< ADDRESS >============== */}
-        <Box sx={{ border: 1, borderColor: '#80bd02', mt: 3 }}>
-          <Box sx={{ px: 8 }}>
-            <Typography variant="body1" align="center" >
-              {user.street}, {user.city}, {user.state} {user.zip}
-            </Typography>
           </Box>
-        </Box>
 
-        <form onSubmit={handleSubmit}>
+          {/* ============< ADDRESS >============== */}
+          {/*---------- NOT EDITING -----------*/}
+          {
+            (function () {
+              if (!isEditing) {
+                return <Box sx={{ border: 1, borderColor: '#80bd02', mt: 3 }}>
+                  <Box sx={{ px: 8 }}>
+                    <Typography variant="body1" align="center" >
+                      {user.street}, {user.city}, {user.state} {user.zip}
+                    </Typography>
+                  </Box>
+                </Box>
+              }
+            })()
+          }
+          {/*---------- EDITING-----------*/}
+          {
+            (function () {
+              if (isEditing) {
+                return <Box sx={{ border: 1, borderColor: '#80bd02', mt: 3 }}>
+                  <Box sx={{ px: 8 }}>
+                    <Typography variant="body1" align="center" >
+                      EDITING
+                    </Typography>
+                  </Box>
+                </Box>
+              }
+            })()
+          }
+
 
           {/* <div>  */}
           {/* CAN EDIT  */}
@@ -310,36 +359,36 @@ function UserPage() {
           {/* ============< BUTTONS >============== */}
           {
             (function () {
-              if (isEditing) {
+              if (isEditing) { // --------- IS EDITING: TRUE --------------
                 return <Box sx={{ display: 'flex', flexDirection: 'row', mt: 2 }}>
-                <Grid container justifyContent="center" alignItems="center" direction="row" spacing={7}>
-                  <Grid item>
-                    <Button variant="outlined" onClick={handleCancel} color="error">
-                      Cancel &nbsp;
-                      <CancelIcon />
-                    </Button>
+                  <Grid container justifyContent="center" alignItems="center" direction="row" spacing={7}>
+                    <Grid item>
+                      <Button variant="outlined" onClick={handleCancel} color="error">
+                        Cancel &nbsp;
+                        <CancelIcon />
+                      </Button>
+                    </Grid>
+                    <Grid item>
+                      <Button type="submit" sx={{ bgcolor: '#80bd02', color: "#000000" }}>
+                        Save &nbsp;
+                        <CheckIcon />
+                      </Button>
+                    </Grid>
                   </Grid>
-                  <Grid item>
-                    <Button onClick={() => setIsEditing(false)} sx={{ bgcolor: '#80bd02', color: "#000000" }}>
-                      Save &nbsp;
-                      <CheckIcon />
-                    </Button>
-                  </Grid>
-                </Grid>
-              </Box>                
-              } else {
+                </Box>
+              } else { // -------------------- IS EDITING: FALSE -------------
                 return <Box sx={{ display: 'flex', flexDirection: 'row', mt: 3 }}>
-                <Grid container justifyContent="center" alignItems="center" direction="column" spacing={2}>
-                  <Button onClick={handleEdit} sx={{ bgcolor: '#80bd02', color: "#000000" }}>
-                    Edit
-                  </Button>
-                </Grid>
+                  <Grid container justifyContent="center" alignItems="center" direction="column" spacing={2}>
+                    <Button onClick={handleEdit} sx={{ bgcolor: '#80bd02', color: "#000000" }}>
+                      Edit
+                    </Button>
+                  </Grid>
                 </Box>
               }
             })()
           }
 
-          <button type="submit">Submit</button>
+          <button >Submit</button>
         </form>
 
         <Button onClick={handleReturnClick} sx={{ border: 2, borderColor: '#80bd02', color: "#000000", mt: 3 }}>
