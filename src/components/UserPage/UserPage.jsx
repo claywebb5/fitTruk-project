@@ -151,7 +151,6 @@ function UserPage() {
               </Grid>
             </CardContent>
           </Card>
-
           {/* ============< PROFILE PICTURE >============== */}
           <Box sx={{ display: 'flex', flexDirection: 'row', mt: 3 }}>
             <Grid container justifyContent="center" alignItems="center" direction="column" spacing={2}>
@@ -168,8 +167,6 @@ function UserPage() {
               }
             </Grid>
           </Box>
-
-
           {/* ============< NAME & PRONOUN >============== */}
           <Box sx={{ display: 'flex', flexDirection: 'row', mt: 2 }}>
             <Grid container justifyContent="center" alignItems="center" direction="row" spacing={2}>
@@ -179,8 +176,6 @@ function UserPage() {
                 </Typography>
                 <Divider sx={{ bgcolor: "#000000", borderBottomWidth: 2 }} />
               </Grid>
-
-
               {/*---------- NOT EDITING -----------*/}
               {
                 (function () {
@@ -200,20 +195,17 @@ function UserPage() {
                   if (isEditing) {
                     return <Grid item>
                       <TextField
+                        size="small"
                         id="outlined-name"
                         label="Pronouns"
                         value={editUser.pronouns}
                         onChange={handlePronounChange}
                       />
-
-
                       <Divider sx={{ bgcolor: "#80bd02", borderBottomWidth: 2 }} />
                     </Grid>
                   }
                 })()
               }
-
-
             </Grid>
           </Box>
 
@@ -256,65 +248,39 @@ function UserPage() {
               if (isEditing) {
                 return <Box sx={{ border: 1, borderColor: '#80bd02', mt: 3 }}>
                   <Box sx={{ px: 8 }}>
-                    <Typography variant="body1" align="center" >
-                      EDITING
-                    </Typography>
+                    <TextField
+                      size="small"
+                      id="outlined-name"
+                      label="Street"
+                      value={editUser.street}
+                      onChange={handleChangeStreet}
+                    />
+                    <TextField
+                      size="small"
+                      id="outlined-name"
+                      label="City"
+                      value={editUser.city}
+                      onChange={handleChangeCity}
+                    />
+                    <TextField
+                      size="small"
+                      id="outlined-name"
+                      label="State"
+                      value={editUser.state}
+                      onChange={handleChangeState}
+                    />
+                    <TextField
+                      size="small"
+                      id="outlined-name"
+                      label="Zip"
+                      value={editUser.zip}
+                      onChange={handleChangeZip}
+                    />
                   </Box>
                 </Box>
               }
             })()
           }
-
-
-          {/* <div>  */}
-          {/* CAN EDIT  */}
-          {/* <p><b>Pronouns:</b> {user.pronouns}</p>
-            <select onChange={handlePronounChange} value={editUser.pronouns}>
-              <option value="He/Him"> He/Him</option>
-              <option value="She/Her"> She/Her</option>
-              <option value="They/Them"> They/Them</option>
-            </select>
-          </div> */}
-
-          {/* <div>  */}
-          {/* CAN EDIT  */}
-          {/* <p><b>Street:</b> {user.street}</p>
-            <input
-              type="text"
-              placeholder={user.street}
-              value={editUser.street}
-              onChange={handleChangeStreet}
-            />
-          </div>
-          <div>
-            <p><b>City:</b> </p>
-            <input
-              type="text"
-              placeholder={user.city}
-              value={editUser.city}
-              onChange={handleChangeCity}
-            />
-          </div>
-          <div>
-            <p><b>State:</b> </p>
-            <input
-              type="text"
-              placeholder={user.state}
-              value={editUser.state}
-              onChange={handleChangeState}
-            />
-          </div>
-          <div>
-            <p><b>Zip:</b> </p>
-            <input
-              type="text"
-              placeholder={user.zip}
-              value={editUser.zip}
-              onChange={handleChangeZip}
-            />
-          </div> */}
-
-
 
           {/* ============< EMERGENCY CONTACT >============== */}
           <Card sx={{ border: 1, borderColor: "#000000", mt: 3 }}>
@@ -387,14 +353,10 @@ function UserPage() {
               }
             })()
           }
-
-          <button >Submit</button>
         </form>
-
         <Button onClick={handleReturnClick} sx={{ border: 2, borderColor: '#80bd02', color: "#000000", mt: 3 }}>
           <ArrowBackIosNewIcon /> &nbsp;
         </Button>
-
       </Container>
     </>
   );
