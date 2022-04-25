@@ -1,0 +1,39 @@
+.Login-form {
+    background-color: orange;
+    display: flex;
+    /* justify-content: center; */
+    align-items: center ;
+}
+
+.login {
+    /* background-color: rgba(0,0,0, 0.6); */
+    display: flex;
+    justify-content: center;
+    align-items: center ;
+    padding: 10px;
+    margin-top: 100px;
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-bottom: 100px;
+    border-radius: 10px;
+}
+
+.login img{
+    width: 100%;
+    /* margin: 10px; */
+}
+
+.loginForm {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+/* .LoginInputs {
+    background-color: orange;
+    display: flex;
+    justify-content: center;
+    align-items: stretch;
+    margin: 5px;
+} */
