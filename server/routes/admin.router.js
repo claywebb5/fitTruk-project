@@ -12,8 +12,8 @@ router.post('/new-class', (req, res) => {
   pool.query(queryText, [req.body.classname, req.body.description, req.body.trainer_user_id, req.body.date, req.body.start_time, req.body.end_time, req.body.street, req.body.city, req.body.state, req.body.zip, req.body.class_size])
 
     .then((result) => {
-      res.send(result.rows)
-      console.log('Created a new class!', result.rows);
+      res.send(201)
+      console.log('Created a new class!');
 
     })
     .catch((error) => {

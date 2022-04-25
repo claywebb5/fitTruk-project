@@ -21,13 +21,14 @@ function CreateClassPage() {
 
     useEffect(() => {
         if (user.access_level == 3) {
-            console.log('User access level is 3, fetching trainer data');
+            // console.log('User access level is 3, fetching trainer data'); // Test log
             dispatch({
                 type: 'FETCH_AVAILABLE_TRAINERS'
             })
         }
         // Edit class view
         if (classId) {
+            // console.log('Editing an existing class, fetching specific class data'); // Test log
             dispatch({
                 type: 'FETCH_CLASS_DETAILS',
                 payload: classId
@@ -35,6 +36,7 @@ function CreateClassPage() {
         }
         // Create class view
         else {
+             // console.log('Creating a new class, reset class data'); // Test log
             dispatch({ type: 'RESET_CLASS_DETAILS' });
         }
     }, []);
@@ -45,16 +47,6 @@ function CreateClassPage() {
     const user = useSelector(store => store.user)
     const classDetails = useSelector(store => store.selectedClass.classDetails)
     let disabledState; // This controls whether or not input fields are disabled, based on if it's an administrator or a trainer. (user.access_level)
-
-
-    // -------- TEST CODE, TO BE DELETED -------- TEST CODE, TO BE DELETED -------- TEST CODE, TO BE DELETED
-    // console.log('access level', user.access_level);
-    const testButtonDispatch = () => {
-        console.log('testButtonDispatching');
-        dispatch({ type: 'FETCH_CLASS_DETAILS', payload: 1 });
-    }
-    // -------- TEST CODE, TO BE DELETED -------- TEST CODE, TO BE DELETED -------- TEST CODE, TO BE DELETED
-
 
     //----------<  I n p u t   H a n d l e r s  >-----------
     const handleTrainerSelection = (selectedTrainerId) => {
@@ -83,7 +75,6 @@ function CreateClassPage() {
         }
     }; // END handleTrainerSelection
 
-
     const handleChange = (prop) => (event) => {
         dispatch({
             type: 'EDIT_CLASS_DETAILS',
@@ -94,6 +85,15 @@ function CreateClassPage() {
         });
     }; // END handleChange
 
+    // This enables/disables the inputs based on if the edits are coming from a trainer or an administrator.
+    if (user.access_level == 3) {
+        disabledState = false;
+    } else {
+        disabledState = true;
+    }
+    //----------<  //  E N D   I n p u t   H a n d l e r s  >-----------
+
+    //----------< CLICK LISTENERS >------------------------------
     const submitHandler = (event) => { //=============This needs to be updated to allow for '/edit-class' functionality====================================
         event.preventDefault();
         console.log('This will submit the form');
@@ -104,20 +104,14 @@ function CreateClassPage() {
         });
         history.push('/all-classes');
     }
-    //----------<  //  E N D   I n p u t   H a n d l e r s  >-----------
 
-    //----------< CLICK LISTENERS >------------------------------
     const handleReturn = () => {
         console.log('Clicked Return');
         history.goBack();
     }
 
 
-    if (user.access_level == 3) {
-        disabledState = false;
-    } else {
-        disabledState = true;
-    }
+
 
     return (
         <>
@@ -212,13 +206,15 @@ function CreateClassPage() {
                         type="number" name="class-size" value={classDetails.class_size} onChange={handleChange('class_size')} />
                 </h4>
 
-                {/* ---- Submit form!! ---- */}
-                <button type="submit">Submit</button>
+                {/* ---- Submit or Edit the form!! ---- */}
+                {(classId) ? // If "classId" is present, that means this page is editing an existing class and not creating a new one.
+                    <button type="submit">Update</button>
+                    :
+                    <button type="submit">Submit</button>
+                }
+
             </form>
-
-            <button onClick={testButtonDispatch}>TEST BUTTON</button>
             <button onClick={handleReturn}>Return</button>
-
         </>
     )
 }

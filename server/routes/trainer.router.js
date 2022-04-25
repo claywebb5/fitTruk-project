@@ -7,22 +7,37 @@ const router = express.Router();
 
 router.put('/edit-class/:id', (req, res) => {
 
-    if (req.isAuthenticated()) {
+    if (req.isAuthenticated()) { // First this router will check that the user IS authenticated
+        if (req.user.access_level == 2) { // Next it will check if it's a trainer that's 
+            const trainerUpdateText = `UPDATE "classes"
+        SET "location" = $1, "description" = $2
+        WHERE classes.id = $3;`;
 
-        const queryText =
-            `UPDATE "classes"
-    SET "location" = $1, "description" = $2
-    WHERE classes.id = $3`;
+            pool.query(trainerUpdateText, [req.body.location, req.body.description, req.params.id])
+                .then((result) => {
+                    res.send(result.rows)
+                })
+                .catch((error) => {
+                    console.log(error);
+                    res.sendStatus(500);
+                })
 
-        pool.query(queryText, [req.body.location, req.body.description, req.params.id])
+        } else if (req.user.access_level == 3) {
+            const adminUpdateText = `UPDATE "classes" 
+            SET "classname" = $1, "description" = $2, "trainer_user_id" = $3,
+            "date" = $4, "start_time" = $5, "end_time" = $6, "street" = $7,
+            "city" = $8, "state" = $9, "zip" = $10, "class_size" = $11
+            WHERE classes.id = $12;`;
+            pool.query(adminUpdateText, [req.body.classname, req.body.description, req.body.trainer_user_id, req.body.date, req.body.start_time, req.body.end_time, req.body.street, req.body.city, req.body.state, req.body.zip, req.body.class_size, req.params.id])
 
-            .then((result) => {
-                res.send(result.rows)
-            })
-            .catch((error) => {
-                console.log(error);
-                res.sendStatus(500);
-            })
+                .then((result) => {
+                    res.send(result.rows)
+                })
+                .catch((error) => {
+                    console.log(error);
+                    res.sendStatus(500);
+                })
+        }
 
     } else {
         res.sendStatus(403);
@@ -79,7 +94,7 @@ router.get('/attendance/:id', (req, res) => {
 
     if (req.isAuthenticated()) {
         console.log('req.params.id', req.params.id)
-        const queryText =`
+        const queryText = `
             SELECT "user"."id", "first_name", "last_name", "user"."profile_image", "class_list"."checked_in"
             FROM "classes"
             JOIN "class_list"
