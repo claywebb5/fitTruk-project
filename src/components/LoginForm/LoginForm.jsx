@@ -47,7 +47,7 @@ function LoginForm() {
           onClick={handleHomeScreen} />
       </div>
       <form
-        className="formPanel"
+        className="loginForm"
         onSubmit={login}>
         {/* <h2>Login</h2> */}
         {errors.loginMessage && (
@@ -55,18 +55,14 @@ function LoginForm() {
             {errors.loginMessage}
           </h3>
         )}
-        <div>
+        <div className='LoginInputs'>
           <label htmlFor="username">
 
             <TextField
               size='small'
-              style={{
-                display: 'flex',
-                justifyContent: 'center',
-                alignItems: 'center',
-                color: '#ace23a',
-                // borderRadius: 10
-              }}
+              sx={{
+                width: '250px',
+               }}
               placeholder='Username'
               type="text"
               name="username"
@@ -76,16 +72,12 @@ function LoginForm() {
             />
           </label>
           <br />
-        </div>
-        <div>
+
+
           <label htmlFor="password">
 
-            <TextField style={{
-              display: 'flex',
-              justifyContent: 'center',
-              alignItems: 'center',
-              // width: '200px',
-              
+            <TextField sx={{
+             width: '250px',
             }}
               size='small'
               placeholder='Password'
@@ -96,13 +88,9 @@ function LoginForm() {
               onChange={(event) => setPassword(event.target.value)}
             />
           </label>
-        </div>
-        <br />
-        <div style={{
-          display: 'flex',
-          justifyContent: 'center',
 
-        }}>
+          <br />
+
           {/* <input style={{
             backgroundColor: '#ace23a',
             color: '#41414c',
@@ -111,6 +99,8 @@ function LoginForm() {
             width: '250',
             fontFamily: 'Muli',
           }} className="btn" type="submit" name="submit" value="Log In" /> */}
+          </div>
+          <div>
           <Button
             style={{
               backgroundColor: "#ace23a",
