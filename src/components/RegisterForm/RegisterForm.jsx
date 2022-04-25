@@ -7,6 +7,7 @@ import MenuItem from '@mui/material/MenuItem';
 import FitnessCenterIcon from '@mui/icons-material/FitnessCenter';
 import Box, { BoxProps } from '@mui/material/Box';
 import logo from './logo.png'
+import {useHistory} from 'react-router-dom';
 
 
 function RegisterForm() {
@@ -27,12 +28,18 @@ function RegisterForm() {
 
   const errors = useSelector((store) => store.errors);
   const dispatch = useDispatch();
+  const history = useHistory();
+
 
   const handlePronounSelection = (event) => {
     setPronouns(event.target.value);
   };
   
-console.log('pronouns test is:', pronouns);
+// console.log('pronouns test is:', pronouns);
+
+function handleHomeScreen(){
+  history.push('/home');
+}
 
 
   const registerUser = (event) => {
@@ -76,10 +83,7 @@ console.log('pronouns test is:', pronouns);
     }}>
      <img src= {logo} alt="" style={{
       height: '100px',
-     
-    
-      
-    }}  />
+ }}  onClick={handleHomeScreen}/>
     <form 
     
     className="formPanel" onSubmit={registerUser}>
@@ -341,12 +345,12 @@ console.log('pronouns test is:', pronouns);
       
       
       {/* =========<LIABILITY WAIVER>================ */}
-      <div>
+      {/* <div>
         <label>
           Liability Waiver will go here:
           <input/>
         </label>
-      </div>
+      </div> */}
       
       {/* =========<LIABILITY WAIVER>================ */}
 
