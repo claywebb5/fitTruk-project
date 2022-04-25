@@ -8,15 +8,22 @@ function MyClassesPage() {
   // --------- Tools ----------
   const history = useHistory();
   const dispatch = useDispatch();
+  const user = useSelector(store => store.user)
 
 
   // --------- Functions ----------
   useEffect(() => {
-
-    // This dispatch sends a request to the database to retrieve all the classes a user is signed up for.
-    dispatch({
-      type: 'FETCH_CUSTOMER_CLASS'
-    });
+    // If the user is a trainer, it'll retrieve all classes and filter by their trainer ID
+    if(user.access_level === 2){
+      dispatch({
+        type: 'FETCH_CLASSES'
+      });
+    } else {
+      // If the user is not a trainer, this dispatch sends a request to the database to retrieve all the classes a user is signed up for.
+      dispatch({
+        type: 'FETCH_CUSTOMER_CLASS'
+      });
+    }
   }, [])
 
   const handleAllClassClick = () => {

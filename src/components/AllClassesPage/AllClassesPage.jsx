@@ -7,14 +7,19 @@ import BtnCreateClass from '../BtnCreateClass/BtnCreateClass'; // <- The floatin
 // ---< MUI IMPORTS >-----
 import Box from '@mui/material/Box';
 
-// import ListItemText from '@mui/material/ListItemText';
-// import Typography from '@mui/material/Typography';
-// import Paper from '@mui/material/Paper';
-// import List from '@mui/material/List';
-// import ListItem from '@mui/material/ListItem';
-// import ListItemAvatar from '@mui/material/ListItemAvatar';
-// import ListSubheader from '@mui/material/ListSubheader';
-// import Avatar from '@mui/material/Avatar';
+import ListItemText from '@mui/material/ListItemText';
+import Typography from '@mui/material/Typography';
+import Paper from '@mui/material/Paper';
+import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
+import ListItemAvatar from '@mui/material/ListItemAvatar';
+import ListSubheader from '@mui/material/ListSubheader';
+import Avatar from '@mui/material/Avatar';
+import Nav from '../Nav/Nav';
+import { styled } from '@mui/material/styles';
+// import { Toolbar } from '@mui/material';
+import Toolbar from '@mui/material/Toolbar';
+import AppBar from '@mui/material/AppBar';
 
 
 function AllClassesPage() {
@@ -53,6 +58,21 @@ function AllClassesPage() {
   const handleMyClassClick = () => {
     history.push("/my-classes");
   }
+
+  // --------------<  M U I   H a n d l e r s  >------------------
+  let priorDate = '';
+
+  const checkForNextDay = (dateToCheck) => {
+    if (dateToCheck == priorDate){
+      return false;
+    } else {
+      priorDate = dateToCheck
+      return true
+    }
+  }
+  // --------------<  M U I   H a n d l e r s  >------------------
+
+
 
   // --------------<  I n p u t   H a n d l e r s  >------------------
   const handleSearchTrainer = (trainerId) => { // This changes the search-by-trainer filter settings
@@ -101,14 +121,18 @@ function AllClassesPage() {
   };
   // --------------<  // E N D   S e a r c h   Q u e r y   H a n d l e r s  >------------------
 
-
+  const Offset = styled('div')(({ theme }) => theme.mixins.toolbar);
 
   return (
     <>
-      <h2 align="center">All Classes</h2>
-      <div>
-        
+    
+      {/* <h2 align="center">All Classes</h2> */}
+    {/* <Nav style="position: fixed;" /> */}
+    <Offset />
+      <Box sx={{mt:'100px'}}>
 
+        
+      <Paper square sx={{ pb: '10px', mt:'100px' }}>
         <input
           type="text"
           value={searchTerm}
@@ -132,37 +156,37 @@ function AllClassesPage() {
             <button align="right" onClick={handleMyClassClick}>Myclasses</button>
       }
 
-      {/* ------ Josh is working on this currently ----- */}
-      {/* <Paper square sx={{ pb: '50px' }}>
+      
+
+      </Paper>
+      <Paper square sx={{ pb: '10px', }}>
           <Typography variant="h5" gutterBottom component="div" sx={{ p: 2, pb: 0 }}>
             All Classes
           </Typography>
-          <List sx={{ mb: 2 }}>
-            {allClasses.map(classEvent => (
-              <React.Fragment key={classEvent.id}>
-                {classEvent.week_day_name === 'Monday' && (
+          <List sx={{ mb: 2, }}>
+            {(searchFunction(allClasses)).map((classEvent,i) => (
+              <React.Fragment key={i}>
+                {(checkForNextDay(classEvent.week_day_name)) && (
                   <ListSubheader sx={{ bgcolor: 'background.paper' }}>
                   {classEvent.week_day_name}
                   </ListSubheader>
                 )}
                 <ListItem button>
-                  <ListItemAvatar>
-                    <Avatar sx={{ fontSize: 'medium' }}>{classEvent.abrv_date}</Avatar>
-                  </ListItemAvatar>
-                  <ListItemText primary={classEvent.week_day_name} secondary={classEvent.classname} sx={{ bgcolor: '#9aca38', width: 270, borderRadius: '5px', p: 1 }} /> 
+                <ClassListItem classEvent={classEvent} key={i} />
+                  {/* <ListItemText primary={classEvent.week_day_name} secondary={classEvent.classname} sx={{ bgcolor: '#9aca38', width: 270, borderRadius: '5px', p: 1 }} />  */}
                 </ListItem>
               </React.Fragment>
             ))}
           </List>
-        </Paper> */}
+        </Paper>
       
-      <ul>
+      {/* <ul>
         { (searchFunction(allClasses)).map((classEvent, i) => (
           <ClassListItem classEvent={classEvent} key={i} />
         ))}
-      </ul>
+      </ul> */}
 
-    </div>
+    </Box>
           {/* Logged in as an Admin show the Admin Nav Bar */}
           {user.access_level === 3 && (
         <BtnCreateClass />
