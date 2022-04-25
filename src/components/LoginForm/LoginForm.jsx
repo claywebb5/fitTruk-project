@@ -5,7 +5,7 @@ import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import Paper from '@mui/material/Paper';
 import { borderRadius } from '@mui/system';
-import fittruck from './fittruck.jpg'
+import fittruck from './FitTruk_Logo_Main.png'
 import { useHistory } from 'react-router-dom';
 import './LoginForm.css'
 
@@ -37,19 +37,16 @@ function LoginForm() {
 
   return (
     <>
-      <div  style={{ textAlign: 'center' }}>
+      <div className='login'>
         <img
           src={fittruck}
           alt="Fit Truk Logo"
           style={{
-            height: '100px',
-            }} 
+            // width: '100%',
+          }}
           onClick={handleHomeScreen} />
       </div>
-      <form 
-        style={{
-        marginTop: '50px',
-        }}
+      <form
         className="formPanel"
         onSubmit={login}>
         {/* <h2>Login</h2> */}
@@ -88,8 +85,9 @@ function LoginForm() {
               justifyContent: 'center',
               alignItems: 'center',
               // width: '200px',
+              
             }}
-              size='large'
+              size='small'
               placeholder='Password'
               type="password"
               name="password"
@@ -114,17 +112,17 @@ function LoginForm() {
             fontFamily: 'Muli',
           }} className="btn" type="submit" name="submit" value="Log In" /> */}
           <Button
-                style={{
-                  backgroundColor: "#ace23a",
-                  color: "black",
-                  fontFamily: 'Muli',
-                  padding: 0,
-                  width: 250,
-                  outline: 'solid'
-                }}
-                variant="contained" className="btn btn_sizeSm" >
-                <p>Login</p> 
-              </Button>
+            style={{
+              backgroundColor: "#ace23a",
+              color: "black",
+              fontFamily: 'Muli',
+              padding: 0,
+              width: 200,
+              outline: 'solid'
+            }}
+            variant="contained" className="btn btn_sizeSm" type='submit'>
+            <p>Login</p>
+          </Button>
         </div>
       </form>
 

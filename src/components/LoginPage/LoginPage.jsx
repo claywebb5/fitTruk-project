@@ -20,7 +20,6 @@ function LoginPage() {
       
         style ={{
           color: 'black',
-          bottom: -150,
           fontFamily: 'Muli',
           fontSize: '18px',
           
