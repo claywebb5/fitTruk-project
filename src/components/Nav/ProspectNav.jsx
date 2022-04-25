@@ -13,6 +13,7 @@ import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
 import Avatar from '@mui/material/Avatar';
 import NoAccountsIcon from '@mui/icons-material/NoAccounts';
+import { styled } from '@mui/material/styles';
 
 // =================**< PROSPECTS VIEW >**=========================
 // [x] All Classes
@@ -22,7 +23,7 @@ import NoAccountsIcon from '@mui/icons-material/NoAccounts';
 function ProspectNav() {
     // ========< TOOLS >==============
     const history = useHistory();
-    
+
     // For the hamburger icon menu
     const [anchorElMenu, setAnchorElMenu] = useState(null);
 
@@ -52,9 +53,12 @@ function ProspectNav() {
         history.push('/home')
     };
 
+    // ------ This is supposed to help the dom scroll without being hidden under the app bar, but it currently does not do that -------
+    const Offset = styled('div')(({ theme }) => theme.mixins.toolbar);
+
     return (
         <>
-            <AppBar position="sticky" sx={{ bgcolor: "#41414c", marginBottom: 1 }}>
+            <AppBar position="fixed" sx={{ bgcolor: "#41414c", marginBottom: 1 }}>
                 <Toolbar>
                     {/* ------< HAMBURGER ICON >--------------- */}
                     <Box sx={{ flexGrow: 1 }}>
@@ -120,6 +124,7 @@ function ProspectNav() {
                     </Box>
                 </Toolbar>
             </AppBar>
+            <Offset />
         </>
     );
 }
