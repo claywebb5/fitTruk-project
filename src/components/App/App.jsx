@@ -46,6 +46,16 @@ function App() {
         fontFamily: ['Montserrat', 'sans-serif'].join(','),
       },
     },
+    palette: {
+      primary: {
+          main: '#ace23a',
+          contrastText: '#fff'
+      },
+      secondary: {
+          main: '#80bd02',
+          contrastText: '#fff'
+      }
+    },
   });
 
   //========================================**< START RETURN >**====================================================
