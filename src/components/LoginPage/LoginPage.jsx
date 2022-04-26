@@ -22,7 +22,7 @@ function LoginPage() {
           color: 'black',
           fontFamily: 'Muli',
           fontSize: '18px',
-          
+          marginTop: 100,
         }}
           type="button"
           className="btn btn_asLink"

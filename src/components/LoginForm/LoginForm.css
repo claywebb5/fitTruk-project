@@ -30,10 +30,7 @@
     flex-direction: column;
 }
 
-/* .LoginInputs {
-    background-color: orange;
-    display: flex;
-    justify-content: center;
-    align-items: stretch;
+.LoginInputs {
+  
     margin: 5px;
-} */
+}
