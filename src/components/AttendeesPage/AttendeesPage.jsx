@@ -97,7 +97,7 @@ function AttendeesPage() {
 
     return (
         <>
-            <Container sx={{ border: 4, borderColor: '#c3c4c5', bgcolor: '#FFFFFF' }}>
+            <Container sx={{ border: 4, borderColor: '#c3c4c5' }}>
                 <Card sx={{ maxWidth: 345 }}>
                     <CardContent className={classes.newroot}>
                         <Typography variant="h5" align="center" >
@@ -128,7 +128,7 @@ function AttendeesPage() {
                     <Button onClick={handleCheckIn} variant="outlined" sx={{ color: "#000000", bgcolor: '#ace23a' }}>Check in</Button>
                 </Box>
 
-                <Button onClick={handleReturnClick} sx={{ border: 2, borderColor: '#80bd02', color: "#000000", mt: 3 }}>
+                <Button onClick={handleReturnClick} sx={{ bgcolor: '#FFFFFF', border: 2, borderColor: '#80bd02', color: "#000000", mt: 3 }}>
                     <ArrowBackIosNewIcon /> &nbsp;
                 </Button>
             </Container>
