@@ -2,10 +2,17 @@ import React, { useState } from 'react';
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import BtnCreateClass from '../BtnCreateClass/BtnCreateClass'; // <- The floating "speed dial" button to create a class
+import ClassList from '../ClassList/ClassList'
 // ---< MUI IMPORTS >-----
 import Typography from '@mui/material/Typography';
 import Paper from '@mui/material/Paper';
-import ClassList from '../ClassList/ClassList'
+import PermContactCalendarIcon from '@mui/icons-material/PermContactCalendar';
+import Box from '@mui/material/Box';
+import Container from '@mui/material/Container';
+
+
+
+
 
 
 function AllClassesPage() {
@@ -45,12 +52,15 @@ function AllClassesPage() {
   return (
     <>
       {/* <Offset /> */}
-
-        <Paper square sx={{ pb: '0px', pt: '10px', height: 'auto', overflow: 'scroll' }}>
-
-          <Typography variant="h3" gutterBottom component="div" sx={{ pl: 2, pr: 2, textAlign: 'center', pt: '20px' }}>
-            All Classes
+      <Container sx={{bgcolor: '#FFFFFF', p: 0}}>
+        <Box>
+          <Typography variant="h3" component="div" sx={{ pl: 2, pr: 2, textAlign: 'center', pt: 2 }}>
+            <PermContactCalendarIcon sx={{ fontSize: 35 }} /> All Classes
           </Typography>
+        </Box>
+
+        <Paper square sx={{ pb: '0px', height: 'auto', overflow: 'scroll' }}>
+
           {/* <hr /> */}
           <ClassList allClasses={allClasses} user={user} pageInfo={pageInfo} />
           {/* Logged in as an Admin show the Admin Nav Bar */}
@@ -58,6 +68,7 @@ function AllClassesPage() {
             <BtnCreateClass />
           )}
         </Paper>
+      </Container>
     </>
   );
 }
