@@ -16,6 +16,8 @@ import ListItemText from '@mui/material/ListItemText';
 import List from '@mui/material/List';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
+
 
 function ClassListItem({ classEvent, i }) {
   const history = useHistory();
@@ -31,9 +33,10 @@ function ClassListItem({ classEvent, i }) {
   return (
     <>
 
-      <Accordion>
+      <Accordion >
         {/* ------< SUMMARY >-------- */}
         <AccordionSummary
+          sx={{ bgcolor: '#6d6e71', color: '#80bd02', fontWeight: 'bold' }}
           expandIcon={<ExpandMoreIcon />}
           aria-controls="panel1a-content"
           id="panel1a-header">
@@ -44,7 +47,8 @@ function ClassListItem({ classEvent, i }) {
           {/* <List> */}
           <ListItem disablePadding>
             <ListItemText primary={classEvent.description}/>
-            <button key={i} onClick={handleEventClick}>Details</button>
+            <Button key={i} onClick={handleEventClick} sx={{ bgcolor: '#41414c' }}>Details</Button>
+            
           </ListItem>
           {/* </List> */}
         </AccordionDetails>

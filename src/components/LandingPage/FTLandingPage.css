@@ -1,5 +1,5 @@
 .body {
-    background-image: url(./Fit_Truk_App_BG.gif);
+    background-image: url(./FITRUK_BG.gif);
     background-repeat: no-repeat;
     background-size: cover;
     background-position-x: center;
@@ -47,4 +47,5 @@
   p {
       margin: 0px;
       font-size: 20px;
+      font-family: cen;
   }

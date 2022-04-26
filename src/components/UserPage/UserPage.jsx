@@ -359,7 +359,7 @@ function UserPage() {
             })()
           }
         </form>
-        <Button onClick={handleReturnClick} sx={{ border: 2, borderColor: '#80bd02', color: "#000000", mt: 3 }}>
+        <Button onClick={handleReturnClick} sx={{ border: 2, borderColor: '#80bd02', color: "#000000", bgcolor: '#FFFFFF', mt: 3 }}>
           <ArrowBackIosNewIcon /> &nbsp;
         </Button>
       </Container>

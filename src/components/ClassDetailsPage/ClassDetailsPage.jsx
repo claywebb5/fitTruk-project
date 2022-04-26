@@ -182,7 +182,7 @@ function ClassDetailsPage() {
 
     return (
         <>
-            <Container sx={{ border: 4, borderColor: '#c3c4c5', bgcolor: '#FFFFFF', mt: 1 }}>
+            <Container sx={{ border: 4, borderColor: '#c3c4c5', mt: 1 }}>
                 <form onSubmit={handleSubmit}>
                     {/* ============< WEEKDAY AND DATE >============== */}
                     <Card sx={{ bgcolor: '#6d6e71', color: '#FFFFFF' }}>
@@ -287,8 +287,8 @@ function ClassDetailsPage() {
 
                     {/* ============< DESCRIPTION >============== */}
 
-                    <Box sx={{ border: 4, borderColor: '#80bd02', mt: 3 }}>
-                        <Box sx={{ px: 2 }}>
+                    <Box sx={{ border: 4, borderColor: '#80bd02', bgcolor: '#FFFFFF', mt: 3 }}>
+                        <Box sx={{ px: 4 }}>
                             {/*---------- NOT EDITING -----------*/}
                             {
                                 (function () {
@@ -407,7 +407,7 @@ function ClassDetailsPage() {
 
 
                 </form>
-                <Button onClick={handleReturnClick} sx={{ border: 2, borderColor: '#80bd02', color: "#000000", mt: 3 }}>
+                <Button onClick={handleReturnClick} sx={{ border: 2, borderColor: '#80bd02', bgcolor: '#FFFFFF', color: "#000000", mt: 3 }}>
                     <ArrowBackIosNewIcon /> &nbsp;
                 </Button>
             </Container>
