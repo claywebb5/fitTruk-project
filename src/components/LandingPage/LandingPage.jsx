@@ -32,18 +32,18 @@ function LandingPage() {
         <div className='logo'>
           <img src={LogoAlt} />
         </div>
+
         <div className='btngroup'>
           <Button variant="contained" onClick={onSeeClasses}>
-            <Typography style={{ color: "#000000", display: 'block' }} variant="body1" >
+            <Typography style={{ color: "#000000", display: 'block', width:200 }} variant="body1" >
               See Classes
             </Typography>
           </Button>
 
           <br />
 
-          <Button variant="contained" onClick={onSeeClasses}>
+          <Button variant="contained" onClick={onLogin}>
             <Typography
-              onClick={onLogin}
               style={{ color: "#000000", display: 'block' }} variant="body1" >
               Login
             </Typography>

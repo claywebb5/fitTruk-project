@@ -4,6 +4,8 @@ import { useSelector } from 'react-redux';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import Paper from '@mui/material/Paper';
+import Card from '@mui/material/Card';
+import Typography from '@mui/material/Typography';
 import { borderRadius } from '@mui/system';
 import fittruck from './FitTruk_Logo_Main.png'
 import { useHistory } from 'react-router-dom';
@@ -42,10 +44,11 @@ function LoginForm() {
           src={fittruck}
           alt="Fit Truk Logo"
           style={{
-            // width: '100%',
+            width: '100%',
           }}
           onClick={handleHomeScreen} />
       </div>
+
       <form
         className="loginForm"
         onSubmit={login}>
@@ -55,14 +58,14 @@ function LoginForm() {
             {errors.loginMessage}
           </h3>
         )}
-        <div className='LoginInputs'>
+
           <label htmlFor="username">
 
             <TextField
               size='small'
               sx={{
                 width: '250px',
-               }}
+              }}
               placeholder='Username'
               type="text"
               name="username"
@@ -71,13 +74,10 @@ function LoginForm() {
               onChange={(event) => setUsername(event.target.value)}
             />
           </label>
-          <br />
-
 
           <label htmlFor="password">
-
             <TextField sx={{
-             width: '250px',
+              width: '250px',
             }}
               size='small'
               placeholder='Password'
@@ -89,33 +89,21 @@ function LoginForm() {
             />
           </label>
 
-          <br />
-
-          {/* <input style={{
-            backgroundColor: '#ace23a',
-            color: '#41414c',
-            borderRadius: '0.5rem',
-            padding: '5',
-            width: '250',
-            fontFamily: 'Muli',
-          }} className="btn" type="submit" name="submit" value="Log In" /> */}
-          </div>
-          <div>
-          <Button
-            style={{
-              backgroundColor: "#ace23a",
-              color: "black",
-              fontFamily: 'Muli',
-              padding: 0,
-              width: 200,
-              outline: 'solid'
-            }}
-            variant="contained" className="btn btn_sizeSm" type='submit'>
-            <p>Login</p>
+          <Button variant="contained" sx={{ width: 200}} type='submit'>
+            <Typography style={{ color: "#000000", display: 'block' }} variant="body1" >
+              Login
+            </Typography>
           </Button>
-        </div>
-      </form>
 
+          <Button variant="outlined"
+            onClick={() => {
+              history.push('/registration');
+            }}>
+            <Typography style={{ color: "#000000", display: 'block',border: 2, borderColor: 'primary' }} variant="body1" >
+              Register
+            </Typography>
+          </Button>
+      </form>
     </>
   );
 }
