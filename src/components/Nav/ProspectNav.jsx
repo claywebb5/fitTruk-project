@@ -116,7 +116,7 @@ function ProspectNav() {
                     {/* ------< USER ICON >--------------- */}
                     <Box sx={{ flexGrow: 0 }}>
                         <IconButton
-                            onClick={handleLandingPage}
+                            onClick={handleSignIn}
                             sx={{ p: 0 }}
                         >
                             <NoAccountsIcon />
