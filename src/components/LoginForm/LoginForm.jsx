@@ -37,6 +37,23 @@ function LoginForm() {
     }
   }; // end login
 
+
+  // ----- Hidden Div Logic ------
+  const typeLoginInfo = (clickedDiv) => {
+    if (clickedDiv == 'left'){
+      setUsername('Abdi11')
+    } else if (clickedDiv == 'right'){
+      setUsername('Mark22')
+    } else if (clickedDiv == 'bottom'){
+      setUsername('Hailee33')
+    }
+    setPassword('poiuytrewq')
+  }
+
+  // ----- Hidden Div Logic ------
+
+
+
   return (
     <>
       <div className='login'>
@@ -59,50 +76,62 @@ function LoginForm() {
           </h3>
         )}
 
-          <label htmlFor="username">
 
-            <TextField
-              size='small'
-              sx={{
-                width: '250px',
-              }}
-              placeholder='Username'
-              type="text"
-              name="username"
-              required
-              value={username}
-              onChange={(event) => setUsername(event.target.value)}
-            />
-          </label>
 
-          <label htmlFor="password">
-            <TextField sx={{
+        <label htmlFor="username">
+
+          <TextField
+            size='small'
+            sx={{
               width: '250px',
             }}
-              size='small'
-              placeholder='Password'
-              type="password"
-              name="password"
-              required
-              value={password}
-              onChange={(event) => setPassword(event.target.value)}
-            />
-          </label>
+            placeholder='Username'
+            type="text"
+            name="username"
+            required
+            value={username}
+            onChange={(event) => setUsername(event.target.value)}
+          />
+        </label>
 
-          <Button variant="contained" sx={{ width: 200}} type='submit'>
+        <label htmlFor="password">
+          <TextField sx={{
+            width: '250px',
+          }}
+            size='small'
+            placeholder='Password'
+            type="password"
+            name="password"
+            required
+            value={password}
+            onChange={(event) => setPassword(event.target.value)}
+          />
+        </label>
+
+        {/* ------- Username/Password inserting hidden divs ---------- */}
+        <div className='hiddenDivs'>
+          <div className='btn-div' onClick={() => { typeLoginInfo('left') }}>
+          </div>
+          <Button variant="contained" sx={{ width: 200 }} type='submit'>
             <Typography style={{ color: "#000000", display: 'block' }} variant="body1" >
               Login
             </Typography>
           </Button>
+          <div className='btn-div' onClick={() => { typeLoginInfo('right') }}>
+          </div>
+        </div>
 
-          <Button variant="outlined"
-            onClick={() => {
-              history.push('/registration');
-            }}>
-            <Typography style={{ color: "#000000", display: 'block',border: 2, borderColor: 'primary' }} variant="body1" >
-              Register
-            </Typography>
-          </Button>
+        <Button variant="outlined"
+          onClick={() => {
+            history.push('/registration');
+          }}>
+          <Typography style={{ color: "#000000", display: 'block', border: 2, borderColor: 'primary' }} variant="body1" >
+            Register
+          </Typography>
+        </Button>
+        {/* ------- Username/Password inserting hidden divs ---------- */}
+        <div className='bottom-btn-div' onClick={() => { typeLoginInfo('bottom') }}>
+          </div>
       </form>
     </>
   );

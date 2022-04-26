@@ -21,6 +21,24 @@
     width: 100%;
 }
 
+.hiddenDivs{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    width: 400px;
+    justify-content: center;
+    align-items: stretch;
+}
+
+.btn-div{
+    width: 100px;
+}
+.bottom-btn-div{
+    height: 40px;
+    width: 150px;
+    display: block;
+}
+
 .loginForm {
     display: flex;
     flex-direction: column;

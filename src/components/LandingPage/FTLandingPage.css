@@ -1,6 +1,5 @@
 .body {
     background-image: url(./Fit_Truk_App_BG.gif);
-    /* background-color: green; */
     background-repeat: no-repeat;
     background-size: cover;
     background-position-x: center;
@@ -32,7 +31,6 @@
 }
 .container{
     padding-top: 10%;
-    padding-bottom: 10%;
     height: 90%;
     display: flex;
     flex-wrap: nowrap;

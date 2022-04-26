@@ -12,7 +12,7 @@ function LoginPage() {
   const history = useHistory();
 
   return (
-    <Paper sx={{ height:736 }}>
+    <Paper sx={{ height: window.innerHeight }}>
 
 
 
