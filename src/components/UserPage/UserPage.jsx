@@ -136,7 +136,7 @@ function UserPage() {
   return (
     <>
 
-      <Container sx={{ border: 4, borderColor: '#c3c4c5', bgcolor: '#FFFFFF' }}>
+      <Container sx={{ border: 4, borderColor: '#c3c4c5', bgcolor: '#FFFFFF', mt: 1 }}>
         <form onSubmit={handleSubmit}>
 
           {/* ============< HEADER >============== */}
@@ -157,10 +157,10 @@ function UserPage() {
               {
                 (function () {
                   if (user.profile_image) {
-                    return <Avatar src={user.profile_image} sx={{ height: '120px', width: '120px' }} />
+                    return <Avatar src={user.profile_image} sx={{ height: '120px', width: '120px', border: 1, borderColor: '#41414c'  }} />
                   } else {
                     return <div>
-                      {(getInitials(user)) && <Avatar sx={{ bgcolor: '#ace23a' }}>{initials}</Avatar>}
+                      {(getInitials(user)) && <Avatar sx={{ bgcolor: '#ace23a'}}>{initials}</Avatar>}
                     </div>
                   }
                 })()

@@ -100,7 +100,7 @@ function AttendeesPage() {
             <Container sx={{ border: 4, borderColor: '#c3c4c5', bgcolor: '#FFFFFF' }}>
                 <Card sx={{ maxWidth: 345 }}>
                     <CardContent className={classes.newroot}>
-                        <Typography variant="h5" align="center">
+                        <Typography variant="h5" align="center" >
                             {classDetails.week_day_name} {classDetails.abbreviated_date}
                         </Typography>
                         <Typography variant="h5" align="center">

@@ -189,8 +189,17 @@ function CustomerNav() {
                             onClick={handleProfile}
                             sx={{ p: 0 }}
                         >
-                            {(getInitials(first_name, last_name)) && <Avatar sx={{ bgcolor: '#80bd02' }}>{initials}</Avatar>}
-
+                            {
+                                (function () {
+                                    if (user.profile_image) {
+                                        return <Avatar src={user.profile_image} sx={{ border: 2, borderColor: '#80bd02' }} />
+                                    } else {
+                                        return <div>
+                                            {(getInitials(first_name, last_name)) && <Avatar sx={{ bgcolor: '#80bd02' }}>{initials}</Avatar>}
+                                        </div>
+                                    }
+                                })()
+                            }
                             {/*=====< AVATAR WITH USER PROFILE PICTURE >====*/}
                             {/* <Avatar src={user.profile_image} /> */}
                         </IconButton>

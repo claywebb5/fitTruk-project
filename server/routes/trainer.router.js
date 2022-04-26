@@ -10,10 +10,10 @@ router.put('/edit-class/:id', (req, res) => {
     if (req.isAuthenticated()) { // First this router will check that the user IS authenticated
         if (req.user.access_level == 2) { // Next it will check if it's a trainer that's 
             const trainerUpdateText = `UPDATE "classes"
-        SET "location" = $1, "description" = $2
-        WHERE classes.id = $3;`;
+        SET "description" = $1
+        WHERE classes.id = $2;`;
 
-            pool.query(trainerUpdateText, [req.body.location, req.body.description, req.params.id])
+            pool.query(trainerUpdateText, [req.body.description, req.params.id])
                 .then((result) => {
                     res.send(result.rows)
                 })
