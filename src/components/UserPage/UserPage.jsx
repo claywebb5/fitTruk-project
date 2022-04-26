@@ -136,7 +136,7 @@ function UserPage() {
   return (
     <>
 
-      <Container sx={{ border: 4, borderColor: '#c3c4c5', bgcolor: '#FFFFFF', mt: 1 }}>
+      <Container sx={{ border: 4, borderColor: '#c3c4c5', mt: 1 }}>
         <form onSubmit={handleSubmit}>
 
           {/* ============< HEADER >============== */}
@@ -359,7 +359,7 @@ function UserPage() {
             })()
           }
         </form>
-        <Button onClick={handleReturnClick} sx={{ border: 2, borderColor: '#80bd02', color: "#000000", mt: 3 }}>
+        <Button onClick={handleReturnClick} sx={{ border: 2, borderColor: '#80bd02', color: "#000000", bgcolor: '#FFFFFF', mt: 3 }}>
           <ArrowBackIosNewIcon /> &nbsp;
         </Button>
       </Container>

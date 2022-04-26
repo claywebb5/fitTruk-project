@@ -150,9 +150,9 @@ function CustomerNav() {
                             open={Boolean(anchorElMenu)}
                             onClose={handleCloseMenu}
                         >
-                            <MenuItem onClick={handleCloseMenu}>
+                            {/* <MenuItem onClick={handleCloseMenu}>
                                 <Typography textAlign="center" onClick={handleHome}>Home</Typography>
-                            </MenuItem>
+                            </MenuItem> */}
                             <MenuItem onClick={handleCloseMenu}>
                                 <Typography textAlign="center" onClick={handleProfile}>Profile</Typography>
                             </MenuItem>

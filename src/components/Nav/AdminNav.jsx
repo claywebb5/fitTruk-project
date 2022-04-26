@@ -140,9 +140,9 @@ function AdminNav() {
                             open={Boolean(anchorElMenu)}
                             onClose={handleCloseMenu}
                         >
-                            <MenuItem onClick={handleCloseMenu}>
+                            {/* <MenuItem onClick={handleCloseMenu}>
                                 <Typography textAlign="center" onClick={handleHome}>Home</Typography>
-                            </MenuItem>
+                            </MenuItem> */}
                             <MenuItem onClick={handleCloseMenu}>
                                 <Typography textAlign="center" onClick={handleCreateClass}>Create Class</Typography>
                             </MenuItem>
