@@ -62,6 +62,7 @@ function LoginForm() {
               size='small'
               sx={{
                 width: '250px',
+                padding: 1,
                }}
               placeholder='Username'
               type="text"
@@ -78,6 +79,8 @@ function LoginForm() {
 
             <TextField sx={{
              width: '250px',
+              // margin: 3,
+              padding: 1,
             }}
               size='small'
               placeholder='Password'
@@ -107,6 +110,7 @@ function LoginForm() {
               color: "black",
               fontFamily: 'Muli',
               padding: 0,
+              // margin: 5,
               width: 200,
               outline: 'solid'
             }}
