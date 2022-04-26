@@ -12,7 +12,7 @@ function LoginPage() {
   const history = useHistory();
 
   return (
-    <Paper sx={{ height: window.innerHeight }}>
+    // <Paper sx={{ height: window.innerHeight , bgColor:'transparent' }}>
 
 
 
@@ -28,7 +28,7 @@ function LoginPage() {
         </Button> */}
       </center>
     </div>
-    </Paper>
+    // </Paper>
   );
 }
 
