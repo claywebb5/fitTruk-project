@@ -157,28 +157,14 @@ function ClassList({ allClasses, user, pageInfo }) {
                 }}
               />
             </Grid>
-            {/* <Grid item> */}
-            {/* <Button onClick={handleOpenMenu} sx={{ bgcolor: '#41414c' }}>Trainers <KeyboardArrowDownIcon /> </Button> */}
-            {/* <Select
-                sx={{ mt: '45px', bgcolor: '#41414c', color: '#ace23a' }}
-                onClick={handleOpenMenu}
-                open={openMenu}
-                onClose={handleCloseMenu}
-                value={availableTrainers.trainer_user_id}
-              >
-                {availableTrainers.map((trainer, i) => (
-                  <MenuItem key={i} value={trainer.trainer_user_id} onClick={(event) => { handleSearchTrainer(event.target.value) }}>
-                    <Typography key={i} value={trainer.trainer_user_id} onClick={(event) => { handleSearchTrainer(event.target.value) }} textAlign="center"> <PersonIcon />{trainer.trainer_first_name} {(trainer.trainer_last_name)[0]}.</Typography>
-                  </MenuItem>
-                ))}
-                <select name="trainer" id="trainer-selector"
-                  placeholder='Trainer'
-                  onChange={(event) => { handleSearchTrainer(event.target.value) }}>
-                  <option value={''}>All trainers</option> {/*  Clicking "All Trainers" resets the trainer value to null */}
-            {/* <option  ></option>
-                </select> &nbsp;
-              </Select>
-            </Grid>  */}
+           <select name="trainer" id="trainer-selector"
+          placeholder='Trainer'
+          onChange={(event) => { handleSearchTrainer(event.target.value) }}>
+          <option value={''}>All trainers</option> {/*  Clicking "All Trainers" resets the trainer value to null */}
+          {availableTrainers.map((trainer, i) => (
+            <option key={i} value={trainer.trainer_user_id}>{trainer.trainer_first_name} {(trainer.trainer_last_name)[0]}.</option>
+          ))}
+        </select> &nbsp;
           </Grid>
         </Box>
       </Paper>

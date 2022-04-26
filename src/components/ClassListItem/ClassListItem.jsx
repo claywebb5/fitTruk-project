@@ -36,7 +36,7 @@ function ClassListItem({ classEvent, i }) {
       <Accordion >
         {/* ------< SUMMARY >-------- */}
         <AccordionSummary
-          sx={{ bgcolor: '#6d6e71', color: '#80bd02' }}
+          sx={{ bgcolor: '#6d6e71', color: '#80bd02', fontWeight: 'bold' }}
           expandIcon={<ExpandMoreIcon />}
           aria-controls="panel1a-content"
           id="panel1a-header">
