@@ -135,8 +135,8 @@ function UserPage() {
 
   return (
     <>
-
-      <Container sx={{ border: 4, borderColor: '#c3c4c5', bgcolor: '#FFFFFF', mt: 1 }}>
+{/* ---------  The height and fixed position of this page may need to be adjusted at some point ---------- */}
+      <Container sx={{ border: 4, borderColor: '#c3c4c5', bgcolor: '#FFFFFF', mt: 1, height:window.innerHeight, overflow:'hidden', position:'fixed' }}>
         <form onSubmit={handleSubmit}>
 
           {/* ============< HEADER >============== */}

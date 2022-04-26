@@ -288,7 +288,7 @@ function ClassDetailsPage() {
                     {/* ============< DESCRIPTION >============== */}
 
                     <Box sx={{ border: 4, borderColor: '#80bd02', mt: 3 }}>
-                        <Box sx={{ px: 8 }}>
+                        <Box sx={{ px: 2 }}>
                             {/*---------- NOT EDITING -----------*/}
                             {
                                 (function () {
