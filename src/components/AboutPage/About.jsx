@@ -16,44 +16,12 @@ import ListItemText from '@mui/material/ListItemText';
 import List from '@mui/material/List';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
-import { makeStyles } from '@material-ui/core/styles';
-import { styled } from '@mui/material/styles';
 
-
-// const useStyles = makeStyles({
-//     : {
-//         padding: 8,
-//         '&:last-child': {
-//             paddingBottom: 8,
-//         },
-//     },
-// });
 
 
 function AboutTab() {
 
     const user = useSelector(store => store.user)
-
-    // ===========*< COLOR/FONT THEME >*===============
-    // const theme = createTheme({
-    //     typography: {
-    //         fontFamily: [
-    //             'FATFRANK',
-    //             'CENTURY GOTHIC',
-    //             'Montserrat',
-    //         ].join(','),
-    //     },
-    //     palette: {
-    //         mode: 'main',
-    //         primary: {
-    //             darkGreen: '#80bd02',
-    //             lightGreen: '#ace23a',
-    //             darkGrey: '#41414c',
-    //             lightGrey: '#6d6e71'
-    //         },
-    //     },
-    // })
-
 
     // ======< IMAGE DATA >==================
     const itemData = [
