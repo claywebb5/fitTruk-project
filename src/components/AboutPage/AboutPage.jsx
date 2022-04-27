@@ -29,7 +29,7 @@ function AboutPage() {
             {/* TABS TITLE  */}
             <Box sx={{ bgcolor: "#6d6e71", borderBottom: 1, borderColor: 'divider' }}>
               {/* <TabList onChange={handleChange} centered indicatorColor='#ace23a'> */}
-              <TabList onChange={handleChange} centered indicatorColor='secondary'>
+              <TabList onChange={handleChange} centered indicatorColor='primary'>
                 <Tab label="About" value="1" />
                 <Tab label="Classes & Packages" value="2" />
               </TabList>

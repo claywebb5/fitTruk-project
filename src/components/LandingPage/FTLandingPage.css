@@ -3,20 +3,41 @@
     background-repeat: no-repeat;
     background-size: cover;
     background-position-x: center;
-    height: 736px;
   }
 
   .logo {
       background-color: rgba(0,0,0, 0.6);
       display: flex;
-      justify-content: center;'G;wd kp'
+      justify-content: center;
       align-items: center ;
       padding: 10px;
       margin-left: 10px;
       margin-right: 10px;
-      margin-bottom: 85%;
+      /* margin-bottom: 60%; */
       border-radius: 10px;
   }
+
+  .register-btn{
+      backdrop-filter: blur(10px) brightness(0.7);
+      border-width: 2px;
+  }
+
+.btngroup{
+    display: flex;
+    justify-content: flex-end;
+    align-content: flex-end;
+    flex-direction: column;
+    width: 70%;
+}
+.container{
+    padding-top: 10%;
+    height: 90%;
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
 
   .logo img{
       width: 90%;

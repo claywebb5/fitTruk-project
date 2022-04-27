@@ -10,8 +10,7 @@
     display: flex;
     justify-content: center;
     align-items: center ;
-    padding: 10px;
-    margin-top: 100px;
+    padding: 100px 10px 10px 10px;
     margin-left: 10px;
     margin-right: 10px;
     margin-bottom: 100px;
@@ -20,17 +19,32 @@
 
 .login img{
     width: 100%;
-    /* margin: 10px; */
+}
+
+.hiddenDivs{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    width: 400px;
+    justify-content: center;
+    align-items: stretch;
+}
+
+.btn-div{
+    width: 100px;
+}
+.bottom-btn-div{
+    height: 40px;
+    width: 150px;
+    display: block;
 }
 
 .loginForm {
     display: flex;
-    justify-content: center;
-    align-items: center;
     flex-direction: column;
-}
-
-.LoginInputs {
-  
-    margin: 5px;
+    align-items: center;
+    flex-wrap: nowrap;
+    justify-content: space-evenly;
+    row-gap: 5px;
+    padding-top: 10%;
 }

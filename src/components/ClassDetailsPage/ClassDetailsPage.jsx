@@ -68,7 +68,7 @@ function ClassDetailsPage() {
     const { id } = useParams();
 
     let classObj = {
-        id: classDetails.id,
+        // id: classDetails.id,
         abbreviated_date: classDetails.abbreviated_date,
         abrv_end_time: classDetails.abrv_end_time,
         abrv_start_time: classDetails.abrv_start_time,
@@ -288,7 +288,7 @@ function ClassDetailsPage() {
                     {/* ============< DESCRIPTION >============== */}
 
                     <Box sx={{ border: 4, borderColor: '#80bd02', bgcolor: '#FFFFFF', mt: 3 }}>
-                        <Box sx={{ px: 8 }}>
+                        <Box sx={{ px: 4 }}>
                             {/*---------- NOT EDITING -----------*/}
                             {
                                 (function () {
