@@ -25,7 +25,6 @@ function LandingPage() {
     history.push('/all-classes');
   };
 
-
   return (
     <div className='body' style={{ height: window.innerHeight }}>
       <div className="container">

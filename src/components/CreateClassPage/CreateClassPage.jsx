@@ -21,14 +21,12 @@ function CreateClassPage() {
 
     useEffect(() => {
         if (user.access_level == 3) {
-            // console.log('User access level is 3, fetching trainer data'); // Test log
             dispatch({
                 type: 'FETCH_AVAILABLE_TRAINERS'
             })
         }
         // Edit class view
         if (classId) {
-            // console.log('Editing an existing class, fetching specific class data'); // Test log
             dispatch({
                 type: 'FETCH_CLASS_DETAILS',
                 payload: classId
@@ -36,11 +34,9 @@ function CreateClassPage() {
         }
         // Create class view
         else {
-             // console.log('Creating a new class, reset class data'); // Test log
             dispatch({ type: 'RESET_CLASS_DETAILS' });
         }
     }, []);
-
 
     //---------- Variables -----------
     const availableTrainers = useSelector(store => store.availableTrainers)
@@ -96,8 +92,6 @@ function CreateClassPage() {
     //----------< CLICK LISTENERS >------------------------------
     const submitHandler = (event) => { //=============This needs to be updated to allow for '/edit-class' functionality====================================
         event.preventDefault();
-        console.log('This will submit the form');
-        console.log(classDetails);
         dispatch({
             type: 'CREATE_CLASS',
             payload: classDetails
@@ -106,12 +100,8 @@ function CreateClassPage() {
     }
 
     const handleReturn = () => {
-        console.log('Clicked Return');
         history.goBack();
     }
-
-
-
 
     return (
         <>
@@ -138,7 +128,6 @@ function CreateClassPage() {
                         disabled={disabledState}
                         placeholder='Trainer'
                         onChange={(event) => { handleTrainerSelection(event.target.value) }}>
-                        {/* <option key={-1} onClick={dispatch({type:''})}>Select a Trainer</option> */}
                         <option key={-1} value={'reset'}>Select a Trainer</option>
                         {availableTrainers.map((trainer, i) => (
                             <option key={i} value={trainer.trainer_user_id}>{trainer.trainer_first_name} {trainer.trainer_last_name}</option>

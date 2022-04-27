@@ -9,5 +9,4 @@ function InfoPage() {
     </div>
   );
 }
-
 export default InfoPage;
