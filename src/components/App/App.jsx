@@ -15,7 +15,6 @@ import AllClassesPage from '../AllClassesPage/AllClassesPage'; // (1.4 a&c) <-- 
 import MyClassesPage from '../MyClassesPage/MyClassesPage'; // (1.4b)
 import ClassDetailsPage from '../ClassDetailsPage/ClassDetailsPage'; // (1.5)
 import EditClassPage from '../EditClassPage/EditClassPage'; // (1.6)
-import RegisteredClassPage from '../RegisteredClassPage/RegisteredClassPage'; // (1.7)
 import AttendeesPage from '../AttendeesPage/AttendeesPage'; // (1.8)
 import UserPage from '../UserPage/UserPage'; // (1.9)
 import CreateClassPage from '../CreateClassPage/CreateClassPage'; // (1.10)
@@ -155,7 +154,6 @@ function App() {
                 exact
                 path="/registered-class">
                 <Nav />
-                <RegisteredClassPage />
               </ProtectedRoute>
               {/* -----< End Registered Class >----- */}
 
