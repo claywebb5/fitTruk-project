@@ -20,9 +20,7 @@ import AttendeesPage from '../AttendeesPage/AttendeesPage'; // (1.8)
 import UserPage from '../UserPage/UserPage'; // (1.9)
 import CreateClassPage from '../CreateClassPage/CreateClassPage'; // (1.10)
 //------------------^< APPROVED ROUTES >^------------------------------------
-import Footer from '../Footer/Footer'; // ** ALREADY IN REPO
 import AboutPage from '../AboutPage/AboutPage'; // ** ALREADY IN REPO
-// import InfoPage from '../InfoPage/InfoPage'; // ** ALREADY IN REPO
 // ^^=====================^< COMPONENTS/VIEWS >^==========================
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 // ^^=====================^< MUI THEME IMPORTS >^==========================
