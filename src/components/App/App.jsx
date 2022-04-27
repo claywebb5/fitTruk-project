@@ -26,7 +26,6 @@ import AboutPage from '../AboutPage/AboutPage'; // ** ALREADY IN REPO
 // ^^=====================^< COMPONENTS/VIEWS >^==========================
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 // ^^=====================^< MUI THEME IMPORTS >^==========================
-//=======================================**< END IMPORTS >**===============================================================
 
 
 
@@ -79,9 +78,7 @@ function App() {
               </Route>
               {/* --------------------------< INFO PAGE >-------------------------- */}
               {/* <ProtectedRoute
-            exact
-            path="/info">
-            <InfoPage />
+            
           </ProtectedRoute> */}
               {/* =============================*< END ALREADY IN REPO >*============================= */}
 
