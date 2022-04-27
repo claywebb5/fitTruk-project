@@ -1,12 +1,10 @@
 .Login-form {
     background-color: orange;
     display: flex;
-    /* justify-content: center; */
     align-items: center ;
 }
 
 .login {
-    /* background-color: rgba(0,0,0, 0.6); */
     display: flex;
     justify-content: center;
     align-items: center ;
@@ -19,24 +17,6 @@
 
 .login img{
     width: 100%;
-}
-
-.hiddenDivs{
-    display: flex;
-    flex-direction: row;
-    flex-wrap: nowrap;
-    width: 400px;
-    justify-content: center;
-    align-items: stretch;
-}
-
-.btn-div{
-    width: 100px;
-}
-.bottom-btn-div{
-    height: 40px;
-    width: 150px;
-    display: block;
 }
 
 .loginForm {
