@@ -51,17 +51,13 @@ function AllClassesPage() {
 
   return (
     <>
-      {/* <Offset /> */}
       <Container sx={{bgcolor: '#FFFFFF', p: 0}}>
         <Box>
           <Typography variant="h3" component="div" sx={{ pl: 2, pr: 2, textAlign: 'center', pt: 2 }}>
             <PermContactCalendarIcon sx={{ fontSize: 35 }} /> All Classes
           </Typography>
         </Box>
-
         <Paper square sx={{ pb: '0px', height: 'auto', overflow: 'scroll' }}>
-
-          {/* <hr /> */}
           <ClassList allClasses={allClasses} user={user} pageInfo={pageInfo} />
           {/* Logged in as an Admin show the Admin Nav Bar */}
           {user.access_level === 3 && (

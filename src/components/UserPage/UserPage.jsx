@@ -119,6 +119,7 @@ function UserPage() {
     initials = firstLetter + secondLetter;
     return true;
   };
+  
   // =============< OPEN EDIT >===============
   const handleEdit = () => {
     setIsEditing(true);
@@ -136,7 +137,7 @@ function UserPage() {
   return (
     <>
 {/* ---------  The height and fixed position of this page may need to be adjusted at some point ---------- */}
-      <Container sx={{ border: 4, borderColor: '#c3c4c5', bgcolor: '#FFFFFF', mt: 1, height:window.innerHeight, overflow:'hidden', }}>
+      <Container sx={{ border: 4, borderColor: '#c3c4c5', bgcolor: '#FFFFFF', mt: 1, height:window.innerHeight, overflow:'scroll', }}>
         <form onSubmit={handleSubmit}>
 
           {/* ============< HEADER >============== */}

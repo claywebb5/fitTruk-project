@@ -170,20 +170,17 @@ function ClassList({ allClasses, user, pageInfo }) {
       </Paper>
       <List sx={{ mb: '0px', pb: 0, bgcolor: '#41414c' }}>
         {(searchFunction(allClasses)).map((classEvent, i) => (
-          <Card>
-            <React.Fragment key={i}>
+          <Card key={i}>
               {(checkForNextDay(classEvent.week_day_name)) && (
                 <ListSubheader sx={{ bgcolor: '#41414c', color: '#FFFFFF', pb: 1, pt: 1 }}>
                   <Typography variant="h5" align="center">
                     {classEvent.week_day_name} {classEvent.abbreviated_date}
                   </Typography>
-
                 </ListSubheader>
               )}
               <Box >
                 <ClassListItem classEvent={classEvent} key={i} />
               </Box>
-            </React.Fragment>
           </Card>
         ))}
       </List>
