@@ -3,8 +3,7 @@ const attendeesReducer = (state = [], action) => {
       case 'SET_ATTENDEES':
         return action.payload;
       case 'CHECK_USER_IN':
-        console.log('this is triggered');
-        
+                
         // const users = action.payload.attendees
         const userId = action.payload.userId
         

@@ -11,8 +11,8 @@ import searchQuery from './searchQuery.reducer';
 // -------- Class detail/editing information -----------
 import selectedClass from './selectedClass.reducer';
 
-
 const rootReducer = combineReducers({
+  
   errors, // contains registrationMessage and loginMessage
   user, // will have an id and username if someone is logged in
   allClasses, // contains all avaliable classes info
@@ -23,8 +23,6 @@ const rootReducer = combineReducers({
   selectedClass, // contains details for a specific class
   searchQuery, // Contains all the data for search queries when searching or filtering for a certain class
 
-  
-  
 });
 
 export default rootReducer;
