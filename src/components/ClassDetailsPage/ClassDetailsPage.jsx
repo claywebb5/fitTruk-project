@@ -68,7 +68,7 @@ function ClassDetailsPage() {
     const { id } = useParams();
 
     let classObj = {
-        id: classDetails.id,
+        // id: classDetails.id,
         abbreviated_date: classDetails.abbreviated_date,
         abrv_end_time: classDetails.abrv_end_time,
         abrv_start_time: classDetails.abrv_start_time,
