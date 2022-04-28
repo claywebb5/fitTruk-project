@@ -1,8 +1,6 @@
-
-![MIT LICENSE](https://img.shields.io/github/license/scottbromander/the_marketplace.svg?style=flat-square)
-![REPO SIZE](https://img.shields.io/github/repo-size/scottbromander/the_marketplace.svg?style=flat-square)
-![TOP_LANGUAGE](https://img.shields.io/github/languages/top/scottbromander/the_marketplace.svg?style=flat-square)
-![FORKS](https://img.shields.io/github/forks/scottbromander/the_marketplace.svg?style=social)
+![REPO SIZE](https://img.shields.io/github/repo-size/claywebb5/fitTruk-project.svg?style=flat-square)
+![TOP_LANGUAGE](https://img.shields.io/github/languages/top/claywebb5/fitTruk-project.svg?style=flat-square)
+![FORKS](https://img.shields.io/github/forks/claywebb5/fitTruk-project.svg?style=social)
 
 # FIT TRUK SCHEDULING APP
 
@@ -29,7 +27,7 @@ The Fit Truk App improves the scheduling and signup experiences of trainers and 
 Customers are able to see upcoming classes and register for them; While administrators are able to create new classes, update existing class info, track attendance, and send updates to class participants all while keeping with Fit Truks’ brand standards and maintaining an enjoyable and cohesive experience for the user.
 
 
-To see the fully functional site, please visit: [DEPLOYED VERSION OF APP](www.heroku.com)
+To see the fully functional site, please visit: [https://fittruk.herokuapp.com](https://fittruk.herokuapp.com/#/home)
 
 
 ## Screen Shot
