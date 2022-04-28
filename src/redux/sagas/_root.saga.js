@@ -8,7 +8,6 @@ import customerSaga from './customer.saga';
 import trainerSaga from './trainer.saga';
 import adminSaga from './admin.saga';
 
-
 export default function* rootSaga() {
   yield all([
     loginSaga(), // login saga is now registered

@@ -1,4 +1,3 @@
-// import './Nav.css';
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
@@ -16,41 +15,12 @@ import Avatar from '@mui/material/Avatar';
 import { styled } from '@mui/material/styles';
 
 
-
-// =================**< CUSTOMER/TRAINER VIEW >**=========================
-// [x] Profile
-// [x] All Classes
-// [x] My Classes
-// [x] Sign out
-
-// ===========*< COLOR THEME >*================
-// const theme = createTheme({
-//   typography: {
-//     fontFamily: [
-//       'FATFRANK',
-//       'CENTURY GOTHIC',
-//       'Montserrat',
-//     ].join(','),
-//   },
-//   palette: {
-//     mode: 'main',
-//     primary: {
-//       darkGreen: '#80bd02',
-//       lightGreen: '#ace23a',
-//       darkGrey: '#41414c',
-//       lightGrey: '#6d6e71'
-//     },
-//   },
-// })
-
-
 function CustomerNav() {
     // ========< TOOLS >==============
     const history = useHistory();
     const user = useSelector((store) => store.user);
     const dispatch = useDispatch();
     // -------< PROFILE ICON >---------------
-
     const { first_name, last_name } = user;
     let initials = '';
 
@@ -150,9 +120,6 @@ function CustomerNav() {
                             open={Boolean(anchorElMenu)}
                             onClose={handleCloseMenu}
                         >
-                            {/* <MenuItem onClick={handleCloseMenu}>
-                                <Typography textAlign="center" onClick={handleHome}>Home</Typography>
-                            </MenuItem> */}
                             <MenuItem onClick={handleCloseMenu}>
                                 <Typography textAlign="center" onClick={handleProfile}>Profile</Typography>
                             </MenuItem>
@@ -200,8 +167,6 @@ function CustomerNav() {
                                     }
                                 })()
                             }
-                            {/*=====< AVATAR WITH USER PROFILE PICTURE >====*/}
-                            {/* <Avatar src={user.profile_image} /> */}
                         </IconButton>
                     </Box>
                 </Toolbar>

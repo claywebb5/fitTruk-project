@@ -10,11 +10,8 @@ import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import Divider from '@mui/material/Divider';
 
-
-
 function MyClassesPage() {
   // --------- Tools ----------
-  // const history = useHistory();
   const dispatch = useDispatch();
 
   // ------- Variables ---------

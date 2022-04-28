@@ -6,27 +6,14 @@ import AttendanceItem from '../AttendanceItem/AttendanceItem';
 //--------------< MUI IMPORTS >-----------------------------
 import Container from '@mui/material/Container';
 import Card from '@mui/material/Card';
-import CardHeader from '@mui/material/CardHeader';
-import CardMedia from '@mui/material/CardMedia';
 import CardContent from '@mui/material/CardContent';
-import CardActions from '@mui/material/CardActions';
-import Collapse from '@mui/material/Collapse';
-import Avatar from '@mui/material/Avatar';
-import IconButton from '@mui/material/IconButton';
-import SendIcon from '@mui/icons-material/Send'; // SEND MESSAGE TO CUSTOMER
-import CheckBoxOutlineBlankIcon from '@mui/icons-material/CheckBoxOutlineBlank'; // NOT CHECKED IN
-import CheckBoxIcon from '@mui/icons-material/CheckBox'; // CHECKED IN
 import Typography from '@mui/material/Typography';
 import Divider from '@mui/material/Divider';
 import { makeStyles } from '@material-ui/core/styles';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
-import { styled } from '@mui/material/styles';
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import swal from 'sweetalert';
-
-
-
 // ==========================< MUI THEMES >===============================
 const useStyles = makeStyles({
     newroot: {
@@ -37,13 +24,11 @@ const useStyles = makeStyles({
     },
 });
 
-
 function AttendeesPage() {
     // =============================< SETUP >========================================
-    //------------< TOOLS >-------------
     const dispatch = useDispatch();
     const history = useHistory();
-    const classes = useStyles(); // MUI Theme
+    const classes = useStyles(); 
 
     //---< FETCH ATTENDANCE >------
     useEffect(() => {
@@ -71,13 +56,10 @@ function AttendeesPage() {
     const user = useSelector((store) => store.user);
     const { id } = useParams()
 
-
-
     // ==========================< CLICK LISTENERS >===============================
 
     // -------< SUBMIT CHECKING IN CUSTOMERS >---------
     const handleCheckIn = () => {
-        // console.log('send a dispatch to the server to update if users are checked in in the database');
         swal("Success", "Attendees have been checked in", "success");
         dispatch({
             type: 'UPDATE_ATTENDANCE',
@@ -86,13 +68,11 @@ function AttendeesPage() {
                 id
             }
         })
-
     };
 
     // ---------< GO BACK >--------------
     const handleReturnClick = () => {
         history.goBack();
-        // console.log('Clicked Cancel');
     }
 
     return (
@@ -112,7 +92,6 @@ function AttendeesPage() {
                         </Typography>
                     </CardContent>
                 </Card>
-
 
                 {attendees.map((customer, i) => (
                     <AttendanceItem key={i} customer={customer} />

@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import ClassListItem from '../ClassListItem/ClassListItem';
 
 
 function TrainersClasses() {
@@ -11,8 +10,6 @@ function TrainersClasses() {
 
     // The Trainer
     const user = useSelector(store => store.user);
-
-
 
     // --------- Functions ----------
     useEffect(() => {

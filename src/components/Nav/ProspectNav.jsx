@@ -1,4 +1,3 @@
-// import './Nav.css';
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import logoWhite from './logoWhite.png';
@@ -16,9 +15,6 @@ import NoAccountsIcon from '@mui/icons-material/NoAccounts';
 import { styled } from '@mui/material/styles';
 
 // =================**< PROSPECTS VIEW >**=========================
-// [x] All Classes
-// [x] Sign in
-// [x] Register
 
 function ProspectNav() {
     // ========< TOOLS >==============

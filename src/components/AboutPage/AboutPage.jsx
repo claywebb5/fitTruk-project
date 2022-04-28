@@ -10,8 +10,6 @@ import TabList from '@material-ui/lab/TabList';
 import TabPanel from '@material-ui/lab/TabPanel';
 import Container from '@mui/material/Container';
 
-
-
 function AboutPage() {
   // ========< TABS LOGIC >===================
   const [value, setValue] = useState('1');
@@ -20,7 +18,6 @@ function AboutPage() {
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
-  // sx={{ bgcolor: "#41414c", marginBottom: 1 }}
   return (
     <>
       <Container>

@@ -1,4 +1,3 @@
-// import './Nav.css';
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
@@ -15,19 +14,8 @@ import { styled } from '@mui/material/styles';
 import MenuIcon from '@mui/icons-material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
-// ----------< MUI DRAWER >----------------
-// import Drawer from '@mui/material/Drawer';
-
-
 
 // =================**< ADMIN VIEW >**=========================
-// [X] Add Class
-// [X] All Classes
-// [X] Class Schedule
-// [X] Profile
-// [X] Sign Out
-
-
 
 function AdminNav() {
     // ========< TOOLS >==============
@@ -76,12 +64,6 @@ function AdminNav() {
     // GO to Profile
     const handleProfile = () => {
         history.push('/personal-info');
-    };
-    // GO to Home
-    const handleHome = () => {
-        // alert('See Home.jsx Component!!!')
-        history.push('/about');
-        // history.push('');
     };
     // GO to All Classes
     const handleAllClasses = () => {
@@ -140,9 +122,6 @@ function AdminNav() {
                             open={Boolean(anchorElMenu)}
                             onClose={handleCloseMenu}
                         >
-                            {/* <MenuItem onClick={handleCloseMenu}>
-                                <Typography textAlign="center" onClick={handleHome}>Home</Typography>
-                            </MenuItem> */}
                             <MenuItem onClick={handleCloseMenu}>
                                 <Typography textAlign="center" onClick={handleCreateClass}>Create Class</Typography>
                             </MenuItem>
@@ -195,9 +174,6 @@ function AdminNav() {
                                 })()
                             }
                             
-
-                            {/*=====< AVATAR WITH USER PROFILE PICTURE >====*/}
-                            {/* <Avatar src={user.profile_image} /> */}
                         </IconButton>
                     </Box>
                 </Toolbar>

@@ -18,8 +18,6 @@ import CancelIcon from '@mui/icons-material/Cancel';
 import CheckIcon from '@mui/icons-material/Check';
 import TextField from '@mui/material/TextField';
 
-
-
 // ==========================< MUI THEMES >===============================
 const useStyles = makeStyles({
   newroot: {
@@ -32,14 +30,11 @@ const useStyles = makeStyles({
 
 // ======*** LINK TO MUI CHIPS FOR EDITABLE INPUTS: https://mui.com/material-ui/react-chip/
 
-
-
 function UserPage() {
   //==================< SETUP >==========================
   const dispatch = useDispatch();
   const history = useHistory();
   const classes = useStyles(); // MUI Theme
-
 
   //==================< VARIABLES >==========================
   const user = useSelector((store) => store.user);
@@ -91,8 +86,7 @@ function UserPage() {
     event.preventDefault();
     let updatedUser = editUser;
     updatedUser = { ...updatedUser };
-    console.log('Clicked Submit');
-    console.log('Updated user info is:', updatedUser);
+
     dispatch({
       type: 'UPDATE_CUSTOMER_INFO',
       payload: updatedUser
@@ -130,12 +124,8 @@ function UserPage() {
     setIsEditing(false);
   };
 
-
-
-
   return (
     <>
-{/* ---------  The height and fixed position of this page may need to be adjusted at some point ---------- */}
       <Container sx={{ border: 4, borderColor: '#c3c4c5', bgcolor: '#FFFFFF', mt: 1, height:window.innerHeight, overflow:'hidden', }}>
         <form onSubmit={handleSubmit}>
 
