@@ -34,6 +34,7 @@ To see the fully functional site, please visit: [DEPLOYED VERSION OF APP](www.he
 
 ## Screen Shot
 <img src="public/screenshots/landing-page.png" alt="landing page" style="height: 300px;"/>
+![Landing Page](./public/screenshots/landing-page.png)
 <img src="public/screenshots/all-classes.png" alt="all classes page" style="height: 300px;"/>
 <img src="public/screenshots/login.png" alt="login page" style="height: 300px;"/>
 <img src="public/screenshots/search-function.png" alt="demo of search functionality" style="height: 300px;"/>
