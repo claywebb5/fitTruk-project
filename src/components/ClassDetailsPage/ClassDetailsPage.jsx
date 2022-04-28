@@ -7,30 +7,22 @@ import Container from '@mui/material/Container';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Avatar from '@mui/material/Avatar';
-import IconButton from '@mui/material/IconButton';
-import SendIcon from '@mui/icons-material/Send'; // SEND MESSAGE TO CUSTOMER
-import CheckBoxOutlineBlankIcon from '@mui/icons-material/CheckBoxOutlineBlank'; // NOT CHECKED IN
-import CheckBoxIcon from '@mui/icons-material/CheckBox'; // CHECKED IN
 import Typography from '@mui/material/Typography';
 import Divider from '@mui/material/Divider';
 import { makeStyles } from '@material-ui/core/styles';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
-import { styled } from '@mui/material/styles';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import Link from '@mui/material/Link';
 import Grid from '@mui/material/Grid';
 import InsertInvitationIcon from '@mui/icons-material/InsertInvitation';
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
-import EditIcon from '@mui/icons-material/Edit';
 import PeopleAltIcon from '@mui/icons-material/PeopleAlt';
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import swal from 'sweetalert';
 import TextField from '@mui/material/TextField';
 import CancelIcon from '@mui/icons-material/Cancel';
 import CheckIcon from '@mui/icons-material/Check';
-
-
 // ==========================< MUI THEMES >===============================
 const useStyles = makeStyles({
     newroot: {
@@ -64,11 +56,9 @@ function ClassDetailsPage() {
     const isClassFull = useSelector(store => store.selectedClass.classSize.full_class);
     const classDetails = useSelector(store => store.selectedClass.classDetails);
     const user = useSelector(store => store.user);
-    const [showMap, setShowMap] = useState(false);
     const { id } = useParams();
 
     let classObj = {
-        // id: classDetails.id,
         abbreviated_date: classDetails.abbreviated_date,
         abrv_end_time: classDetails.abrv_end_time,
         abrv_start_time: classDetails.abrv_start_time,
@@ -122,12 +112,10 @@ function ClassDetailsPage() {
                 type: 'ADD_RESERVATION',
                 payload: classDetails
             });
-            // history.push('/my-classes')
         }
     }
     // -------------< CANCEL RESERVATION >-------------------
     const handleCancelClick = () => {
-        // console.log('you canceled the class', classDetails) // TEST LOG
         swal({
             title: "Are you sure?",
             text: "Pressing ok will cancel your reservation",
@@ -170,15 +158,12 @@ function ClassDetailsPage() {
         event.preventDefault();
         let updatedClass = editClass;
         updatedClass = { ...updatedClass };
-        console.log('Updated Class is:', updatedClass);
         dispatch({
             type: 'UPDATE_CLASS_DETAILS',
             payload: updatedClass
         });
         setIsEditing(false);
     };
-
-
 
     return (
         <>
@@ -242,10 +227,6 @@ function ClassDetailsPage() {
                             </Grid>
                         </Grid>
                     </Box>
-                    {/* -------* CODE FOR SHOWING MAP IN APP *------- */}
-                    {/* 
-                {showMap ? <iframe width="100%" height="250" frameBorder="0" style={{ border: 0 }} // referrerpolicy="no-referrer-when-downgrade" src={`https://www.google.com/maps/embed/v1/place?key=ADD_KEY_HERE&q=`} //the 'q' or "Query" can be text aswell as coordinates, these coords are DUMMY DATA > </iframe> : <p></p>}
-                */}
 
                     {/* ============< TIME >============== */}
                     <Box sx={{ display: 'flex', flexDirection: 'row', mt: 3 }}>
@@ -321,11 +302,6 @@ function ClassDetailsPage() {
                             }
                         </Box>
                     </Box>
-
-
-
-
-
 
                     {/* ============< BUTTONS >============== */}
                     {
@@ -403,8 +379,6 @@ function ClassDetailsPage() {
                             }
                         })()
                     }
-
-
 
                 </form>
                 <Button onClick={handleReturnClick} sx={{ border: 2, borderColor: '#80bd02', bgcolor: '#FFFFFF', color: "#000000", mt: 3 }}>

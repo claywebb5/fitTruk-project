@@ -3,14 +3,9 @@ import { useHistory } from 'react-router-dom';
 import './FTLandingPage.css';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
-import { createTheme, ThemeProvider } from "@mui/material/styles";
-import { fontFamily } from '@mui/system';
-import blackLogo from '../LandingPage/blackFitTrucklogo.png'
 import LogoAlt from './FitTruk_Logo_Alt.png'
 
-
 function LandingPage() {
-  const [heading, setHeading] = useState('Landing Page View');
   const history = useHistory();
 
   const onLogin = (event) => {
@@ -24,7 +19,6 @@ function LandingPage() {
   const onSeeClasses = (event) => {
     history.push('/all-classes');
   };
-
 
   return (
     <div className='body' style={{ height: window.innerHeight }}>

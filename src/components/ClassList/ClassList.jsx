@@ -1,39 +1,18 @@
-// import { useEffect, useState } from 'react';
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
 import { useHistory } from 'react-router-dom';
 import ClassListItem from '../ClassListItem/ClassListItem';
-import BtnCreateClass from '../BtnCreateClass/BtnCreateClass'; // <- The floating "speed dial" button to create a class
 // ---< MUI IMPORTS >-----
 import Box from '@mui/material/Box';
-import TextField from '@mui/material/TextField';
-import ListItemText from '@mui/material/ListItemText';
 import Typography from '@mui/material/Typography';
 import Paper from '@mui/material/Paper';
 import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
-import ListItemAvatar from '@mui/material/ListItemAvatar';
 import ListSubheader from '@mui/material/ListSubheader';
-import Avatar from '@mui/material/Avatar';
-import Nav from '../Nav/Nav';
-import { styled } from '@mui/material/styles';
 import Grid from '@mui/material/Grid';
 import Input from '@mui/material/Input';
-import InputLabel from '@mui/material/InputLabel';
 import Button from '@mui/material/Button';
 import { makeStyles } from '@material-ui/core/styles';
-import Select from '@mui/material/Select';
-import MenuItem from '@mui/material/MenuItem';
-import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
-import PersonIcon from '@mui/icons-material/Person';
-import Divider from '@mui/material/Divider';
 import Card from '@mui/material/Card';
-
-
-
-
-
 
 // ==========================< MUI THEMES >===============================
 const useStyles = makeStyles({
@@ -75,7 +54,6 @@ function ClassList({ allClasses, user, pageInfo }) {
 
   // --------------<  I n p u t   H a n d l e r s  >------------------
   const handleSearchTrainer = (trainerId) => { // This changes the search-by-trainer filter settings
-    // console.log('trainer Id:', trainerId); // Test log
     dispatch({
       type: 'SET_SEARCH_TRAINER',
       payload: trainerId
@@ -90,8 +68,6 @@ function ClassList({ allClasses, user, pageInfo }) {
     })
   };
   // --------------< // E N D  I n p u t   H a n d l e r s  >------------------
-
-
 
   // For the trainer menu
   const [openMenu, setOpenMenu] = useState(false);

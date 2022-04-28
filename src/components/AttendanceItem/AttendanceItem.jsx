@@ -25,9 +25,6 @@ import TextField from '@mui/material/TextField';
 import Snackbar from '@mui/material/Snackbar';
 import MuiAlert from '@mui/material/Alert';
 
-
-
-
 const useStyles = makeStyles({
     newroot: {
         padding: 8,
@@ -36,7 +33,6 @@ const useStyles = makeStyles({
         },
     },
 });
-
 
 function AttendanceItem(props) {
     //------------<  Setup  >-------------
@@ -81,7 +77,6 @@ function AttendanceItem(props) {
     //----------< CLICKED INDIVIDUAL CHECKBOXES >--------------
     // this sends a dispatch to the attendees reducer to update local state
     const checkUserIn = () => {
-        // console.log('this will update a piece of local state');
         setClicked(!clicked);
         dispatch({
             type: 'CHECK_USER_IN',
@@ -92,8 +87,6 @@ function AttendanceItem(props) {
         });
     };
     
-
-
     return (
         <>
             {props.customer.checked_in || clicked?
@@ -106,9 +99,7 @@ function AttendanceItem(props) {
                             <Typography variant="h5" sx={{ width: 200,  mt: 1, ml: 1  }}>
                                 {props.customer.first_name} {props.customer.last_name}
                             </Typography>
-                            {/* <Typography variant="h5">
-                                Not Checked in
-                            </Typography> */}
+
                             <SendIcon onClick={handleMessage} sx={{ mr: 1, p: 1, mt: 1, pr: 3 }}/>
                         </Box>
                     </CardContent>
@@ -123,9 +114,7 @@ function AttendanceItem(props) {
                             <Typography variant="h5" sx={{ width: 200, mt: 1, ml: 1  }}>
                                 {props.customer.first_name} {props.customer.last_name}
                             </Typography>
-                            {/* <Typography variant="h5">
-                                Not Checked in
-                            </Typography> */}
+    
                             <SendIcon onClick={handleMessage} sx={{ mr: 1, p: 1, mt: 1, pr: 3 }}/>
                         </Box>
                     </CardContent>
@@ -145,7 +134,6 @@ function AttendanceItem(props) {
                         label="SMS Message"
                         type="email"
                         fullWidth
-                        // variant="standard"
                     />
                 </DialogContent>
                 <DialogActions>

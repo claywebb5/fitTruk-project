@@ -1,16 +1,12 @@
 import React from 'react';
 import {useHistory} from 'react-router-dom';
-
 // ---< MUI IMPORTS >-----
 import SpeedDial from '@mui/material/SpeedDial';
 import SpeedDialIcon from '@mui/material/SpeedDialIcon';
 
-
 function BtnCreateClass() {
     const history = useHistory();
 
-
-    // GO to Create Class
     const handleCreateClass = () => {
         history.push('/create-class');
     };

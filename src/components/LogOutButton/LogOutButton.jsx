@@ -1,15 +1,11 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import Button from '@mui/material/Button';
-// import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 
 function LogOutButton(props) {
   const dispatch = useDispatch();
-  // const history = useHistory();
 
   const handleLogOut = () => {
     dispatch({ type: 'LOGOUT' })
-    // history.push('/home')
   }
 
   return (

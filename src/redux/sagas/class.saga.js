@@ -1,82 +1,51 @@
 import { put, takeLatest } from 'redux-saga/effects';
 import axios from 'axios';
 
-
 // =============***< (GET) ALL CLASSES >***=======================================
-function* fetchClasses (){
+function* fetchClasses() {
     // Will send a request to the classes router to retrieve all available classes
-    console.log('in fetchClasses, this is the dispatch I received');
     try {
         const classes = yield axios.get(`/api/class/`); // * Goes to SERVER "class.router"
-        console.log('these are classes', classes.data);
         yield put({ type: 'SET_ALL_CLASSES', payload: classes.data }); // * Goes to REDUCER "allClasses.reducer.js"
     } catch (error) {
-        console.log('Error fetching All Classes', error);
-    } 
-}
-
-
-// =============***< (GET) ALL CLASSES BASED ON SEARCH >***========================
-function* searchClasses (action){
-    // Will send a request to the classes router to search the classes by name
-    console.log('here is the dispatch info:', action.type, action.payload);
-    // ----------------***< WAITING FOR BACK END ROUTE TO TEST >***-----------------------
-    // try {
-    //     // ** WHERE IN THE ROUTES/SERVER FILES WILL THE ROUTE FOR FETCHING ALL CLASSES BE???
-    //     const classes = yield axios.get(`/api/class/${action.payload}`); // * Goes to SERVER "class.router"
-    //     console.log('these are classes', classes);
-    //     yield put({ type: 'SET_ALL_CLASSES', payload: classes.data }); // * Goes to REDUCER "allClasses.reducer.js"
-    // } catch (error) {
-    //     console.log('Error searching All Classes', error);
-    // } 
+    }
 }
 
 // =============***< (GET) CLASS DETAILS >***======================================
-function* fetchDetails (action){
+function* fetchDetails(action) {
     // Will send a request to the classes router to grab a specific classes details
-    console.log('GET Class DETAILS, ID is:', action.payload);
     try {
         const classDetails = yield axios.get(`/api/class/details/${action.payload}/`); // * Goes to SERVER "class.router"
-        console.log('Selected Class Details are:', classDetails.data);
         yield put({ type: 'SET_CLASS_DETAILS', payload: classDetails.data }); // * Goes to REDUCER "classDetails.reducer.js"
     } catch (error) {
-        console.log('Error fetching Class Details', error);
-    } 
+    }
 }
-function* classSize (action){
+function* classSize(action) {
     // Will send a request to the class router to retrieve size of class
-    console.log('GET Class SIZE, ID is:', action.payload);
     try {
-       
         const size = yield axios.get(`/api/class/class-size/${action.payload}`); // * Goes to SERVER "class.router"
-        console.log('Is The Class Full?:', size.data)
         yield put({ type: 'SET_CLASS_SIZE', payload: size.data }); // * Goes to REDUCER 
     } catch (error) {
-        console.log('Error setting class size', error);
-    } 
+    }
 }
 
 // =============***< (GET) ALL TRAINERS >***=======================================
-function* fetchTrainers (){
+function* fetchTrainers() {
     // Will send a request to the admin router to retrieve all available trainers
-    console.log('in fetchTrainers, this is the dispatch I received');
     try {
         const availableTrainerList = yield axios.get(`/api/admin/available-trainers`); // * Goes to SERVER "class.router"
-        console.log('these are the trainers', availableTrainerList.data);
         yield put({ type: 'SET_AVAILABLE_TRAINERS', payload: availableTrainerList.data }); // * Goes to REDUCER "availableTrainers.reducer.js"
     } catch (error) {
-        console.log('Error fetching All Trainers', error);
-    } 
+    }
 }
 
 
 
 function* classSaga() {
     yield takeLatest('FETCH_CLASSES', fetchClasses);
-    yield takeLatest('SEARCH_CLASSES', searchClasses); // Currently commented out
     yield takeLatest('FETCH_CLASS_DETAILS', fetchDetails);
     yield takeLatest('FETCH_CLASS_SIZE', classSize);
     yield takeLatest('FETCH_AVAILABLE_TRAINERS', fetchTrainers);
 }
-  
+
 export default classSaga;

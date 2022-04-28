@@ -3,10 +3,7 @@ import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
-import Paper from '@mui/material/Paper';
-import Card from '@mui/material/Card';
 import Typography from '@mui/material/Typography';
-import { borderRadius } from '@mui/system';
 import fittruck from './FitTruk_Logo_Main.png'
 import { useHistory } from 'react-router-dom';
 import './LoginForm.css'
@@ -36,23 +33,6 @@ function LoginForm() {
       dispatch({ type: 'LOGIN_INPUT_ERROR' });
     }
   }; // end login
-
-
-  // ----- Hidden Div Logic ------
-  const typeLoginInfo = (clickedDiv) => {
-    if (clickedDiv == 'left'){
-      setUsername('Abdi11')
-    } else if (clickedDiv == 'right'){
-      setUsername('Mark22')
-    } else if (clickedDiv == 'bottom'){
-      setUsername('Hailee33')
-    }
-    setPassword('poiuytrewq')
-  }
-
-  // ----- Hidden Div Logic ------
-
-
 
   return (
     <>
@@ -107,19 +87,11 @@ function LoginForm() {
             onChange={(event) => setPassword(event.target.value)}
           />
         </label>
-
-        {/* ------- Username/Password inserting hidden divs ---------- */}
-        <div className='hiddenDivs'>
-          <div className='btn-div' onClick={() => { typeLoginInfo('left') }}>
-          </div>
-          <Button variant="contained" sx={{ width: 200 }} type='submit'>
-            <Typography style={{ color: "#000000", display: 'block' }} variant="body1" >
-              Login
-            </Typography>
-          </Button>
-          <div className='btn-div' onClick={() => { typeLoginInfo('right') }}>
-          </div>
-        </div>
+        <Button variant="contained" sx={{ width: 200 }} type='submit'>
+          <Typography style={{ color: "#000000", display: 'block' }} variant="body1" >
+            Login
+          </Typography>
+        </Button>
 
         <Button variant="outlined"
           onClick={() => {
@@ -129,9 +101,6 @@ function LoginForm() {
             Register
           </Typography>
         </Button>
-        {/* ------- Username/Password inserting hidden divs ---------- */}
-        <div className='bottom-btn-div' onClick={() => { typeLoginInfo('bottom') }}>
-          </div>
       </form>
     </>
   );

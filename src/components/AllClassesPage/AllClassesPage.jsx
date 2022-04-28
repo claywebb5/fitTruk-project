@@ -10,17 +10,10 @@ import PermContactCalendarIcon from '@mui/icons-material/PermContactCalendar';
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 
-
-
-
-
-
 function AllClassesPage() {
-  // ------- Tools ---------
-  // const history = useHistory();
+
   const dispatch = useDispatch();
 
-  // ------- Functions ---------
   useEffect(() => {
     dispatch({
       type: 'FETCH_CLASSES'
@@ -39,9 +32,7 @@ function AllClassesPage() {
   // ------- Variables ---------
   const user = useSelector(store => store.user)
   const allClasses = useSelector(store => store.allClasses)
-  // The pageInfo prop allows the child component of this page to know which page it is the child of, which allows for
-  // the ClassList page to dynamically render a link that will take the user between AllClasses and MyClasses
-  // without needing the "useParams" method
+
   const pageInfo = {
     pageLink: "/my-classes",
     pageName: 'My Classes'

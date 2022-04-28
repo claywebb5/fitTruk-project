@@ -1,12 +1,12 @@
 const myClassesReducer = (state = [], action) => {
-    switch (action.type) {
-      case 'SET_MY_CLASSES':
-        return action.payload;
-      
-        
-      default:
-        return state;
-    }
-  };
+  switch (action.type) {
+    case 'SET_MY_CLASSES':
+      return action.payload;
 
-  export default myClassesReducer;
+
+    default:
+      return state;
+  }
+};
+
+export default myClassesReducer;
